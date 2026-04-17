@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
 import shap
@@ -16,6 +17,18 @@ def initialize_population(X, pop_size = 30): # Initialisiere ein Array X.size * 
 def initialize_max_population(X, pop_size = 30): #Initialisiere ein Array X.size * pop_size gefüllt mit 1en, also dem Maximum bei min max Skalierung mit Feature Range 0, 1
     particles = np.ones((pop_size, X.shape[1]))
     return particles
+
+def create_scaler():
+    file = "datensatz/" + "spritzguss.csv"
+    data = pd.read_csv((file))
+
+    X = data.iloc[:, :-1] # X enthält immer alle Spalten des Datensatzes außer die letzte Spalte
+    y = data.iloc[:, -1] # Y enthält immer die letzte Spalte des Datensatzes
+    # -> Man muss nur sichergehen dass im gegebenen Datensatz das Qualitätsmaß in der letzten Spalte ist
+
+    min_max_scaler = MinMaxScaler(feature_range=(0, 1) )
+    X_scaled = min_max_scaler.fit_transform(X)
+    return min_max_scaler
 
 def plot_scores(scores, title="Plot der besten Qualität", y="Zielvariabel", x="Anzahl der Iterationen"): # Plottet jeden Wert innerhalb von scores
     plt.plot(scores)

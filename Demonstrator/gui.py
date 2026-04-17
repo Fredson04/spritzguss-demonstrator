@@ -1,9 +1,11 @@
+import pickle
+
 import customtkinter
 import tkinter as tk
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 import algorithm.pso as pso
-from nn.neural_network import create_neural_network
+from helper.help_functions import create_scaler
 
 class App(customtkinter.CTk):
     def __init__(self):
@@ -11,7 +13,8 @@ class App(customtkinter.CTk):
         self.geometry("900x750")
         self.title("Spritzguss Demonstrator")
         
-        self.model, self.min_max_scaler = create_neural_network()
+        self.min_max_scaler = create_scaler()
+        self.model = pickle.load(open("nn/neural-net.sav", 'rb'))
         
         # Widgets:
         self.parameterLabel = customtkinter.CTkLabel(self, text="Prozessparameter", fg_color="transparent")
@@ -83,6 +86,7 @@ class App(customtkinter.CTk):
         self.slider13.grid(row=13, column=1, padx=20, pady=10)
         self.slider13label = customtkinter.CTkLabel(self, text="Volumen des Spritzers", fg_color="transparent")
         self.slider13label.grid(row=13, column=0, padx=20, pady=10)
+        
         
         self.produce_button = customtkinter.CTkButton(self, text="Produziere ", command=self.produce_func)
         self.produce_button.grid(row=12, column=5, padx=20, pady=10)
