@@ -43,7 +43,7 @@ class App(customtkinter.CTk):
         def update_label13(value):
             self.slider13label.configure(text=f"Volumen des Spritzers: {value:.4f}")
             
-        STEPS=100
+        STEPS=1000
         
         # Widgets:
         self.parameterLabel = customtkinter.CTkLabel(self, text="Prozessparameter", fg_color="transparent")
@@ -124,7 +124,7 @@ class App(customtkinter.CTk):
         self.ai_button = customtkinter.CTkButton(self, text="Generiere optimale Parameter ", command=self.use_algo, state="disabled") # Evtl mit combobox verschiedene Algorithmen anbieten
         self.ai_button.grid(row=13, column=6, padx=20, pady=10)
         
-    def produce_func(self):#Importiere self um alles leichter zu machen
+    def produce_func(self):
         self.vars = []
         self.vars.append(self.slider1var.get()) 
         self.vars.append(self.slider2var.get()) 
@@ -151,11 +151,11 @@ class App(customtkinter.CTk):
     def use_algo(self):
         solution_std, fitness, scores, it = pso.pso(self.model, self.vars, 5.0, pop_size=30, iterations=100, w=0.6, c1=1, c2=2)
         solution = self.min_max_scaler.inverse_transform(solution_std)
-        self.vars = solution.squeeze()
+        self.transformed_solution = solution.squeeze()
         self.Optparamterlabel0 = customtkinter.CTkLabel(self, text="Optimierte Parameter", fg_color="transparent")
         self.Optparamterlabel0.grid(row=0, column=2, padx=20, pady=10)
         self.optParameterLabels = []
-        for i, value in enumerate(self.vars):
+        for i, value in enumerate(self.transformed_solution):
             optParameterLabel = customtkinter.CTkLabel(self, text=f"{value:.4f}", fg_color="transparent")
             optParameterLabel.grid(row=i + 1, column=2, padx=20, pady=10, sticky="w")
             self.optParameterLabels.append(optParameterLabel)
@@ -163,32 +163,32 @@ class App(customtkinter.CTk):
         self.useOptimizedButton.grid(row=14, column=2, padx=20, pady=10)
         
     def useOptimizedFunc(self):
-        self.slider1.set((self.vars)[0])
-        self.slider1label.configure(text=f"Temperatur des Polymer vor Injektion in den Guss: {(self.vars)[0]:.4f}")
-        self.slider2.set((self.vars)[1])
-        self.slider2label.configure(text=f"Temperatur des Gusses: {(self.vars)[1]:.4f}")
-        self.slider3.set((self.vars)[2])
-        self.slider3label.configure(text=f"Zeit um den Guss zu füllen: {(self.vars)[2]:.4f}")
-        self.slider4.set((self.vars)[3])
-        self.slider4label.configure(text=f"Zeit um das Produkt zu plastizieren: {(self.vars)[3]:.4f}")
-        self.slider5.set((self.vars)[4])
-        self.slider5label.configure(text=f"Zeit um den Prozess für ein Produkt zu beenden: {(self.vars)[4]:.4f}")
-        self.slider6.set((self.vars)[5])
-        self.slider6label.configure(text=f"Schließmoment des Gusses: {(self.vars)[5]:.4f}")
-        self.slider7.set((self.vars)[6])
-        self.slider7label.configure(text=f"Höchstwert des Schließmoment des Gusses: {(self.vars)[6]:.4f}")
-        self.slider8.set((self.vars)[7])
-        self.slider8label.configure(text=f"Höchstwert des Drehmoments der Einspritzschnecke: {(self.vars)[7]:.4f}")
-        self.slider9.set((self.vars)[8])
-        self.slider9label.configure(text=f"Mittelwert des Drehmoments der Einspritzschnecke: {(self.vars)[8]:.4f}")
-        self.slider10.set((self.vars)[9])
-        self.slider10label.configure(text=f"Höchstwert des Widerstands der Einspritzschnecke: {(self.vars)[9]:.4f}")
-        self.slider11.set((self.vars)[10])
-        self.slider11label.configure(text=f"Höchstwert des Drucks beim Spritzen: {(self.vars)[10]:.4f}")
-        self.slider12.set((self.vars)[11])
-        self.slider12label.configure(text=f"Position der Einspritzschnecke am Ende des Prozesses: {(self.vars)[11]:.4f}")
-        self.slider13.set((self.vars)[12])
-        self.slider13label.configure(text=f"Volumen des Spritzers: {(self.vars)[12]:.4f}")
+        self.slider1.set((self.transformed_solution)[0])
+        self.slider1label.configure(text=f"Temperatur des Polymer vor Injektion in den Guss: {(self.transformed_solution)[0]:.4f}")
+        self.slider2.set((self.transformed_solution)[1])
+        self.slider2label.configure(text=f"Temperatur des Gusses: {(self.transformed_solution)[1]:.4f}")
+        self.slider3.set((self.transformed_solution)[2])
+        self.slider3label.configure(text=f"Zeit um den Guss zu füllen: {(self.transformed_solution)[2]:.4f}")
+        self.slider4.set((self.transformed_solution)[3])
+        self.slider4label.configure(text=f"Zeit um das Produkt zu plastizieren: {(self.transformed_solution)[3]:.4f}")
+        self.slider5.set((self.transformed_solution)[4])
+        self.slider5label.configure(text=f"Zeit um den Prozess für ein Produkt zu beenden: {(self.transformed_solution)[4]:.4f}")
+        self.slider6.set((self.transformed_solution)[5])
+        self.slider6label.configure(text=f"Schließmoment des Gusses: {(self.transformed_solution)[5]:.4f}")
+        self.slider7.set((self.transformed_solution)[6])
+        self.slider7label.configure(text=f"Höchstwert des Schließmoment des Gusses: {(self.transformed_solution)[6]:.4f}")
+        self.slider8.set((self.transformed_solution)[7])
+        self.slider8label.configure(text=f"Höchstwert des Drehmoments der Einspritzschnecke: {(self.transformed_solution)[7]:.4f}")
+        self.slider9.set((self.transformed_solution)[8])
+        self.slider9label.configure(text=f"Mittelwert des Drehmoments der Einspritzschnecke: {(self.transformed_solution)[8]:.4f}")
+        self.slider10.set((self.transformed_solution)[9])
+        self.slider10label.configure(text=f"Höchstwert des Widerstands der Einspritzschnecke: {(self.transformed_solution)[9]:.4f}")
+        self.slider11.set((self.transformed_solution)[10])
+        self.slider11label.configure(text=f"Höchstwert des Drucks beim Spritzen: {(self.transformed_solution)[10]:.4f}")
+        self.slider12.set((self.transformed_solution)[11])
+        self.slider12label.configure(text=f"Position der Einspritzschnecke am Ende des Prozesses: {(self.transformed_solution)[11]:.4f}")
+        self.slider13.set((self.transformed_solution)[12])
+        self.slider13label.configure(text=f"Volumen des Spritzers: {(self.transformed_solution)[12]:.4f}")
 
     def judge_quality(self):
         if(self.prediction < 4):
