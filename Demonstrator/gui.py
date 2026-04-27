@@ -6,7 +6,9 @@ from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 import algorithm.pso as pso
 from helper.help_functions import create_scaler
+from PIL import Image
 
+# Konstanten
 STEPS=1000 # Nur in dem Wertebereich der Schritte können den Slidern Werte zugeordnet werden, also muss die Schrittmenge hoch (oder nonexistent) sein damit die Qualität der optimierten Parameter erreicht werden kann
 CELSIUS="°C"
 SECONDS="s"
@@ -15,6 +17,7 @@ NEWTONMETER="N\u22C5m"
 BAR="Bar"
 CM="cm"
 CM3="cm\u00B3"
+
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
@@ -152,13 +155,21 @@ class App(customtkinter.CTk):
         self.amount13label = customtkinter.CTkLabel(self, text=(f"{(self.slider13var.get()):.4f}", CM3), fg_color="transparent")
         self.amount13label.grid(row=13, column=1, padx=20, pady=10)
         
-        
         self.produce_button = customtkinter.CTkButton(self, text="Produziere ", command=self.produce_func)
         self.produce_button.grid(row=12, column=7, padx=20, pady=10)
         self.produce_label = customtkinter.CTkLabel(self, text="-", fg_color="transparent")
         self.produce_label.grid(row=11, column=7, padx=20, pady=10)
         self.ai_button = customtkinter.CTkButton(self, text="Generiere optimale Parameter ", command=self.use_algo, state="disabled") # Evtl mit combobox verschiedene Algorithmen anbieten
         self.ai_button.grid(row=13, column=7, padx=20, pady=10)
+        
+        # Bild
+        self.placeholder_pic = customtkinter.CTkImage(light_image=Image.open('graphics/placeholder.png'), dark_image=Image.open('graphics/placeholder.png'), size=(200,200)) # WidthxHeight
+        self.ausschuss_pic = customtkinter.CTkImage(light_image=Image.open('graphics/ausschuss.png'), dark_image=Image.open('graphics/ausschuss.png'), size=(200,200)) # WidthxHeight
+        self.inOrdnung_pic = customtkinter.CTkImage(light_image=Image.open('graphics/inOrdnung.png'), dark_image=Image.open('graphics/inOrdnung.png'), size=(200,200)) # WidthxHeight
+        self.sollbereich_pic = customtkinter.CTkImage(light_image=Image.open('graphics/sollbereich.png'), dark_image=Image.open('graphics/sollbereich.png'), size=(200,200)) # WidthxHeight
+        self.ineffizient_pic = customtkinter.CTkImage(light_image=Image.open('graphics/ineffizient.png'), dark_image=Image.open('graphics/ineffizient.png'), size=(200,200)) # WidthxHeight
+        self.image_label = customtkinter.CTkLabel(self, text="", image=self.placeholder_pic)
+        self.image_label.place(relx=0.95, rely=0.05, anchor="ne")
         
     def produce_func(self):
         self.vars = []
@@ -228,12 +239,16 @@ class App(customtkinter.CTk):
 
     def judge_quality(self):
         if(self.prediction < 4):
+            self.image_label.configure(image=self.ausschuss_pic)
             return "Ausschuss"
         elif(self.prediction < 4.5):
+            self.image_label.configure(image=self.inOrdnung_pic)
             return "in Ordnung"
         elif(self.prediction <= 5):
+            self.image_label.configure(image=self.sollbereich_pic)
             return "Sollbereich"
         else:
+            self.image_label.configure(image=self.ineffizient_pic)
             return "Unwirtschaftlich"
 
 app = App()
