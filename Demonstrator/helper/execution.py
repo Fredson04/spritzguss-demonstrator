@@ -3,7 +3,7 @@ from sklearn.preprocessing import MinMaxScaler
 from nn.neural_network import create_neural_network
 
 def return_neural_net():
-    file = "datensatz/" + "spritzguss.csv"
+    file = "dataset/" + "spritzguss.csv"
     data = pd.read_csv((file))
 
     X = data.iloc[:, :-1] # X enthält immer alle Spalten des Datensatzes außer die letzte Spalte

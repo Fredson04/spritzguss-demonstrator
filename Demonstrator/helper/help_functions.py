@@ -19,7 +19,7 @@ def initialize_max_population(X, pop_size = 30): #Initialisiere ein Array X.size
     return particles
 
 def create_scaler():
-    file = "datensatz/" + "spritzguss.csv"
+    file = "dataset/" + "spritzguss.csv"
     data = pd.read_csv((file))
 
     X = data.iloc[:, :-1] # X enthält immer alle Spalten des Datensatzes außer die letzte Spalte
