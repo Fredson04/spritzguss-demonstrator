@@ -57,11 +57,11 @@ class App(customtkinter.CTk):
         
         
         # Widgets:
-        self.parameterLabel = customtkinter.CTkLabel(self, text="Prozessparameter", fg_color="transparent")
+        self.parameterLabel = customtkinter.CTkLabel(self, text="Prozessparameter", fg_color="transparent", font=("Arial", 16, "bold") )
         self.parameterLabel.grid(row=0, column=0, padx=20, pady=10)
-        self.parameterAmountLabel = customtkinter.CTkLabel(self, text="Anzahl", fg_color="transparent")
+        self.parameterAmountLabel = customtkinter.CTkLabel(self, text="Wert", fg_color="transparent", font=("Arial", 16, "bold") )
         self.parameterAmountLabel.grid(row=0, column=1, padx=20, pady=10)
-        self.sliderLabel = customtkinter.CTkLabel(self, text="Anpassen der Prozessparameter", fg_color="transparent")
+        self.sliderLabel = customtkinter.CTkLabel(self, text="Anpassen der Prozessparameter", fg_color="transparent", font=("Arial", 16, "bold") )
         self.sliderLabel.grid(row=0, column=2, padx=20, pady=10)
         self.slider1var = tk.DoubleVar(value=((155.032-81.747)/2)+81.747)
         self.slider1 = customtkinter.CTkSlider(self, from_=81.747/1.5, to=155.032*1.5, variable=self.slider1var, command=update_label1)
@@ -122,7 +122,7 @@ class App(customtkinter.CTk):
         self.slider9var = tk.DoubleVar(value=((114.9-76.5)/2)+76.5)
         self.slider9 = customtkinter.CTkSlider(self, from_=76.5/1.5, to=114.9*1.5, variable=self.slider9var, command=update_label9)
         self.slider9.grid(row=9, column=2, padx=20, pady=10)
-        self.slider9label = customtkinter.CTkLabel(self, text=f"Mittelwert des Drehmoments der Einspritzschnecke: {(self.slider9var.get()):.4f}", fg_color="transparent")
+        self.slider9label = customtkinter.CTkLabel(self, text=f"Mittelwert des Drehmoments der Einspritzschnecke:", fg_color="transparent")
         self.slider9label.grid(row=9, column=0, padx=20, pady=10)
         self.amount9label = customtkinter.CTkLabel(self, text=(f"{(self.slider9var.get()):.4f}", NEWTONMETER), fg_color="transparent")
         self.amount9label.grid(row=9, column=1, padx=20, pady=10)

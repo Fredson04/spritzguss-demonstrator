@@ -46,6 +46,7 @@ def pso(model, X, maxQuality, pop_size=30, iterations=100, w=1.0, c1=1, c2=2, co
             particles[p] += velocities[p] # Update Partikel durch addition mit dem Geschwindigkeitsvektor
         
         particles = np.maximum(particles, 0) # Verhindert, dass Minuswerte entstehen
+        particles = np.minimum(particles, 1) # Max Werte sind max werte im Wertebereich des Datensatzes
         #
 
         fitness_values = np.array([model.predict(particles)]) # Update das Array das alle Fitness Werte der Partikel speichert
