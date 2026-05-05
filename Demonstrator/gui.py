@@ -163,11 +163,11 @@ class App(customtkinter.CTk):
         self.ai_button.grid(row=13, column=7, padx=20, pady=10)
         
         # Bild
-        self.placeholder_pic = customtkinter.CTkImage(light_image=Image.open('graphics/placeholder.png'), dark_image=Image.open('graphics/placeholder.png'), size=(200,200)) # WidthxHeight
-        self.ausschuss_pic = customtkinter.CTkImage(light_image=Image.open('graphics/ausschuss.png'), dark_image=Image.open('graphics/ausschuss.png'), size=(200,200)) # WidthxHeight
-        self.inOrdnung_pic = customtkinter.CTkImage(light_image=Image.open('graphics/inOrdnung.png'), dark_image=Image.open('graphics/inOrdnung.png'), size=(200,200)) # WidthxHeight
-        self.sollbereich_pic = customtkinter.CTkImage(light_image=Image.open('graphics/sollbereich.png'), dark_image=Image.open('graphics/sollbereich.png'), size=(200,200)) # WidthxHeight
-        self.ineffizient_pic = customtkinter.CTkImage(light_image=Image.open('graphics/ineffizient.png'), dark_image=Image.open('graphics/ineffizient.png'), size=(200,200)) # WidthxHeight
+        self.placeholder_pic = customtkinter.CTkImage(light_image=Image.open('graphics/placeholder.jpg'), dark_image=Image.open('graphics/placeholder.jpg'), size=(200,200)) # WidthxHeight
+        self.ausschuss_pic = customtkinter.CTkImage(light_image=Image.open('graphics/ausschuss.jpg'), dark_image=Image.open('graphics/ausschuss.jpg'), size=(200,200)) # WidthxHeight
+        self.inOrdnung_pic = customtkinter.CTkImage(light_image=Image.open('graphics/inOrdnung.jpg'), dark_image=Image.open('graphics/inOrdnung.jpg'), size=(200,200)) # WidthxHeight
+        self.sollbereich_pic = customtkinter.CTkImage(light_image=Image.open('graphics/sollbereich.jpg'), dark_image=Image.open('graphics/sollbereich.jpg'), size=(200,200)) # WidthxHeight
+        self.ineffizient_pic = customtkinter.CTkImage(light_image=Image.open('graphics/ineffizient.jpg'), dark_image=Image.open('graphics/ineffizient.jpg'), size=(200,200)) # WidthxHeight
         self.image_label = customtkinter.CTkLabel(self, text="", image=self.placeholder_pic)
         self.image_label.place(relx=0.95, rely=0.05, anchor="ne")
         
@@ -199,7 +199,7 @@ class App(customtkinter.CTk):
         solution_std, fitness, scores, it = pso.pso(self.model, self.vars, 5.0, pop_size=30, iterations=100, w=0.6, c1=1, c2=2)
         solution = self.min_max_scaler.inverse_transform(solution_std)
         self.transformed_solution = solution.squeeze()
-        self.Optparamterlabel0 = customtkinter.CTkLabel(self, text="Optimierte Parameter", fg_color="transparent")
+        self.Optparamterlabel0 = customtkinter.CTkLabel(self, text="Optimierte Parameter", fg_color="transparent", font=("Arial", 16, "bold"))
         self.Optparamterlabel0.grid(row=0, column=3, padx=20, pady=10)
         self.optParameterLabels = []
         for i, value in enumerate(self.transformed_solution):
