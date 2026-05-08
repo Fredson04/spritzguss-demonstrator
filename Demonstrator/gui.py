@@ -7,6 +7,7 @@ import numpy as np
 import algorithm.pso as pso
 from helper.help_functions import create_scaler
 from PIL import Image
+from CTkToolTip import *
 
 # Konstanten
 STEPS=1000 # Nur in dem Wertebereich der Schritte können den Slidern Werte zugeordnet werden, also muss die Schrittmenge hoch (oder nonexistent) sein damit die Qualität der optimierten Parameter erreicht werden kann
@@ -59,10 +60,14 @@ class App(customtkinter.CTk):
         # Widgets:
         self.parameterLabel = customtkinter.CTkLabel(self, text="Prozessparameter", fg_color="transparent", font=("Arial", 16, "bold") )
         self.parameterLabel.grid(row=0, column=0, padx=20, pady=10)
+        parameter_tooltip_string = "Die hier gelisteten Parameter stellen die Prozessparameter des Industrieprozess der Herstellung von Kunststofflinsen dar"
+        self.parameter_tooltip = CTkToolTip(self.parameterLabel, message=parameter_tooltip_string)
         self.parameterAmountLabel = customtkinter.CTkLabel(self, text="Wert", fg_color="transparent", font=("Arial", 16, "bold") )
         self.parameterAmountLabel.grid(row=0, column=1, padx=20, pady=10)
         self.sliderLabel = customtkinter.CTkLabel(self, text="Anpassen der Prozessparameter", fg_color="transparent", font=("Arial", 16, "bold") )
         self.sliderLabel.grid(row=0, column=2, padx=20, pady=10)
+        slider_label_tooltip_string = "Der Wertebereich jedes Prozessparameters basiert auf dem Wertebereich des jeweiligen Parameters im Kunststofflinsendatensatz. Hierbei weicht der minimal einstellbare Wert jedes Parameters um 50% zum minimalwert im Datensatz ab, und ebenso ist es bei dem maximal einstellbaren Wert."
+        self.slider_label_tooltip = CTkToolTip(self.sliderLabel, message=slider_label_tooltip_string)
         self.slider1var = tk.DoubleVar(value=((155.032-81.747)/2)+81.747)
         self.slider1 = customtkinter.CTkSlider(self, from_=81.747/1.5, to=155.032*1.5, variable=self.slider1var, command=update_label1)
         self.slider1.grid(row=1, column=2, padx=20, pady=10)
@@ -161,6 +166,8 @@ class App(customtkinter.CTk):
         self.produce_label.grid(row=11, column=7, padx=20, pady=10)
         self.ai_button = customtkinter.CTkButton(self, text="Generiere optimale Parameter ", command=self.use_algo, state="disabled") # Evtl mit combobox verschiedene Algorithmen anbieten
         self.ai_button.grid(row=13, column=7, padx=20, pady=10)
+        ai_tooltip_string = "Die Parameter werden mit der Partikelschwarmoptimierung generiert. Dieser stochastische Optimierungsalgorithmus produziert nicht-deterministische Ergebnisse."
+        self.ai_tooltip = CTkToolTip(self.ai_button, message=ai_tooltip_string)
         
         # Bild
         self.placeholder_pic = customtkinter.CTkImage(light_image=Image.open('graphics/placeholder.jpg'), dark_image=Image.open('graphics/placeholder.jpg'), size=(200,200)) # WidthxHeight
@@ -193,6 +200,8 @@ class App(customtkinter.CTk):
         quality_cat = self.judge_quality()
         msg = f"Sie haben Qualität {self.prediction:.4f} erzielt! Wertung: {quality_cat}"
         self.produce_label.configure(text=msg)
+        produce_tooltip_string = "Die Qualität wird durch ein Neuronales Netz berechnet. Dieses wurde mit einem Datensatz der die Herstellung von Kunststofflinsen abbildet trainiert."
+        self.produce_tooltip = CTkToolTip(self.produce_label, message=produce_tooltip_string)
         self.ai_button.configure(state="normal")
     
     def use_algo(self):
