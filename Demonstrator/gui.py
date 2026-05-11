@@ -4,6 +4,7 @@ import customtkinter
 import tkinter as tk
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
+from algorithm import ga, sa
 import algorithm.pso as pso
 from helper.help_functions import create_scaler
 from PIL import Image
@@ -64,6 +65,7 @@ class App(customtkinter.CTk):
         self.tabview.add("Maschinensimulation")
         self.tabview.set("Maschinensimulation")
         
+        # Maschinensimulation
         # Widgets:
         self.parameterLabel = customtkinter.CTkLabel(self.tabview.tab("Maschinensimulation"), text="Prozessparameter", fg_color="transparent", font=("Arial", 16, "bold") )
         self.parameterLabel.grid(row=0, column=0, padx=20, pady=10)
@@ -167,10 +169,15 @@ class App(customtkinter.CTk):
         self.amount13label = customtkinter.CTkLabel(self.tabview.tab("Maschinensimulation"), text=(f"{(self.slider13var.get()):.4f}", CM3), fg_color="transparent")
         self.amount13label.grid(row=13, column=1, padx=20, pady=10)
         
-        self.produce_button = customtkinter.CTkButton(self.tabview.tab("Maschinensimulation"), text="Produziere ", command=self.produce_func)
-        self.produce_button.grid(row=12, column=7, padx=20, pady=10)
+        # Production Widgets
         self.produce_label = customtkinter.CTkLabel(self.tabview.tab("Maschinensimulation"), text="-", fg_color="transparent")
-        self.produce_label.grid(row=11, column=7, padx=20, pady=10)
+        self.produce_label.grid(row=10, column=7, padx=20, pady=10)
+        self.produce_button = customtkinter.CTkButton(self.tabview.tab("Maschinensimulation"), text="Produziere ", command=self.produce_func)
+        self.produce_button.grid(row=11, column=7, padx=20, pady=10)
+        self.algoOptionVar = customtkinter.StringVar(value="Partikelschwarmoptimierung")
+        self.algoOption = customtkinter.CTkOptionMenu(self.tabview.tab("Maschinensimulation"), values=["Partikelschwarmoptimierung", "Genetischer Algorithmus", "Simulierte Abkühlung"],variable=self.algoOptionVar)
+        self.algoOption.set("Partikelschwarmoptimierung")
+        self.algoOption.grid(row=12, column=7, padx=20, pady=10)
         self.ai_button = customtkinter.CTkButton(self.tabview.tab("Maschinensimulation"), text="Generiere optimale Parameter ", command=self.use_algo, state="disabled") # Evtl mit combobox verschiedene Algorithmen anbieten
         self.ai_button.grid(row=13, column=7, padx=20, pady=10)
         ai_tooltip_string = "Die Parameter werden mit der Partikelschwarmoptimierung generiert. Dieser stochastische Optimierungsalgorithmus produziert nicht-deterministische Ergebnisse."
@@ -212,7 +219,12 @@ class App(customtkinter.CTk):
         self.ai_button.configure(state="normal")
     
     def use_algo(self):
-        solution_std, fitness, scores, it = pso.pso(self.model, self.vars, 5.0, pop_size=30, iterations=100, w=0.6, c1=1, c2=2)
+        if(self.algoOptionVar=="Genetischer Algorithmus"):
+            solution_std, fitness, scores, iterations = ga.ga(self.model, self.vars, 2, 30, 100, 0.2, "tournament", "blend")
+        elif(self.algoOptionVar=="Simulierte Abkühlung"):
+            solution_std, fitness, scores, iterations = sa.simulated_annealing(self.model, self.vars, 2, 100, 100, 0.1, False, "exponential")
+        else:
+            solution_std, fitness, scores, it = pso.pso(self.model, self.vars, 5.0, pop_size=30, iterations=100, w=0.6, c1=1, c2=2)
         solution = self.min_max_scaler.inverse_transform(solution_std)
         self.transformed_solution = solution.squeeze()
         self.Optparamterlabel0 = customtkinter.CTkLabel(self.tabview.tab("Maschinensimulation"), text="Optimierte Parameter", fg_color="transparent", font=("Arial", 16, "bold"))
