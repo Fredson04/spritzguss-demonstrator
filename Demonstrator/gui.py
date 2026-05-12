@@ -6,9 +6,14 @@ from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 from algorithm import ga, sa
 import algorithm.pso as pso
-from helper.help_functions import create_scaler
+from helper.help_functions import create_scaler, plot_scores
 from PIL import Image
 from CTkToolTip import *
+from matplotlib.backends.backend_tkagg import (
+    FigureCanvasTkAgg, NavigationToolbar2Tk)
+from matplotlib.figure import Figure
+
+from helper.nn_executer import create_neural_network
 
 # Konstanten
 STEPS=1000 # Nur in dem Wertebereich der Schritte können den Slidern Werte zugeordnet werden, also muss die Schrittmenge hoch (oder nonexistent) sein damit die Qualität der optimierten Parameter erreicht werden kann
@@ -28,6 +33,7 @@ class App(customtkinter.CTk):
         
         self.min_max_scaler = create_scaler()
         self.model = pickle.load(open("nn/neural-net.sav", 'rb'))
+        self.scores = []
         
         def update_label1(value):
             self.amount1label.configure(text=(f"{value:.4f}", CELSIUS))
@@ -61,11 +67,70 @@ class App(customtkinter.CTk):
         self.tabview = customtkinter.CTkTabview(self)
         self.tabview.pack(padx=0, pady=0)
 
-        self.tabview.add("tab 1")
+        self.tabview.add("Optimierungsalgorithmus")
         self.tabview.add("Maschinensimulation")
+        self.tabview.add("Neuronales Netz")
         self.tabview.set("Maschinensimulation")
         
-        # Maschinensimulation
+        # Optimierungsalgorithmus - Tab
+        
+        #self.optAlgoFrame = customtkinter.CTkFrame(self.tabview.tab("Optimierungsalgorithmus"), width=200, height=200) 
+        
+        #fig = plot_scores(self.scores)
+        #canvas = FigureCanvasTkAgg(fig, self.tabview.tab("Optimierungsalgorithmus"))  # A tk.DrawingArea.
+        #canvas.draw()
+        #canvas.get_tk_widget().grid(row=0, column=0)  
+        
+        # Neuronales Netz
+        
+        self.nnFrame = customtkinter.CTkFrame(self.tabview.tab("Neuronales Netz"), width=200, height=200)
+        self.nnFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        
+        self.layerLabel = customtkinter.CTkLabel(self.nnFrame, text="Gebe die Größe und Anzahl der Versteckten Schichten an", fg_color="transparent", font=("Arial", 16, "bold") )
+        self.layerLabel.grid(row=1, column=0, padx=20, pady=10)
+        self.layers_text = customtkinter.CTkEntry(self.nnFrame, placeholder_text="64, 32, 16")
+        self.layers_text.grid(row=1, column=1, padx=20)
+        self.activLabel = customtkinter.CTkLabel(self.nnFrame, text="Gebe die zu nutzende Aktivierungsfunktion an", fg_color="transparent", font=("Arial", 16, "bold") )
+        self.activLabel.grid(row=2, column=0, padx=20, pady=10)
+        self.activVar = customtkinter.StringVar(value="relu")
+        self.activOption = customtkinter.CTkOptionMenu(self.nnFrame,values=["relu", "identity", "logistic", "tanh"],
+                                         variable=self.activVar)
+        self.activOption.grid(row=2, column=1, padx=20, pady=10)
+        self.solverLabel = customtkinter.CTkLabel(self.nnFrame, text="Gebe die zu nutzende Solver Funktion an", fg_color="transparent", font=("Arial", 16, "bold") )
+        self.solverLabel.grid(row=3, column=0, padx=20, pady=10)
+        self.solverVar = customtkinter.StringVar(value="adam")
+        self.solverOption = customtkinter.CTkOptionMenu(self.nnFrame,values=["lbfgs", "sgd", "adam"],
+                                         variable=self.solverVar)
+        self.solverOption.grid(row=3, column=1, padx=20, pady=10)
+        self.iterationsLabel = customtkinter.CTkLabel(self.nnFrame, text="Gebe die maximale Anzahl an Iterationen an", fg_color="transparent", font=("Arial", 16, "bold") )
+        self.iterationsLabel.grid(row=4, column=0, padx=20, pady=10)
+        self.iterations_text = customtkinter.CTkEntry(self.nnFrame, placeholder_text="500")
+        self.iterations_text.grid(row=4, column=1, padx=20)
+        
+        self.mseLabel = customtkinter.CTkLabel(self.nnFrame, text="Mean Squared Error des Neuronalen Netzes: ", fg_color="transparent", font=("Arial", 16, "bold") )
+        self.mseLabel.grid(row=6, column=0, padx=20, pady=10)
+        self.mseValue = customtkinter.CTkLabel(self.nnFrame, text="-", fg_color="transparent", font=("Arial", 16, "bold") )
+        self.mseValue.grid(row=6, column=1, padx=20, pady=10)
+        
+        self.percLabel = customtkinter.CTkLabel(self.nnFrame, text="Akkuratheit des Neuronalen Netzes: ", fg_color="transparent", font=("Arial", 16, "bold") )
+        self.percLabel.grid(row=7, column=0, padx=20, pady=10)
+        self.percValue = customtkinter.CTkLabel(self.nnFrame, text="-", fg_color="transparent", font=("Arial", 16, "bold") )
+        self.percValue.grid(row=7, column=1, padx=20, pady=10)
+        
+        def nn_button_pressed():
+            print("test")
+            print(self.activVar.get(), self.solverVar.get(), int(self.iterations_text.get()))
+            self.model, mse, perc = create_neural_network(self.min_max_scaler, acti_func=self.activVar.get(), solve_func=self.solverVar.get(), max_iterations=int(self.iterations_text.get()))
+            print(mse, perc)
+            mse = f"{mse:.4f}"
+            self.mseValue.configure(text=mse)
+            perc = f"{perc:.4f}%"
+            self.percValue.configure(text=perc)
+        
+        self.createNNButton = customtkinter.CTkButton(self.nnFrame, text="Erstelle Neuronales Netz", command=nn_button_pressed)
+        self.createNNButton.grid(row=5, column=1, padx=20)
+        
+        # Maschinensimulation - Tab
         # Widgets:
         self.parameterLabel = customtkinter.CTkLabel(self.tabview.tab("Maschinensimulation"), text="Prozessparameter", fg_color="transparent", font=("Arial", 16, "bold") )
         self.parameterLabel.grid(row=0, column=0, padx=20, pady=10)
@@ -180,7 +245,7 @@ class App(customtkinter.CTk):
         self.algoOption.grid(row=12, column=7, padx=20, pady=10)
         self.ai_button = customtkinter.CTkButton(self.tabview.tab("Maschinensimulation"), text="Generiere optimale Parameter ", command=self.use_algo, state="disabled") # Evtl mit combobox verschiedene Algorithmen anbieten
         self.ai_button.grid(row=13, column=7, padx=20, pady=10)
-        ai_tooltip_string = "Die Parameter werden mit der Partikelschwarmoptimierung generiert. Dieser stochastische Optimierungsalgorithmus produziert nicht-deterministische Ergebnisse."
+        ai_tooltip_string = ("{Die Parameter werden mit ", self.algoOptionVar.get(), " generiert. Dieser stochastische Optimierungsalgorithmus produziert nicht-deterministische Ergebnisse.}")
         self.ai_tooltip = CTkToolTip(self.ai_button, message=ai_tooltip_string)
         
         # Bild
@@ -220,11 +285,11 @@ class App(customtkinter.CTk):
     
     def use_algo(self):
         if(self.algoOptionVar=="Genetischer Algorithmus"):
-            solution_std, fitness, scores, iterations = ga.ga(self.model, self.vars, 2, 30, 100, 0.2, "tournament", "blend")
+            solution_std, fitness, self.scores, iterations = ga.ga(self.model, self.vars, 2, 30, 100, 0.2, "tournament", "blend")
         elif(self.algoOptionVar=="Simulierte Abkühlung"):
-            solution_std, fitness, scores, iterations = sa.simulated_annealing(self.model, self.vars, 2, 100, 100, 0.1, False, "exponential")
+            solution_std, fitness, self.scores, iterations = sa.simulated_annealing(self.model, self.vars, 2, 100, 100, 0.1, False, "exponential")
         else:
-            solution_std, fitness, scores, it = pso.pso(self.model, self.vars, 5.0, pop_size=30, iterations=100, w=0.6, c1=1, c2=2)
+            solution_std, fitness, self.scores, it = pso.pso(self.model, self.vars, 5.0, pop_size=30, iterations=100, w=0.6, c1=1, c2=2)
         solution = self.min_max_scaler.inverse_transform(solution_std)
         self.transformed_solution = solution.squeeze()
         self.Optparamterlabel0 = customtkinter.CTkLabel(self.tabview.tab("Maschinensimulation"), text="Optimierte Parameter", fg_color="transparent", font=("Arial", 16, "bold"))

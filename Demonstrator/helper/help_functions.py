@@ -30,14 +30,14 @@ def create_scaler():
     X_scaled = min_max_scaler.fit_transform(X)
     return min_max_scaler
 
-def plot_scores(scores, title="Plot der besten Qualität", y="Zielvariabel", x="Anzahl der Iterationen"): # Plottet jeden Wert innerhalb von scores
-    plt.plot(scores)
-    plt.title(title)
-    plt.xlabel(x)
-    plt.ylabel(y)
-    plt.grid(True)
-    plt.show()
-    plt.close()
+def plot_scores(scores, title="Plot der besten Qualität", y="Qualität", x="Anzahl der Iterationen"): # Plottet jeden Wert innerhalb von scores
+    fig, ax = plt.subplots()
+    ax.plot(scores)
+    ax.set_title(title)
+    ax.set_xlabel(x)
+    ax.set_ylabel(y)
+    ax.grid(True)
+    return fig
 
 def plot_animated_scores(scores, title="Plot der besten Qualität", y="Zielvariabel", x="Iteration"):
     plt.ion()
