@@ -1,3 +1,4 @@
+import datetime
 import pickle
 import time
 
@@ -19,6 +20,7 @@ from helper.nn_executer import create_neural_network
 
 # Konstanten
 STEPS=1000 # Nur in dem Wertebereich der Schritte können den Slidern Werte zugeordnet werden, also muss die Schrittmenge hoch (oder nonexistent) sein damit die Qualität der optimierten Parameter erreicht werden kann
+DATE=datetime.datetime.now().strftime("%Y%m%d")
 CELSIUS="°C"
 SECONDS="s"
 NEWTON="n"
@@ -281,7 +283,7 @@ class App(customtkinter.CTk):
         self.qual_label.grid(row=0, column=0, padx=20, pady=10)
         self.quality_category_label = customtkinter.CTkLabel(self.qual_frame, text="", fg_color="transparent")
         self.quality_category_label.grid(row=1, column=0, padx=20, pady=10)
-        self.qual_value_label = customtkinter.CTkLabel(self.qual_frame, text="U0-Wert:", fg_color="transparent")
+        self.qual_value_label = customtkinter.CTkLabel(self.qual_frame, text="U\u2080-Wert:", fg_color="transparent")
         self.qual_value_label.grid(row=0, column=1, padx=20, pady=10)
         self.produce_label = customtkinter.CTkLabel(self.qual_frame, text="", fg_color="transparent")
         self.produce_label.grid(row=1, column=1, padx=20, pady=10)
@@ -301,6 +303,31 @@ class App(customtkinter.CTk):
         self.ai_button.grid(row=0, column=4, padx=20, pady=10)
         ai_tooltip_string = ("{Die Parameter werden mit ", self.algoOptionVar.get(), " generiert. Dieser stochastische Optimierungsalgorithmus produziert nicht-deterministische Ergebnisse.}")
         self.ai_tooltip = CTkToolTip(self.ai_button, message=ai_tooltip_string)
+        
+        # Linse fertigung:
+        self.lense_frame = customtkinter.CTkFrame(self.tabview.tab("Maschinensimulation"),border_width=2,border_color="gray")
+        self.lense_frame.grid(row=2, column=1, padx=20, pady=(10, 0), sticky="nsw")
+        self.lens_pic = customtkinter.CTkImage(light_image=Image.open('graphics/lens.png'), dark_image=Image.open('graphics/lens.png'), size=(200,200))
+        self.lens_image_label = customtkinter.CTkLabel(self.lense_frame, text="", image=self.lens_pic)
+        self.lens_image_label.grid(row=0, column=0, rowspan=4, padx=20, pady=10)
+        self.lens_produced_label1 = customtkinter.CTkLabel(self.lense_frame, text="Status:", fg_color="transparent", font=("Arial",14, "bold") )
+        self.lens_produced_label1.grid(row=0, column=1, padx=5, pady=5)
+        self.lens_produced_label2 = customtkinter.CTkLabel(self.lense_frame, text="Linse produziert", fg_color="transparent",font=("Arial",14, "bold"))
+        self.lens_produced_label2.grid(row=0, column=2, padx=5, pady=5)
+        self.article_produced_label1 = customtkinter.CTkLabel(self.lense_frame, text="Artikelnummer:", fg_color="transparent",font=("Arial",12, "bold"))
+        self.article_produced_label1.grid(row=1, column=1, padx=5, pady=5)
+        self.article_produced_label2 = customtkinter.CTkLabel(self.lense_frame, text="LNS-4712", fg_color="transparent")
+        self.article_produced_label2.grid(row=1, column=2, padx=5, pady=5)
+        self.material_label1 = customtkinter.CTkLabel(self.lense_frame, text="Material:", fg_color="transparent", font=("Arial",12, "bold"))
+        self.material_label1.grid(row=2, column=1, padx=5, pady=5)
+        self.material_label2 = customtkinter.CTkLabel(self.lense_frame, text="PMMA", fg_color="transparent")
+        self.material_label2.grid(row=2, column=2, padx=5, pady=5)
+        self.current_iter = "001"
+        self.current_charge = (DATE, "-M1-", self.current_iter)
+        self.charge_label1 = customtkinter.CTkLabel(self.lense_frame, text="Charge: ", fg_color="transparent", font=("Arial",12, "bold"))
+        self.charge_label1.grid(row=3, column=1, padx=5, pady=5)
+        self.charge_label2 = customtkinter.CTkLabel(self.lense_frame, text=self.current_charge, fg_color="transparent")
+        self.charge_label2.grid(row=3, column=2, padx=5, pady=5)
         
         # Bild
         #self.placeholder_pic = customtkinter.CTkImage(light_image=Image.open('graphics/placeholder.jpg'), dark_image=Image.open('graphics/placeholder.jpg'), size=(200,200)) # WidthxHeight
