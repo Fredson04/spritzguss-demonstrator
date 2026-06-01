@@ -30,6 +30,20 @@ def create_scaler():
     X_scaled = min_max_scaler.fit_transform(X)
     return min_max_scaler
 
+def get_X(scaler):
+    file = "dataset/" + "spritzguss.csv"
+    data = pd.read_csv((file))
+
+    X = data.iloc[:, :-1] # X enthält immer alle Spalten des Datensatzes außer die letzte Spalte
+    y = data.iloc[:, -1]
+    return scaler.transform(X)
+
+def add_rest_parameters(population, kn):
+    for p in population:
+        rest_parameters = kn.predict(p[0:6].reshape(1, -1))
+        p[6:13] = rest_parameters
+    return population
+
 def plot_scores(scores, title="Plot der besten Qualität", y="Qualität", x="Anzahl der Iterationen"): # Plottet jeden Wert innerhalb von scores
     fig, ax = plt.subplots()
     ax.plot(scores)

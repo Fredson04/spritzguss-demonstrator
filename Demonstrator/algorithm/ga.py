@@ -3,7 +3,7 @@ import numpy as np
 import numpy.random
 import helper.help_functions as helper
 
-def ga(model, X, maxQuality, pop_size=30, generations=100, mutation_rate=1, selection="tournament", crossover="blend", converge_int=3):
+def ga(model, X, kn, maxQuality, pop_size=30, generations=100, mutation_rate=1, selection="tournament", crossover="blend", converge_int=3):
     population = help.initialize_population(X, pop_size) # Initialisierung der Population
     
     # Da die Population min max Skaliert ist, sind lower und upper bound effektiv immer 0 und 1
@@ -61,6 +61,10 @@ def ga(model, X, maxQuality, pop_size=30, generations=100, mutation_rate=1, sele
             next_population.append(uniform_mutation(child1, mutation_rate, lower_bound, upper_bound))
             next_population.append(uniform_mutation(child2, mutation_rate, lower_bound, upper_bound))
 
+        next_population = np.maximum(next_population, 0) # Verhindert, dass Minuswerte entstehen
+        next_population = np.minimum(next_population, 1) # Max Werte sind max werte im Wertebereich des Datensatzes
+        next_population = helper.add_rest_parameters(next_population, kn)
+        
         next_population = np.array(next_population) # List muss in np.array konvertiert werden
         next_population[0] = population[best_individual] # Behalte das beste Individuum der vorherigen Generation bei
         population = next_population # Ersetze die vorherige mit der neuen Generation

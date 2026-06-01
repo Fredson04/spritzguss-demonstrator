@@ -3,7 +3,7 @@ import random
 import helper.help_functions as helper
 import numpy as np
 
-def simulated_annealing(model, X, maxQuality, temp=10, iterations=100, neighbourhood=0.1, neighbour_index=True, schedule="exponential", alpha=0.95, converge_int=3):
+def simulated_annealing(model, X, kn, maxQuality, temp=10, iterations=100, neighbourhood=0.1, neighbour_index=True, schedule="exponential", alpha=0.95, converge_int=3):
     solution = help.initialize_population(X, 1)
     best_solution = solution.copy()
     solution_energy = model.predict(solution) * -1 # Speicher die Fitness 
@@ -22,6 +22,7 @@ def simulated_annealing(model, X, maxQuality, temp=10, iterations=100, neighbour
 
         neighbour = np.maximum(neighbour, 0) # Verhindert, dass Minuswerte entstehen
         neighbour = np.minimum(neighbour, 1)
+        neighbour = helper.add_rest_parameters(neighbour, kn)
         
         neighbour_energy = model.predict(neighbour) * -1 # Prüfe die Fitness des Nachbarn, da SA ein minimum finden soll, wird der gesuchte Max Wert zum Min Wert
 
@@ -69,7 +70,7 @@ def logarithmic_cooling(i, c, d=1):
 
 def get_neighbour_index(x, neighbourhood=0.1):
     neighbour = x.copy()
-    index = random.randint(0, len(x) - 1) # Generiere einen zufälligen Integer in der Index Range von x
+    index = random.randint(0, 6) # Generiere einen zufälligen Integer in der Index Range von x
     neighbour[index] += random.uniform(-neighbourhood, neighbourhood) # Auf diesen Index addiere eine zufällige Zahl zwischen -neighbourhood und neighbourhood
     return neighbour
 
