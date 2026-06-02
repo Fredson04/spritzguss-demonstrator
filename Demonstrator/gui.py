@@ -90,16 +90,20 @@ class App(customtkinter.CTk):
             self.quality_category_label.configure(fg_color="transparent")
             self.produce_label.configure(text="")
             
+            mode = customtkinter.get_appearance_mode()
+            tuple = customtkinter.ThemeManager.theme["CTkFrame"]["fg_color"]
+            colour = tuple[0] if mode == "Light" else tuple[1]
+            self.border_frame.configure(fg_color=colour  , border_width=0,border_color=colour)
             
         # Tabs    
             
         self.tabview = customtkinter.CTkTabview(self)
         self.tabview.pack(padx=0, pady=0)
 
-        self.tabview.add("Optimierungsalgorithmus")
-        self.tabview.add("Maschinensimulation")
-        self.tabview.add("Neuronales Netz")
-        self.tabview.set("Maschinensimulation")
+        self.tab1 = self.tabview.add("KI Live testen")
+        self.tab2 =self.tabview.add("Optimierungsalgorithmus")
+        self.tab3 = self.tabview.add("KI selbst trainieren")
+        self.tabview.set("KI Live testen")
         
         # Optimierungsalgorithmus - Tab
         
@@ -112,7 +116,7 @@ class App(customtkinter.CTk):
         
         # Neuronales Netz
         
-        self.nnFrame = customtkinter.CTkFrame(self.tabview.tab("Neuronales Netz"), width=200, height=200)
+        self.nnFrame = customtkinter.CTkFrame(self.tab3, width=200, height=200)
         self.nnFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         
         self.layerLabel = customtkinter.CTkLabel(self.nnFrame, text="Gebe die Größe und Anzahl der Versteckten Schichten an", fg_color="transparent", font=("Arial", 16, "bold") )
@@ -174,7 +178,7 @@ class App(customtkinter.CTk):
         
         # Maschinensimulation - Tab
         # Widgets:
-        self.einstellParam_frame = customtkinter.CTkFrame(self.tabview.tab("Maschinensimulation"),border_width=2,border_color="gray")
+        self.einstellParam_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray")
         self.einstellParam_frame.grid(row=1, column=0, padx=20, pady=(10, 0), sticky="nsw")
         self.parameterLabel = customtkinter.CTkLabel(self.einstellParam_frame, text="Parameter", fg_color="transparent", font=("Arial", 16, "bold") )
         self.parameterLabel.grid(row=0, column=0, padx=20, pady=10)
@@ -234,7 +238,7 @@ class App(customtkinter.CTk):
         
         self.generated_paremeters = self.get_kn_vals()
         
-        self.prozessParam_frame = customtkinter.CTkFrame(self.tabview.tab("Maschinensimulation"),border_width=2,border_color="gray")
+        self.prozessParam_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray")
         self.prozessParam_frame.grid(row=1, column=1, padx=20, pady=(10, 0), sticky="nsw")
         self.parameter2Label = customtkinter.CTkLabel(self.prozessParam_frame, text="Parameter", fg_color="transparent", font=("Arial", 16, "bold") )
         self.parameter2Label.grid(row=0, column=0, padx=20, pady=10)
@@ -277,57 +281,85 @@ class App(customtkinter.CTk):
         self.amount12label.grid(row=7, column=1, padx=20, pady=10)
         
         #Quality Widgets
-        self.qual_frame = customtkinter.CTkFrame(self.tabview.tab("Maschinensimulation"),border_width=2,border_color="gray")
+        self.qual_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray")
         self.qual_frame.grid(row=0, column=0, padx=20, pady=(10, 0), sticky="nsw")
         self.qual_label = customtkinter.CTkLabel(self.qual_frame, text="Qualitätsergebnis:", fg_color="transparent")
         self.qual_label.grid(row=0, column=0, padx=20, pady=10)
-        self.quality_category_label = customtkinter.CTkLabel(self.qual_frame, text="", fg_color="transparent")
-        self.quality_category_label.grid(row=1, column=0, padx=20, pady=10)
+        self.border_frame = customtkinter.CTkFrame(self.qual_frame, fg_color="transparent")
+        self.border_frame.grid(row=1, column=0, padx=20, pady=10)
+        self.quality_category_label = customtkinter.CTkLabel(self.border_frame, text="", fg_color="transparent")
+        self.quality_category_label.grid(row=0, column=0, padx=3, pady=3)
         self.qual_value_label = customtkinter.CTkLabel(self.qual_frame, text="U\u2080-Wert:", fg_color="transparent")
         self.qual_value_label.grid(row=0, column=1, padx=20, pady=10)
-        self.produce_label = customtkinter.CTkLabel(self.qual_frame, text="", fg_color="transparent")
+        self.produce_label = customtkinter.CTkLabel(self.qual_frame, text="", fg_color="transparent", font=("Arial",16, "bold"))
         self.produce_label.grid(row=1, column=1, padx=20, pady=10)
         
+        segmente = [
+            ("Ausschuss\nU₀ < 0,4",           "#e05555", 100),
+            ("Akzeptabel\n0,4 ≤ U₀ < 0,45",  "#e0c040", 130),
+            ("Sollbereich\n0,45 ≤ U₀ ≤ 0,5", "#50c050", 130),
+            ("Ineffizient\nU₀ > 0,5",         "#e08030", 100),
+        ]
+
+        customtkinter.CTkLabel(self.qual_frame, text="Qualitätsskala:", font=customtkinter.CTkFont(size=13, weight="bold")).grid(
+            row=0, column=2, columnspan=len(segmente), sticky="w", padx=10, pady=(10, 4)
+        )
+
+        for col, (text, farbe, breite) in enumerate(segmente):
+            seg = customtkinter.CTkFrame(self.qual_frame, fg_color=farbe, corner_radius=4, width=breite, height=50)
+            seg.grid(row=1, column=col+2, padx=2, pady=(0, 10), sticky="nsew")
+            seg.grid_propagate(False)
+            customtkinter.CTkLabel(
+                seg,
+                text=text,
+                font=customtkinter.CTkFont(size=11),
+                text_color="white",
+                justify="center"
+            ).grid(row=0, column=0, sticky="nsew", padx=4, pady=4)
+            seg.grid_rowconfigure(0, weight=1)
+            seg.grid_columnconfigure(0, weight=1)
+        
+        
         # Production Widgets
-        self.production_frame = customtkinter.CTkFrame(self.tabview.tab("Maschinensimulation"),border_width=2,border_color="gray")
+        self.production_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray")
         self.production_frame.grid(row=0, column=1, padx=20, pady=(10, 0), sticky="nsw")
-        self.producing_button = customtkinter.CTkButton(self.production_frame, text="Produziere ", command=self.set_kn_vals)
+        self.producing_button = customtkinter.CTkButton(self.production_frame, text="1.\nProduktion starten", command=self.set_kn_vals, corner_radius=12,border_width=1,border_color="#a0b4c8",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
         self.producing_button.grid(row=0, column=1, padx=20, pady=10)
-        self.produce_button = customtkinter.CTkButton(self.production_frame, text="Qualitätsprüfung ", command=self.produce_func, state="disabled")
+        self.produce_button = customtkinter.CTkButton(self.production_frame, text="2.\nQualität vorhersagen ", command=self.produce_func, state="disabled", corner_radius=12,border_width=1,border_color="#a0b4c8",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
         self.produce_button.grid(row=0, column=2, padx=20, pady=10)
         self.algoOptionVar = customtkinter.StringVar(value="Partikelschwarmoptimierung")
-        self.algoOption = customtkinter.CTkOptionMenu(self.production_frame, values=["Partikelschwarmoptimierung", "Genetischer Algorithmus", "Simulierte Abkühlung"],variable=self.algoOptionVar)
+        self.algoOption = customtkinter.CTkOptionMenu(self.production_frame, values=["Partikelschwarmoptimierung", "Genetischer Algorithmus", "Simulierte Abkühlung"],variable=self.algoOptionVar, corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
         self.algoOption.set("Partikelschwarmoptimierung")
         self.algoOption.grid(row=0, column=3, padx=20, pady=10)
-        self.ai_button = customtkinter.CTkButton(self.production_frame, text="Generiere optimale Parameter ", command=self.use_algo, state="disabled") # Evtl mit combobox verschiedene Algorithmen anbieten
+        self.ai_button = customtkinter.CTkButton(self.production_frame, text="3.\nEinstellempfehlung generieren", command=self.use_algo, state="disabled", corner_radius=12,border_width=1,border_color="#a0b4c8",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
         self.ai_button.grid(row=0, column=4, padx=20, pady=10)
         ai_tooltip_string = ("{Die Parameter werden mit ", self.algoOptionVar.get(), " generiert. Dieser stochastische Optimierungsalgorithmus produziert nicht-deterministische Ergebnisse.}")
         self.ai_tooltip = CTkToolTip(self.ai_button, message=ai_tooltip_string)
         
         # Linse fertigung:
-        self.lense_frame = customtkinter.CTkFrame(self.tabview.tab("Maschinensimulation"),border_width=2,border_color="gray")
+        self.lense_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray")
         self.lense_frame.grid(row=2, column=1, padx=20, pady=(10, 0), sticky="nsw")
-        self.lens_pic = customtkinter.CTkImage(light_image=Image.open('graphics/lens.png'), dark_image=Image.open('graphics/lens.png'), size=(200,200))
+        self.lens_pic = customtkinter.CTkImage(light_image=Image.open('graphics/lens.png'), dark_image=Image.open('graphics/lens.png'), size=(150,150))
         self.lens_image_label = customtkinter.CTkLabel(self.lense_frame, text="", image=self.lens_pic)
         self.lens_image_label.grid(row=0, column=0, rowspan=4, padx=20, pady=10)
         self.lens_produced_label1 = customtkinter.CTkLabel(self.lense_frame, text="Status:", fg_color="transparent", font=("Arial",14, "bold") )
-        self.lens_produced_label1.grid(row=0, column=1, padx=5, pady=5)
+        self.lens_produced_label1.grid(row=0, column=1, padx=0, pady=0)
         self.lens_produced_label2 = customtkinter.CTkLabel(self.lense_frame, text="Linse produziert", fg_color="transparent",font=("Arial",14, "bold"))
-        self.lens_produced_label2.grid(row=0, column=2, padx=5, pady=5)
+        self.lens_produced_label2.grid(row=0, column=2, padx=0, pady=0)
         self.article_produced_label1 = customtkinter.CTkLabel(self.lense_frame, text="Artikelnummer:", fg_color="transparent",font=("Arial",12, "bold"))
-        self.article_produced_label1.grid(row=1, column=1, padx=5, pady=5)
+        self.article_produced_label1.grid(row=1, column=1, padx=0, pady=0)
         self.article_produced_label2 = customtkinter.CTkLabel(self.lense_frame, text="LNS-4712", fg_color="transparent")
-        self.article_produced_label2.grid(row=1, column=2, padx=5, pady=5)
+        self.article_produced_label2.grid(row=1, column=2, padx=0, pady=0)
         self.material_label1 = customtkinter.CTkLabel(self.lense_frame, text="Material:", fg_color="transparent", font=("Arial",12, "bold"))
-        self.material_label1.grid(row=2, column=1, padx=5, pady=5)
+        self.material_label1.grid(row=2, column=1, padx=0, pady=0)
         self.material_label2 = customtkinter.CTkLabel(self.lense_frame, text="PMMA", fg_color="transparent")
-        self.material_label2.grid(row=2, column=2, padx=5, pady=5)
+        self.material_label2.grid(row=2, column=2, padx=0, pady=0)
         self.current_iter = "001"
-        self.current_charge = (DATE, "-M1-", self.current_iter)
+        self.current_charge = f"{DATE}-M1-{self.current_iter}"
         self.charge_label1 = customtkinter.CTkLabel(self.lense_frame, text="Charge: ", fg_color="transparent", font=("Arial",12, "bold"))
-        self.charge_label1.grid(row=3, column=1, padx=5, pady=5)
+        self.charge_label1.grid(row=3, column=1, padx=0, pady=0)
         self.charge_label2 = customtkinter.CTkLabel(self.lense_frame, text=self.current_charge, fg_color="transparent")
-        self.charge_label2.grid(row=3, column=2, padx=5, pady=5)
+        self.charge_label2.grid(row=3, column=2, padx=0, pady=0)
         
         # Bild
         #self.placeholder_pic = customtkinter.CTkImage(light_image=Image.open('graphics/placeholder.jpg'), dark_image=Image.open('graphics/placeholder.jpg'), size=(200,200)) # WidthxHeight
@@ -337,6 +369,11 @@ class App(customtkinter.CTk):
         #self.ineffizient_pic = customtkinter.CTkImage(light_image=Image.open('graphics/ineffizient.jpg'), dark_image=Image.open('graphics/ineffizient.jpg'), size=(200,200)) # WidthxHeight
         #self.image_label = customtkinter.CTkLabel(self.tabview.tab("Maschinensimulation"), text="", image=self.placeholder_pic)
         #self.image_label.place(relx=0.95, rely=0.05, anchor="ne")
+        
+    def update_charge(self):
+        self.current_iter = str(int(self.current_iter) + 1).zfill(len(self.current_iter))
+        self.current_charge = f"{DATE}-M1-{self.current_iter}"
+        self.charge_label2.configure(text=self.current_charge)
         
     def get_kn_vals(self, scale=True):
         self.vars = []
@@ -369,6 +406,9 @@ class App(customtkinter.CTk):
         self.amount9label.configure(text=(f"{(self.generated_paremeters)[0][11]:.2f}", NEWTONMETER))
         self.amount12label.configure(text=(f"{(self.generated_paremeters)[0][12]:.2f}", CM))
         self.produce_button.configure(state="normal")
+        
+        self.update_charge()
+        self.slider_change()
         
     def produce_func(self):
         self.vars = []
@@ -409,16 +449,17 @@ class App(customtkinter.CTk):
         msg2 = f"{quality_cat}"
         self.quality_category_label.configure(text=msg2)
         if(quality_cat == "Ausschuss"):
-            self.quality_category_label.configure(fg_color="red")
-        if(quality_cat == "in Ordnung"):
-            self.quality_category_label.configure(fg_color="yellow")
+            self.border_frame.configure(fg_color="#C00000", border_width=2,border_color="black")
+        if(quality_cat == "Akzeptabel"):
+            self.border_frame.configure(fg_color="#FFC000", border_width=2,border_color="black")
         if(quality_cat == "Sollbereich"):
-            self.quality_category_label.configure(fg_color="green")
-        if(quality_cat == "Unwirtschaftlich"):
-            self.quality_category_label.configure(fg_color="orange")
+            self.border_frame.configure(fg_color="#8ED973", border_width=2,border_color="black")
+        if(quality_cat == "Ineffizient"):
+            self.border_frame.configure(fg_color="#E97132", border_width=2,border_color="black")
         produce_tooltip_string = "Die Qualität wird durch ein Neuronales Netz berechnet. Dieses wurde mit einem Datensatz der die Herstellung von Kunststofflinsen abbildet trainiert."
         self.produce_tooltip = CTkToolTip(self.produce_label, message=produce_tooltip_string)
         self.ai_button.configure(state="normal")
+        
         
         
     
@@ -445,7 +486,7 @@ class App(customtkinter.CTk):
             optParameterLabel = customtkinter.CTkLabel(self.einstellParam_frame, text=f"{value:.2f}", fg_color="transparent")
             optParameterLabel.grid(row=i + 1, column=3, padx=20, pady=10)
             self.optParameterLabels.append(optParameterLabel)
-        self.useOptimizedButton = customtkinter.CTkButton(self.einstellParam_frame, text="Übernehme generierte Werte", command=self.useOptimizedFunc)
+        self.useOptimizedButton = customtkinter.CTkButton(self.einstellParam_frame, text="4.\nEmpfehlung übernehmen", command=self.useOptimizedFunc, corner_radius=12,border_width=1,border_color="#a0b4c8",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
         self.useOptimizedButton.grid(row=7, column=3, padx=20, pady=10)
         
     def useOptimizedFunc(self):
