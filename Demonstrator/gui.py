@@ -101,9 +101,35 @@ class App(customtkinter.CTk):
         self.tabview.pack(padx=0, pady=0)
 
         self.tab1 = self.tabview.add("KI Live testen")
-        self.tab2 =self.tabview.add("Optimierungsalgorithmus")
+        self.tab2 = self.tabview.add("Einstellungen ändern")
         self.tab3 = self.tabview.add("KI selbst trainieren")
+        self.tab4 =self.tabview.add("Optimierungsalgorithmus")
         self.tabview.set("KI Live testen")
+        
+        # Einstellungen ändern Tab
+        
+        self.eAeFrame = customtkinter.CTkFrame(self.tab2, width=200, height=200)
+        self.eAeFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.eAe_headline_Label = customtkinter.CTkLabel(self.eAeFrame, text="Was möchtest du untersuchen?​", fg_color="transparent", font=("Arial", 18, "bold") )
+        self.eAe_headline_Label.grid(row=0, column=1, padx=20, pady=10)
+        self.eAe_text_Label = customtkinter.CTkLabel(self.eAeFrame, text="Die KI besteht aus zwei Teilen: Einem KI-Modell, das die Qualität vorhersagt\nund einem Modell, das die besten Einstellparameter findet.\nHier kannst du beide gezielt verändern und beobachten, was passiert.​​", fg_color="transparent")
+        self.eAe_text_Label.grid(row=1, column=1, padx=20, pady=10)
+        self.eAeFrame1 = customtkinter.CTkFrame(self.eAeFrame, width=200, height=200)
+        self.eAeFrame1.grid(row=2, column=0, padx=20, pady=20, sticky="nsew")
+        self.eAeFrame1_headline_Label = customtkinter.CTkLabel(self.eAeFrame1, text="Einfluss der Datenmenge verstehen​​", fg_color="transparent", font=("Arial", 18, "bold") )
+        self.eAeFrame1_headline_Label.grid(row=0, column=0, padx=20, pady=10)
+        self.eAeFrame1_text_Label = customtkinter.CTkLabel(self.eAeFrame1, text="Was passiert, wenn das KI-Modell weniger Produktionsläufe zum Lernen hat?\nWie viele Daten braucht die KI, um zuverlässig zu sein?​​​", fg_color="transparent")
+        self.eAeFrame1_text_Label.grid(row=1, column=0, padx=20, pady=10)
+        self.eAeFrame1_button = customtkinter.CTkButton(self.eAeFrame1, text="Zum Vergleich")
+        self.eAeFrame1_button.grid(row=2, column=0, padx=20)
+        self.eAeFrame2 = customtkinter.CTkFrame(self.eAeFrame, width=200, height=200)
+        self.eAeFrame2.grid(row=2, column=2, padx=20, pady=20, sticky="nsew")
+        self.eAeFrame2_headline_Label = customtkinter.CTkLabel(self.eAeFrame2, text="Optimierungsalgorithmus wechseln​", fg_color="transparent", font=("Arial", 18, "bold") )
+        self.eAeFrame2_headline_Label.grid(row=0, column=0, padx=20, pady=10)
+        self.eAeFrame2_text_Label = customtkinter.CTkLabel(self.eAeFrame2, text="Welches Modell findet die besten Einstellparameter?\nVergleiche verschiedene Methoden direkt miteinander.​", fg_color="transparent")
+        self.eAeFrame2_text_Label.grid(row=1, column=0, padx=20, pady=10)
+        self.eAeFrame2_button = customtkinter.CTkButton(self.eAeFrame2, text="Zum Vergleich")
+        self.eAeFrame2_button.grid(row=2, column=0, padx=20)
         
         # Optimierungsalgorithmus - Tab
         
