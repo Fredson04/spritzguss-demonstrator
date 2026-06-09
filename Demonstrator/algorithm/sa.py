@@ -22,7 +22,6 @@ def simulated_annealing(model, X, kn, maxQuality, temp=10, iterations=100, neigh
 
         neighbour = np.maximum(neighbour, 0) # Verhindert, dass Minuswerte entstehen
         neighbour = np.minimum(neighbour, 1)
-        neighbour = helper.add_rest_parameters(neighbour, kn)
         
         neighbour_energy = model.predict(neighbour) * -1 # Prüfe die Fitness des Nachbarn, da SA ein minimum finden soll, wird der gesuchte Max Wert zum Min Wert
 

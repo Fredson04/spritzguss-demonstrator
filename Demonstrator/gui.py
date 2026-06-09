@@ -8,7 +8,7 @@ from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 from algorithm import ga, sa
 import algorithm.pso as pso
-from helper.help_functions import create_scaler, get_X, plot_scores
+from helper.help_functions import create_scaler, create_scaler2, get_X, plot_scores
 from PIL import Image
 from CTkToolTip import *
 from matplotlib.backends.backend_tkagg import (
@@ -40,7 +40,8 @@ class App(customtkinter.CTk):
         self.title("Spritzguss Demonstrator")
         
         self.min_max_scaler = create_scaler()
-        self.model = pickle.load(open("nn/neural-net.sav", 'rb'))
+        self.scaler2 = create_scaler2()
+        self.model = pickle.load(open("nn/neural-net-new.sav", 'rb'))
         self.scores = []
         self.kn = create_kn_classifier(6, self.min_max_scaler)
         
@@ -358,7 +359,7 @@ class App(customtkinter.CTk):
         self.lense_frame.grid_forget()
         self.lens_pic = customtkinter.CTkImage(light_image=Image.open('graphics/lens.png'), dark_image=Image.open('graphics/lens.png'), size=(150,150))
         self.lens_image_label = customtkinter.CTkLabel(self.lense_frame, text="", image=self.lens_pic)
-        self.lens_image_label.grid(row=0, column=0, rowspan=5, padx=20, pady=10)
+        self.lens_image_label.grid(row=0, column=0, rowspan=6, padx=20, pady=10)
         self.lens_produced_label1 = customtkinter.CTkLabel(self.lense_frame, text="Status:", fg_color="transparent", font=("Arial",14, "bold") )
         self.lens_produced_label1.grid(row=0, column=1, padx=10, pady=0, sticky="w")
         self.lens_produced_label2 = customtkinter.CTkLabel(self.lense_frame, text="Linse produziert", fg_color="transparent",font=("Arial",14, "bold"))
@@ -438,23 +439,30 @@ class App(customtkinter.CTk):
         self.vars.append(self.slider10var.get()) 
         self.vars.append(self.slider11var.get()) 
         self.vars.append(self.slider13var.get()) 
-        
-        for i in range(0, 7):
-           self.vars.append(0) 
+
+
         self.vars = np.array(self.vars).reshape(1, -1)
-        self.vars = self.min_max_scaler.transform(self.vars)
-        index = [6, 7, 8, 9, 10, 11, 12]
-        self.vars = np.delete(self.vars, index)
-        self.vars = self.vars.reshape(1, -1)
-        self.vars = np.hstack([self.vars, self.kn.predict(self.vars)])
+        self.vars = self.scaler2.transform(self.vars)
+        self.prediction = self.model.predict(self.vars).item()
         
-        self.vars = np.array(self.vars).reshape(1, -1)
-        self.prediction = (self.model.predict(self.vars)).item()
+        #for i in range(0, 7):
+        #   self.vars.append(0) 
+        #self.vars = np.array(self.vars).reshape(1, -1)
+        #self.vars = self.min_max_scaler.transform(self.vars)
+        #index = [6, 7, 8, 9, 10, 11, 12]
+        #self.vars = np.delete(self.vars, index)
+        #self.vars = self.vars.reshape(1, -1)
+        #self.vars = np.hstack([self.vars, self.kn.predict(self.vars)])
+        
+        #self.vars = np.array(self.vars).reshape(1, -1)
+        #self.prediction = (self.model.predict(self.vars)).item()
         
         if(self.prediction < 0):
             self.prediction = 0
         if(self.prediction > 10):
             self.prediction = 10
+        
+        #self.prediction = round(self.prediction, 1)
         
         quality_cat = self.judge_quality()
         self.prediction = self.prediction * 0.1
@@ -481,13 +489,8 @@ class App(customtkinter.CTk):
             solution_std, fitness, self.scores, iterations = sa.simulated_annealing(self.model, get_X(self.min_max_scaler), self.kn, 5.0, 100, 200, 0.1, False, "exponential")
         else:
             solution_std, fitness, self.scores, it = pso.pso(self.model, get_X(self.min_max_scaler), self.kn, 5.0, pop_size=30, iterations=200, w=0.6, c1=1, c2=2)
-            print(solution_std)
-            print(fitness)
-            print(self.model.predict(solution_std))
-            print(solution_std[0][0:6])
-            print(solution_std[0][6:13])
-            print(self.kn.predict(solution_std[0][0:6].reshape(1, -1)))
-        solution = self.min_max_scaler.inverse_transform(solution_std)
+
+        solution = self.scaler2.inverse_transform(solution_std)
         self.transformed_solution = solution.squeeze()
         self.transformed_solution = self.transformed_solution[0:6]
         self.Optparamterlabel0 = customtkinter.CTkLabel(self.einstellParam_frame, text="Empfehlung", fg_color="transparent", font=("Arial", 16, "bold"))

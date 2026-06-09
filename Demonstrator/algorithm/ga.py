@@ -63,7 +63,6 @@ def ga(model, X, kn, maxQuality, pop_size=30, generations=100, mutation_rate=1, 
 
         next_population = np.maximum(next_population, 0) # Verhindert, dass Minuswerte entstehen
         next_population = np.minimum(next_population, 1) # Max Werte sind max werte im Wertebereich des Datensatzes
-        next_population = helper.add_rest_parameters(next_population, kn)
         
         next_population = np.array(next_population) # List muss in np.array konvertiert werden
         next_population[0] = population[best_individual] # Behalte das beste Individuum der vorherigen Generation bei

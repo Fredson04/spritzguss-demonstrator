@@ -6,7 +6,6 @@ import helper.help_functions as helper
 def pso(model, X, kn, maxQuality, pop_size=30, iterations=100, w=1.0, c1=1, c2=2, converge_int=3):
     #Initialisierung Pop und deren Fitness
     particles = helper.initialize_population(X, pop_size) # Initialisiere Population von größe dim * num_particles
-    particles = helper.add_rest_parameters(particles, kn)
     fitness_values = np.array([model.predict(particles)])
     #Initialisierung pbest und fitness, anfänglich identisch zu particles
     pbest = np.copy(particles)
@@ -49,7 +48,6 @@ def pso(model, X, kn, maxQuality, pop_size=30, iterations=100, w=1.0, c1=1, c2=2
         
         particles = np.maximum(particles, 0) # Verhindert, dass Minuswerte entstehen
         particles = np.minimum(particles, 1) # Max Werte sind max werte im Wertebereich des Datensatzes
-        particles = helper.add_rest_parameters(particles, kn)
 
         fitness_values = np.array([model.predict(particles)]) # Update das Array das alle Fitness Werte der Partikel speichert
 

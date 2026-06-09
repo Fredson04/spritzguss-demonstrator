@@ -30,12 +30,27 @@ def create_scaler():
     X_scaled = min_max_scaler.fit_transform(X)
     return min_max_scaler
 
+def create_scaler2():
+    file = "dataset/" + "spritzguss-new.csv"
+    data = pd.read_csv((file))
+
+    X = data.iloc[:, :-1] # X enthält immer alle Spalten des Datensatzes außer die letzte Spalte
+    y = data.iloc[:, -1] # Y enthält immer die letzte Spalte des Datensatzes
+    # -> Man muss nur sichergehen dass im gegebenen Datensatz das Qualitätsmaß in der letzten Spalte ist
+
+    min_max_scaler = MinMaxScaler(feature_range=(0, 1) )
+    X_scaled = min_max_scaler.fit_transform(X)
+    return min_max_scaler
+
 def get_X(scaler):
-    file = "dataset/" + "spritzguss.csv"
+    #file = "dataset/" + "spritzguss.csv"
+    file = "dataset/" + "spritzguss-new.csv"
     data = pd.read_csv((file))
 
     X = data.iloc[:, :-1] # X enthält immer alle Spalten des Datensatzes außer die letzte Spalte
     y = data.iloc[:, -1]
+    #temp
+    scaler = create_scaler2()
     return scaler.transform(X)
 
 def add_rest_parameters(population, kn):
