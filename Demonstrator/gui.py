@@ -105,7 +105,7 @@ class App(customtkinter.CTk):
             self.returneAe_button = customtkinter.CTkButton(self.prodLaufFrame, text="Zurück zur Auswahl", command=zurueckAuswahl, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
             self.returneAe_button.grid(row=0, column=0, padx=20, sticky="nw")
             self.vermFrame = customtkinter.CTkFrame(self.prodLaufFrame, fg_color="#e8e8e8", corner_radius=8)
-            self.vermFrame.grid(row=1, column=0, padx=20, pady=20)
+            self.vermFrame.grid(row=1, column=0, padx=20, pady=20, sticky="ew")
             
             self.kreis1 = customtkinter.CTkLabel(self.vermFrame, text=str(1), width=36, height=36, corner_radius=18, fg_color="#1f6aa5", text_color="white", font=customtkinter.CTkFont(size=14, weight="bold"))
             self.kreis1.grid(row=0, column=0, padx=(20, 8), pady=15)
@@ -204,9 +204,9 @@ class App(customtkinter.CTk):
             
             self.denkFrameButton5 = customtkinter.CTkButton(self.denkFrameCapFrame2, text="Eher schlecht​\n(unter 60% richtig\n vorhergesagt)", command=do_denkFrameButton5,corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
             self.denkFrameButton5.grid(row=0, column=0, padx=20, pady=10)
-            self.denkFrameButton6 = customtkinter.CTkButton(self.denkFrameCapFrame2, text="Mittel\n(60-90%) richtig\n vorhergesagt)", command=do_denkFrameButton6, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+            self.denkFrameButton6 = customtkinter.CTkButton(self.denkFrameCapFrame2, text="Mittel\n(60-80%) richtig\n vorhergesagt)", command=do_denkFrameButton6, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
             self.denkFrameButton6.grid(row=0, column=1, padx=20, pady=10)
-            self.denkFrameButton7 = customtkinter.CTkButton(self.denkFrameCapFrame2, text="Gut\n(über 90% richtig\n vorhergesagt​", command=do_denkFrameButton7, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+            self.denkFrameButton7 = customtkinter.CTkButton(self.denkFrameCapFrame2, text="Gut\n(über 80% richtig\n vorhergesagt​", command=do_denkFrameButton7, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
             self.denkFrameButton7.grid(row=0, column=2, padx=20, pady=10)
             
             self.denkFrameButton5.configure(fg_color="#c5d8ed")
@@ -226,31 +226,84 @@ class App(customtkinter.CTk):
             self.ergebnisAnsehenLabel1.grid(row=0, column=0, columnspan=4, padx=20, pady=10, sticky="w")
             self.ergebnisAnsehenLabel2 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("Getestet an 300 Produktionsläufen, die das KI-Modell beim Training nicht gesehen hat"), fg_color="transparent")
             self.ergebnisAnsehenLabel2.grid(row=1, column=0, columnspan=4, padx=20, pady=10, sticky="w")
+            
+            seg1 = customtkinter.CTkFrame(self.ergebnisAnsehenFrame, fg_color="#C00000", corner_radius=4, width=100, height=50)
+            seg1.grid(row=2, column=0, padx=2, pady=(0, 10), sticky="nsew")
+            seg1.grid_propagate(False)
+            self.segLabel1 = customtkinter.CTkLabel(seg1, text="", font=customtkinter.CTkFont(size=12), text_color="black",justify="center")
+            self.segLabel1.grid(row=0, column=0, sticky="nsew", padx=4, pady=4)
+            seg1.grid_rowconfigure(0, weight=1)
+            seg1.grid_columnconfigure(0, weight=1)
+            
+            seg2 = customtkinter.CTkFrame(self.ergebnisAnsehenFrame, fg_color="#FFC000", corner_radius=4, width=100, height=50)
+            seg2.grid(row=2, column=1, padx=2, pady=(0, 10), sticky="nsew")
+            seg2.grid_propagate(False)
+            self.segLabel2 = customtkinter.CTkLabel(seg2, text="", font=customtkinter.CTkFont(size=12), text_color="black",justify="center")
+            self.segLabel2.grid(row=0, column=0, sticky="nsew", padx=4, pady=4)
+            seg2.grid_rowconfigure(0, weight=1)
+            seg2.grid_columnconfigure(0, weight=1)
+            
+            seg3 = customtkinter.CTkFrame(self.ergebnisAnsehenFrame, fg_color="#8ED973", corner_radius=4, width=100, height=50)
+            seg3.grid(row=2, column=2, padx=2, pady=(0, 10), sticky="nsew")
+            seg3.grid_propagate(False)
+            self.segLabel3 = customtkinter.CTkLabel(seg3, text="", font=customtkinter.CTkFont(size=12), text_color="black",justify="center")
+            self.segLabel3.grid(row=0, column=0, sticky="nsew", padx=4, pady=4)
+            seg3.grid_rowconfigure(0, weight=1)
+            seg3.grid_columnconfigure(0, weight=1)
+            
+            seg4 = customtkinter.CTkFrame(self.ergebnisAnsehenFrame, fg_color="#E97132", corner_radius=4, width=100, height=50)
+            seg4.grid(row=2, column=3, padx=2, pady=(0, 10), sticky="nsew")
+            seg4.grid_propagate(False)
+            self.segLabel4 = customtkinter.CTkLabel(seg4, text="", font=customtkinter.CTkFont(size=12), text_color="black",justify="center")
+            self.segLabel4.grid(row=0, column=0, sticky="nsew", padx=4, pady=4)
+            seg4.grid_rowconfigure(0, weight=1)
+            seg4.grid_columnconfigure(0, weight=1)
+            
             self.ergebnisAnsehenLabel3 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("Gesamttrefferquote:"), fg_color="transparent", font=("Arial", 18, "bold"))
-            self.ergebnisAnsehenLabel3.grid(row=2, column=0, padx=20, pady=10, sticky="w")
-            self.progressbar = customtkinter.CTkProgressBar(self.ergebnisAnsehenFrame, orientation="horizontal")
-            self.progressbar.grid(row=2, column=1, columnspan=2, padx=20, pady=10, sticky="w")
+            self.ergebnisAnsehenLabel3.grid(row=3, column=0, padx=20, pady=10, sticky="w")
+            self.progressbar = customtkinter.CTkProgressBar(self.ergebnisAnsehenFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",border_width=0)
+            self.progressbar.grid(row=3, column=1, columnspan=3, padx=20, pady=10, sticky="w")
             if(self.denkFrameCap_button_var.get() == "250 Läufe"):
+                self.progressbar.configure(progress_color="#C00000")
                 self.progressbar.set(0.41)
                 self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("41%"), fg_color="transparent", font=("Arial", 18, "bold"))
                 self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("Placeholder text"), fg_color="transparent")
+                self.segLabel1.configure(text="Ausschuss:\n25,9%")
+                self.segLabel2.configure(text="Akzeptabel:\n40,9%")
+                self.segLabel3.configure(text="Sollbereich:\n60,8%")
+                self.segLabel4.configure(text="Ineffizient:\n36,1%")
             if(self.denkFrameCap_button_var.get() == "500 Läufe"):
+                self.progressbar.configure(progress_color="#FFC000")
                 self.progressbar.set(0.79)
                 self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("79%"), fg_color="transparent", font=("Arial", 18, "bold"))
                 self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("500 Läufe reichen für erste brauchbare Vorhersagen. Aber es gibt trotzdem noch Verwechslungen und falsche Vorhersagen.​"), fg_color="transparent")
+                self.segLabel1.configure(text="Ausschuss:\n61,9%")
+                self.segLabel2.configure(text="Akzeptabel:\n82,2%")
+                self.segLabel3.configure(text="Sollbereich:\n80,4%")
+                self.segLabel4.configure(text="Ineffizient:\n83,2%")
             if(self.denkFrameCap_button_var.get() == "1000 Läufe"):
+                self.progressbar.configure(progress_color="#FFC000")
                 self.progressbar.set(0.83)
                 self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("83%"), fg_color="transparent", font=("Arial", 18, "bold"))
                 self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("Placeholder text"), fg_color="transparent")
+                self.segLabel1.configure(text="Ausschuss:\n68,9%")
+                self.segLabel2.configure(text="Akzeptabel:\n84,6%")
+                self.segLabel3.configure(text="Sollbereich:\n85,6%")
+                self.segLabel4.configure(text="Ineffizient:\n88,5%")
             if(self.denkFrameCap_button_var.get() == "1451 Läufe"):
+                self.progressbar.configure(progress_color="#8ED973")
                 self.progressbar.set(0.84)
                 self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("84%"), fg_color="transparent", font=("Arial", 18, "bold"))
                 self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("Placeholder text"), fg_color="transparent")
-            self.ergebnisAnsehenLabel4.grid(row=2, column=4, padx=20, pady=10, sticky="w")
-            self.ergebnisAnsehenLabel5.grid(row=3, column=0, columnspan=4, padx=20, pady=10, sticky="w")
+                self.segLabel1.configure(text="Ausschuss:\n73,0%")
+                self.segLabel2.configure(text="Akzeptabel:\n84,5%")
+                self.segLabel3.configure(text="Sollbereich:\n87,2%")
+                self.segLabel4.configure(text="Ineffizient:\n90,0%")
+            self.ergebnisAnsehenLabel4.grid(row=3, column=4, padx=20, pady=10, sticky="w")
+            self.ergebnisAnsehenLabel5.grid(row=4, column=0, columnspan=4, padx=20, pady=10, sticky="w")
             
             self.ergebnisAnsehenFrameExit = customtkinter.CTkButton(self.ergebnisAnsehenFrame, text="Was bedeutet das?", command=create_erklaerung_frame, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=("Arial", 18, "bold"))
-            self.ergebnisAnsehenFrameExit.grid(row=5, column=3, padx=20, pady=10)
+            self.ergebnisAnsehenFrameExit.grid(row=6, column=3, padx=20, pady=10)
         
         def create_erklaerung_frame():
             self.ergebnisAnsehenFrame.destroy()
@@ -539,13 +592,7 @@ class App(customtkinter.CTk):
             seg = customtkinter.CTkFrame(self.qual_frame, fg_color=farbe, corner_radius=4, width=breite, height=50)
             seg.grid(row=1, column=col+2, padx=2, pady=(0, 10), sticky="nsew")
             seg.grid_propagate(False)
-            customtkinter.CTkLabel(
-                seg,
-                text=text,
-                font=customtkinter.CTkFont(size=12),
-                text_color="black",
-                justify="center"
-            ).grid(row=0, column=0, sticky="nsew", padx=4, pady=4)
+            customtkinter.CTkLabel(seg, text=text, font=customtkinter.CTkFont(size=12), text_color="black",justify="center").grid(row=0, column=0, sticky="nsew", padx=4, pady=4)
             seg.grid_rowconfigure(0, weight=1)
             seg.grid_columnconfigure(0, weight=1)
         
@@ -692,6 +739,8 @@ class App(customtkinter.CTk):
         else:
             solution_std, fitness, self.scores, it = pso.pso(self.model, get_X(self.min_max_scaler), self.kn, 5.0, pop_size=30, iterations=200, w=0.6, c1=1, c2=2)
 
+        self.lense_frame.grid_forget()
+        
         solution = self.scaler2.inverse_transform(solution_std)
         self.transformed_solution = solution.squeeze()
         self.transformed_solution = self.transformed_solution[0:6]
