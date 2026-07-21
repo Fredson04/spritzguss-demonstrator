@@ -404,55 +404,135 @@ class App(customtkinter.CTk):
         self.nnFrame = customtkinter.CTkFrame(self.tab3, width=200, height=200)
         self.nnFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         
-        self.layerLabel = customtkinter.CTkLabel(self.nnFrame, text="Gebe die Größe und Anzahl der Versteckten Schichten an", fg_color="transparent", font=("Arial", 18, "bold") )
-        self.layerLabel.grid(row=1, column=0, padx=20, pady=10)
-        self.layers_text = customtkinter.CTkEntry(self.nnFrame, placeholder_text="64 32 16")
-        self.layers_text.grid(row=1, column=1, padx=20)
-        #self.activLabel = customtkinter.CTkLabel(self.nnFrame, text="Gebe die zu nutzende Aktivierungsfunktion an", fg_color="transparent", font=("Arial", 18, "bold") )
-        #self.activLabel.grid(row=2, column=0, padx=20, pady=10)
         self.activVar = customtkinter.StringVar(value="relu")
-        #self.activOption = customtkinter.CTkOptionMenu(self.nnFrame,values=["relu", "identity", "logistic", "tanh"],                                 variable=self.activVar)
-        #self.activOption.grid(row=2, column=1, padx=20, pady=10)
-        #self.solverLabel = customtkinter.CTkLabel(self.nnFrame, text="Gebe die zu nutzende Solver Funktion an", fg_color="transparent", font=("Arial", 18, "bold") )
-        #self.solverLabel.grid(row=3, column=0, padx=20, pady=10)
         self.solverVar = customtkinter.StringVar(value="adam")
-        #self.solverOption = customtkinter.CTkOptionMenu(self.nnFrame,values=["lbfgs", "sgd", "adam"],                                 variable=self.solverVar)
-        #self.solverOption.grid(row=3, column=1, padx=20, pady=10)
-        self.iterationsLabel = customtkinter.CTkLabel(self.nnFrame, text="Gebe die maximale Anzahl an Iterationen an", fg_color="transparent", font=("Arial", 18, "bold") )
-        self.iterationsLabel.grid(row=2, column=0, padx=20, pady=10)
-        self.iterations_text = customtkinter.CTkEntry(self.nnFrame, placeholder_text="500")
-        self.iterations_text.grid(row=2, column=1, padx=20)
         
-        self.mseLabel = customtkinter.CTkLabel(self.nnFrame, text="Mean Squared Error des Neuronalen Netzes: ", fg_color="transparent", font=("Arial", 18, "bold") )
-        self.mseLabel.grid(row=4, column=0, padx=20, pady=10)
-        self.mseValue = customtkinter.CTkLabel(self.nnFrame, text="-", fg_color="transparent", font=("Arial", 18, "bold") )
-        self.mseValue.grid(row=4, column=1, padx=20, pady=10)
+        self.nnsubFrame1 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200)
+        self.nnsubFrame1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         
-        self.percLabel = customtkinter.CTkLabel(self.nnFrame, text="Akkuratheit des Neuronalen Netzes: ", fg_color="transparent", font=("Arial", 18, "bold") )
-        self.percLabel.grid(row=5, column=0, padx=20, pady=10)
-        self.percValue = customtkinter.CTkLabel(self.nnFrame, text="-", fg_color="transparent", font=("Arial", 18, "bold") )
-        self.percValue.grid(row=5, column=1, padx=20, pady=10)
+        self.aiLabel = customtkinter.CTkLabel(self.nnsubFrame1, text="Trainiere dein eigenes neuronales Netz​\nStelle ein, wie oft das Netz aus den Daten lernt (Iterationen) und wie viele Verarbeitungsschritte es\ndabei durchläuft (Schichten). Trainiere es dann und beobachte, wie gut die Qualitätsvorhersage", fg_color="transparent", font=("Arial", 18, "bold") )
+        self.aiLabel.grid(row=0, column=0, padx=20, pady=10)
         
-        self.timeLabel = customtkinter.CTkLabel(self.nnFrame, text="Trainingszeit: ", fg_color="transparent", font=("Arial", 18, "bold") )
-        self.timeLabel.grid(row=6, column=0, padx=20, pady=10)
-        self.timeValue = customtkinter.CTkLabel(self.nnFrame, text="-", fg_color="transparent", font=("Arial", 18, "bold") )
-        self.timeValue.grid(row=6, column=1, padx=20, pady=10)
+        self.nnsubFrame2 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200)
+        self.nnsubFrame2.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
+
+        self.iterationsLabel = customtkinter.CTkLabel(self.nnsubFrame2, text="Iterationen: Wie oft das Netz lernt", fg_color="transparent", font=("Arial", 18, "bold") )
+        self.iterationsLabel.grid(row=0, column=0, padx=20, pady=10)
+        def change_iterationsSlider_val(value):
+            self.iterationsSliderVar = int(value)
+            self.iterationsLabel2.configure(text=f"{(self.iterationsSlider.get()):.0f}")
+        self.iterationsSliderVar = tk.IntVar(value=250)
+        self.iterationsLabel2 = customtkinter.CTkLabel(self.nnsubFrame2, text=f"{(self.iterationsSliderVar.get()):.0f}", fg_color="transparent", font=("Arial", 18, "bold"))
+        self.iterationsLabel2.grid(row=0, column=1, padx=20, pady=10)
+        self.iterationsSlider = customtkinter.CTkSlider(self.nnsubFrame2, from_=1, to=500, variable=self.iterationsSliderVar, command=change_iterationsSlider_val, number_of_steps=499)
+        self.iterationsSlider.grid(row=1, column=0, padx=20)
+        
+        self.layerLabel = customtkinter.CTkLabel(self.nnsubFrame2, text="Gebe die Größe und Anzahl der Versteckten Schichten an", fg_color="transparent", font=("Arial", 18, "bold") )
+        self.layerLabel.grid(row=2, column=0, padx=20, pady=10)
+        self.layers_text = customtkinter.CTkEntry(self.nnsubFrame2, placeholder_text="64 32 16")
+        self.layers_text.grid(row=2, column=1, padx=20)
+        
+        self.nnsubFrame3 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200)
+        self.nnsubFrame3.grid(row=2, column=0, padx=20, pady=20, sticky="nsew")
+        
+        self.percLabel = customtkinter.CTkLabel(self.nnsubFrame3, text="Trefferquote:", fg_color="transparent", font=("Arial", 18, "bold") )
+        self.percLabel.grid(row=0, column=0, padx=20, pady=10)
+        self.percValue = customtkinter.CTkLabel(self.nnsubFrame3, text="", fg_color="transparent", font=("Arial", 18, "bold") )
+        self.percValue.grid(row=1, column=0, padx=20, pady=10)
+        self.percLabel2 = customtkinter.CTkLabel(self.nnsubFrame3, text="", fg_color="transparent", font=("Arial", 16) )
+        self.percLabel2.grid(row=2, column=0, padx=20, pady=10)
+        
+        self.timeLabel = customtkinter.CTkLabel(self.nnsubFrame3, text="Trainingszeit:", fg_color="transparent", font=("Arial", 18, "bold") )
+        self.timeLabel.grid(row=0, column=1, padx=20, pady=10)
+        self.timeValue = customtkinter.CTkLabel(self.nnsubFrame3, text="", fg_color="transparent", font=("Arial", 18, "bold") )
+        self.timeValue.grid(row=1, column=1, padx=20, pady=10)
+        self.timeLabel2 = customtkinter.CTkLabel(self.nnsubFrame3, text="", fg_color="transparent", font=("Arial", 16) )
+        self.timeLabel2.grid(row=2, column=1, padx=20, pady=10)
+        
+        self.mseLabel = customtkinter.CTkLabel(self.nnsubFrame3, text="Mean Squared Error des Neuronalen Netzes: ", fg_color="transparent", font=("Arial", 18, "bold") )
+        self.mseLabel.grid(row=0, column=2, padx=20, pady=10)
+        self.mseValue = customtkinter.CTkLabel(self.nnsubFrame3, text="", fg_color="transparent", font=("Arial", 18, "bold") )
+        self.mseValue.grid(row=1, column=2, padx=20, pady=10)
+        
+        self.nnsubFrame4 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200) # Für nn_advice_label
+        self.nnsubFrame4.grid(row=2, column=1, padx=20, pady=20, sticky="nsew")
+        
+        self.nnsubFrame5 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200)
+        self.nnsubFrame5.grid(row=3, column=0, padx=20, pady=20, sticky="nsew")
+        self.built_nns = 0
+        self.built_nns_iterations = []
+        self.built_nns_layers = []
+        self.built_nns_percentages = []
+        self.built_nns_caption = customtkinter.CTkLabel(self.nnsubFrame5, text="Bisherige Versuche", fg_color="transparent", font=("Arial", 16, "bold") )
+        self.built_nns_caption.grid(row=0, column=0, padx=20, pady=10)
+        
+        def clear_built_nns():
+            for i in range (0, self.built_nns):
+                self.built_nns_iterations[i].grid_forget()
+                self.built_nns_layers[i].grid_forget()
+                self.built_nns_percentages[i].grid_forget()
+            self.built_nns_iterations.clear()
+            self.built_nns_layers.clear()
+            self.built_nns_percentages.clear()
+            
+            self.built_nns = 0
+        
+        self.built_nns_redo = customtkinter.CTkButton(self.nnsubFrame5, text="Neu anfangen", command=clear_built_nns)
+        self.built_nns_redo.grid(row=0, column=2, padx=20)
         
         def nn_button_pressed():
+            self.iterationsSliderVar = int(self.iterationsSlider.get())
             start_time = time.time()
             layers = tuple(int(x) for x in self.layers_text.get().split())
-            self.new_model, mse, perc = create_neural_network(self.min_max_scaler, hidden_layers=layers, acti_func=self.activVar.get(), solve_func=self.solverVar.get(), max_iterations=int(self.iterations_text.get()))
+            self.new_model, mse, perc = create_neural_network(self.min_max_scaler, hidden_layers=layers, acti_func=self.activVar.get(), solve_func=self.solverVar.get(), max_iterations=self.iterationsSliderVar)
             total_time = time.time() - start_time
-            total_time = f"{total_time:.4f} Sek."
-            mse = f"{mse:.4f}"
+            total_time = f"{total_time:.1f} Sek."
+            mse = f"{mse:.1f}"
             self.mseValue.configure(text=mse)
-            perc = f"{perc:.4f}%"
+            judge_perc(perc)
+            perc = f"{perc:.1f}%"
+            self.timeLabel2.configure(text="Simuliert")
             self.percValue.configure(text=perc)
             self.takeNNButton.configure(state="normal")
             self.timeValue.configure(text=total_time)
+            list_built_nns(self.iterationsSliderVar, layers, perc)
             
         def take_nn_button_pressed():
             self.model = self.new_model
+            
+        def judge_perc(perc):
+            self.nn_advice_label = customtkinter.CTkLabel(self.nnsubFrame4, text="", corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
+            if(perc < 50):
+                self.percLabel2.configure(text="Schlecht")
+                self.nn_advice_label.configure(text="Platzhalter")
+            elif(perc < 75):
+                self.percLabel2.configure(text="Mittel")
+                self.nn_advice_label.configure(text="Es geht noch besser - erhöhte Iterationen oder Schichten")
+            else:
+                self.percLabel2.configure(text="Gut")
+                self.nn_advice_label.configure(text="Platzhalter")
+            
+            self.nn_advice_label.grid(row=0, column=1, padx=10, pady=10, rowspan=3, sticky="nsew")
+            
+            self.nnsubFrame4.grid_rowconfigure(0, weight=1)
+            self.nnsubFrame4.grid_rowconfigure(1, weight=1)
+            self.nnsubFrame4.grid_rowconfigure(2, weight=1)
+            self.nnsubFrame4.grid_columnconfigure(0, weight=1)
+        
+        def list_built_nns(iterations, layers, percentage):
+            i = self.built_nns
+            built_nn_iteration = customtkinter.CTkLabel(self.nnsubFrame5, text=iterations, fg_color="transparent", font=("Arial", 16, "bold") )
+            built_nn_iteration.grid(row=i+1, column=0, padx=20, pady=10)
+            self.built_nns_iterations.append(built_nn_iteration)
+            built_nn_layer = customtkinter.CTkLabel(self.nnsubFrame5, text=layers, fg_color="transparent", font=("Arial", 16, "bold") )
+            built_nn_layer.grid(row=i+1, column=1, padx=20, pady=10)
+            self.built_nns_layers.append(built_nn_iteration)
+            built_nn_percentage = customtkinter.CTkLabel(self.nnsubFrame5, text=percentage, fg_color="transparent", font=("Arial", 16, "bold") )
+            built_nn_percentage.grid(row=i+1, column=2, padx=20, pady=10)
+            self.built_nns_percentages.append(built_nn_iteration)
+            
+            self.built_nns = self.built_nns + 1
+                
         
         self.createNNButton = customtkinter.CTkButton(self.nnFrame, text="Erstelle Neuronales Netz", command=nn_button_pressed)
         self.createNNButton.grid(row=3, column=1, padx=20)
