@@ -28,6 +28,7 @@ NEWTONMETER="N\u22C5m"
 BAR="Bar"
 CM="cm"
 CM3="cm\u00B3"
+BACKGROUND_COLOR="#ffffff"
 
 class App(customtkinter.CTk):
     def __init__(self):
@@ -38,6 +39,7 @@ class App(customtkinter.CTk):
         #geometry = str(width) + "x" + str(height)
         #self.geometry(geometry)
         self.title("Spritzguss Demonstrator")
+        self.configure(fg_color=BACKGROUND_COLOR)
         
         self.min_max_scaler = create_scaler()
         self.scaler2 = create_scaler2()
@@ -95,16 +97,20 @@ class App(customtkinter.CTk):
         self.tab3 = self.tabview.add("KI selbst trainieren")
         self.tab4 =self.tabview.add("Optimierungsalgorithmus")
         self.tabview.set("KI Live testen")
+        self.tab1.configure(fg_color=BACKGROUND_COLOR)
+        self.tab2.configure(fg_color=BACKGROUND_COLOR)
+        self.tab3.configure(fg_color=BACKGROUND_COLOR)
+        self.tab4.configure(fg_color=BACKGROUND_COLOR)
         
         # Einstellungen ändern Tab
         
         def createProdLaufFrame():
             self.eAeFrame.forget()
-            self.prodLaufFrame = customtkinter.CTkFrame(self.tab2, width=200, height=200)
+            self.prodLaufFrame = customtkinter.CTkFrame(self.tab2, width=200, height=200, fg_color=BACKGROUND_COLOR)
             self.prodLaufFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
             self.returneAe_button = customtkinter.CTkButton(self.prodLaufFrame, text="Zurück zur Auswahl", command=zurueckAuswahl, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
             self.returneAe_button.grid(row=0, column=0, padx=20, sticky="nw")
-            self.vermFrame = customtkinter.CTkFrame(self.prodLaufFrame, fg_color="#e8e8e8", corner_radius=8)
+            self.vermFrame = customtkinter.CTkFrame(self.prodLaufFrame, fg_color=BACKGROUND_COLOR, corner_radius=8)
             self.vermFrame.grid(row=1, column=0, padx=20, pady=20, sticky="ew")
             
             self.kreis1 = customtkinter.CTkLabel(self.vermFrame, text=str(1), width=36, height=36, corner_radius=18, fg_color="#1f6aa5", text_color="white", font=customtkinter.CTkFont(size=14, weight="bold"))
@@ -126,7 +132,7 @@ class App(customtkinter.CTk):
             self.vermLabel3 = customtkinter.CTkLabel(self.vermFrame, text="Erklärung", font=customtkinter.CTkFont(size=13), text_color="black")
             self.vermLabel3.grid(row=0, column=7, sticky="w")
             
-            self.denkFrame = customtkinter.CTkFrame(self.prodLaufFrame, border_width=2,border_color="gray")
+            self.denkFrame = customtkinter.CTkFrame(self.prodLaufFrame, border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
             self.denkFrame.grid(row=2, column=0, padx=10, pady=(10, 0), sticky="nsw")
             self.denkFrameCap1 = customtkinter.CTkLabel(self.denkFrame, text="Was denkst du – wie viele Produktionsläufe braucht die KI?​", fg_color="transparent", font=("Arial", 18, "bold"))
             self.denkFrameCap1.grid(row=0, column=0, padx=20, pady=10, sticky="w")
@@ -134,7 +140,7 @@ class App(customtkinter.CTk):
             self.denkFrameCap2.grid(row=1, column=0, padx=20, pady=10, sticky="w")
             self.denkFrameCap3 = customtkinter.CTkLabel(self.denkFrame, text="Wähle eine Datenmenge:", fg_color="transparent", font=("Arial", 18, "bold"))
             self.denkFrameCap3.grid(row=2, column=0, columnspan=4, padx=20, pady=10, sticky="w")
-            self.denkFrameCapFrame = customtkinter.CTkFrame(self.denkFrame, border_width=2,border_color="gray")
+            self.denkFrameCapFrame = customtkinter.CTkFrame(self.denkFrame, border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
             self.denkFrameCapFrame.grid(row=3, column=0, padx=10, pady=(10, 0), sticky="nsw")
             
             def do_denkFrameButton1():
@@ -182,7 +188,7 @@ class App(customtkinter.CTk):
             
             self.denkFrameCap4 = customtkinter.CTkLabel(self.denkFrame, text="Wie gut wird die KI mit dieser Datenmenge sein?", fg_color="transparent", font=("Arial", 18, "bold"))
             self.denkFrameCap4.grid(row=4, column=0, columnspan=4, padx=20, pady=10, sticky="w")
-            self.denkFrameCapFrame2 = customtkinter.CTkFrame(self.denkFrame, border_width=2,border_color="gray")
+            self.denkFrameCapFrame2 = customtkinter.CTkFrame(self.denkFrame, border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
             self.denkFrameCapFrame2.grid(row=5, column=0, padx=10, pady=(10, 0), sticky="nsw")
             def do_denkFrameButton5():
                 self.denkFrameButton5.configure(fg_color="#c5d8ed")
@@ -220,7 +226,7 @@ class App(customtkinter.CTk):
             self.denkFrame.destroy()
             self.kreis1.configure(fg_color="#d0d0d0", text_color="#333333")
             self.kreis2.configure(fg_color="#1f6aa5", text_color="white")
-            self.ergebnisAnsehenFrame = customtkinter.CTkFrame(self.prodLaufFrame, border_width=2,border_color="gray")
+            self.ergebnisAnsehenFrame = customtkinter.CTkFrame(self.prodLaufFrame, border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
             self.ergebnisAnsehenFrame.grid(row=2, column=0, padx=10, pady=(10, 0), sticky="nsw")
             self.ergebnisAnsehenLabel1 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=(f"Ergebnis: KI trainiert mit {(self.denkFrameCap_button_var.get())} Läufen"), fg_color="transparent", font=("Arial", 18, "bold"))
             self.ergebnisAnsehenLabel1.grid(row=0, column=0, columnspan=4, padx=20, pady=10, sticky="w")
@@ -310,7 +316,7 @@ class App(customtkinter.CTk):
             #self.ergebnisAnsehenFrame.grid_forget() 
             self.kreis2.configure(fg_color="#d0d0d0", text_color="#333333")
             self.kreis3.configure(fg_color="#1f6aa5", text_color="white")
-            self.erklaerungFrame = customtkinter.CTkFrame(self.prodLaufFrame, border_width=2,border_color="gray")
+            self.erklaerungFrame = customtkinter.CTkFrame(self.prodLaufFrame, border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
             self.erklaerungFrame.grid(row=2, column=0, padx=10, pady=(10, 0), sticky="nsw")
             self.erklaerungLabel1 = customtkinter.CTkLabel(self.erklaerungFrame, text=("Ergebnis: So verändert die Datenmenge die Qualität der KI"), fg_color="transparent", font=("Arial", 18, "bold"))
             self.erklaerungLabel1.grid(row=0, column=0, columnspan=4, padx=20, pady=10, sticky="w")
@@ -367,13 +373,13 @@ class App(customtkinter.CTk):
             self.eAeFrame.grid()
             
         
-        self.eAeFrame = customtkinter.CTkFrame(self.tab2, width=200, height=200)
+        self.eAeFrame = customtkinter.CTkFrame(self.tab2, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.eAeFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         self.eAe_headline_Label = customtkinter.CTkLabel(self.eAeFrame, text="Was möchtest du untersuchen?​", fg_color="transparent", font=("Arial", 20, "bold") )
         self.eAe_headline_Label.grid(row=0, column=1, padx=20, pady=10)
         self.eAe_text_Label = customtkinter.CTkLabel(self.eAeFrame, text="Die KI besteht aus zwei Teilen: Einem KI-Modell, das die Qualität vorhersagt\nund einem Modell, das die besten Einstellparameter findet.\nHier kannst du beide gezielt verändern und beobachten, was passiert.​​", fg_color="transparent")
         self.eAe_text_Label.grid(row=1, column=1, padx=20, pady=10)
-        self.eAeFrame1 = customtkinter.CTkFrame(self.eAeFrame, width=200, height=200)
+        self.eAeFrame1 = customtkinter.CTkFrame(self.eAeFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.eAeFrame1.grid(row=2, column=0, padx=20, pady=20, sticky="nsew")
         self.eAeFrame1_headline_Label = customtkinter.CTkLabel(self.eAeFrame1, text="Einfluss der Datenmenge verstehen​​", fg_color="transparent", font=("Arial", 20, "bold") )
         self.eAeFrame1_headline_Label.grid(row=0, column=0, padx=20, pady=10)
@@ -381,7 +387,7 @@ class App(customtkinter.CTk):
         self.eAeFrame1_text_Label.grid(row=1, column=0, padx=20, pady=10)
         self.eAeFrame1_button = customtkinter.CTkButton(self.eAeFrame1, text="Zum Vergleich", command=createProdLaufFrame)
         self.eAeFrame1_button.grid(row=2, column=0, padx=20)
-        self.eAeFrame2 = customtkinter.CTkFrame(self.eAeFrame, width=200, height=200)
+        self.eAeFrame2 = customtkinter.CTkFrame(self.eAeFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.eAeFrame2.grid(row=2, column=2, padx=20, pady=20, sticky="nsew")
         self.eAeFrame2_headline_Label = customtkinter.CTkLabel(self.eAeFrame2, text="Optimierungsalgorithmus wechseln​", fg_color="transparent", font=("Arial", 20, "bold") )
         self.eAeFrame2_headline_Label.grid(row=0, column=0, padx=20, pady=10)
@@ -401,19 +407,19 @@ class App(customtkinter.CTk):
         
         # Neuronales Netz
         
-        self.nnFrame = customtkinter.CTkFrame(self.tab3, width=200, height=200)
+        self.nnFrame = customtkinter.CTkFrame(self.tab3, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.nnFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         
         self.activVar = customtkinter.StringVar(value="relu")
         self.solverVar = customtkinter.StringVar(value="adam")
         
-        self.nnsubFrame1 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200)
+        self.nnsubFrame1 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.nnsubFrame1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         
         self.aiLabel = customtkinter.CTkLabel(self.nnsubFrame1, text="Trainiere dein eigenes neuronales Netz​\nStelle ein, wie oft das Netz aus den Daten lernt (Iterationen) und wie viele Verarbeitungsschritte es\ndabei durchläuft (Schichten). Trainiere es dann und beobachte, wie gut die Qualitätsvorhersage", fg_color="transparent", font=("Arial", 18, "bold") )
         self.aiLabel.grid(row=0, column=0, padx=20, pady=10)
         
-        self.nnsubFrame2 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200)
+        self.nnsubFrame2 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.nnsubFrame2.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
 
         self.iterationsLabel = customtkinter.CTkLabel(self.nnsubFrame2, text="Iterationen: Wie oft das Netz lernt", fg_color="transparent", font=("Arial", 18, "bold") )
@@ -435,7 +441,7 @@ class App(customtkinter.CTk):
         self.layersOption.grid(row=2, column=1, padx=20)
         self.layersOption.set("64 32 16")
         
-        self.nnsubFrame3 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200)
+        self.nnsubFrame3 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.nnsubFrame3.grid(row=2, column=0, padx=20, pady=20, sticky="nsew")
         
         self.percLabel = customtkinter.CTkLabel(self.nnsubFrame3, text="Trefferquote:", fg_color="transparent", font=("Arial", 18, "bold") )
@@ -457,10 +463,10 @@ class App(customtkinter.CTk):
         self.mseValue = customtkinter.CTkLabel(self.nnsubFrame3, text="", fg_color="transparent", font=("Arial", 18, "bold") )
         self.mseValue.grid(row=1, column=2, padx=20, pady=10)
         
-        self.nnsubFrame4 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200) # Für nn_advice_label
+        self.nnsubFrame4 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR) # Für nn_advice_label
         self.nnsubFrame4.grid(row=2, column=1, padx=20, pady=20, sticky="nsew")
         
-        self.nnsubFrame5 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200)
+        self.nnsubFrame5 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.nnsubFrame5.grid(row=3, column=0, padx=20, pady=20, sticky="nsew")
         self.built_nns = 0
         self.built_nns_iterations = []
@@ -536,7 +542,7 @@ class App(customtkinter.CTk):
             
             self.built_nns = self.built_nns + 1
             
-        self.nnsubFrame6 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200)
+        self.nnsubFrame6 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.nnsubFrame6.grid(row=0, column=1, padx=20, pady=20, sticky="nsew", rowspan=2)
         
         self.NN_graphic = customtkinter.CTkImage(light_image=Image.open('graphics/lens.png'), dark_image=Image.open('graphics/lens.png'), size=(150,150))
@@ -550,7 +556,7 @@ class App(customtkinter.CTk):
         
         # Maschinensimulation - Tab
         # Widgets:
-        self.einstellParam_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray")
+        self.einstellParam_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
         self.einstellParam_frame.grid(row=1, column=0, padx=10, pady=(10, 0), sticky="nsw")
         self.einstellParam_label = customtkinter.CTkLabel(self.einstellParam_frame, text="Einstellparameter", font=("Arial", 20, "bold"))
         self.einstellParam_label.grid(row=0, column=0, columnspan=3, sticky="we", padx=10, pady=10)
@@ -609,7 +615,7 @@ class App(customtkinter.CTk):
         
         self.generated_paremeters = self.get_kn_vals()
         
-        self.prozessParam_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray")
+        self.prozessParam_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
         self.prozessParam_frame.grid(row=1, column=1, padx=10, pady=(10, 0), sticky="nsw")
         self.prozessParam_label = customtkinter.CTkLabel(self.prozessParam_frame, text="Prozessparameter", font=("Arial", 20, "bold"))
         self.prozessParam_label.grid(row=0, column=0, columnspan=2, sticky="we", padx=10, pady=10)
@@ -654,7 +660,7 @@ class App(customtkinter.CTk):
         self.amount12label.grid(row=8, column=1, padx=10, pady=5, sticky="w")
         
         #Quality Widgets
-        self.qual_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray")
+        self.qual_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
         self.qual_frame.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nsw")
         self.qual_label = customtkinter.CTkLabel(self.qual_frame, text="Qualitätsergebnis:", fg_color="transparent", font=("Arial", 16,"bold"))
         self.qual_label.grid(row=0, column=0, padx=10, pady=10)
@@ -687,7 +693,7 @@ class App(customtkinter.CTk):
         
         
         # Production Widgets
-        self.production_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray")
+        self.production_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
         self.production_frame.grid(row=0, column=1, padx=10, pady=(10, 0), sticky="nsw")
         self.production_frame.grid_rowconfigure((0), weight=1)
         self.producing_button = customtkinter.CTkButton(self.production_frame, text="1.\nProduktion starten", command=self.set_kn_vals, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
@@ -704,7 +710,7 @@ class App(customtkinter.CTk):
         self.ai_tooltip = CTkToolTip(self.ai_button, message=ai_tooltip_string)
         
         # Linse fertigung:
-        self.lense_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray")
+        self.lense_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
         self.lense_frame.grid(row=2, column=1, padx=10, pady=(10, 0), sticky="nsw")
         self.lense_frame.grid_forget()
         self.lens_pic = customtkinter.CTkImage(light_image=Image.open('graphics/lens.png'), dark_image=Image.open('graphics/lens.png'), size=(150,150))
