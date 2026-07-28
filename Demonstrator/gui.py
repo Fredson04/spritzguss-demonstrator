@@ -427,10 +427,13 @@ class App(customtkinter.CTk):
         self.iterationsSlider = customtkinter.CTkSlider(self.nnsubFrame2, from_=1, to=500, variable=self.iterationsSliderVar, command=change_iterationsSlider_val, number_of_steps=499)
         self.iterationsSlider.grid(row=1, column=0, padx=20)
         
+        
         self.layerLabel = customtkinter.CTkLabel(self.nnsubFrame2, text="Gebe die Größe und Anzahl der Versteckten Schichten an", fg_color="transparent", font=("Arial", 18, "bold") )
         self.layerLabel.grid(row=2, column=0, padx=20, pady=10)
-        self.layers_text = customtkinter.CTkEntry(self.nnsubFrame2, placeholder_text="64 32 16")
-        self.layers_text.grid(row=2, column=1, padx=20)
+        self.layersVar = customtkinter.StringVar(value="64 32 16")
+        self.layersOption = customtkinter.CTkOptionMenu(self.nnsubFrame2, values=["64 32 16", "5 5", "32 32 32", "256 128 64 32 16"],variable=self.layersVar, corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
+        self.layersOption.grid(row=2, column=1, padx=20)
+        self.layersOption.set("64 32 16")
         
         self.nnsubFrame3 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200)
         self.nnsubFrame3.grid(row=2, column=0, padx=20, pady=20, sticky="nsew")
@@ -483,7 +486,7 @@ class App(customtkinter.CTk):
         def nn_button_pressed():
             self.iterationsSliderVar = int(self.iterationsSlider.get())
             start_time = time.time()
-            layers = tuple(int(x) for x in self.layers_text.get().split())
+            layers = tuple(int(x) for x in self.layersOption.get().split())
             self.new_model, mse, perc = create_neural_network(self.min_max_scaler, hidden_layers=layers, acti_func=self.activVar.get(), solve_func=self.solverVar.get(), max_iterations=self.iterationsSliderVar)
             total_time = time.time() - start_time
             total_time = f"{total_time:.1f} Sek."
@@ -532,12 +535,18 @@ class App(customtkinter.CTk):
             self.built_nns_percentages.append(built_nn_iteration)
             
             self.built_nns = self.built_nns + 1
-                
+            
+        self.nnsubFrame6 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200)
+        self.nnsubFrame6.grid(row=0, column=1, padx=20, pady=20, sticky="nsew", rowspan=2)
         
-        self.createNNButton = customtkinter.CTkButton(self.nnFrame, text="Erstelle Neuronales Netz", command=nn_button_pressed)
-        self.createNNButton.grid(row=3, column=1, padx=20)
-        self.takeNNButton = customtkinter.CTkButton(self.nnFrame, text="Übernehme erstelltes Neuronales Netz", command=take_nn_button_pressed, state="disabled")
-        self.takeNNButton.grid(row=7, column=1, padx=20)
+        self.NN_graphic = customtkinter.CTkImage(light_image=Image.open('graphics/lens.png'), dark_image=Image.open('graphics/lens.png'), size=(150,150))
+        self.NN_graphic_label = customtkinter.CTkLabel(self.nnsubFrame6, text="", image=self.NN_graphic)
+        self.NN_graphic_label.grid(row=0, column=0, rowspan=2, padx=20, pady=10)
+        
+        self.createNNButton = customtkinter.CTkButton(self.nnsubFrame6, text="Erstelle Neuronales Netz", command=nn_button_pressed)
+        self.createNNButton.grid(row=1, column=0, padx=20)
+        self.takeNNButton = customtkinter.CTkButton(self.nnsubFrame6, text="Übernehme erstelltes Neuronales Netz", command=take_nn_button_pressed, state="disabled")
+        self.takeNNButton.grid(row=2, column=0, padx=20)
         
         # Maschinensimulation - Tab
         # Widgets:
