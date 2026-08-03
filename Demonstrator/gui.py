@@ -93,12 +93,12 @@ class App(customtkinter.CTk):
         self.tabview = customtkinter.CTkTabview(self)
         self.tabview.pack(padx=0, pady=0)
 
-        self.tab1 = self.tabview.add("KI Live testen")
-        self.tab2 = self.tabview.add("Einstellungen ändern")
-        self.tab3 = self.tabview.add("KI selbst trainieren")
-        self.tab4 =self.tabview.add("Optimierungsalgorithmus")
-        self.tab5 =self.tabview.add("Funktionsweise verstehen")
-        self.tabview.set("KI Live testen")
+        self.tab1 = self.tabview.add("1. KI Live testen")
+        self.tab2 = self.tabview.add("2. Einstellungen ändern")
+        self.tab3 = self.tabview.add("3. KI selbst trainieren")
+        self.tab4 =self.tabview.add("4. Optimierungsalgorithmus")
+        self.tab5 =self.tabview.add("5. Funktionsweise verstehen")
+        self.tabview.set("1. KI Live testen")
         self.tab1.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
         self.tab2.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
         self.tab3.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
@@ -858,6 +858,16 @@ class App(customtkinter.CTk):
             self.optParameterLabels.append(optParameterLabel)
         self.useOptimizedButton = customtkinter.CTkButton(self.einstellParam_frame, text="4.\nEmpfehlung übernehmen", command=self.useOptimizedFunc, corner_radius=12,border_width=1,border_color="#a0b4c8",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
         self.useOptimizedButton.grid(row=8, column=3, padx=10, pady=5)
+        self.removeOptimizedButton = customtkinter.CTkButton(self.einstellParam_frame, text="Empfehlung zurücksetzen", command=self.removeOptimized, corner_radius=12,border_width=1,border_color="#a0b4c8",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+        self.removeOptimizedButton.grid(row=9, column=3, padx=10, pady=5)
+        
+    def removeOptimized(self):
+        self.Optparamterlabel0.destroy()
+        for i in range(0, len(self.optParameterLabels)):
+            print(i)
+            self.optParameterLabels[i].destroy()
+        self.useOptimizedButton.destroy()
+        self.removeOptimizedButton.destroy()
         
     def useOptimizedFunc(self):
         self.slider1.set((self.transformed_solution)[0])
