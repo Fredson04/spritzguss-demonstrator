@@ -17,6 +17,7 @@ from matplotlib.figure import Figure
 
 from helper.k_neighbour_executer import create_kn_classifier
 from helper.nn_executer import create_neural_network
+from helper.shap_executer import shap_explainer
 
 # Konstanten
 STEPS=1000 # Nur in dem Wertebereich der Schritte können den Slidern Werte zugeordnet werden, also muss die Schrittmenge hoch (oder nonexistent) sein damit die Qualität der optimierten Parameter erreicht werden kann
@@ -96,11 +97,13 @@ class App(customtkinter.CTk):
         self.tab2 = self.tabview.add("Einstellungen ändern")
         self.tab3 = self.tabview.add("KI selbst trainieren")
         self.tab4 =self.tabview.add("Optimierungsalgorithmus")
+        self.tab5 =self.tabview.add("Funktionsweise verstehen")
         self.tabview.set("KI Live testen")
-        self.tab1.configure(fg_color=BACKGROUND_COLOR)
-        self.tab2.configure(fg_color=BACKGROUND_COLOR)
-        self.tab3.configure(fg_color=BACKGROUND_COLOR)
-        self.tab4.configure(fg_color=BACKGROUND_COLOR)
+        self.tab1.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
+        self.tab2.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
+        self.tab3.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
+        self.tab4.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
+        self.tab5.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
         
         # Einstellungen ändern Tab
         
@@ -660,18 +663,25 @@ class App(customtkinter.CTk):
         self.amount12label.grid(row=8, column=1, padx=10, pady=5, sticky="w")
         
         #Quality Widgets
+        def use_shap_button():
+            shap_explainer(self.model)
+        
         self.qual_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
         self.qual_frame.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nsw")
         self.qual_label = customtkinter.CTkLabel(self.qual_frame, text="Qualitätsergebnis:", fg_color="transparent", font=("Arial", 16,"bold"))
         self.qual_label.grid(row=0, column=0, padx=10, pady=10)
         self.border_frame = customtkinter.CTkFrame(self.qual_frame, fg_color="transparent")
         self.border_frame.grid(row=1, column=0, padx=10, pady=10)
+        
+        self.shap_button = customtkinter.CTkButton(self.qual_frame, text="i", width=40, height=40, corner_radius=20, fg_color="#d0d0d0", hover_color="#989898", text_color="black", font=customtkinter.CTkFont(size=16, weight="bold"), border_width=3, border_color="black", command=use_shap_button)
+        self.shap_button.grid(row=1, column=1, padx=10, pady=10)
+        
         self.quality_category_label = customtkinter.CTkLabel(self.border_frame, text="", fg_color="transparent")
         self.quality_category_label.grid(row=0, column=0, padx=3, pady=3)
         self.qual_value_label = customtkinter.CTkLabel(self.qual_frame, text="U\u2080-Wert:", fg_color="transparent", font=("Arial", 16,"bold"))
-        self.qual_value_label.grid(row=0, column=1, padx=10, pady=10)
+        self.qual_value_label.grid(row=0, column=2, padx=10, pady=10)
         self.produce_label = customtkinter.CTkLabel(self.qual_frame, text="", fg_color="transparent", font=("Arial",18, "bold"))
-        self.produce_label.grid(row=1, column=1, padx=10, pady=10)
+        self.produce_label.grid(row=1, column=2, padx=10, pady=10)
         
         segmente = [
             ("Ausschuss\nU₀ < 0,4",           "#C00000", 100),
@@ -681,11 +691,11 @@ class App(customtkinter.CTk):
         ]
 
         self.qualitySkala_label = customtkinter.CTkLabel(self.qual_frame, text="Qualitätsskala:", font=("Arial", 16,"bold"))
-        self.qualitySkala_label.grid(row=0, column=2, columnspan=len(segmente), sticky="w", padx=10, pady=10)
+        self.qualitySkala_label.grid(row=0, column=3, columnspan=len(segmente), sticky="w", padx=10, pady=10)
 
         for col, (text, farbe, breite) in enumerate(segmente):
             seg = customtkinter.CTkFrame(self.qual_frame, fg_color=farbe, corner_radius=4, width=breite, height=50)
-            seg.grid(row=1, column=col+2, padx=2, pady=(0, 10), sticky="nsew")
+            seg.grid(row=1, column=col+3, padx=2, pady=(0, 10), sticky="nsew")
             seg.grid_propagate(False)
             customtkinter.CTkLabel(seg, text=text, font=customtkinter.CTkFont(size=12), text_color="black",justify="center").grid(row=0, column=0, sticky="nsew", padx=4, pady=4)
             seg.grid_rowconfigure(0, weight=1)

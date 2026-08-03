@@ -85,9 +85,3 @@ def plot_animated_scores(scores, title="Plot der besten Qualität", y="Zielvaria
 
     plt.ioff()
     plt.show()
-
-def shap_explainer(model, X_test): # Gibt eine Erklärung der NN Gewichtung mithilfe von Shap aus
-    explainer = shap.Explainer(model.predict, X_test)
-    shap_values = explainer(X_test)
-    print(shap_values)
-    shap.plots.waterfall(shap_values[0])

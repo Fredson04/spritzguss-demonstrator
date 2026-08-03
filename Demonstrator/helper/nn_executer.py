@@ -44,3 +44,4 @@ def accuracy_percentage(y_test, y_pred): #Kalkuliert den Prozentsatz akkurater V
             accurate = accurate + 1
     percent = (accurate / n) * 100
     return(percent)
+
