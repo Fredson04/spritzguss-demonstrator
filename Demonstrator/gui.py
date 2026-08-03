@@ -97,7 +97,8 @@ class App(customtkinter.CTk):
         self.tab2 = self.tabview.add("2. Einstellungen ändern")
         self.tab3 = self.tabview.add("3. KI selbst trainieren")
         self.tab4 =self.tabview.add("4. Optimierungsalgorithmus")
-        self.tab5 =self.tabview.add("5. Funktionsweise verstehen")
+        self.tab5 =self.tabview.add("5. KI hinterfragen")
+        self.tab6 =self.tabview.add("6. Funktionsweise verstehen")
         self.tabview.set("1. KI Live testen")
         self.tab1.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
         self.tab2.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
@@ -139,7 +140,7 @@ class App(customtkinter.CTk):
             self.denkFrame.grid(row=2, column=0, padx=10, pady=(10, 0), sticky="nsw")
             self.denkFrameCap1 = customtkinter.CTkLabel(self.denkFrame, text="Was denkst du – wie viele Produktionsläufe braucht die KI?​", fg_color="transparent", font=("Arial", 18, "bold"))
             self.denkFrameCap1.grid(row=0, column=0, padx=20, pady=10, sticky="w")
-            self.denkFrameCap2 = customtkinter.CTkLabel(self.denkFrame, text="Die KI lernt aus echten Produktionsläufen einer Maschine und den dazugehörigen Qualitätsprüfungen. Je mehr Beispiele die KI gesehen hat,\ndesto besser kann sie die Qualität vorhersagen. Aber wie viele Läufe sind genug?​", fg_color="transparent")
+            self.denkFrameCap2 = customtkinter.CTkLabel(self.denkFrame, text="Die KI lernt aus vergangenen Produktionsläufen und den zugehörigen Qualitätsprüfungen. Doch wie viele Daten braucht sie,\n um zuverlässige Vorhersagen treffen zu können? Wähle eine Datenmenge und schätze anschließend ein,\n wie gut die KI damit sein wird. Teste danach, ob deine Einschätzung stimmt.​​", fg_color="transparent")
             self.denkFrameCap2.grid(row=1, column=0, padx=20, pady=10, sticky="w")
             self.denkFrameCap3 = customtkinter.CTkLabel(self.denkFrame, text="Wähle eine Datenmenge:", fg_color="transparent", font=("Arial", 18, "bold"))
             self.denkFrameCap3.grid(row=2, column=0, columnspan=4, padx=20, pady=10, sticky="w")
@@ -344,7 +345,7 @@ class App(customtkinter.CTk):
             
             self.erklaerungBarLabel3 = customtkinter.CTkLabel(self.erklaerungFrame, text=("1000 Läufe​"), fg_color="transparent", font=("Arial", 18, "bold"))
             self.erklaerungBarLabel3.grid(row=4, column=0, padx=20, pady=10, sticky="w")
-            self.erklaerungBar3 = customtkinter.CTkProgressBar(self.erklaerungFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",progress_color="#FFC000",border_width=0)
+            self.erklaerungBar3 = customtkinter.CTkProgressBar(self.erklaerungFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",progress_color="#8ED973",border_width=0)
             self.erklaerungBar3.grid(row=4, column=1, columnspan=2, padx=20, pady=10, sticky="w")
             self.erklaerungBar3.set(0.83)
             self.erklaerungBarLabel33 = customtkinter.CTkLabel(self.erklaerungFrame, text=("83%"), fg_color="transparent", font=("Arial", 18, "bold"))
@@ -358,7 +359,7 @@ class App(customtkinter.CTk):
             self.erklaerungBarLabel44 = customtkinter.CTkLabel(self.erklaerungFrame, text=("84%"), fg_color="transparent", font=("Arial", 18, "bold"))
             self.erklaerungBarLabel44.grid(row=5, column=3, padx=20, pady=10, sticky="w")
             
-            self.erklaerungLabel3 = customtkinter.CTkLabel(self.erklaerungFrame, text=("Damit eine KI gute Vorhersagen machen kann, ist sowohl die Menge der Daten als auch die \nsogenannte Qualität der Daten ausschlaggebend. Gute Daten sind vollständig. Das heißt alle \nWerte (z.B. Einstellparameter und Qualitätsprüfung) sind vorhanden.​"), fg_color="transparent")
+            self.erklaerungLabel3 = customtkinter.CTkLabel(self.erklaerungFrame, text=("Damit eine KI gute Vorhersagen machen kann, ist sowohl die Menge der Daten als auch die \nsogenannte Qualität der Daten ausschlaggebend. Gute Daten sind vollständig. Das heißt alle \nWerte (z.B. Einstellparameter und Qualitätsprüfung) sind vorhanden.\n\nDu hast gesehen: Mehr Daten helfen, aber irgendwann werden die Verbesserungen kleiner.\nDie zusätzlichen 451 Produktionsläufe erhöhen die Vorhersagequalität nur noch wenig. Für eine bessere KI\n reicht es deshalb nicht immer aus, einfach mehr Daten zu sammeln.Welche weiteren Stellschrauben gibt es?\nWechsle zu „3. KI trainieren“ und entdecke neue Möglichkeiten zur Optimierung.​​"), fg_color="transparent")
             self.erklaerungLabel3.grid(row=6, column=0, columnspan=4, padx=20, pady=10, sticky="w")
             
             self.erklaerungReturnButton = customtkinter.CTkButton(self.erklaerungFrame, text="Andere Datenmenge testen", command=andereDatenmengen, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=("Arial", 18, "bold"))
@@ -616,6 +617,11 @@ class App(customtkinter.CTk):
         self.amount13label = customtkinter.CTkLabel(self.einstellParam_frame, text=(f"{(self.slider13var.get()):.1f}", CM3), fg_color="transparent", font=("Arial", 14))
         self.amount13label.grid(row=7, column=2, padx=10, pady=5, sticky="w")
         
+        self.paramPopup_frame = customtkinter.CTkFrame(self.einstellParam_frame,border_width=0,border_color=BACKGROUND_COLOR, fg_color=BACKGROUND_COLOR)
+        self.paramPopup_frame.grid(row=8, column=0, columnspan=3, rowspan=2, padx=10, pady=(10, 10), sticky="nsw")
+        self.paramPopup_label = customtkinter.CTkLabel(self.paramPopup_frame, text="", fg_color="transparent", font=("Arial", 14))
+        self.paramPopup_label.grid(row=7, column=2, padx=10, pady=10, sticky="w")
+        
         self.generated_paremeters = self.get_kn_vals()
         
         self.prozessParam_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
@@ -750,6 +756,7 @@ class App(customtkinter.CTk):
         self.quality_category_label.configure(text="")
         self.quality_category_label.configure(fg_color="transparent")
         self.produce_label.configure(text="")
+        self.paramPopup_label.configure(text="")
             
         mode = customtkinter.get_appearance_mode()
         tuple = customtkinter.ThemeManager.theme["CTkFrame"]["fg_color"]
@@ -826,12 +833,16 @@ class App(customtkinter.CTk):
         self.quality_category_label.configure(text=msg2)
         if(quality_cat == "Ausschuss"):
             self.border_frame.configure(fg_color="#C00000", border_width=2,border_color="black")
+            self.paramPopup_label.configure(text="Schade, diese Einstellung führt zu Ausschuss.\nProbiere eine andere Kombination aus und schau!​")
         if(quality_cat == "Akzeptabel"):
             self.border_frame.configure(fg_color="#FFC000", border_width=2,border_color="black")
+            self.paramPopup_label.configure(text="Knapp daneben! Die Linse ist verkäuflich, jedoch nur als B-Ware.\nKannst du die Qualität weiter verbessern?")
         if(quality_cat == "Sollbereich"):
             self.border_frame.configure(fg_color="#8ED973", border_width=2,border_color="black")
+            self.paramPopup_label.configure(text="Perfekt! Mit dieser Einstellung erhältst du eine\n Linse in der gewünschten Qualität. Gut gemacht!")
         if(quality_cat == "Ineffizient"):
             self.border_frame.configure(fg_color="#E97132", border_width=2,border_color="black")
+            self.paramPopup_label.configure(text="Interessant! Die Qualität ist sogar besser als erforderlich. Die Herausforderung ist,\n die Qualitätsanforderungen zu erfüllen und gleichzeitig\n wirtschaftlich zu produzieren. Versuch's noch einmal.")
         produce_tooltip_string = "Die Qualität wird durch ein Neuronales Netz berechnet. Dieses wurde mit einem Datensatz der die Herstellung von Kunststofflinsen abbildet trainiert."
         self.produce_tooltip = CTkToolTip(self.produce_label, message=produce_tooltip_string)
         self.ai_button.configure(state="normal")
@@ -864,7 +875,6 @@ class App(customtkinter.CTk):
     def removeOptimized(self):
         self.Optparamterlabel0.destroy()
         for i in range(0, len(self.optParameterLabels)):
-            print(i)
             self.optParameterLabels[i].destroy()
         self.useOptimizedButton.destroy()
         self.removeOptimizedButton.destroy()
