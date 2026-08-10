@@ -35,6 +35,10 @@ FONT_SMALL_LIGHT = ("Arial",14)
 FONT_MEDIUM = ("Arial",16, "bold")
 FONT_LARGE = ("Arial", 18, "bold")
 FONT_EXTRALARGE = ("Arial", 20, "bold")
+RED ="#C00000"
+YELLOW = "#FFC000"
+GREEN = "#8ED973"
+ORANGE = "#E97132"
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
@@ -242,7 +246,7 @@ class App(customtkinter.CTk):
             self.ergebnisAnsehenLabel2 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("Getestet an 300 Produktionsläufen, die das KI-Modell beim Training nicht gesehen hat"), fg_color="transparent")
             self.ergebnisAnsehenLabel2.grid(row=1, column=0, columnspan=4, padx=20, pady=10, sticky="w")
             
-            seg1 = customtkinter.CTkFrame(self.ergebnisAnsehenFrame, fg_color="#C00000", corner_radius=4, width=100, height=50)
+            seg1 = customtkinter.CTkFrame(self.ergebnisAnsehenFrame, fg_color=RED, corner_radius=4, width=100, height=50)
             seg1.grid(row=2, column=0, padx=2, pady=(0, 10), sticky="nsew")
             seg1.grid_propagate(False)
             self.segLabel1 = customtkinter.CTkLabel(seg1, text="", font=customtkinter.CTkFont(size=12), text_color="black",justify="center")
@@ -250,7 +254,7 @@ class App(customtkinter.CTk):
             seg1.grid_rowconfigure(0, weight=1)
             seg1.grid_columnconfigure(0, weight=1)
             
-            seg2 = customtkinter.CTkFrame(self.ergebnisAnsehenFrame, fg_color="#FFC000", corner_radius=4, width=100, height=50)
+            seg2 = customtkinter.CTkFrame(self.ergebnisAnsehenFrame, fg_color=YELLOW, corner_radius=4, width=100, height=50)
             seg2.grid(row=2, column=1, padx=2, pady=(0, 10), sticky="nsew")
             seg2.grid_propagate(False)
             self.segLabel2 = customtkinter.CTkLabel(seg2, text="", font=customtkinter.CTkFont(size=12), text_color="black",justify="center")
@@ -258,7 +262,7 @@ class App(customtkinter.CTk):
             seg2.grid_rowconfigure(0, weight=1)
             seg2.grid_columnconfigure(0, weight=1)
             
-            seg3 = customtkinter.CTkFrame(self.ergebnisAnsehenFrame, fg_color="#8ED973", corner_radius=4, width=100, height=50)
+            seg3 = customtkinter.CTkFrame(self.ergebnisAnsehenFrame, fg_color=GREEN, corner_radius=4, width=100, height=50)
             seg3.grid(row=2, column=2, padx=2, pady=(0, 10), sticky="nsew")
             seg3.grid_propagate(False)
             self.segLabel3 = customtkinter.CTkLabel(seg3, text="", font=customtkinter.CTkFont(size=12), text_color="black",justify="center")
@@ -266,7 +270,7 @@ class App(customtkinter.CTk):
             seg3.grid_rowconfigure(0, weight=1)
             seg3.grid_columnconfigure(0, weight=1)
             
-            seg4 = customtkinter.CTkFrame(self.ergebnisAnsehenFrame, fg_color="#E97132", corner_radius=4, width=100, height=50)
+            seg4 = customtkinter.CTkFrame(self.ergebnisAnsehenFrame, fg_color=ORANGE, corner_radius=4, width=100, height=50)
             seg4.grid(row=2, column=3, padx=2, pady=(0, 10), sticky="nsew")
             seg4.grid_propagate(False)
             self.segLabel4 = customtkinter.CTkLabel(seg4, text="", font=customtkinter.CTkFont(size=12), text_color="black",justify="center")
@@ -279,7 +283,7 @@ class App(customtkinter.CTk):
             self.progressbar = customtkinter.CTkProgressBar(self.ergebnisAnsehenFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",border_width=0)
             self.progressbar.grid(row=3, column=1, columnspan=3, padx=20, pady=10, sticky="w")
             if(self.denkFrameCap_button_var.get() == "250 Läufe"):
-                self.progressbar.configure(progress_color="#C00000")
+                self.progressbar.configure(progress_color=RED)
                 self.progressbar.set(0.41)
                 self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("41%"), fg_color="transparent", font=FONT_LARGE)
                 self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("Placeholder text"), fg_color="transparent")
@@ -288,7 +292,7 @@ class App(customtkinter.CTk):
                 self.segLabel3.configure(text="Sollbereich:\n60,8%")
                 self.segLabel4.configure(text="Ineffizient:\n36,1%")
             if(self.denkFrameCap_button_var.get() == "500 Läufe"):
-                self.progressbar.configure(progress_color="#FFC000")
+                self.progressbar.configure(progress_color=YELLOW)
                 self.progressbar.set(0.79)
                 self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("79%"), fg_color="transparent", font=FONT_LARGE)
                 self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("500 Läufe reichen für erste brauchbare Vorhersagen. Aber es gibt trotzdem noch Verwechslungen und falsche Vorhersagen.​"), fg_color="transparent")
@@ -297,7 +301,7 @@ class App(customtkinter.CTk):
                 self.segLabel3.configure(text="Sollbereich:\n80,4%")
                 self.segLabel4.configure(text="Ineffizient:\n83,2%")
             if(self.denkFrameCap_button_var.get() == "1000 Läufe"):
-                self.progressbar.configure(progress_color="#FFC000")
+                self.progressbar.configure(progress_color=YELLOW)
                 self.progressbar.set(0.83)
                 self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("83%"), fg_color="transparent", font=FONT_LARGE)
                 self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("Placeholder text"), fg_color="transparent")
@@ -306,7 +310,7 @@ class App(customtkinter.CTk):
                 self.segLabel3.configure(text="Sollbereich:\n85,6%")
                 self.segLabel4.configure(text="Ineffizient:\n88,5%")
             if(self.denkFrameCap_button_var.get() == "1451 Läufe"):
-                self.progressbar.configure(progress_color="#8ED973")
+                self.progressbar.configure(progress_color=GREEN)
                 self.progressbar.set(0.84)
                 self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("84%"), fg_color="transparent", font=FONT_LARGE)
                 self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("Placeholder text"), fg_color="transparent")
@@ -334,7 +338,7 @@ class App(customtkinter.CTk):
             
             self.erklaerungBarLabel1 = customtkinter.CTkLabel(self.erklaerungFrame, text=("250 Läufe​"), fg_color="transparent", font=FONT_LARGE)
             self.erklaerungBarLabel1.grid(row=2, column=0, padx=20, pady=10, sticky="w")
-            self.erklaerungBar1 = customtkinter.CTkProgressBar(self.erklaerungFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",progress_color="#C00000",border_width=0)
+            self.erklaerungBar1 = customtkinter.CTkProgressBar(self.erklaerungFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",progress_color=RED,border_width=0)
             self.erklaerungBar1.grid(row=2, column=1, columnspan=2, padx=20, pady=10, sticky="w")
             self.erklaerungBar1.set(0.41)
             self.erklaerungBarLabel11 = customtkinter.CTkLabel(self.erklaerungFrame, text=("41%"), fg_color="transparent", font=FONT_LARGE)
@@ -342,7 +346,7 @@ class App(customtkinter.CTk):
             
             self.erklaerungBarLabel2 = customtkinter.CTkLabel(self.erklaerungFrame, text=("500 Läufe​"), fg_color="transparent", font=FONT_LARGE)
             self.erklaerungBarLabel2.grid(row=3, column=0, padx=20, pady=10, sticky="w")
-            self.erklaerungBar2 = customtkinter.CTkProgressBar(self.erklaerungFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",progress_color="#FFC000",border_width=0)
+            self.erklaerungBar2 = customtkinter.CTkProgressBar(self.erklaerungFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",progress_color=YELLOW,border_width=0)
             self.erklaerungBar2.grid(row=3, column=1, columnspan=2, padx=20, pady=10, sticky="w")
             self.erklaerungBar2.set(0.79)
             self.erklaerungBarLabel22 = customtkinter.CTkLabel(self.erklaerungFrame, text=("79%"), fg_color="transparent", font=FONT_LARGE)
@@ -350,7 +354,7 @@ class App(customtkinter.CTk):
             
             self.erklaerungBarLabel3 = customtkinter.CTkLabel(self.erklaerungFrame, text=("1000 Läufe​"), fg_color="transparent", font=FONT_LARGE)
             self.erklaerungBarLabel3.grid(row=4, column=0, padx=20, pady=10, sticky="w")
-            self.erklaerungBar3 = customtkinter.CTkProgressBar(self.erklaerungFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",progress_color="#8ED973",border_width=0)
+            self.erklaerungBar3 = customtkinter.CTkProgressBar(self.erklaerungFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",progress_color=GREEN,border_width=0)
             self.erklaerungBar3.grid(row=4, column=1, columnspan=2, padx=20, pady=10, sticky="w")
             self.erklaerungBar3.set(0.83)
             self.erklaerungBarLabel33 = customtkinter.CTkLabel(self.erklaerungFrame, text=("83%"), fg_color="transparent", font=FONT_LARGE)
@@ -358,7 +362,7 @@ class App(customtkinter.CTk):
             
             self.erklaerungBarLabel4 = customtkinter.CTkLabel(self.erklaerungFrame, text=("1451 Läufe​"), fg_color="transparent", font=FONT_LARGE)
             self.erklaerungBarLabel4.grid(row=5, column=0, padx=20, pady=10, sticky="w")
-            self.erklaerungBar4 = customtkinter.CTkProgressBar(self.erklaerungFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",progress_color="#8ED973",border_width=0)
+            self.erklaerungBar4 = customtkinter.CTkProgressBar(self.erklaerungFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",progress_color=GREEN,border_width=0)
             self.erklaerungBar4.grid(row=5, column=1, columnspan=2, padx=20, pady=10, sticky="w")
             self.erklaerungBar4.set(0.84)
             self.erklaerungBarLabel44 = customtkinter.CTkLabel(self.erklaerungFrame, text=("84%"), fg_color="transparent", font=FONT_LARGE)
@@ -563,6 +567,152 @@ class App(customtkinter.CTk):
         self.takeNNButton = customtkinter.CTkButton(self.nnsubFrame6, text="Übernehme erstelltes Neuronales Netz", command=take_nn_button_pressed, state="disabled")
         self.takeNNButton.grid(row=2, column=0, padx=20)
         
+        # KI Hinterfragen - Tab
+        
+        self.KiHFrame = customtkinter.CTkFrame(self.tab5, width=200, height=200, fg_color=BACKGROUND_COLOR)
+        self.KiHFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        
+        self.FragenFrame = customtkinter.CTkFrame(self.KiHFrame, fg_color=BACKGROUND_COLOR, corner_radius=8)
+        self.FragenFrame.grid(row=0, column=0, padx=10, pady=10, sticky="ew")
+            
+        self.KiHkreis1 = customtkinter.CTkLabel(self.FragenFrame, text=str(1), width=36, height=36, corner_radius=18, fg_color="#1f6aa5", text_color="white", font=FONT_SMALL)
+        self.KiHkreis1.grid(row=0, column=0, padx=(20, 8), pady=15)
+        self.KiHkreisLabel1 = customtkinter.CTkLabel(self.FragenFrame, text="Frage 1", font=customtkinter.CTkFont(size=13), text_color="black")
+        self.KiHkreisLabel1.grid(row=0, column=1, sticky="w")
+        self.KiHlinie1 = customtkinter.CTkFrame(self.FragenFrame, height=2, fg_color="#333333", width=80)
+        self.KiHlinie1.grid(row=0, column=2, padx=15, sticky="ew")
+        
+        self.KiHkreis2 = customtkinter.CTkLabel(self.FragenFrame, text=str(2), width=36, height=36, corner_radius=18, fg_color="#1f6aa5", text_color="white", font=FONT_SMALL)
+        self.KiHkreis2.grid(row=0, column=3, padx=(20, 8), pady=15)
+        self.KiHkreisLabel2 = customtkinter.CTkLabel(self.FragenFrame, text="Frage 2", font=customtkinter.CTkFont(size=13), text_color="black")
+        self.KiHkreisLabel2.grid(row=0, column=4, sticky="w")
+        self.KiHlinie2 = customtkinter.CTkFrame(self.FragenFrame, height=2, fg_color="#333333", width=80)
+        self.KiHlinie2.grid(row=0, column=5, padx=15, sticky="ew")
+
+        self.KiHkreis3 = customtkinter.CTkLabel(self.FragenFrame, text=str(3), width=36, height=36, corner_radius=18, fg_color="#1f6aa5", text_color="white", font=FONT_SMALL)
+        self.KiHkreis3.grid(row=0, column=6, padx=(20, 8), pady=15)
+        self.KiHkreisLabel3 = customtkinter.CTkLabel(self.FragenFrame, text="Frage 3", font=customtkinter.CTkFont(size=13), text_color="black")
+        self.KiHkreisLabel3.grid(row=0, column=7, sticky="w")
+        self.KiHlinie3 = customtkinter.CTkFrame(self.FragenFrame, height=2, fg_color="#333333", width=80)
+        self.KiHlinie3.grid(row=0, column=8, padx=15, sticky="ew")
+        
+        self.KiHkreis4 = customtkinter.CTkLabel(self.FragenFrame, text=str(4), width=36, height=36, corner_radius=18, fg_color="#1f6aa5", text_color="white", font=FONT_SMALL)
+        self.KiHkreis4.grid(row=0, column=9, padx=(20, 8), pady=15)
+        self.KiHkreisLabel4 = customtkinter.CTkLabel(self.FragenFrame, text="Ergebnis", font=customtkinter.CTkFont(size=13), text_color="black")
+        self.KiHkreisLabel4.grid(row=0, column=10, sticky="w")
+        
+        self.KiHFrame2 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
+        self.KiHFrame2.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
+        
+        self.KiHFragenNrLabel = customtkinter.CTkLabel(self.KiHFrame2, text="Frage 1 von 3", font=FONT_SMALL_LIGHT)
+        self.KiHFragenNrLabel.grid(row=0, column=0, sticky="w", padx=10, pady=10)
+        
+        self.KiHFragenLabel = customtkinter.CTkLabel(self.KiHFrame2, text="Das Modell wurde auf einer bestimmten Linse trainiert. Nun soll eine neue Linse mit leicht\nveränderter Geometrie produziert werden – gleicher Kunststoff, gleiche Maschine,\nminimal andere Wandstärke. Kannst du dasselbe KI-Modell verwenden", font=FONT_MEDIUM)
+        self.KiHFragenLabel.grid(row=1, column=0, sticky="w", padx=10, pady=10)
+        
+        self.KiHFrame3 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
+        self.KiHFrame3.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
+        
+        self.KiHSubmission = 0
+        self.KiHQuestionNr = 1
+        
+        def set_question1():
+            self.KiHQuestionBtn1.configure(fg_color="#c5d8ed")
+            self.KiHQuestionBtn2.configure(fg_color="#dce8f5")
+            self.KiHQuestionBtn3.configure(fg_color="#dce8f5")
+            self.KiHSubmission = 1
+            self.KiHSubmitBtn.configure(state="active")
+        
+        def set_question2():
+            self.KiHQuestionBtn2.configure(fg_color="#c5d8ed")
+            self.KiHQuestionBtn1.configure(fg_color="#dce8f5")
+            self.KiHQuestionBtn3.configure(fg_color="#dce8f5")
+            self.KiHSubmission = 2
+            self.KiHSubmitBtn.configure(state="active")
+            
+        def set_question3():
+            self.KiHQuestionBtn3.configure(fg_color="#c5d8ed")
+            self.KiHQuestionBtn1.configure(fg_color="#dce8f5")
+            self.KiHQuestionBtn2.configure(fg_color="#dce8f5")
+            self.KiHSubmission = 3
+            self.KiHSubmitBtn.configure(state="active")
+        
+        self.KiHQuestionBtn1 = customtkinter.CTkButton(self.KiHFrame3, text="Ja – die Unterschiede sind klein, das Modell funktioniert weiterhin", command=set_question1, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
+        self.KiHQuestionBtn1.grid(row=0, column=1, padx=10, pady=10, sticky="ns")
+        self.KiHQuestionBtn2 = customtkinter.CTkButton(self.KiHFrame3, text="Kommt drauf an – je nach Ausmaß der Veränderung", command=set_question2, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
+        self.KiHQuestionBtn2.grid(row=1, column=1, padx=10, pady=10, sticky="ns")
+        self.KiHQuestionBtn3 = customtkinter.CTkButton(self.KiHFrame3, text="Nein – jede Geometrieänderung erfordert ein neues KI-Modell", command=set_question3, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
+        self.KiHQuestionBtn3.grid(row=2, column=1, padx=10, pady=10, sticky="ns")
+        
+        self.KiHFeedbackLabel = customtkinter.CTkLabel(self.KiHFrame3, text="Platzhalter", font=FONT_MEDIUM, corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
+        self.KiHFeedbackLabel.grid(row=3, column=0, sticky="w", padx=10, pady=20)
+        self.KiHErklärungLabel = customtkinter.CTkLabel(self.KiHFrame3, text="Platzhalter", font=FONT_MEDIUM,text_color="#1a1a1a")
+        self.KiHErklärungLabel.grid(row=4, column=0, sticky="w", padx=10, pady=20)
+        self.KiHFeedbackLabel.grid_forget()
+        self.KiHErklärungLabel.grid_forget()
+        
+        def submit_answer():
+            self.KiHContinueBtn.configure(state="active")
+            if(self.KiHQuestionNr == 1):
+                if(self.KiHSubmission == 1):
+                    self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Nicht ganz. Auch kleine Änderungen können die Messwerte verschieben – dann kennt das KI-Modell die Situation nicht mehr.")
+                if(self.KiHSubmission == 2):
+                    self.KiHFeedbackLabel.configure(fg_color=GREEN, text="Richtig. Bleiben die Einstellwerte der Maschine im bekannten Bereich, funktioniert das KI-Modell noch. Weichen sie ab, versagt es.​")
+                if(self.KiHSubmission == 3):
+                    self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Zu streng. Bei sehr ähnlichen Produkten kann das Modell noch brauchbar sein – aber immer prüfen.​​")
+                self.KiHErklärungLabel.configure(text="Das Modell hat gelernt, welche Messwerte – Füllzeit, Druck, Zykluszeit – zu welcher Qualität führen. Bleiben diese Messwerte bei der neuen Linse im gewohnten Bereich, kann das KI-Modell noch funktionieren. Weichen sie deutlich ab, ist das KI-Modell überfordert – es kennt diese Kombination nicht.​")
+            
+            if(self.KiHQuestionNr == 2):
+                if(self.KiHSubmission == 1):
+                    self.KiHFeedbackLabel.configure(fg_color=RED, text="Nicht korrekt. Der Prozess verändert sich auf Wegen, die das Modell nie gesehen hat.​")
+                if(self.KiHSubmission == 2):
+                    self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Nah dran – aber nicht präzise genug. Das Problem ist grundlegender: Das Modell weiß nicht einmal, dass sich etwas verändert hat, da die Umgebungstemperatur nicht in den Daten aufgenommen wird.​​")
+                if(self.KiHSubmission == 3):
+                    self.KiHFeedbackLabel.configure(fg_color=GREEN, text="Richtig. Das Modell hat Sommerbedingungen nie gesehen und bemerkt die Veränderung nicht – ohne Warnsignal.​")
+                self.KiHErklärungLabel.configure(text="Auch wenn die Maschineneinstellungen gleich bleiben – die Umgebungstemperatur verändert den Prozess. Das Granulat im Trichter erwärmt sich, die Schmelze verhält sich anders. Füllzeit, Druck und Zykluszeit verschieben sich – genau die Werte, aus denen das Modell gelernt hat. Das Modell hat Sommerwerte nie gesehen und gibt trotzdem eine Vorhersage aus – ohne zu wissen, dass die Bedingungen sich verändert haben.​​")
+            
+            if(self.KiHQuestionNr == 3):
+                if(self.KiHSubmission == 1):
+                    self.KiHFeedbackLabel.configure(fg_color=RED, text="Nicht korrekt. Was nicht gemessen wird, kann die KI auch mit noch so vielen Daten nicht lernen.​​")
+                if(self.KiHSubmission == 2):
+                    self.KiHFeedbackLabel.configure(fg_color=GREEN, text="Richtig. Für Messbares leistet die KI gute Arbeit – für das Nicht-Messbare bleibt Erfahrung unersetzlich.​​")
+                if(self.KiHSubmission == 3):
+                    self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Zu streng. Die KI kann das Messbare sehr gut übernehmen – aber nicht das, was erfahrene Bediener sehen, hören und spüren.​")
+                self.KiHErklärungLabel.configure(text="Die KI kann nur aus Daten lernen, die tatsächlich erfasst wurden. Der Feuchtigkeitsgehalt des Granulats steckt nicht in den 13 Messwerten – aber er beeinflusst die Qualität erheblich. Gleiches gilt für frühen Werkzeugverschleiß oder ein ungewöhnliches Maschinengeräusch. Ein erfahrener Maschinenführer erkennt solche Signale oft, bevor sie messbar werden.​​​")
+                
+                
+            self.KiHFeedbackLabel.grid()
+            self.KiHErklärungLabel.grid()
+        
+        def next_question():
+            self.KiHSubmitBtn.configure(state="disabled")
+            self.KiHContinueBtn.configure(state="disabled")
+            self.KiHFeedbackLabel.grid_forget()
+            self.KiHErklärungLabel.grid_forget()
+            if(self.KiHQuestionNr == 1):
+                self.KiHQuestionNr == 2
+                self.KiHFragenNrLabel.configure(text="Frage 2 von 3")
+                self.KiHFragenLabel.configure(text="Die Trainingsdaten wurden ausschließlich im Winter gesammelt, als die Halle kalt war. Im Sommer steigt die Hallentemperatur auf 35 °C. Wie zuverlässig ist die KI-Vorhersage dann noch?​")
+                self.KiHQuestionBtn1.configure(text="Genauso zuverlässig")
+                self.KiHQuestionBtn2.configure(text="Eingeschränkt – Umgebungstemperatur beeinflusst den Prozess")
+                self.KiHQuestionBtn3.configure(text="Unzuverlässig – das Modell hat diese Bedingungen nie gesehen")
+            if(self.KiHQuestionNr == 2):
+                self.KiHQuestionNr == 3
+                self.KiHFragenNrLabel.configure(text="Frage 3 von 3")
+                self.KiHFragenLabel.configure(text="Die KI arbeitet mit 13 Messwerten. Ein erfahrener Maschinenführer bemerkt beim Einlegen des Granulats, ob es zu feucht ist. Kann die KI das auch?​")
+                self.KiHQuestionBtn1.configure(text="Ja – mit genug Daten lernt die KI alles, was relevant ist")
+                self.KiHQuestionBtn2.configure(text="Teilweise – für messbare, wiederholbare Dinge ja; für alles andere nein")
+                self.KiHQuestionBtn3.configure(text="Nein – was nicht gemessen wird, kann die KI nicht lernen")
+            
+        self.KiHFrame4 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
+        self.KiHFrame4.grid(row=3, column=0, padx=10, pady=10, sticky="nsew")
+        
+        self.KiHSubmitBtn = customtkinter.CTkButton(self.KiHFrame4, text="Einreichen", command=submit_answer, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", state="disabled")
+        self.KiHSubmitBtn.grid(row=3, column=1, padx=10, pady=10, sticky="ns")
+        self.KiHContinueBtn = customtkinter.CTkButton(self.KiHFrame4, text="Weiter", command=next_question, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", state="disabled")
+        self.KiHContinueBtn.grid(row=4, column=1, padx=10, pady=10, sticky="ns")
+        
+        
         # Maschinensimulation - Tab
         # Widgets:
         self.einstellParam_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
@@ -695,10 +845,10 @@ class App(customtkinter.CTk):
         self.produce_label.grid(row=1, column=2, padx=10, pady=10)
         
         segmente = [
-            ("Ausschuss\nU₀ < 0,4",           "#C00000", 100),
-            ("Akzeptabel\n0,4 ≤ U₀ < 0,45",  "#FFC000", 130),
-            ("Sollbereich\n0,45 ≤ U₀ ≤ 0,5", "#8ED973", 130),
-            ("Ineffizient\nU₀ > 0,5",         "#E97132", 100),
+            ("Ausschuss\nU₀ < 0,4",           RED, 100),
+            ("Akzeptabel\n0,4 ≤ U₀ < 0,45",  YELLOW, 130),
+            ("Sollbereich\n0,45 ≤ U₀ ≤ 0,5", GREEN, 130),
+            ("Ineffizient\nU₀ > 0,5",         ORANGE, 100),
         ]
 
         self.qualitySkala_label = customtkinter.CTkLabel(self.qual_frame, text="Qualitätsskala:", font=FONT_MEDIUM)
@@ -841,16 +991,16 @@ class App(customtkinter.CTk):
         msg2 = f"{quality_cat}"
         self.quality_category_label.configure(text=msg2)
         if(quality_cat == "Ausschuss"):
-            self.border_frame.configure(fg_color="#C00000", border_width=2,border_color="black")
+            self.border_frame.configure(fg_color=RED, border_width=2,border_color="black")
             self.paramPopup_label.configure(text="Schade, diese Einstellung führt zu Ausschuss.\nProbiere eine andere Kombination aus und schau!​")
         if(quality_cat == "Akzeptabel"):
-            self.border_frame.configure(fg_color="#FFC000", border_width=2,border_color="black")
+            self.border_frame.configure(fg_color=YELLOW, border_width=2,border_color="black")
             self.paramPopup_label.configure(text="Knapp daneben! Die Linse ist verkäuflich, jedoch nur als B-Ware.\nKannst du die Qualität weiter verbessern?")
         if(quality_cat == "Sollbereich"):
-            self.border_frame.configure(fg_color="#8ED973", border_width=2,border_color="black")
+            self.border_frame.configure(fg_color=GREEN, border_width=2,border_color="black")
             self.paramPopup_label.configure(text="Perfekt! Mit dieser Einstellung erhältst du eine\n Linse in der gewünschten Qualität. Gut gemacht!")
         if(quality_cat == "Ineffizient"):
-            self.border_frame.configure(fg_color="#E97132", border_width=2,border_color="black")
+            self.border_frame.configure(fg_color=ORANGE, border_width=2,border_color="black")
             self.paramPopup_label.configure(text="Interessant! Die Qualität ist sogar besser als erforderlich. Die Herausforderung ist,\n die Qualitätsanforderungen zu erfüllen und gleichzeitig\n wirtschaftlich zu produzieren. Versuch's noch einmal.")
         produce_tooltip_string = "Die Qualität wird durch ein Neuronales Netz berechnet. Dieses wurde mit einem Datensatz der die Herstellung von Kunststofflinsen abbildet trainiert."
         self.produce_tooltip = CTkToolTip(self.produce_label, message=produce_tooltip_string)
