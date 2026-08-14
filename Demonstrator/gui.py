@@ -390,7 +390,7 @@ class App(customtkinter.CTk):
         self.eAeFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         self.eAe_headline_Label = customtkinter.CTkLabel(self.eAeFrame, text="Was möchtest du untersuchen?​", fg_color="transparent", font=FONT_EXTRALARGE)
         self.eAe_headline_Label.grid(row=0, column=1, padx=20, pady=10)
-        self.eAe_text_Label = customtkinter.CTkLabel(self.eAeFrame, text="Die KI besteht aus zwei Teilen: Einem KI-Modell, das die Qualität vorhersagt\nund einem Modell, das die besten Einstellparameter findet.\nHier kannst du beide gezielt verändern und beobachten, was passiert.​​", fg_color="transparent")
+        self.eAe_text_Label = customtkinter.CTkLabel(self.eAeFrame, text="Die KI besteht aus zwei Teilen: Einem KI-Modell, das die Qualität vorhersagt\nund einem Modell, das die besten Einstellparameter findet.\nHier kannst du beide gezielt verstehen und beobachten, was passiert.​​", fg_color="transparent")
         self.eAe_text_Label.grid(row=1, column=1, padx=20, pady=10)
         self.eAeFrame1 = customtkinter.CTkFrame(self.eAeFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.eAeFrame1.grid(row=2, column=0, padx=20, pady=20, sticky="nsew")
@@ -568,270 +568,280 @@ class App(customtkinter.CTk):
         self.takeNNButton.grid(row=2, column=0, padx=20)
         
         # KI Hinterfragen - Tab
-        
         self.KiHFrame = customtkinter.CTkFrame(self.tab5, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.KiHFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-        
-        self.FragenFrame = customtkinter.CTkFrame(self.KiHFrame, fg_color=BACKGROUND_COLOR, corner_radius=8)
-        self.FragenFrame.grid(row=0, column=0, padx=10, pady=10, sticky="ew")
-            
-        self.KiHkreis1 = customtkinter.CTkLabel(self.FragenFrame, text=str(1), width=36, height=36, corner_radius=18, fg_color="#1f6aa5", text_color="white", font=FONT_SMALL)
-        self.KiHkreis1.grid(row=0, column=0, padx=(20, 8), pady=15)
-        self.KiHkreisLabel1 = customtkinter.CTkLabel(self.FragenFrame, text="Frage 1", font=customtkinter.CTkFont(size=13), text_color="black")
-        self.KiHkreisLabel1.grid(row=0, column=1, sticky="w")
-        self.KiHlinie1 = customtkinter.CTkFrame(self.FragenFrame, height=2, fg_color="#333333", width=80)
-        self.KiHlinie1.grid(row=0, column=2, padx=15, sticky="ew")
-        
-        self.KiHkreis2 = customtkinter.CTkLabel(self.FragenFrame, text=str(2), width=36, height=36, corner_radius=18, fg_color="#62717c", text_color="black", font=FONT_SMALL)
-        self.KiHkreis2.grid(row=0, column=3, padx=(20, 8), pady=15)
-        self.KiHkreisLabel2 = customtkinter.CTkLabel(self.FragenFrame, text="Frage 2", font=customtkinter.CTkFont(size=13), text_color="black")
-        self.KiHkreisLabel2.grid(row=0, column=4, sticky="w")
-        self.KiHlinie2 = customtkinter.CTkFrame(self.FragenFrame, height=2, fg_color="#333333", width=80)
-        self.KiHlinie2.grid(row=0, column=5, padx=15, sticky="ew")
 
-        self.KiHkreis3 = customtkinter.CTkLabel(self.FragenFrame, text=str(3), width=36, height=36, corner_radius=18, fg_color="#62717c", text_color="black", font=FONT_SMALL)
-        self.KiHkreis3.grid(row=0, column=6, padx=(20, 8), pady=15)
-        self.KiHkreisLabel3 = customtkinter.CTkLabel(self.FragenFrame, text="Frage 3", font=customtkinter.CTkFont(size=13), text_color="black")
-        self.KiHkreisLabel3.grid(row=0, column=7, sticky="w")
-        self.KiHlinie3 = customtkinter.CTkFrame(self.FragenFrame, height=2, fg_color="#333333", width=80)
-        self.KiHlinie3.grid(row=0, column=8, padx=15, sticky="ew")
         
-        self.KiHkreis4 = customtkinter.CTkLabel(self.FragenFrame, text=str(4), width=36, height=36, corner_radius=18, fg_color="#62717c", text_color="black", font=FONT_SMALL)
-        self.KiHkreis4.grid(row=0, column=9, padx=(20, 8), pady=15)
-        self.KiHkreisLabel4 = customtkinter.CTkLabel(self.FragenFrame, text="Ergebnis", font=customtkinter.CTkFont(size=13), text_color="black")
-        self.KiHkreisLabel4.grid(row=0, column=10, sticky="w")
+        def createKIHinterfragen():
+            self.KiH_headline_Label.grid_forget()
+            self.KiH_text_Label.grid_forget()
+            self.KiH_spawn_question_button.grid_forget()
         
-        self.KiHFrame2 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
-        self.KiHFrame2.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
-        
-        self.KiHFragenNrLabel = customtkinter.CTkLabel(self.KiHFrame2, text="Frage 1 von 3", font=FONT_SMALL_LIGHT)
-        self.KiHFragenNrLabel.grid(row=0, column=0, sticky="w", padx=10, pady=10)
-        
-        self.KiHFragenLabel = customtkinter.CTkLabel(self.KiHFrame2, text="Das Modell wurde auf einer bestimmten Linse trainiert. Nun soll eine neue Linse mit leicht\nveränderter Geometrie produziert werden – gleicher Kunststoff, gleiche Maschine,\nminimal andere Wandstärke. Kannst du dasselbe KI-Modell verwenden?", font=FONT_MEDIUM)
-        self.KiHFragenLabel.grid(row=1, column=0, sticky="w", padx=10, pady=10)
-        
-        self.KiHFrame3 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
-        self.KiHFrame3.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
-        
-        self.KiHSubmission = 0
-        self.KiHQuestionNr = 1
-        self.KiHAnswersCorrect = [] # 0 Falsch, 1 Richtig
-        
-        def set_question1():
-            self.KiHQuestionBtn1.configure(fg_color="#c5d8ed")
-            self.KiHQuestionBtn2.configure(fg_color="#dce8f5")
-            self.KiHQuestionBtn3.configure(fg_color="#dce8f5")
-            self.KiHSubmission = 1
-            if(self.KiHQuestionNr == 1 & len(self.KiHAnswersCorrect) > 0):
-                self.KiHSubmitBtn.configure(state="disabled")
-            elif(self.KiHQuestionNr == 2 & len(self.KiHAnswersCorrect) > 1):
-                self.KiHSubmitBtn.configure(state="disabled")
-            elif(self.KiHQuestionNr == 3 & len(self.KiHAnswersCorrect) > 2):
-                self.KiHSubmitBtn.configure(state="disabled")
-            else:
-                self.KiHSubmitBtn.configure(state="active")
-        
-        def set_question2():
-            self.KiHQuestionBtn2.configure(fg_color="#c5d8ed")
-            self.KiHQuestionBtn1.configure(fg_color="#dce8f5")
-            self.KiHQuestionBtn3.configure(fg_color="#dce8f5")
-            self.KiHSubmission = 2
-            if(self.KiHQuestionNr == 1 & len(self.KiHAnswersCorrect) > 0):
-                self.KiHSubmitBtn.configure(state="disabled")
-            elif(self.KiHQuestionNr == 2 & len(self.KiHAnswersCorrect) > 1):
-                self.KiHSubmitBtn.configure(state="disabled")
-            elif(self.KiHQuestionNr == 3 & len(self.KiHAnswersCorrect) > 2):
-                self.KiHSubmitBtn.configure(state="disabled")
-            else:
-                self.KiHSubmitBtn.configure(state="active")
-            
-        def set_question3():
-            self.KiHQuestionBtn3.configure(fg_color="#c5d8ed")
-            self.KiHQuestionBtn1.configure(fg_color="#dce8f5")
-            self.KiHQuestionBtn2.configure(fg_color="#dce8f5")
-            self.KiHSubmission = 3
-            if(self.KiHQuestionNr == 1 & len(self.KiHAnswersCorrect) > 0):
-                self.KiHSubmitBtn.configure(state="disabled")
-            elif(self.KiHQuestionNr == 2 & len(self.KiHAnswersCorrect) > 1):
-                self.KiHSubmitBtn.configure(state="disabled")
-            elif(self.KiHQuestionNr == 3 & len(self.KiHAnswersCorrect) > 2):
-                self.KiHSubmitBtn.configure(state="disabled")
-            else:
-                self.KiHSubmitBtn.configure(state="active")
-        
-        self.KiHQuestionBtn1 = customtkinter.CTkButton(self.KiHFrame3, text="Ja – die Unterschiede sind klein, das Modell funktioniert weiterhin", command=set_question1, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
-        self.KiHQuestionBtn1.grid(row=0, column=0, padx=10, pady=10, sticky="nwes")
-        self.KiHQuestionBtn2 = customtkinter.CTkButton(self.KiHFrame3, text="Kommt drauf an – je nach Ausmaß der Veränderung", command=set_question2, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
-        self.KiHQuestionBtn2.grid(row=1, column=0, padx=10, pady=10, sticky="nwes")
-        self.KiHQuestionBtn3 = customtkinter.CTkButton(self.KiHFrame3, text="Nein – jede Geometrieänderung erfordert ein neues KI-Modell", command=set_question3, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
-        self.KiHQuestionBtn3.grid(row=2, column=0, padx=10, pady=10, sticky="nwes")
-        
-        self.KiHFeedbackLabel = customtkinter.CTkLabel(self.KiHFrame3, text="Platzhalter", font=FONT_MEDIUM, corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
-        self.KiHFeedbackLabel.grid(row=3, column=0, sticky="w", padx=10, pady=20)
-        self.KiHErklärungLabel = customtkinter.CTkLabel(self.KiHFrame3, text="Platzhalter", font=FONT_MEDIUM,text_color="#1a1a1a")
-        self.KiHErklärungLabel.grid(row=4, column=0, sticky="w", padx=10, pady=20)
-        self.KiHFeedbackLabel.grid_forget()
-        self.KiHErklärungLabel.grid_forget()
-        
-        def submit_answer():
-            self.KiHContinueBtn.configure(state="active")
-            self.KiHSubmitBtn.configure(state="disabled")
-            if(self.KiHQuestionNr == 1):
-                if(self.KiHSubmission == 1):
-                    self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Nicht ganz. Auch kleine Änderungen können die Messwerte verschieben – dann\nkennt das KI-Modell die Situation nicht mehr.")
-                    self.KiHAnswersCorrect.append(0)
-                if(self.KiHSubmission == 2):
-                    self.KiHFeedbackLabel.configure(fg_color=GREEN, text="Richtig. Bleiben die Einstellwerte der Maschine im bekannten Bereich,\nfunktioniert das KI-Modell noch. Weichen sie ab, versagt es.​")
-                    self.KiHAnswersCorrect.append(1)
-                if(self.KiHSubmission == 3):
-                    self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Zu streng. Bei sehr ähnlichen Produkten kann das Modell noch brauchbar\nsein – aber immer prüfen.​​")
-                    self.KiHAnswersCorrect.append(0)
-                self.KiHErklärungLabel.configure(text="Das Modell hat gelernt, welche Messwerte – Füllzeit, Druck, Zykluszeit – zu welcher Qualität\nführen. Bleiben diese Messwerte bei der neuen Linse im gewohnten Bereich,\nkann das KI-Modell noch funktionieren. Weichen sie deutlich ab,\nist das KI-Modell überfordert – es kennt diese Kombination nicht.​")
-            
-            if(self.KiHQuestionNr == 2):
-                if(self.KiHSubmission == 1):
-                    self.KiHFeedbackLabel.configure(fg_color=RED, text="Nicht korrekt. Der Prozess verändert sich auf Wegen, die das Modell nie gesehen hat.​")
-                    self.KiHAnswersCorrect.append(0)
-                if(self.KiHSubmission == 2):
-                    self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Nah dran – aber nicht präzise genug. Das Problem ist grundlegender: Das\nModell weiß nicht einmal, dass sich etwas verändert hat, da die Umgebungstemperatur\nnicht in den Daten aufgenommen wird.​​")
-                    self.KiHAnswersCorrect.append(0)
-                if(self.KiHSubmission == 3):
-                    self.KiHFeedbackLabel.configure(fg_color=GREEN, text="Richtig. Das Modell hat Sommerbedingungen nie gesehen und\nbemerkt die Veränderung nicht – ohne Warnsignal.​")
-                    self.KiHAnswersCorrect.append(1)
-                self.KiHErklärungLabel.configure(text="Auch wenn die Maschineneinstellungen gleich bleiben – die Umgebungstemperatur\nverändert den Prozess. Das Granulat im Trichter erwärmt sich,\ndie Schmelze verhält sich anders. Füllzeit, Druck und Zykluszeit verschieben\nsich – genau die Werte, aus denen das Modell gelernt hat. Das Modell\nhat Sommerwerte nie gesehen und gibt trotzdem eine Vorhersage aus – ohne zu wissen,\ndass die Bedingungen sich verändert haben.​​")
-            
-            if(self.KiHQuestionNr == 3):
-                if(self.KiHSubmission == 1):
-                    self.KiHFeedbackLabel.configure(fg_color=RED, text="Nicht korrekt. Was nicht gemessen wird, kann\ndie KI auch mit noch so vielen Daten nicht lernen.​​")
-                    self.KiHAnswersCorrect.append(0)
-                if(self.KiHSubmission == 2):
-                    self.KiHFeedbackLabel.configure(fg_color=GREEN, text="Richtig. Für Messbares leistet die KI gute Arbeit – für\ndas Nicht-Messbare bleibt Erfahrung unersetzlich.​​")
-                    self.KiHAnswersCorrect.append(1)
-                if(self.KiHSubmission == 3):
-                    self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Zu streng. Die KI kann das Messbare sehr gut übernehmen – aber nicht das,\nwas erfahrene Bediener sehen, hören und spüren.​")
-                    self.KiHAnswersCorrect.append(0)
-                self.KiHErklärungLabel.configure(text="Die KI kann nur aus Daten lernen, die tatsächlich erfasst wurden.\nDer Feuchtigkeitsgehalt des Granulats steckt nicht in den 13 Messwerten – aber er\nbeeinflusst die Qualität erheblich. Gleiches gilt\nfür frühen Werkzeugverschleiß oder ein ungewöhnliches Maschinengeräusch. Ein erfahrener\nMaschinenführer erkennt solche Signale oft, bevor sie messbar werden.​​​")
+            self.FragenFrame = customtkinter.CTkFrame(self.KiHFrame, fg_color=BACKGROUND_COLOR, corner_radius=8)
+            self.FragenFrame.grid(row=0, column=0, padx=10, pady=10, sticky="ew")
                 
-                
-            self.KiHFeedbackLabel.grid()
-            self.KiHErklärungLabel.grid()
-        
-        def KiHReset():
+            self.KiHkreis1 = customtkinter.CTkLabel(self.FragenFrame, text=str(1), width=36, height=36, corner_radius=18, fg_color="#1f6aa5", text_color="white", font=FONT_SMALL)
+            self.KiHkreis1.grid(row=0, column=0, padx=(20, 8), pady=15)
+            self.KiHkreisLabel1 = customtkinter.CTkLabel(self.FragenFrame, text="Frage 1", font=customtkinter.CTkFont(size=13), text_color="black")
+            self.KiHkreisLabel1.grid(row=0, column=1, sticky="w")
+            self.KiHlinie1 = customtkinter.CTkFrame(self.FragenFrame, height=2, fg_color="#333333", width=80)
+            self.KiHlinie1.grid(row=0, column=2, padx=15, sticky="ew")
+            
+            self.KiHkreis2 = customtkinter.CTkLabel(self.FragenFrame, text=str(2), width=36, height=36, corner_radius=18, fg_color="#62717c", text_color="black", font=FONT_SMALL)
+            self.KiHkreis2.grid(row=0, column=3, padx=(20, 8), pady=15)
+            self.KiHkreisLabel2 = customtkinter.CTkLabel(self.FragenFrame, text="Frage 2", font=customtkinter.CTkFont(size=13), text_color="black")
+            self.KiHkreisLabel2.grid(row=0, column=4, sticky="w")
+            self.KiHlinie2 = customtkinter.CTkFrame(self.FragenFrame, height=2, fg_color="#333333", width=80)
+            self.KiHlinie2.grid(row=0, column=5, padx=15, sticky="ew")
+
+            self.KiHkreis3 = customtkinter.CTkLabel(self.FragenFrame, text=str(3), width=36, height=36, corner_radius=18, fg_color="#62717c", text_color="black", font=FONT_SMALL)
+            self.KiHkreis3.grid(row=0, column=6, padx=(20, 8), pady=15)
+            self.KiHkreisLabel3 = customtkinter.CTkLabel(self.FragenFrame, text="Frage 3", font=customtkinter.CTkFont(size=13), text_color="black")
+            self.KiHkreisLabel3.grid(row=0, column=7, sticky="w")
+            self.KiHlinie3 = customtkinter.CTkFrame(self.FragenFrame, height=2, fg_color="#333333", width=80)
+            self.KiHlinie3.grid(row=0, column=8, padx=15, sticky="ew")
+            
+            self.KiHkreis4 = customtkinter.CTkLabel(self.FragenFrame, text=str(4), width=36, height=36, corner_radius=18, fg_color="#62717c", text_color="black", font=FONT_SMALL)
+            self.KiHkreis4.grid(row=0, column=9, padx=(20, 8), pady=15)
+            self.KiHkreisLabel4 = customtkinter.CTkLabel(self.FragenFrame, text="Ergebnis", font=customtkinter.CTkFont(size=13), text_color="black")
+            self.KiHkreisLabel4.grid(row=0, column=10, sticky="w")
+            
+            self.KiHFrame2 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
+            self.KiHFrame2.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
+            
+            self.KiHFragenNrLabel = customtkinter.CTkLabel(self.KiHFrame2, text="Frage 1 von 3", font=FONT_SMALL_LIGHT)
+            self.KiHFragenNrLabel.grid(row=0, column=0, sticky="w", padx=10, pady=10)
+            
+            self.KiHFragenLabel = customtkinter.CTkLabel(self.KiHFrame2, text="Das Modell wurde auf einer bestimmten Linse trainiert. Nun soll eine neue Linse mit leicht\nveränderter Geometrie produziert werden – gleicher Kunststoff, gleiche Maschine,\nminimal andere Wandstärke. Kannst du dasselbe KI-Modell verwenden?", font=FONT_MEDIUM)
+            self.KiHFragenLabel.grid(row=1, column=0, sticky="w", padx=10, pady=10)
+            
+            self.KiHFrame3 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
+            self.KiHFrame3.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
+            
             self.KiHSubmission = 0
             self.KiHQuestionNr = 1
-            self.KiHAnswersCorrect = []
+            self.KiHAnswersCorrect = [] # 0 Falsch, 1 Richtig
             
-            self.KiHReturnBtn.grid_forget()
-            self.KiHFrame5.grid_forget()
-            self.KiHFrame6.grid_forget()
-            self.KiHFrame2.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
-            self.KiHFragenNrLabel.grid(row=0, column=0, sticky="w", padx=10, pady=10)
-            self.KiHFragenLabel.grid(row=1, column=0, sticky="w", padx=10, pady=10)
-            self.KiHFrame3.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
-            self.KiHQuestionBtn1.grid(row=0, column=0, padx=10, pady=10, sticky="nwes")
-            self.KiHQuestionBtn2.grid(row=1, column=0, padx=10, pady=10, sticky="nwes")
-            self.KiHQuestionBtn3.grid(row=2, column=0, padx=10, pady=10, sticky="nwes")
-            self.KiHFrame4.grid(row=3, column=0, padx=10, pady=10, sticky="nsew") 
-            self.KiHSubmitBtn.grid(row=3, column=1, padx=10, pady=10, sticky="ns")
-            self.KiHContinueBtn.grid(row=4, column=1, padx=10, pady=10, sticky="ns")
+            def set_question1():
+                self.KiHQuestionBtn1.configure(fg_color="#c5d8ed")
+                self.KiHQuestionBtn2.configure(fg_color="#dce8f5")
+                self.KiHQuestionBtn3.configure(fg_color="#dce8f5")
+                self.KiHSubmission = 1
+                if(self.KiHQuestionNr == 1 & len(self.KiHAnswersCorrect) > 0):
+                    self.KiHSubmitBtn.configure(state="disabled")
+                elif(self.KiHQuestionNr == 2 & len(self.KiHAnswersCorrect) > 1):
+                    self.KiHSubmitBtn.configure(state="disabled")
+                elif(self.KiHQuestionNr == 3 & len(self.KiHAnswersCorrect) > 2):
+                    self.KiHSubmitBtn.configure(state="disabled")
+                else:
+                    self.KiHSubmitBtn.configure(state="active")
             
-            self.KiHkreis2.configure(fg_color="#62717c", text_color="black")
-            self.KiHkreis3.configure(fg_color="#62717c", text_color="black")
-            self.KiHkreis4.configure(fg_color="#62717c", text_color="black")
-            self.KiHFragenNrLabel.configure(text="Frage 1 von 3")
-            self.KiHFragenLabel.configure(text="Das Modell wurde auf einer bestimmten Linse trainiert. Nun soll eine neue Linse mit leicht\nveränderter Geometrie produziert werden – gleicher Kunststoff, gleiche Maschine,\nminimal andere Wandstärke. Kannst du dasselbe KI-Modell verwenden?")
-            self.KiHQuestionBtn1.configure(text="Ja – die Unterschiede sind klein, das Modell funktioniert weiterhin")
-            self.KiHQuestionBtn2.configure(text="Kommt drauf an – je nach Ausmaß der Veränderung")
-            self.KiHQuestionBtn3.configure(text="Nein – jede Geometrieänderung erfordert ein neues KI-Modell")
-            
+            def set_question2():
+                self.KiHQuestionBtn2.configure(fg_color="#c5d8ed")
+                self.KiHQuestionBtn1.configure(fg_color="#dce8f5")
+                self.KiHQuestionBtn3.configure(fg_color="#dce8f5")
+                self.KiHSubmission = 2
+                if(self.KiHQuestionNr == 1 & len(self.KiHAnswersCorrect) > 0):
+                    self.KiHSubmitBtn.configure(state="disabled")
+                elif(self.KiHQuestionNr == 2 & len(self.KiHAnswersCorrect) > 1):
+                    self.KiHSubmitBtn.configure(state="disabled")
+                elif(self.KiHQuestionNr == 3 & len(self.KiHAnswersCorrect) > 2):
+                    self.KiHSubmitBtn.configure(state="disabled")
+                else:
+                    self.KiHSubmitBtn.configure(state="active")
+                
+            def set_question3():
+                self.KiHQuestionBtn3.configure(fg_color="#c5d8ed")
+                self.KiHQuestionBtn1.configure(fg_color="#dce8f5")
+                self.KiHQuestionBtn2.configure(fg_color="#dce8f5")
+                self.KiHSubmission = 3
+                if(self.KiHQuestionNr == 1 & len(self.KiHAnswersCorrect) > 0):
+                    self.KiHSubmitBtn.configure(state="disabled")
+                elif(self.KiHQuestionNr == 2 & len(self.KiHAnswersCorrect) > 1):
+                    self.KiHSubmitBtn.configure(state="disabled")
+                elif(self.KiHQuestionNr == 3 & len(self.KiHAnswersCorrect) > 2):
+                    self.KiHSubmitBtn.configure(state="disabled")
+                else:
+                    self.KiHSubmitBtn.configure(state="active")
         
-        def next_question():
-            self.KiHSubmitBtn.configure(state="disabled")
-            self.KiHContinueBtn.configure(state="disabled")
+            self.KiHQuestionBtn1 = customtkinter.CTkButton(self.KiHFrame3, text="Ja – die Unterschiede sind klein, das Modell funktioniert weiterhin", command=set_question1, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
+            self.KiHQuestionBtn1.grid(row=0, column=0, padx=10, pady=10, sticky="nwes")
+            self.KiHQuestionBtn2 = customtkinter.CTkButton(self.KiHFrame3, text="Kommt drauf an – je nach Ausmaß der Veränderung", command=set_question2, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
+            self.KiHQuestionBtn2.grid(row=1, column=0, padx=10, pady=10, sticky="nwes")
+            self.KiHQuestionBtn3 = customtkinter.CTkButton(self.KiHFrame3, text="Nein – jede Geometrieänderung erfordert ein neues KI-Modell", command=set_question3, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
+            self.KiHQuestionBtn3.grid(row=2, column=0, padx=10, pady=10, sticky="nwes")
+            
+            self.KiHFeedbackLabel = customtkinter.CTkLabel(self.KiHFrame3, text="Platzhalter", font=FONT_MEDIUM, corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
+            self.KiHFeedbackLabel.grid(row=3, column=0, sticky="w", padx=10, pady=20)
+            self.KiHErklärungLabel = customtkinter.CTkLabel(self.KiHFrame3, text="Platzhalter", font=FONT_MEDIUM,text_color="#1a1a1a")
+            self.KiHErklärungLabel.grid(row=4, column=0, sticky="w", padx=10, pady=20)
             self.KiHFeedbackLabel.grid_forget()
             self.KiHErklärungLabel.grid_forget()
-            self.KiHQuestionBtn1.configure(fg_color="#dce8f5")
-            self.KiHQuestionBtn2.configure(fg_color="#dce8f5")
-            self.KiHQuestionBtn3.configure(fg_color="#dce8f5")
-            self.KiHSubmission = 0
-            if(self.KiHQuestionNr == 3):
-                self.KiHFrame2.grid_forget()
-                self.KiHFrame3.grid_forget()
-                self.KiHFrame4.grid_forget()
-                self.KiHkreis4.configure(fg_color="#1f6aa5", text_color="white")
-                
-                correct_answers = self.KiHAnswersCorrect.count(1)
-                self.KiHFrame5 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, border_width=2,border_color="gray")
-                self.KiHFrame5.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
-                self.KiHCorrectAnswersLabel = customtkinter.CTkLabel(self.KiHFrame5, text="", font=FONT_EXTRALARGE)
-                self.KiHCorrectAnswersLabel.grid(row=0, column=0, rowspan=2, sticky="w", padx=20, pady=10)
-                self.KiHCorrectAnswersTitleLabel = customtkinter.CTkLabel(self.KiHFrame5, text="", font=FONT_LARGE)
-                self.KiHCorrectAnswersTitleLabel.grid(row=0, column=1, sticky="w", padx=10, pady=10)
-                self.KiHCorrectAnswersSubtitleLabel = customtkinter.CTkLabel(self.KiHFrame5, text="", font=FONT_MEDIUM)
-                self.KiHCorrectAnswersSubtitleLabel.grid(row=1, column=1, sticky="w", padx=10, pady=10)
-                if(correct_answers == 0):
-                    self.KiHFrame5.configure(fg_color=RED)
-                    self.KiHCorrectAnswersLabel.configure(text="0/3")
-                    self.KiHCorrectAnswersTitleLabel.configure(text="Noch Luft nach oben")
-                    self.KiHCorrectAnswersSubtitleLabel.configure(text="Die Fragen waren nicht einfach – schau dir die Erklärungen nochmal an. Die drei\nKernaussagen sind wichtig, um KI in der Produktion richtig einzuschätzen.")
-                elif(correct_answers == 1):
-                    self.KiHFrame5.configure(fg_color=ORANGE)
-                    self.KiHCorrectAnswersLabel.configure(text="1/3")
-                    self.KiHCorrectAnswersTitleLabel.configure(text="Ein guter Anfang")
-                    self.KiHCorrectAnswersSubtitleLabel.configure(text="Du hast erste wichtige Zusammenhänge erkannt. Bei zwei Fragen lagen die\nAntworten nah dran – lies die Erklärungen nochmal, die Nuancen machen in der Praxis den Unterschied.")
-                elif(correct_answers == 2):
-                    self.KiHFrame5.configure(fg_color=YELLOW)
-                    self.KiHCorrectAnswersLabel.configure(text="2/3")
-                    self.KiHCorrectAnswersTitleLabel.configure(text="Schon sehr gut")
-                    self.KiHCorrectAnswersSubtitleLabel.configure(text="Du hast die meisten Zusammenhänge richtig eingeschätzt. Eine Frage war besonders\nknifflig – und genau diese Falle passiert in der Praxis häufig.")
-                elif(correct_answers == 3):
-                    self.KiHFrame5.configure(fg_color=GREEN)
-                    self.KiHCorrectAnswersLabel.configure(text="3/3")
-                    self.KiHCorrectAnswersTitleLabel.configure(text="Alles richtig")
-                    self.KiHCorrectAnswersSubtitleLabel.configure(text="Du hast alle drei Fragen richtig beantwortet. Das zeigt: Du weißt, wo KI ihre Grenzen\nhat – und das ist genauso wichtig wie zu wissen, was sie kann.")
-                
-                self.KiHFrame6 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_width=2,border_color="gray")
-                self.KiHFrame6.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
-                self.KiHKernaussagenTitleLabel = customtkinter.CTkLabel(self.KiHFrame6, text="Die drei Kernaussagen", font=FONT_MEDIUM)
-                self.KiHKernaussagenTitleLabel.grid(row=0, column=0, sticky="w", padx=10, pady=10)
-                self.KiHKernaussagenSubtitle1Label = customtkinter.CTkLabel(self.KiHFrame6, text="✓ Je stärker neue Messwerte vom Trainingsbereich abweichen, desto weniger ist dem Modell zu vertrauen.", font=FONT_MEDIUM)
-                self.KiHKernaussagenSubtitle1Label.grid(row=1, column=0, sticky="w", padx=20, pady=10)
-                self.KiHKernaussagenSubtitle2Label = customtkinter.CTkLabel(self.KiHFrame6, text="✓ Veränderte Bedingungen - z.B. Jahreszeiten - können das Modell unbemerkt unzuverlässig machen.", font=FONT_MEDIUM)
-                self.KiHKernaussagenSubtitle2Label.grid(row=2, column=0, sticky="w", padx=20, pady=10)
-                self.KiHKernaussagenSubtitle3Label = customtkinter.CTkLabel(self.KiHFrame6, text="✓ Was nicht gemessen wird, kann die KI nicht lernen. Menschliche Erfahrung bleibt unersetzlich.", font=FONT_MEDIUM)
-                self.KiHKernaussagenSubtitle3Label.grid(row=3, column=0, sticky="w", padx=20, pady=10)
-                
-                self.KiHReturnBtn = customtkinter.CTkButton(self.KiHFrame, text="Beginne das Quiz erneut", command=KiHReset, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
-                self.KiHReturnBtn.grid(row=3, column=0, padx=10, pady=10, sticky="we")
-                
-                
-            if(self.KiHQuestionNr == 2):
-                self.KiHQuestionNr = 3
-                self.KiHkreis3.configure(fg_color="#1f6aa5", text_color="white")
-                self.KiHFragenNrLabel.configure(text="Frage 3 von 3")
-                self.KiHFragenLabel.configure(text="Die KI arbeitet mit 13 Messwerten. Ein erfahrener Maschinenführer bemerkt\nbeim Einlegen des Granulats, ob es zu feucht ist. Kann die KI das auch?​")
-                self.KiHQuestionBtn1.configure(text="Ja – mit genug Daten lernt die KI alles, was relevant ist")
-                self.KiHQuestionBtn2.configure(text="Teilweise – für messbare, wiederholbare Dinge ja; für alles andere nein")
-                self.KiHQuestionBtn3.configure(text="Nein – was nicht gemessen wird, kann die KI nicht lernen")
-            # Umgedreht, damit nicht beide ifs nacheinander laufen (sicher auch eleganter lösbar)
-            if(self.KiHQuestionNr == 1):
-                self.KiHQuestionNr = 2
-                self.KiHkreis2.configure(fg_color="#1f6aa5", text_color="white")
-                self.KiHFragenNrLabel.configure(text="Frage 2 von 3")
-                self.KiHFragenLabel.configure(text="Die Trainingsdaten wurden ausschließlich im Winter gesammelt,\nals die Halle kalt war. Im Sommer steigt die Hallentemperatur auf 35 °C.\nWie zuverlässig ist die KI-Vorhersage dann noch?​")
-                self.KiHQuestionBtn1.configure(text="Genauso zuverlässig")
-                self.KiHQuestionBtn2.configure(text="Eingeschränkt – Umgebungstemperatur beeinflusst den Prozess")
-                self.KiHQuestionBtn3.configure(text="Unzuverlässig – das Modell hat diese Bedingungen nie gesehen")
             
-        self.KiHFrame4 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
-        self.KiHFrame4.grid(row=3, column=0, padx=10, pady=10, sticky="nsew")
+            def submit_answer():
+                self.KiHContinueBtn.configure(state="active")
+                self.KiHSubmitBtn.configure(state="disabled")
+                if(self.KiHQuestionNr == 1):
+                    if(self.KiHSubmission == 1):
+                        self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Nicht ganz. Auch kleine Änderungen können die Messwerte verschieben – dann\nkennt das KI-Modell die Situation nicht mehr.")
+                        self.KiHAnswersCorrect.append(0)
+                    if(self.KiHSubmission == 2):
+                        self.KiHFeedbackLabel.configure(fg_color=GREEN, text="Richtig. Bleiben die Einstellwerte der Maschine im bekannten Bereich,\nfunktioniert das KI-Modell noch. Weichen sie ab, versagt es.​")
+                        self.KiHAnswersCorrect.append(1)
+                    if(self.KiHSubmission == 3):
+                        self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Zu streng. Bei sehr ähnlichen Produkten kann das Modell noch brauchbar\nsein – aber immer prüfen.​​")
+                        self.KiHAnswersCorrect.append(0)
+                    self.KiHErklärungLabel.configure(text="Das Modell hat gelernt, welche Messwerte – Füllzeit, Druck, Zykluszeit – zu welcher Qualität\nführen. Bleiben diese Messwerte bei der neuen Linse im gewohnten Bereich,\nkann das KI-Modell noch funktionieren. Weichen sie deutlich ab,\nist das KI-Modell überfordert – es kennt diese Kombination nicht.​")
+                
+                if(self.KiHQuestionNr == 2):
+                    if(self.KiHSubmission == 1):
+                        self.KiHFeedbackLabel.configure(fg_color=RED, text="Nicht korrekt. Der Prozess verändert sich auf Wegen, die das Modell nie gesehen hat.​")
+                        self.KiHAnswersCorrect.append(0)
+                    if(self.KiHSubmission == 2):
+                        self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Nah dran – aber nicht präzise genug. Das Problem ist grundlegender: Das\nModell weiß nicht einmal, dass sich etwas verändert hat, da die Umgebungstemperatur\nnicht in den Daten aufgenommen wird.​​")
+                        self.KiHAnswersCorrect.append(0)
+                    if(self.KiHSubmission == 3):
+                        self.KiHFeedbackLabel.configure(fg_color=GREEN, text="Richtig. Das Modell hat Sommerbedingungen nie gesehen und\nbemerkt die Veränderung nicht – ohne Warnsignal.​")
+                        self.KiHAnswersCorrect.append(1)
+                    self.KiHErklärungLabel.configure(text="Auch wenn die Maschineneinstellungen gleich bleiben – die Umgebungstemperatur\nverändert den Prozess. Das Granulat im Trichter erwärmt sich,\ndie Schmelze verhält sich anders. Füllzeit, Druck und Zykluszeit verschieben\nsich – genau die Werte, aus denen das Modell gelernt hat. Das Modell\nhat Sommerwerte nie gesehen und gibt trotzdem eine Vorhersage aus – ohne zu wissen,\ndass die Bedingungen sich verändert haben.​​")
+                
+                if(self.KiHQuestionNr == 3):
+                    if(self.KiHSubmission == 1):
+                        self.KiHFeedbackLabel.configure(fg_color=RED, text="Nicht korrekt. Was nicht gemessen wird, kann\ndie KI auch mit noch so vielen Daten nicht lernen.​​")
+                        self.KiHAnswersCorrect.append(0)
+                    if(self.KiHSubmission == 2):
+                        self.KiHFeedbackLabel.configure(fg_color=GREEN, text="Richtig. Für Messbares leistet die KI gute Arbeit – für\ndas Nicht-Messbare bleibt Erfahrung unersetzlich.​​")
+                        self.KiHAnswersCorrect.append(1)
+                    if(self.KiHSubmission == 3):
+                        self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Zu streng. Die KI kann das Messbare sehr gut übernehmen – aber nicht das,\nwas erfahrene Bediener sehen, hören und spüren.​")
+                        self.KiHAnswersCorrect.append(0)
+                    self.KiHErklärungLabel.configure(text="Die KI kann nur aus Daten lernen, die tatsächlich erfasst wurden.\nDer Feuchtigkeitsgehalt des Granulats steckt nicht in den 13 Messwerten – aber er\nbeeinflusst die Qualität erheblich. Gleiches gilt\nfür frühen Werkzeugverschleiß oder ein ungewöhnliches Maschinengeräusch. Ein erfahrener\nMaschinenführer erkennt solche Signale oft, bevor sie messbar werden.​​​")
+                    
+                    
+                self.KiHFeedbackLabel.grid()
+                self.KiHErklärungLabel.grid()
         
-        self.KiHSubmitBtn = customtkinter.CTkButton(self.KiHFrame4, text="Einreichen", command=submit_answer, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", state="disabled")
-        self.KiHSubmitBtn.grid(row=3, column=1, padx=10, pady=10, sticky="ns")
-        self.KiHContinueBtn = customtkinter.CTkButton(self.KiHFrame4, text="Weiter", command=next_question, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", state="disabled")
-        self.KiHContinueBtn.grid(row=4, column=1, padx=10, pady=10, sticky="ns")
+            def KiHReset():
+                self.KiHSubmission = 0
+                self.KiHQuestionNr = 1
+                self.KiHAnswersCorrect = []
+                
+                self.KiHReturnBtn.grid_forget()
+                self.KiHFrame5.grid_forget()
+                self.KiHFrame6.grid_forget()
+                self.KiHFrame2.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
+                self.KiHFragenNrLabel.grid(row=0, column=0, sticky="w", padx=10, pady=10)
+                self.KiHFragenLabel.grid(row=1, column=0, sticky="w", padx=10, pady=10)
+                self.KiHFrame3.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
+                self.KiHQuestionBtn1.grid(row=0, column=0, padx=10, pady=10, sticky="nwes")
+                self.KiHQuestionBtn2.grid(row=1, column=0, padx=10, pady=10, sticky="nwes")
+                self.KiHQuestionBtn3.grid(row=2, column=0, padx=10, pady=10, sticky="nwes")
+                self.KiHFrame4.grid(row=3, column=0, padx=10, pady=10, sticky="nsew") 
+                self.KiHSubmitBtn.grid(row=3, column=1, padx=10, pady=10, sticky="ns")
+                self.KiHContinueBtn.grid(row=4, column=1, padx=10, pady=10, sticky="ns")
+                
+                self.KiHkreis2.configure(fg_color="#62717c", text_color="black")
+                self.KiHkreis3.configure(fg_color="#62717c", text_color="black")
+                self.KiHkreis4.configure(fg_color="#62717c", text_color="black")
+                self.KiHFragenNrLabel.configure(text="Frage 1 von 3")
+                self.KiHFragenLabel.configure(text="Das Modell wurde auf einer bestimmten Linse trainiert. Nun soll eine neue Linse mit leicht\nveränderter Geometrie produziert werden – gleicher Kunststoff, gleiche Maschine,\nminimal andere Wandstärke. Kannst du dasselbe KI-Modell verwenden?")
+                self.KiHQuestionBtn1.configure(text="Ja – die Unterschiede sind klein, das Modell funktioniert weiterhin")
+                self.KiHQuestionBtn2.configure(text="Kommt drauf an – je nach Ausmaß der Veränderung")
+                self.KiHQuestionBtn3.configure(text="Nein – jede Geometrieänderung erfordert ein neues KI-Modell")
+                
+            
+            def next_question():
+                self.KiHSubmitBtn.configure(state="disabled")
+                self.KiHContinueBtn.configure(state="disabled")
+                self.KiHFeedbackLabel.grid_forget()
+                self.KiHErklärungLabel.grid_forget()
+                self.KiHQuestionBtn1.configure(fg_color="#dce8f5")
+                self.KiHQuestionBtn2.configure(fg_color="#dce8f5")
+                self.KiHQuestionBtn3.configure(fg_color="#dce8f5")
+                self.KiHSubmission = 0
+                if(self.KiHQuestionNr == 3):
+                    self.KiHFrame2.grid_forget()
+                    self.KiHFrame3.grid_forget()
+                    self.KiHFrame4.grid_forget()
+                    self.KiHkreis4.configure(fg_color="#1f6aa5", text_color="white")
+                    
+                    correct_answers = self.KiHAnswersCorrect.count(1)
+                    self.KiHFrame5 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, border_width=2,border_color="gray")
+                    self.KiHFrame5.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
+                    self.KiHCorrectAnswersLabel = customtkinter.CTkLabel(self.KiHFrame5, text="", font=FONT_EXTRALARGE)
+                    self.KiHCorrectAnswersLabel.grid(row=0, column=0, rowspan=2, sticky="w", padx=20, pady=10)
+                    self.KiHCorrectAnswersTitleLabel = customtkinter.CTkLabel(self.KiHFrame5, text="", font=FONT_LARGE)
+                    self.KiHCorrectAnswersTitleLabel.grid(row=0, column=1, sticky="w", padx=10, pady=10)
+                    self.KiHCorrectAnswersSubtitleLabel = customtkinter.CTkLabel(self.KiHFrame5, text="", font=FONT_MEDIUM)
+                    self.KiHCorrectAnswersSubtitleLabel.grid(row=1, column=1, sticky="w", padx=10, pady=10)
+                    if(correct_answers == 0):
+                        self.KiHFrame5.configure(fg_color=RED)
+                        self.KiHCorrectAnswersLabel.configure(text="0/3")
+                        self.KiHCorrectAnswersTitleLabel.configure(text="Noch Luft nach oben")
+                        self.KiHCorrectAnswersSubtitleLabel.configure(text="Die Fragen waren nicht einfach – schau dir die Erklärungen nochmal an. Die drei\nKernaussagen sind wichtig, um KI in der Produktion richtig einzuschätzen.")
+                    elif(correct_answers == 1):
+                        self.KiHFrame5.configure(fg_color=ORANGE)
+                        self.KiHCorrectAnswersLabel.configure(text="1/3")
+                        self.KiHCorrectAnswersTitleLabel.configure(text="Ein guter Anfang")
+                        self.KiHCorrectAnswersSubtitleLabel.configure(text="Du hast erste wichtige Zusammenhänge erkannt. Bei zwei Fragen lagen die\nAntworten nah dran – lies die Erklärungen nochmal, die Nuancen machen in der Praxis den Unterschied.")
+                    elif(correct_answers == 2):
+                        self.KiHFrame5.configure(fg_color=YELLOW)
+                        self.KiHCorrectAnswersLabel.configure(text="2/3")
+                        self.KiHCorrectAnswersTitleLabel.configure(text="Schon sehr gut")
+                        self.KiHCorrectAnswersSubtitleLabel.configure(text="Du hast die meisten Zusammenhänge richtig eingeschätzt. Eine Frage war besonders\nknifflig – und genau diese Falle passiert in der Praxis häufig.")
+                    elif(correct_answers == 3):
+                        self.KiHFrame5.configure(fg_color=GREEN)
+                        self.KiHCorrectAnswersLabel.configure(text="3/3")
+                        self.KiHCorrectAnswersTitleLabel.configure(text="Alles richtig")
+                        self.KiHCorrectAnswersSubtitleLabel.configure(text="Du hast alle drei Fragen richtig beantwortet. Das zeigt: Du weißt, wo KI ihre Grenzen\nhat – und das ist genauso wichtig wie zu wissen, was sie kann.")
+                    
+                    self.KiHFrame6 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_width=2,border_color="gray")
+                    self.KiHFrame6.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
+                    self.KiHKernaussagenTitleLabel = customtkinter.CTkLabel(self.KiHFrame6, text="Die drei Kernaussagen", font=FONT_MEDIUM)
+                    self.KiHKernaussagenTitleLabel.grid(row=0, column=0, sticky="w", padx=10, pady=10)
+                    self.KiHKernaussagenSubtitle1Label = customtkinter.CTkLabel(self.KiHFrame6, text="✓ Je stärker neue Messwerte vom Trainingsbereich abweichen, desto weniger ist dem Modell zu vertrauen.", font=FONT_MEDIUM)
+                    self.KiHKernaussagenSubtitle1Label.grid(row=1, column=0, sticky="w", padx=20, pady=10)
+                    self.KiHKernaussagenSubtitle2Label = customtkinter.CTkLabel(self.KiHFrame6, text="✓ Veränderte Bedingungen - z.B. Jahreszeiten - können das Modell unbemerkt unzuverlässig machen.", font=FONT_MEDIUM)
+                    self.KiHKernaussagenSubtitle2Label.grid(row=2, column=0, sticky="w", padx=20, pady=10)
+                    self.KiHKernaussagenSubtitle3Label = customtkinter.CTkLabel(self.KiHFrame6, text="✓ Was nicht gemessen wird, kann die KI nicht lernen. Menschliche Erfahrung bleibt unersetzlich.", font=FONT_MEDIUM)
+                    self.KiHKernaussagenSubtitle3Label.grid(row=3, column=0, sticky="w", padx=20, pady=10)
+                    
+                    self.KiHReturnBtn = customtkinter.CTkButton(self.KiHFrame, text="Beginne das Quiz erneut", command=KiHReset, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+                    self.KiHReturnBtn.grid(row=3, column=0, padx=10, pady=10, sticky="we")
+                    
+                    
+                if(self.KiHQuestionNr == 2):
+                    self.KiHQuestionNr = 3
+                    self.KiHkreis3.configure(fg_color="#1f6aa5", text_color="white")
+                    self.KiHFragenNrLabel.configure(text="Frage 3 von 3")
+                    self.KiHFragenLabel.configure(text="Die KI arbeitet mit 13 Messwerten. Ein erfahrener Maschinenführer bemerkt\nbeim Einlegen des Granulats, ob es zu feucht ist. Kann die KI das auch?​")
+                    self.KiHQuestionBtn1.configure(text="Ja – mit genug Daten lernt die KI alles, was relevant ist")
+                    self.KiHQuestionBtn2.configure(text="Teilweise – für messbare, wiederholbare Dinge ja; für alles andere nein")
+                    self.KiHQuestionBtn3.configure(text="Nein – was nicht gemessen wird, kann die KI nicht lernen")
+                # Umgedreht, damit nicht beide ifs nacheinander laufen (sicher auch eleganter lösbar)
+                if(self.KiHQuestionNr == 1):
+                    self.KiHQuestionNr = 2
+                    self.KiHkreis2.configure(fg_color="#1f6aa5", text_color="white")
+                    self.KiHFragenNrLabel.configure(text="Frage 2 von 3")
+                    self.KiHFragenLabel.configure(text="Die Trainingsdaten wurden ausschließlich im Winter gesammelt,\nals die Halle kalt war. Im Sommer steigt die Hallentemperatur auf 35 °C.\nWie zuverlässig ist die KI-Vorhersage dann noch?​")
+                    self.KiHQuestionBtn1.configure(text="Genauso zuverlässig")
+                    self.KiHQuestionBtn2.configure(text="Eingeschränkt – Umgebungstemperatur beeinflusst den Prozess")
+                    self.KiHQuestionBtn3.configure(text="Unzuverlässig – das Modell hat diese Bedingungen nie gesehen")
+                
+            self.KiHFrame4 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
+            self.KiHFrame4.grid(row=3, column=0, padx=10, pady=10, sticky="nsew")
+            
+            self.KiHSubmitBtn = customtkinter.CTkButton(self.KiHFrame4, text="Einreichen", command=submit_answer, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", state="disabled")
+            self.KiHSubmitBtn.grid(row=3, column=1, padx=10, pady=10, sticky="ns")
+            self.KiHContinueBtn = customtkinter.CTkButton(self.KiHFrame4, text="Weiter", command=next_question, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", state="disabled")
+            self.KiHContinueBtn.grid(row=4, column=1, padx=10, pady=10, sticky="ns")
         
-        
+        self.KiH_headline_Label = customtkinter.CTkLabel(self.KiHFrame, text="KI Hinterfragen​", fg_color="transparent", font=FONT_EXTRALARGE)
+        self.KiH_headline_Label.grid(row=0, column=0, padx=20, pady=10)
+        self.KiH_text_Label = customtkinter.CTkLabel(self.KiHFrame, text="Du hast die KI trainiert und getestet – aber weißt du auch, wo ihre Grenzen liegen? Es folgen drei kurze Fragen aus der Produktionspraxis.​​", fg_color="transparent")
+        self.KiH_text_Label.grid(row=1, column=0, padx=20, pady=10)
+        self.KiH_spawn_question_button = customtkinter.CTkButton(self.KiHFrame, text="Jetzt starten →", command=createKIHinterfragen, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+        self.KiH_spawn_question_button.grid(row=2, column=0, padx=20)
         
         
         # Maschinensimulation - Tab
@@ -1026,6 +1036,25 @@ class App(customtkinter.CTk):
         self.charge_label1.grid(row=3, column=1, padx=10, pady=0, sticky="w")
         self.charge_label2 = customtkinter.CTkLabel(self.lense_frame, text=self.current_charge, fg_color="transparent")
         self.charge_label2.grid(row=3, column=2, padx=10, pady=0, sticky="w")
+        
+        
+        # Funktionsweise verstehen
+        
+        self.presentationList = [] # Hier jeder Eintrag Pfad zu Bild in chronologischer Reihenfolge
+        
+        self.FunkVFrame = customtkinter.CTkFrame(self.tab6,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR, width=self.winfo_screenwidth()-100, height=self.winfo_screenheight()-200)
+        self.FunkVFrame.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nswe")
+        
+        self.FunkVFrame1 = customtkinter.CTkFrame(self.FunkVFrame,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
+        self.FunkVFrame1.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nswe")
+        self.FunkVFrame2 = customtkinter.CTkFrame(self.FunkVFrame,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
+        self.FunkVFrame2.grid(row=1, column=0, padx=10, pady=(10, 0), sticky="nswe")
+        
+        self.FunkVReturnBtn = customtkinter.CTkButton(self.FunkVFrame2, text="Zurück", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+        self.FunkVReturnBtn.grid(row=0, column=0, padx=20, pady=10, sticky="nswe")
+        self.FunkVContinueBtn = customtkinter.CTkButton(self.FunkVFrame2, text="Weiter", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+        self.FunkVContinueBtn.grid(row=0, column=1, padx=20, pady=10, sticky="nswe")
+        
         
         #Mögliche optimierung:
         self.update_idletasks()
