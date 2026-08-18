@@ -102,10 +102,10 @@ class App(customtkinter.CTk):
         self.tabview.pack(padx=0, pady=0)
 
         self.tab1 = self.tabview.add("1. KI Live testen")
-        self.tab2 = self.tabview.add("2. Einstellungen ändern")
-        self.tab3 = self.tabview.add("3. KI selbst trainieren")
+        self.tab5 = self.tabview.add("2. KI hinterfragen")
+        self.tab2 = self.tabview.add("3. Einstellungen ändern")
+        self.tab3 = self.tabview.add("4. KI selbst trainieren")
         #self.tab4 =self.tabview.add("4. Optimierungsalgorithmus")
-        self.tab5 =self.tabview.add("4. KI hinterfragen")
         self.tab6 =self.tabview.add("5. Funktionsweise verstehen")
         self.tabview.set("1. KI Live testen")
         self.tab1.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
@@ -409,6 +409,13 @@ class App(customtkinter.CTk):
         self.eAeFrame2_button = customtkinter.CTkButton(self.eAeFrame2, text="Zum Vergleich")
         self.eAeFrame2_button.grid(row=2, column=0, padx=20)
         
+        # Wirksam Logo
+        self.wirksam_frame4 = customtkinter.CTkFrame(self.tab2,border_width=2,border_color=BACKGROUND_COLOR, fg_color=BACKGROUND_COLOR)
+        self.wirksam_frame4.grid(row=1, column=0, padx=10, pady=(10, 0), sticky="se")
+        self.wirksam_logo4 = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
+        self.wirksam_logo_image_label4 = customtkinter.CTkLabel(self.wirksam_frame4, text="", image=self.wirksam_logo4)
+        self.wirksam_logo_image_label4.grid(row=0, column=0, rowspan=6, padx=20, pady=10, sticky="se")
+        
         # Optimierungsalgorithmus - Tab
         
         #self.optAlgoFrame = customtkinter.CTkFrame(self.tabview.tab("Optimierungsalgorithmus"), width=200, height=200) 
@@ -429,7 +436,7 @@ class App(customtkinter.CTk):
         self.nnsubFrame1 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.nnsubFrame1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         
-        self.aiLabel = customtkinter.CTkLabel(self.nnsubFrame1, text="Trainiere dein eigenes neuronales Netz​\nStelle ein, wie oft das Netz aus den Daten lernt (Iterationen) und wie viele Verarbeitungsschritte es\ndabei durchläuft (Schichten). Trainiere es dann und beobachte, wie gut die Qualitätsvorhersage", fg_color="transparent", font=FONT_LARGE)
+        self.aiLabel = customtkinter.CTkLabel(self.nnsubFrame1, text="Trainiere dein eigenes neuronales Netz​\nStelle ein, wie oft das Netz aus den Daten lernt (Iterationen) und wie viele Verarbeitungsschritte es\ndabei durchläuft (Schichten). Trainiere es dann und beobachte, wie gut die Qualitätsvorhersage ist.", fg_color="transparent", font=FONT_LARGE)
         self.aiLabel.grid(row=0, column=0, padx=20, pady=10)
         
         self.nnsubFrame2 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
@@ -454,27 +461,47 @@ class App(customtkinter.CTk):
         self.layersOption.grid(row=2, column=1, padx=20)
         self.layersOption.set("64 32 16")
         
+        def nn_button_pressed():
+            self.iterationsSliderVar = int(self.iterationsSlider.get())
+            start_time = time.time()
+            layers = tuple(int(x) for x in self.layersOption.get().split())
+            self.new_model, mse, perc = create_neural_network(self.min_max_scaler, hidden_layers=layers, acti_func=self.activVar.get(), solve_func=self.solverVar.get(), max_iterations=self.iterationsSliderVar)
+            total_time = time.time() - start_time
+            total_time = f"{total_time:.1f} Sek."
+            mse = f"{mse:.1f}"
+            #self.mseValue.configure(text=mse)
+            judge_perc(perc)
+            perc = f"{perc:.1f}%"
+            self.timeLabel2.configure(text="Simuliert")
+            self.percValue.configure(text=perc)
+            #self.takeNNButton.configure(state="normal")
+            self.timeValue.configure(text=total_time)
+            list_built_nns(self.iterationsSliderVar, layers, perc)
+        
+        self.createNNButton = customtkinter.CTkButton(self.nnsubFrame2, text="Erstelle Neuronales Netz", command=nn_button_pressed)
+        self.createNNButton.grid(row=3, column=0, padx=20, columnspan=3)
+        
         self.nnsubFrame3 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.nnsubFrame3.grid(row=2, column=0, padx=20, pady=20, sticky="nsew")
         
-        self.percLabel = customtkinter.CTkLabel(self.nnsubFrame3, text="Trefferquote:", fg_color="transparent", font=FONT_LARGE)
-        self.percLabel.grid(row=0, column=0, padx=20, pady=10)
+        self.percLabel = customtkinter.CTkLabel(self.nnsubFrame3, text="Trefferquote (Qualitätsvorhersage):", fg_color="transparent", font=FONT_LARGE)
+        self.percLabel.grid(row=0, column=0, padx=20, pady=10, sticky="w")
         self.percValue = customtkinter.CTkLabel(self.nnsubFrame3, text="", fg_color="transparent", font=FONT_LARGE)
-        self.percValue.grid(row=1, column=0, padx=20, pady=10)
+        self.percValue.grid(row=0, column=1, padx=20, pady=10, sticky="w")
         self.percLabel2 = customtkinter.CTkLabel(self.nnsubFrame3, text="", fg_color="transparent", font=("Arial", 16) )
-        self.percLabel2.grid(row=2, column=0, padx=20, pady=10)
+        self.percLabel2.grid(row=0, column=2, padx=20, pady=10, sticky="w")
         
         self.timeLabel = customtkinter.CTkLabel(self.nnsubFrame3, text="Trainingszeit:", fg_color="transparent", font=FONT_LARGE)
-        self.timeLabel.grid(row=0, column=1, padx=20, pady=10)
+        self.timeLabel.grid(row=1, column=0, padx=20, pady=10, sticky="w")
         self.timeValue = customtkinter.CTkLabel(self.nnsubFrame3, text="", fg_color="transparent", font=FONT_LARGE)
-        self.timeValue.grid(row=1, column=1, padx=20, pady=10)
+        self.timeValue.grid(row=1, column=1, padx=20, pady=10, sticky="w")
         self.timeLabel2 = customtkinter.CTkLabel(self.nnsubFrame3, text="", fg_color="transparent", font=("Arial", 16) )
-        self.timeLabel2.grid(row=2, column=1, padx=20, pady=10)
+        self.timeLabel2.grid(row=1, column=2, padx=20, pady=10, sticky="w")
         
-        self.mseLabel = customtkinter.CTkLabel(self.nnsubFrame3, text="Mean Squared Error des Neuronalen Netzes: ", fg_color="transparent", font=FONT_LARGE)
-        self.mseLabel.grid(row=0, column=2, padx=20, pady=10)
-        self.mseValue = customtkinter.CTkLabel(self.nnsubFrame3, text="", fg_color="transparent", font=FONT_LARGE)
-        self.mseValue.grid(row=1, column=2, padx=20, pady=10)
+        #self.mseLabel = customtkinter.CTkLabel(self.nnsubFrame3, text="Mean Squared Error des Neuronalen Netzes: ", fg_color="transparent", font=FONT_LARGE)
+        #self.mseLabel.grid(row=0, column=2, padx=20, pady=10)
+        #self.mseValue = customtkinter.CTkLabel(self.nnsubFrame3, text="", fg_color="transparent", font=FONT_LARGE)
+        #self.mseValue.grid(row=1, column=2, padx=20, pady=10)
         
         self.nnsubFrame4 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR) # Für nn_advice_label
         self.nnsubFrame4.grid(row=2, column=1, padx=20, pady=20, sticky="nsew")
@@ -487,6 +514,19 @@ class App(customtkinter.CTk):
         self.built_nns_percentages = []
         self.built_nns_caption = customtkinter.CTkLabel(self.nnsubFrame5, text="Bisherige Versuche", fg_color="transparent", font=FONT_MEDIUM )
         self.built_nns_caption.grid(row=0, column=0, padx=20, pady=10)
+        self.built_nns_subcaption1 = customtkinter.CTkLabel(self.nnsubFrame5, text="Iterationen", fg_color="transparent", font=FONT_MEDIUM )
+        self.built_nns_subcaption1.grid(row=1, column=0, padx=20, pady=10)
+        self.built_nns_subcaption2 = customtkinter.CTkLabel(self.nnsubFrame5, text="Schichten", fg_color="transparent", font=FONT_MEDIUM )
+        self.built_nns_subcaption2.grid(row=1, column=1, padx=20, pady=10)
+        self.built_nns_subcaption3 = customtkinter.CTkLabel(self.nnsubFrame5, text="Trefferquote", fg_color="transparent", font=FONT_MEDIUM )
+        self.built_nns_subcaption3.grid(row=1, column=2, padx=20, pady=10)
+        
+        # Wirksam Logo
+        self.wirksam_frame3 = customtkinter.CTkFrame(self.nnFrame,border_width=2,border_color=BACKGROUND_COLOR, fg_color=BACKGROUND_COLOR)
+        self.wirksam_frame3.grid(row=3, column=1, padx=10, pady=(10, 0), sticky="n")
+        self.wirksam_logo3 = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
+        self.wirksam_logo_image_label3 = customtkinter.CTkLabel(self.wirksam_frame3, text="", image=self.wirksam_logo3)
+        self.wirksam_logo_image_label3.grid(row=0, column=0, rowspan=6, padx=20, pady=10, sticky="se")
         
         def clear_built_nns():
             for i in range (0, self.built_nns):
@@ -501,23 +541,6 @@ class App(customtkinter.CTk):
         
         self.built_nns_redo = customtkinter.CTkButton(self.nnsubFrame5, text="Neu anfangen", command=clear_built_nns)
         self.built_nns_redo.grid(row=0, column=2, padx=20)
-        
-        def nn_button_pressed():
-            self.iterationsSliderVar = int(self.iterationsSlider.get())
-            start_time = time.time()
-            layers = tuple(int(x) for x in self.layersOption.get().split())
-            self.new_model, mse, perc = create_neural_network(self.min_max_scaler, hidden_layers=layers, acti_func=self.activVar.get(), solve_func=self.solverVar.get(), max_iterations=self.iterationsSliderVar)
-            total_time = time.time() - start_time
-            total_time = f"{total_time:.1f} Sek."
-            mse = f"{mse:.1f}"
-            self.mseValue.configure(text=mse)
-            judge_perc(perc)
-            perc = f"{perc:.1f}%"
-            self.timeLabel2.configure(text="Simuliert")
-            self.percValue.configure(text=perc)
-            self.takeNNButton.configure(state="normal")
-            self.timeValue.configure(text=total_time)
-            list_built_nns(self.iterationsSliderVar, layers, perc)
             
         def take_nn_button_pressed():
             self.model = self.new_model
@@ -534,7 +557,7 @@ class App(customtkinter.CTk):
                 self.percLabel2.configure(text="Gut")
                 self.nn_advice_label.configure(text="Platzhalter")
             
-            self.nn_advice_label.grid(row=0, column=1, padx=10, pady=10, rowspan=3, sticky="nsew")
+            self.nn_advice_label.grid(row=0, column=0, padx=10, pady=10, rowspan=3, sticky="nsew")
             
             self.nnsubFrame4.grid_rowconfigure(0, weight=1)
             self.nnsubFrame4.grid_rowconfigure(1, weight=1)
@@ -544,33 +567,37 @@ class App(customtkinter.CTk):
         def list_built_nns(iterations, layers, percentage):
             i = self.built_nns
             built_nn_iteration = customtkinter.CTkLabel(self.nnsubFrame5, text=iterations, fg_color="transparent", font=FONT_MEDIUM )
-            built_nn_iteration.grid(row=i+1, column=0, padx=20, pady=10)
+            built_nn_iteration.grid(row=i+2, column=0, padx=20, pady=10)
             self.built_nns_iterations.append(built_nn_iteration)
             built_nn_layer = customtkinter.CTkLabel(self.nnsubFrame5, text=layers, fg_color="transparent", font=FONT_MEDIUM)
-            built_nn_layer.grid(row=i+1, column=1, padx=20, pady=10)
-            self.built_nns_layers.append(built_nn_iteration)
+            built_nn_layer.grid(row=i+2, column=1, padx=20, pady=10)
+            self.built_nns_layers.append(built_nn_layer)
             built_nn_percentage = customtkinter.CTkLabel(self.nnsubFrame5, text=percentage, fg_color="transparent", font=FONT_MEDIUM)
-            built_nn_percentage.grid(row=i+1, column=2, padx=20, pady=10)
-            self.built_nns_percentages.append(built_nn_iteration)
+            built_nn_percentage.grid(row=i+2, column=2, padx=20, pady=10)
+            self.built_nns_percentages.append(built_nn_percentage)
             
             self.built_nns = self.built_nns + 1
             
         self.nnsubFrame6 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.nnsubFrame6.grid(row=0, column=1, padx=20, pady=20, sticky="nsew", rowspan=2)
         
-        self.NN_graphic = customtkinter.CTkImage(light_image=Image.open('graphics/lens.png'), dark_image=Image.open('graphics/lens.png'), size=(150,150))
+        self.NN_graphic = customtkinter.CTkImage(light_image=Image.open('graphics/neural_net_gfx/neuronales_netz.png'), dark_image=Image.open('graphics/neural_net_gfx/neuronales_netz.png'), size=(224, 400))
         self.NN_graphic_label = customtkinter.CTkLabel(self.nnsubFrame6, text="", image=self.NN_graphic)
         self.NN_graphic_label.grid(row=0, column=0, rowspan=2, padx=20, pady=10)
-        
-        self.createNNButton = customtkinter.CTkButton(self.nnsubFrame6, text="Erstelle Neuronales Netz", command=nn_button_pressed)
-        self.createNNButton.grid(row=1, column=0, padx=20)
-        self.takeNNButton = customtkinter.CTkButton(self.nnsubFrame6, text="Übernehme erstelltes Neuronales Netz", command=take_nn_button_pressed, state="disabled")
-        self.takeNNButton.grid(row=2, column=0, padx=20)
+    
+        #self.takeNNButton = customtkinter.CTkButton(self.nnsubFrame6, text="Übernehme erstelltes Neuronales Netz", command=take_nn_button_pressed, state="disabled")
+        #self.takeNNButton.grid(row=2, column=0, padx=20)
         
         # KI Hinterfragen - Tab
         self.KiHFrame = customtkinter.CTkFrame(self.tab5, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.KiHFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-
+        
+        # Wirksam Logo
+        self.wirksam_frame2 = customtkinter.CTkFrame(self.tab5,border_width=2,border_color=BACKGROUND_COLOR, fg_color=BACKGROUND_COLOR)
+        self.wirksam_frame2.grid(row=0, column=1, padx=10, pady=(10, 0), sticky="se")
+        self.wirksam_logo2 = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
+        self.wirksam_logo_image_label2 = customtkinter.CTkLabel(self.wirksam_frame2, text="", image=self.wirksam_logo2)
+        self.wirksam_logo_image_label2.grid(row=0, column=0, rowspan=6, padx=20, pady=10, sticky="se")
         
         def createKIHinterfragen():
             self.KiH_headline_Label.grid_forget()
@@ -612,7 +639,7 @@ class App(customtkinter.CTk):
             self.KiHFragenNrLabel = customtkinter.CTkLabel(self.KiHFrame2, text="Frage 1 von 3", font=FONT_SMALL_LIGHT)
             self.KiHFragenNrLabel.grid(row=0, column=0, sticky="w", padx=10, pady=10)
             
-            self.KiHFragenLabel = customtkinter.CTkLabel(self.KiHFrame2, text="Das Modell wurde auf einer bestimmten Linse trainiert. Nun soll eine neue Linse mit leicht\nveränderter Geometrie produziert werden – gleicher Kunststoff, gleiche Maschine,\nminimal andere Wandstärke. Kannst du dasselbe KI-Modell verwenden?", font=FONT_MEDIUM)
+            self.KiHFragenLabel = customtkinter.CTkLabel(self.KiHFrame2, text="Das KI-Modell wurde für eine bestimmte Linse trainiert. Nun soll eine\nandere Linse produziert werden. Zwar werden dieselbe Maschine und\nderselbe Kunststoff verwendet, die Geometrie der Linse ist\njedoch verändert. Kann für das neue Produkt dasselbe KI-Modell genutzt werden?​", font=FONT_MEDIUM)
             self.KiHFragenLabel.grid(row=1, column=0, sticky="w", padx=10, pady=10)
             
             self.KiHFrame3 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
@@ -664,11 +691,11 @@ class App(customtkinter.CTk):
                 else:
                     self.KiHSubmitBtn.configure(state="active")
         
-            self.KiHQuestionBtn1 = customtkinter.CTkButton(self.KiHFrame3, text="Ja – die Unterschiede sind klein, das Modell funktioniert weiterhin", command=set_question1, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
+            self.KiHQuestionBtn1 = customtkinter.CTkButton(self.KiHFrame3, text="Ja, das  KI-Modell funktioniert auch für neue Produkte", command=set_question1, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
             self.KiHQuestionBtn1.grid(row=0, column=0, padx=10, pady=10, sticky="nwes")
-            self.KiHQuestionBtn2 = customtkinter.CTkButton(self.KiHFrame3, text="Kommt drauf an – je nach Ausmaß der Veränderung", command=set_question2, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
+            self.KiHQuestionBtn2 = customtkinter.CTkButton(self.KiHFrame3, text="Nein, für neue Produkte werden neue Trainingsdaten benötigt", command=set_question2, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
             self.KiHQuestionBtn2.grid(row=1, column=0, padx=10, pady=10, sticky="nwes")
-            self.KiHQuestionBtn3 = customtkinter.CTkButton(self.KiHFrame3, text="Nein – jede Geometrieänderung erfordert ein neues KI-Modell", command=set_question3, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
+            self.KiHQuestionBtn3 = customtkinter.CTkButton(self.KiHFrame3, text="Das KI-Modell passt sich automatisch an", command=set_question3, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
             self.KiHQuestionBtn3.grid(row=2, column=0, padx=10, pady=10, sticky="nwes")
             
             self.KiHFeedbackLabel = customtkinter.CTkLabel(self.KiHFrame3, text="Platzhalter", font=FONT_MEDIUM, corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
@@ -683,15 +710,15 @@ class App(customtkinter.CTk):
                 self.KiHSubmitBtn.configure(state="disabled")
                 if(self.KiHQuestionNr == 1):
                     if(self.KiHSubmission == 1):
-                        self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Nicht ganz. Auch kleine Änderungen können die Messwerte verschieben – dann\nkennt das KI-Modell die Situation nicht mehr.")
+                        self.KiHFeedbackLabel.configure(fg_color=RED, text="Nicht korrekt. Das Modell kennt nur das Produkt, mit dem es trainiert wurde.")
                         self.KiHAnswersCorrect.append(0)
                     if(self.KiHSubmission == 2):
-                        self.KiHFeedbackLabel.configure(fg_color=GREEN, text="Richtig. Bleiben die Einstellwerte der Maschine im bekannten Bereich,\nfunktioniert das KI-Modell noch. Weichen sie ab, versagt es.​")
+                        self.KiHFeedbackLabel.configure(fg_color=GREEN, text="Richtig. Das Modell muss auf Daten des neuen Produkts trainiert werden.​​")
                         self.KiHAnswersCorrect.append(1)
                     if(self.KiHSubmission == 3):
-                        self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Zu streng. Bei sehr ähnlichen Produkten kann das Modell noch brauchbar\nsein – aber immer prüfen.​​")
+                        self.KiHFeedbackLabel.configure(fg_color=RED, text="Nicht korrekt. Neue Produkte erfordern neue Daten und ein erneutes Training.​​")
                         self.KiHAnswersCorrect.append(0)
-                    self.KiHErklärungLabel.configure(text="Das Modell hat gelernt, welche Messwerte – Füllzeit, Druck, Zykluszeit – zu welcher Qualität\nführen. Bleiben diese Messwerte bei der neuen Linse im gewohnten Bereich,\nkann das KI-Modell noch funktionieren. Weichen sie deutlich ab,\nist das KI-Modell überfordert – es kennt diese Kombination nicht.​")
+                    self.KiHErklärungLabel.configure(text="Das KI-Modell hat anhand von Produktionsdaten einer bestimmten Linse gelernt,\nwelche Zusammenhänge zwischen Prozesswerten und den passenden\nMaschineneinstellungen bestehen. Bei einer neuen Linse ändern sich diese Zusammenhänge,\nselbst wenn Material und Maschine gleich bleiben. Da das Modell\ndiese neue Produktausprägung noch nicht kennt, müssen zunächst\nDaten für das neue Produkt gesammelt und daraus ein neues KI-Modell erstellt werden.​")
                 
                 if(self.KiHQuestionNr == 2):
                     if(self.KiHSubmission == 1):
@@ -703,19 +730,19 @@ class App(customtkinter.CTk):
                     if(self.KiHSubmission == 3):
                         self.KiHFeedbackLabel.configure(fg_color=GREEN, text="Richtig. Das Modell hat Sommerbedingungen nie gesehen und\nbemerkt die Veränderung nicht – ohne Warnsignal.​")
                         self.KiHAnswersCorrect.append(1)
-                    self.KiHErklärungLabel.configure(text="Auch wenn die Maschineneinstellungen gleich bleiben – die Umgebungstemperatur\nverändert den Prozess. Das Granulat im Trichter erwärmt sich,\ndie Schmelze verhält sich anders. Füllzeit, Druck und Zykluszeit verschieben\nsich – genau die Werte, aus denen das Modell gelernt hat. Das Modell\nhat Sommerwerte nie gesehen und gibt trotzdem eine Vorhersage aus – ohne zu wissen,\ndass die Bedingungen sich verändert haben.​​")
+                    self.KiHErklärungLabel.configure(text="Auch wenn die Maschineneinstellungen gleich bleiben – die Umgebungstemperatur\nverändert den Prozess. Das Granulat im Trichter erwärmt\nsich, die Schmelze verhält sich anders. Füllzeit, Druck und\nZykluszeit verschieben sich – genau die Werte, aus denen das Modell\ngelernt hat. Das Modell hat Sommerwerte nie gesehen und gibt trotzdem\neine Vorhersage aus – ohne zu wissen,\ndass die Bedingungen sich verändert haben.​​")
                 
                 if(self.KiHQuestionNr == 3):
                     if(self.KiHSubmission == 1):
-                        self.KiHFeedbackLabel.configure(fg_color=RED, text="Nicht korrekt. Was nicht gemessen wird, kann\ndie KI auch mit noch so vielen Daten nicht lernen.​​")
+                        self.KiHFeedbackLabel.configure(fg_color=RED, text="Nicht korrekt. Die KI kann nur die Informationen nutzen,\ndie in den verfügbaren Daten enthalten sind.​")
                         self.KiHAnswersCorrect.append(0)
                     if(self.KiHSubmission == 2):
-                        self.KiHFeedbackLabel.configure(fg_color=GREEN, text="Richtig. Für Messbares leistet die KI gute Arbeit – für\ndas Nicht-Messbare bleibt Erfahrung unersetzlich.​​")
+                        self.KiHFeedbackLabel.configure(fg_color=GREEN, text="Richtig. Die KI kann Zusammenhänge in den vorhandenen Daten erkennen und Vorschläge machen.\nErfahrungswissen der Beschäftigten bleibt jedoch unverzichtbar.​​")
                         self.KiHAnswersCorrect.append(1)
                     if(self.KiHSubmission == 3):
-                        self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Zu streng. Die KI kann das Messbare sehr gut übernehmen – aber nicht das,\nwas erfahrene Bediener sehen, hören und spüren.​")
+                        self.KiHFeedbackLabel.configure(fg_color=ORANGE, text="Zu streng. Die KI kann eine wertvolle Unterstützung sein und\nEinstellprozesse gerade für neue Mitarbeitende erleichtern.​​")
                         self.KiHAnswersCorrect.append(0)
-                    self.KiHErklärungLabel.configure(text="Die KI kann nur aus Daten lernen, die tatsächlich erfasst wurden.\nDer Feuchtigkeitsgehalt des Granulats steckt nicht in den 13 Messwerten – aber er\nbeeinflusst die Qualität erheblich. Gleiches gilt\nfür frühen Werkzeugverschleiß oder ein ungewöhnliches Maschinengeräusch. Ein erfahrener\nMaschinenführer erkennt solche Signale oft, bevor sie messbar werden.​​​")
+                    self.KiHErklärungLabel.configure(text="Die KI lernt aus verfügbaren Prozesswerten und kann daraus\npassende Maschineneinstellungen ableiten. Es gibt jedoch Einflussfaktoren,\ndie in diesen Daten nicht enthalten sind. So können beispielsweise\ndie Feuchtigkeit oder Temperatur des Granulats abhängig vom Lagerort\nvariieren und das Prozessergebnis beeinflussen. Erfahrene\nMaschinenführer erkennen solche Situationen frühzeitig und\nbeziehen sie in ihre Entscheidungen ein.​​​")
                     
                     
                 self.KiHFeedbackLabel.grid()
@@ -788,7 +815,7 @@ class App(customtkinter.CTk):
                         self.KiHFrame5.configure(fg_color=YELLOW)
                         self.KiHCorrectAnswersLabel.configure(text="2/3")
                         self.KiHCorrectAnswersTitleLabel.configure(text="Schon sehr gut")
-                        self.KiHCorrectAnswersSubtitleLabel.configure(text="Du hast die meisten Zusammenhänge richtig eingeschätzt. Eine Frage war besonders\nknifflig – und genau diese Falle passiert in der Praxis häufig.")
+                        self.KiHCorrectAnswersSubtitleLabel.configure(text="Du hast die meisten Zusammenhänge richtig eingeschätzt.\nEine Frage war besonders knifflig.")
                     elif(correct_answers == 3):
                         self.KiHFrame5.configure(fg_color=GREEN)
                         self.KiHCorrectAnswersLabel.configure(text="3/3")
@@ -799,7 +826,7 @@ class App(customtkinter.CTk):
                     self.KiHFrame6.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
                     self.KiHKernaussagenTitleLabel = customtkinter.CTkLabel(self.KiHFrame6, text="Die drei Kernaussagen", font=FONT_MEDIUM)
                     self.KiHKernaussagenTitleLabel.grid(row=0, column=0, sticky="w", padx=10, pady=10)
-                    self.KiHKernaussagenSubtitle1Label = customtkinter.CTkLabel(self.KiHFrame6, text="✓ Je stärker neue Messwerte vom Trainingsbereich abweichen, desto weniger ist dem Modell zu vertrauen.", font=FONT_MEDIUM)
+                    self.KiHKernaussagenSubtitle1Label = customtkinter.CTkLabel(self.KiHFrame6, text="✓ Jedes neue Produkt erfordert neue Trainingsdaten und ein neues KI-Modell.", font=FONT_MEDIUM)
                     self.KiHKernaussagenSubtitle1Label.grid(row=1, column=0, sticky="w", padx=20, pady=10)
                     self.KiHKernaussagenSubtitle2Label = customtkinter.CTkLabel(self.KiHFrame6, text="✓ Veränderte Bedingungen - z.B. Jahreszeiten - können das Modell unbemerkt unzuverlässig machen.", font=FONT_MEDIUM)
                     self.KiHKernaussagenSubtitle2Label.grid(row=2, column=0, sticky="w", padx=20, pady=10)
@@ -814,10 +841,10 @@ class App(customtkinter.CTk):
                     self.KiHQuestionNr = 3
                     self.KiHkreis3.configure(fg_color="#1f6aa5", text_color="white")
                     self.KiHFragenNrLabel.configure(text="Frage 3 von 3")
-                    self.KiHFragenLabel.configure(text="Die KI arbeitet mit 13 Messwerten. Ein erfahrener Maschinenführer bemerkt\nbeim Einlegen des Granulats, ob es zu feucht ist. Kann die KI das auch?​")
-                    self.KiHQuestionBtn1.configure(text="Ja – mit genug Daten lernt die KI alles, was relevant ist")
-                    self.KiHQuestionBtn2.configure(text="Teilweise – für messbare, wiederholbare Dinge ja; für alles andere nein")
-                    self.KiHQuestionBtn3.configure(text="Nein – was nicht gemessen wird, kann die KI nicht lernen")
+                    self.KiHFragenLabel.configure(text="Die KI schlägt Maschineneinstellungen auf Basis von verfügbaren Prozesswerten vor.\nBedeutet das, dass nun jeder die Maschine auch ohne Erfahrung bedienen kann?​​")
+                    self.KiHQuestionBtn1.configure(text="Ja, die KI übernimmt das Wissen der erfahrenen Maschinenführer vollständig")
+                    self.KiHQuestionBtn2.configure(text="Teilweise. Die KI unterstützt bei der Maschineneinstellung, Erfahrung bleibt aber weiterhin unersetzlich.")
+                    self.KiHQuestionBtn3.configure(text="Nein. Die KI ist für die Maschineneinstellung nicht hilfreich")
                 # Umgedreht, damit nicht beide ifs nacheinander laufen (sicher auch eleganter lösbar)
                 if(self.KiHQuestionNr == 1):
                     self.KiHQuestionNr = 2
@@ -962,7 +989,7 @@ class App(customtkinter.CTk):
         self.qual_frame.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nsw")
         self.qual_label = customtkinter.CTkLabel(self.qual_frame, text="Qualitätsergebnis:", fg_color="transparent", font=FONT_MEDIUM)
         self.qual_label.grid(row=0, column=0, padx=10, pady=10)
-        self.border_frame = customtkinter.CTkFrame(self.qual_frame, fg_color="transparent")
+        self.border_frame = customtkinter.CTkFrame(self.qual_frame, fg_color=BACKGROUND_COLOR)
         self.border_frame.grid(row=1, column=0, padx=10, pady=10)
         
         self.shap_button = customtkinter.CTkButton(self.qual_frame, text="i", width=40, height=40, corner_radius=20, fg_color="#d0d0d0", hover_color="#989898", text_color="black", font=customtkinter.CTkFont(size=16, weight="bold"), border_width=3, border_color="black", command=use_shap_button)
@@ -1002,18 +1029,18 @@ class App(customtkinter.CTk):
         self.producing_button.grid(row=0, column=1, padx=10, pady=10, sticky="ns")
         self.produce_button = customtkinter.CTkButton(self.production_frame, text="2.\nQualität vorhersagen ", command=self.produce_func, state="disabled", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
         self.produce_button.grid(row=0, column=2, padx=10, pady=10, sticky="ns")
-        self.algoOptionVar = customtkinter.StringVar(value="Partikelschwarmoptimierung")
-        self.algoOption = customtkinter.CTkOptionMenu(self.production_frame, values=["Partikelschwarmoptimierung", "Genetischer Algorithmus", "Simulierte Abkühlung"],variable=self.algoOptionVar, corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
-        self.algoOption.set("Partikelschwarmoptimierung")
-        self.algoOption.grid(row=0, column=3, padx=10, pady=10, sticky="ns")
+        self.algoOptionVar = customtkinter.StringVar(value="Genetischer Algorithmus")
+        #self.algoOption = customtkinter.CTkOptionMenu(self.production_frame, values=["Partikelschwarmoptimierung", "Genetischer Algorithmus", "Simulierte Abkühlung"],variable=self.algoOptionVar, corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
+        #self.algoOption.set("Partikelschwarmoptimierung")
+        #self.algoOption.grid(row=0, column=3, padx=10, pady=10, sticky="ns")
         self.ai_button = customtkinter.CTkButton(self.production_frame, text="3.\nEinstellempfehlung generieren", command=self.use_algo, state="disabled", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
-        self.ai_button.grid(row=0, column=4, padx=10, pady=10, sticky="ns")
+        self.ai_button.grid(row=0, column=3, padx=10, pady=10, sticky="ns")
         ai_tooltip_string = ("{Die Parameter werden mit ", self.algoOptionVar.get(), " generiert. Dieser stochastische Optimierungsalgorithmus produziert nicht-deterministische Ergebnisse.}")
         self.ai_tooltip = CTkToolTip(self.ai_button, message=ai_tooltip_string)
         
         # Linse fertigung:
         self.lense_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
-        self.lense_frame.grid(row=2, column=1, padx=10, pady=(10, 0), sticky="nsw")
+        self.lense_frame.grid(row=2, column=0, padx=10, pady=(10, 0), sticky="nsw")
         self.lense_frame.grid_forget()
         self.lens_pic = customtkinter.CTkImage(light_image=Image.open('graphics/lens.png'), dark_image=Image.open('graphics/lens.png'), size=(150,150))
         self.lens_image_label = customtkinter.CTkLabel(self.lense_frame, text="", image=self.lens_pic)
@@ -1037,6 +1064,12 @@ class App(customtkinter.CTk):
         self.charge_label2 = customtkinter.CTkLabel(self.lense_frame, text=self.current_charge, fg_color="transparent")
         self.charge_label2.grid(row=3, column=2, padx=10, pady=0, sticky="w")
         
+        # Wirksam Logo
+        self.wirksam_frame1 = customtkinter.CTkFrame(self.tab1,border_width=2,border_color=BACKGROUND_COLOR, fg_color=BACKGROUND_COLOR)
+        self.wirksam_frame1.grid(row=2, column=1, padx=10, pady=(10, 0), sticky="e")
+        self.wirksam_logo1 = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
+        self.wirksam_logo_image_label1 = customtkinter.CTkLabel(self.wirksam_frame1, text="", image=self.wirksam_logo1)
+        self.wirksam_logo_image_label1.grid(row=0, column=0, rowspan=6, padx=20, pady=10, sticky="e")
         
         # Funktionsweise verstehen
         
@@ -1066,11 +1099,8 @@ class App(customtkinter.CTk):
         self.quality_category_label.configure(fg_color="transparent")
         self.produce_label.configure(text="")
         self.paramPopup_label.configure(text="")
-            
-        mode = customtkinter.get_appearance_mode()
-        tuple = customtkinter.ThemeManager.theme["CTkFrame"]["fg_color"]
-        colour = tuple[0] if mode == "Light" else tuple[1]
-        self.border_frame.configure(fg_color=colour, border_width=0,border_color=colour)
+        
+        self.border_frame.configure(fg_color=BACKGROUND_COLOR, border_width=0,border_color=BACKGROUND_COLOR)
         
     def update_charge(self):
         self.current_iter = str(int(self.current_iter) + 1).zfill(len(self.current_iter))
@@ -1108,7 +1138,7 @@ class App(customtkinter.CTk):
         self.amount9label.configure(text=(f"{(self.generated_paremeters)[0][11]:.1f}", NEWTONMETER))
         self.amount12label.configure(text=(f"{(self.generated_paremeters)[0][12]:.1f}", CM))
         self.lense_frame.grid()
-        self.lense_frame.grid(row=2, column=1, padx=10, pady=(10, 0), sticky="nsw")
+        self.lense_frame.grid(row=2, column=0, padx=10, pady=(10, 0), sticky="nsw")
         self.update_charge()
         self.slider_change()
         self.produce_button.configure(state="normal")
