@@ -6,6 +6,7 @@ import customtkinter
 import tkinter as tk
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
+import GifLabel
 from algorithm import ga, sa
 import algorithm.pso as pso
 from helper.help_functions import create_scaler, create_scaler2, get_X, plot_scores
@@ -39,6 +40,10 @@ RED ="#C00000"
 YELLOW = "#FFC000"
 GREEN = "#8ED973"
 ORANGE = "#E97132"
+TURQUOISE_HELL = "#96c8c8"
+TURQUOISE = "#5ab4b4"
+BLACK = "#2d2d00"
+GREY = "#7d7d7d"
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
@@ -55,6 +60,8 @@ class App(customtkinter.CTk):
         self.model = pickle.load(open("nn/neural-net-new.sav", 'rb'))
         self.scores = []
         self.kn = create_kn_classifier(6, self.min_max_scaler)
+        
+        self.wirksam_logo = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
         
         def update_label1(value):
             self.amount1label.configure(text=(f"{value:.1f}", CELSIUS))
@@ -97,8 +104,7 @@ class App(customtkinter.CTk):
             self.slider_change()
             
         # Tabs    
-            
-        self.tabview = customtkinter.CTkTabview(self)
+        self.tabview = customtkinter.CTkTabview(self, fg_color=BACKGROUND_COLOR, border_color=BLACK, text_color=BLACK)#, corner_radius=0, , width=self.winfo_screenwidth()
         self.tabview.pack(padx=0, pady=0)
 
         self.tab1 = self.tabview.add("1. KI Live testen")
@@ -108,12 +114,14 @@ class App(customtkinter.CTk):
         #self.tab4 =self.tabview.add("4. Optimierungsalgorithmus")
         self.tab6 =self.tabview.add("5. Funktionsweise verstehen")
         self.tabview.set("1. KI Live testen")
-        self.tab1.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
-        self.tab2.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
-        self.tab3.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
+        self.tab1.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR, border_width=10)
+        self.tab2.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR, border_width=10)
+        self.tab3.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR, border_width=10)
         #self.tab4.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
-        self.tab5.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
-        self.tab6.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
+        self.tab5.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR, border_width=10)
+        self.tab6.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR, border_width=10)
+        
+        self.tabview._segmented_button.configure(corner_radius=8, width=140, border_width=10, font=FONT_MEDIUM)
         
         # Einstellungen ändern Tab
         
@@ -121,7 +129,7 @@ class App(customtkinter.CTk):
             self.eAeFrame.forget()
             self.prodLaufFrame = customtkinter.CTkFrame(self.tab2, width=200, height=200, fg_color=BACKGROUND_COLOR)
             self.prodLaufFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-            self.returneAe_button = customtkinter.CTkButton(self.prodLaufFrame, text="Zurück zur Auswahl", command=zurueckAuswahl, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+            self.returneAe_button = customtkinter.CTkButton(self.prodLaufFrame, text="Zurück zur Auswahl", command=zurueckAuswahl1, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
             self.returneAe_button.grid(row=0, column=0, padx=20, sticky="nw")
             self.vermFrame = customtkinter.CTkFrame(self.prodLaufFrame, fg_color=BACKGROUND_COLOR, corner_radius=8)
             self.vermFrame.grid(row=1, column=0, padx=20, pady=20, sticky="ew")
@@ -381,9 +389,39 @@ class App(customtkinter.CTk):
             self.prodLaufFrame.destroy()
             createProdLaufFrame()
         
-        def zurueckAuswahl():
+        def zurueckAuswahl1():
             self.prodLaufFrame.destroy()
             self.eAeFrame.grid()
+        
+        def zurueckAuswahl2():
+            self.scoresFrame.destroy()
+            self.eAeFrame.grid()
+            
+        def showBestQuality():
+            self.eAeFrame.forget()
+            self.scoresFrame = customtkinter.CTkFrame(self.tab2, width=200, height=200, fg_color=BACKGROUND_COLOR)
+            self.scoresFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+            self.returnScores_button = customtkinter.CTkButton(self.scoresFrame, text="Zurück", command=zurueckAuswahl2, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+            self.returnScores_button.grid(row=0, column=0, padx=20, sticky="nw")
+            self.scoresSubFrame = customtkinter.CTkFrame(self.scoresFrame, fg_color=BACKGROUND_COLOR, corner_radius=8)
+            self.scoresSubFrame.grid(row=1, column=0, padx=20, pady=20, sticky="esw")
+            
+            self.gif = GifLabel.GifLabel(self.scoresSubFrame, "graphics/scores.gif", width=500, height=500)
+            self.gif.grid(row=0, column=1, padx=10, pady=10)
+            
+            def stopGif():
+                self.gif.stop()
+                self.continue_button.configure(state="active")
+                self.stop_button.configure(state="disabled")
+            def continueGif():
+                self.gif.start()
+                self.stop_button.configure(state="active")
+                self.continue_button.configure(state="disabled")
+            
+            self.stop_button = customtkinter.CTkButton(self.scoresSubFrame, text="Pausieren", command=stopGif, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", state="active")
+            self.stop_button.grid(row=1, column=0, padx=20, sticky="we")
+            self.continue_button = customtkinter.CTkButton(self.scoresSubFrame, text="Fortsetzen", command=continueGif, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", state="disabled")
+            self.continue_button.grid(row=1, column=2, padx=20, sticky="we")
             
         
         self.eAeFrame = customtkinter.CTkFrame(self.tab2, width=200, height=200, fg_color=BACKGROUND_COLOR)
@@ -404,16 +442,16 @@ class App(customtkinter.CTk):
         self.eAeFrame2.grid(row=2, column=2, padx=20, pady=20, sticky="nsew")
         self.eAeFrame2_headline_Label = customtkinter.CTkLabel(self.eAeFrame2, text="Optimierungsalgorithmus wechseln​", fg_color="transparent", font=FONT_EXTRALARGE)
         self.eAeFrame2_headline_Label.grid(row=0, column=0, padx=20, pady=10)
-        self.eAeFrame2_text_Label = customtkinter.CTkLabel(self.eAeFrame2, text="Welches Modell findet die besten Einstellparameter?\nVergleiche verschiedene Methoden direkt miteinander.​", fg_color="transparent")
+        self.eAeFrame2_text_Label = customtkinter.CTkLabel(self.eAeFrame2, text="Wie findet die KI die besten Einstellparameter? Schau dem\nAlgorithmus live zu – Schritt für Schritt, wie er aus vielen\nmöglichen Einstellungen die beste herausfindet.​​", fg_color="transparent")
         self.eAeFrame2_text_Label.grid(row=1, column=0, padx=20, pady=10)
-        self.eAeFrame2_button = customtkinter.CTkButton(self.eAeFrame2, text="Zum Vergleich")
+        self.eAeFrame2_button = customtkinter.CTkButton(self.eAeFrame2, text="Zum Vergleich", command=showBestQuality)
         self.eAeFrame2_button.grid(row=2, column=0, padx=20)
         
         # Wirksam Logo
         self.wirksam_frame4 = customtkinter.CTkFrame(self.tab2,border_width=2,border_color=BACKGROUND_COLOR, fg_color=BACKGROUND_COLOR)
         self.wirksam_frame4.grid(row=1, column=0, padx=10, pady=(10, 0), sticky="se")
-        self.wirksam_logo4 = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
-        self.wirksam_logo_image_label4 = customtkinter.CTkLabel(self.wirksam_frame4, text="", image=self.wirksam_logo4)
+        #self.wirksam_logo4 = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
+        self.wirksam_logo_image_label4 = customtkinter.CTkLabel(self.wirksam_frame4, text="", image=self.wirksam_logo)
         self.wirksam_logo_image_label4.grid(row=0, column=0, rowspan=6, padx=20, pady=10, sticky="se")
         
         # Optimierungsalgorithmus - Tab
@@ -506,7 +544,7 @@ class App(customtkinter.CTk):
         self.nnsubFrame4 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR) # Für nn_advice_label
         self.nnsubFrame4.grid(row=2, column=1, padx=20, pady=20, sticky="nsew")
         
-        self.nnsubFrame5 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
+        self.nnsubFrame5 = customtkinter.CTkScrollableFrame (self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.nnsubFrame5.grid(row=3, column=0, padx=20, pady=20, sticky="nsew")
         self.built_nns = 0
         self.built_nns_iterations = []
@@ -524,8 +562,8 @@ class App(customtkinter.CTk):
         # Wirksam Logo
         self.wirksam_frame3 = customtkinter.CTkFrame(self.nnFrame,border_width=2,border_color=BACKGROUND_COLOR, fg_color=BACKGROUND_COLOR)
         self.wirksam_frame3.grid(row=3, column=1, padx=10, pady=(10, 0), sticky="n")
-        self.wirksam_logo3 = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
-        self.wirksam_logo_image_label3 = customtkinter.CTkLabel(self.wirksam_frame3, text="", image=self.wirksam_logo3)
+        #self.wirksam_logo3 = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
+        self.wirksam_logo_image_label3 = customtkinter.CTkLabel(self.wirksam_frame3, text="", image=self.wirksam_logo)
         self.wirksam_logo_image_label3.grid(row=0, column=0, rowspan=6, padx=20, pady=10, sticky="se")
         
         def clear_built_nns():
@@ -595,8 +633,8 @@ class App(customtkinter.CTk):
         # Wirksam Logo
         self.wirksam_frame2 = customtkinter.CTkFrame(self.tab5,border_width=2,border_color=BACKGROUND_COLOR, fg_color=BACKGROUND_COLOR)
         self.wirksam_frame2.grid(row=0, column=1, padx=10, pady=(10, 0), sticky="se")
-        self.wirksam_logo2 = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
-        self.wirksam_logo_image_label2 = customtkinter.CTkLabel(self.wirksam_frame2, text="", image=self.wirksam_logo2)
+        #self.wirksam_logo2 = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
+        self.wirksam_logo_image_label2 = customtkinter.CTkLabel(self.wirksam_frame2, text="", image=self.wirksam_logo)
         self.wirksam_logo_image_label2.grid(row=0, column=0, rowspan=6, padx=20, pady=10, sticky="se")
         
         def createKIHinterfragen():
@@ -1041,34 +1079,34 @@ class App(customtkinter.CTk):
         # Linse fertigung:
         self.lense_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
         self.lense_frame.grid(row=2, column=0, padx=10, pady=(10, 0), sticky="nsw")
-        self.lense_frame.grid_forget()
+        #self.lense_frame.grid_forget()
         self.lens_pic = customtkinter.CTkImage(light_image=Image.open('graphics/lens.png'), dark_image=Image.open('graphics/lens.png'), size=(150,150))
         self.lens_image_label = customtkinter.CTkLabel(self.lense_frame, text="", image=self.lens_pic)
         self.lens_image_label.grid(row=0, column=0, rowspan=6, padx=20, pady=10)
         self.lens_produced_label1 = customtkinter.CTkLabel(self.lense_frame, text="Status:", fg_color="transparent", font=FONT_MEDIUM )
         self.lens_produced_label1.grid(row=0, column=1, padx=10, pady=0, sticky="w")
-        self.lens_produced_label2 = customtkinter.CTkLabel(self.lense_frame, text="Linse produziert", fg_color="transparent",font=FONT_MEDIUM)
+        self.lens_produced_label2 = customtkinter.CTkLabel(self.lense_frame, text="Unproduziert", fg_color="transparent",font=FONT_MEDIUM)
         self.lens_produced_label2.grid(row=0, column=2, padx=10, pady=0, sticky="w")
         self.article_produced_label1 = customtkinter.CTkLabel(self.lense_frame, text="Artikelnummer:", fg_color="transparent",font=FONT_SMALL)
         self.article_produced_label1.grid(row=1, column=1, padx=10, pady=0, sticky="w")
-        self.article_produced_label2 = customtkinter.CTkLabel(self.lense_frame, text="LNS-4712", fg_color="transparent")
+        self.article_produced_label2 = customtkinter.CTkLabel(self.lense_frame, text="-", fg_color="transparent")
         self.article_produced_label2.grid(row=1, column=2, padx=10, pady=0, sticky="w")
         self.material_label1 = customtkinter.CTkLabel(self.lense_frame, text="Material:", fg_color="transparent", font=FONT_SMALL)
         self.material_label1.grid(row=2, column=1, padx=10, pady=0, sticky="w")
-        self.material_label2 = customtkinter.CTkLabel(self.lense_frame, text="PMMA", fg_color="transparent")
+        self.material_label2 = customtkinter.CTkLabel(self.lense_frame, text="-", fg_color="transparent")
         self.material_label2.grid(row=2, column=2, padx=10, pady=0, sticky="w")
         self.current_iter = "000"
         self.current_charge = f"{DATE}-M1-{self.current_iter}"
         self.charge_label1 = customtkinter.CTkLabel(self.lense_frame, text="Charge: ", fg_color="transparent", font=FONT_SMALL)
         self.charge_label1.grid(row=3, column=1, padx=10, pady=0, sticky="w")
-        self.charge_label2 = customtkinter.CTkLabel(self.lense_frame, text=self.current_charge, fg_color="transparent")
+        self.charge_label2 = customtkinter.CTkLabel(self.lense_frame, text="-", fg_color="transparent")
         self.charge_label2.grid(row=3, column=2, padx=10, pady=0, sticky="w")
         
         # Wirksam Logo
         self.wirksam_frame1 = customtkinter.CTkFrame(self.tab1,border_width=2,border_color=BACKGROUND_COLOR, fg_color=BACKGROUND_COLOR)
         self.wirksam_frame1.grid(row=2, column=1, padx=10, pady=(10, 0), sticky="e")
-        self.wirksam_logo1 = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
-        self.wirksam_logo_image_label1 = customtkinter.CTkLabel(self.wirksam_frame1, text="", image=self.wirksam_logo1)
+        #self.wirksam_logo1 = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
+        self.wirksam_logo_image_label1 = customtkinter.CTkLabel(self.wirksam_frame1, text="", image=self.wirksam_logo)
         self.wirksam_logo_image_label1.grid(row=0, column=0, rowspan=6, padx=20, pady=10, sticky="e")
         
         # Funktionsweise verstehen
@@ -1102,10 +1140,26 @@ class App(customtkinter.CTk):
         
         self.border_frame.configure(fg_color=BACKGROUND_COLOR, border_width=0,border_color=BACKGROUND_COLOR)
         
-    def update_charge(self):
+    def update_charge_init(self):
+        self.lens_produced_label2.configure(text="Produziere Linse")
+        self.article_produced_label2.configure(text="-")
+        self.material_label2.configure(text="-")
+        self.charge_label2.configure(text="-")
+        #Ändere Bild kurzzeitig zu Ladebild:
+        
+        self.after(2000, self.update_charge_finish)
+        
+    def update_charge_finish(self):
+        
+        
         self.current_iter = str(int(self.current_iter) + 1).zfill(len(self.current_iter))
         self.current_charge = f"{DATE}-M1-{self.current_iter}"
         self.charge_label2.configure(text=self.current_charge)
+        self.lens_produced_label2.configure(text="Linse produziert")
+        self.article_produced_label2.configure(text="LNS-4712")
+        self.material_label2.configure(text="PMMA")
+        
+        self.produce_button.configure(state="normal")
         
     def get_kn_vals(self, scale=True):
         self.vars = []
@@ -1137,11 +1191,12 @@ class App(customtkinter.CTk):
         self.amount8label.configure(text=(f"{(self.generated_paremeters)[0][10]:.1f}", NEWTONMETER))
         self.amount9label.configure(text=(f"{(self.generated_paremeters)[0][11]:.1f}", NEWTONMETER))
         self.amount12label.configure(text=(f"{(self.generated_paremeters)[0][12]:.1f}", CM))
-        self.lense_frame.grid()
-        self.lense_frame.grid(row=2, column=0, padx=10, pady=(10, 0), sticky="nsw")
-        self.update_charge()
+        #self.lense_frame.grid()
+        #self.lense_frame.grid(row=2, column=0, padx=10, pady=(10, 0), sticky="nsw")
+        
+        self.update_charge_init()
         self.slider_change()
-        self.produce_button.configure(state="normal")
+        
         
     def produce_func(self):
         self.vars = []
@@ -1194,7 +1249,7 @@ class App(customtkinter.CTk):
         else:
             solution_std, fitness, self.scores, it = pso.pso(self.model, get_X(self.min_max_scaler), self.kn, 5.0, pop_size=30, iterations=200, w=0.6, c1=1, c2=2)
 
-        self.lense_frame.grid_forget()
+        #self.lense_frame.grid_forget()
         
         solution = self.scaler2.inverse_transform(solution_std)
         self.transformed_solution = solution.squeeze()
