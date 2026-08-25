@@ -471,32 +471,35 @@ class App(customtkinter.CTk):
         self.activVar = customtkinter.StringVar(value="relu")
         self.solverVar = customtkinter.StringVar(value="adam")
         
-        self.nnsubFrame1 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
-        self.nnsubFrame1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.nnsubFrame1 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_color=TURQUOISE_HELL, border_width=2)
+        self.nnsubFrame1.grid(row=0, column=0, padx=10, pady=10, sticky="ew", columnspan=2)
         
         self.aiLabel = customtkinter.CTkLabel(self.nnsubFrame1, text="Trainiere dein eigenes neuronales Netz​\nStelle ein, wie oft das Netz aus den Daten lernt (Iterationen) und wie viele Verarbeitungsschritte es\ndabei durchläuft (Schichten). Trainiere es dann und beobachte, wie gut die Qualitätsvorhersage ist.", fg_color="transparent", font=FONT_LARGE)
-        self.aiLabel.grid(row=0, column=0, padx=20, pady=10)
+        self.aiLabel.grid(row=0, column=0, padx=10, pady=10, columnspan=2)
         
-        self.nnsubFrame2 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
-        self.nnsubFrame2.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
+        self.nnsubFrameLeft = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
+        self.nnsubFrameLeft.grid(row=1, column=0, padx=20, pady=10, sticky="nw")
+        
+        self.nnsubFrame2 = customtkinter.CTkFrame(self.nnsubFrameLeft, width=200, height=200, fg_color=BACKGROUND_COLOR)
+        self.nnsubFrame2.grid(row=0, column=0, padx=20, pady=10, sticky="nsew")
 
         self.iterationsLabel = customtkinter.CTkLabel(self.nnsubFrame2, text="Iterationen: Wie oft das Netz lernt", fg_color="transparent", font=FONT_LARGE )
-        self.iterationsLabel.grid(row=0, column=0, padx=20, pady=10)
+        self.iterationsLabel.grid(row=0, column=0, padx=10, pady=10, sticky="w")
         def change_iterationsSlider_val(value):
             self.iterationsSliderVar = int(value)
             self.iterationsLabel2.configure(text=f"{(self.iterationsSlider.get()):.0f}")
         self.iterationsSliderVar = tk.IntVar(value=250)
         self.iterationsLabel2 = customtkinter.CTkLabel(self.nnsubFrame2, text=f"{(self.iterationsSliderVar.get()):.0f}", fg_color="transparent", font=FONT_LARGE)
-        self.iterationsLabel2.grid(row=0, column=1, padx=20, pady=10)
+        self.iterationsLabel2.grid(row=0, column=1, padx=10, pady=10, sticky="w")
         self.iterationsSlider = customtkinter.CTkSlider(self.nnsubFrame2, from_=1, to=500, variable=self.iterationsSliderVar, command=change_iterationsSlider_val, number_of_steps=499)
         self.iterationsSlider.grid(row=1, column=0, padx=20)
         
         
         self.layerLabel = customtkinter.CTkLabel(self.nnsubFrame2, text="Gebe die Größe und Anzahl der Versteckten Schichten an", fg_color="transparent", font=FONT_LARGE)
-        self.layerLabel.grid(row=2, column=0, padx=20, pady=10)
+        self.layerLabel.grid(row=2, column=0, padx=10, pady=10, sticky="w")
         self.layersVar = customtkinter.StringVar(value="64 32 16")
         self.layersOption = customtkinter.CTkOptionMenu(self.nnsubFrame2, values=["64 32 16", "5 5", "32 32 32", "256 128 64 32 16"],variable=self.layersVar, corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
-        self.layersOption.grid(row=2, column=1, padx=20)
+        self.layersOption.grid(row=2, column=1, padx=10, pady=10, sticky="w")
         self.layersOption.set("64 32 16")
         
         def nn_button_pressed():
@@ -517,10 +520,10 @@ class App(customtkinter.CTk):
             list_built_nns(self.iterationsSliderVar, layers, perc)
         
         self.createNNButton = customtkinter.CTkButton(self.nnsubFrame2, text="Erstelle Neuronales Netz", command=nn_button_pressed)
-        self.createNNButton.grid(row=3, column=0, padx=20, columnspan=3)
+        self.createNNButton.grid(row=3, column=0, padx=20, columnspan=3, sticky="nsew")
         
-        self.nnsubFrame3 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
-        self.nnsubFrame3.grid(row=2, column=0, padx=20, pady=20, sticky="nsew")
+        self.nnsubFrame3 = customtkinter.CTkFrame(self.nnsubFrameLeft, width=200, height=200, fg_color=BACKGROUND_COLOR)
+        self.nnsubFrame3.grid(row=1, column=0, padx=10, pady=10, sticky="nw")
         
         self.percLabel = customtkinter.CTkLabel(self.nnsubFrame3, text="Trefferquote (Qualitätsvorhersage):", fg_color="transparent", font=FONT_LARGE)
         self.percLabel.grid(row=0, column=0, padx=20, pady=10, sticky="w")
@@ -544,27 +547,29 @@ class App(customtkinter.CTk):
         self.nnsubFrame4 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR) # Für nn_advice_label
         self.nnsubFrame4.grid(row=2, column=1, padx=20, pady=20, sticky="nsew")
         
-        self.nnsubFrame5 = customtkinter.CTkScrollableFrame (self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
-        self.nnsubFrame5.grid(row=3, column=0, padx=20, pady=20, sticky="nsew")
+        self.nnsubFrame5 = customtkinter.CTkFrame(self.nnsubFrameLeft, width=200, height=200, fg_color=BACKGROUND_COLOR)
+        self.nnsubFrame5.grid(row=2, column=0, padx=20, pady=10, sticky="nw")
+        
+        #self.nnsubFrame5.grid_columnconfigure(0, weight=1)
+        #self.nnsubFrame5.grid_columnconfigure(1, weight=1)
+        #self.nnsubFrame5.grid_columnconfigure(2, weight=1)
+        
         self.built_nns = 0
         self.built_nns_iterations = []
         self.built_nns_layers = []
         self.built_nns_percentages = []
-        self.built_nns_caption = customtkinter.CTkLabel(self.nnsubFrame5, text="Bisherige Versuche", fg_color="transparent", font=FONT_MEDIUM )
-        self.built_nns_caption.grid(row=0, column=0, padx=20, pady=10)
-        self.built_nns_subcaption1 = customtkinter.CTkLabel(self.nnsubFrame5, text="Iterationen", fg_color="transparent", font=FONT_MEDIUM )
-        self.built_nns_subcaption1.grid(row=1, column=0, padx=20, pady=10)
-        self.built_nns_subcaption2 = customtkinter.CTkLabel(self.nnsubFrame5, text="Schichten", fg_color="transparent", font=FONT_MEDIUM )
-        self.built_nns_subcaption2.grid(row=1, column=1, padx=20, pady=10)
-        self.built_nns_subcaption3 = customtkinter.CTkLabel(self.nnsubFrame5, text="Trefferquote", fg_color="transparent", font=FONT_MEDIUM )
-        self.built_nns_subcaption3.grid(row=1, column=2, padx=20, pady=10)
+        self.built_nns_caption = customtkinter.CTkLabel(self.nnsubFrame5, text="Bisherige Versuche", fg_color="transparent", font=FONT_LARGE )
+        self.built_nns_caption.grid(row=0, column=0, padx=20, pady=10, sticky="w")
+        self.nnsubsubFrame1 = customtkinter.CTkFrame(self.nnsubFrame5, width=200, height=200, fg_color=BACKGROUND_COLOR)
+        self.nnsubsubFrame1.grid(row=1, column=0, padx=20, pady=0, sticky="nw")
+        self.built_nns_subcaption1 = customtkinter.CTkLabel(self.nnsubsubFrame1, text="Iterationen", fg_color="transparent", font=FONT_MEDIUM )
+        self.built_nns_subcaption1.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+        self.built_nns_subcaption2 = customtkinter.CTkLabel(self.nnsubsubFrame1, text="Schichten", fg_color="transparent", font=FONT_MEDIUM )
+        self.built_nns_subcaption2.grid(row=0, column=1, padx=10, pady=5, sticky="w")
+        self.built_nns_subcaption3 = customtkinter.CTkLabel(self.nnsubsubFrame1, text="Trefferquote", fg_color="transparent", font=FONT_MEDIUM )
+        self.built_nns_subcaption3.grid(row=0, column=2, padx=10, pady=5, sticky="w")
         
-        # Wirksam Logo
-        self.wirksam_frame3 = customtkinter.CTkFrame(self.nnFrame,border_width=2,border_color=BACKGROUND_COLOR, fg_color=BACKGROUND_COLOR)
-        self.wirksam_frame3.grid(row=3, column=1, padx=10, pady=(10, 0), sticky="n")
-        #self.wirksam_logo3 = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
-        self.wirksam_logo_image_label3 = customtkinter.CTkLabel(self.wirksam_frame3, text="", image=self.wirksam_logo)
-        self.wirksam_logo_image_label3.grid(row=0, column=0, rowspan=6, padx=20, pady=10, sticky="se")
+        
         
         def clear_built_nns():
             for i in range (0, self.built_nns):
@@ -595,33 +600,43 @@ class App(customtkinter.CTk):
                 self.percLabel2.configure(text="Gut")
                 self.nn_advice_label.configure(text="Platzhalter")
             
-            self.nn_advice_label.grid(row=0, column=0, padx=10, pady=10, rowspan=3, sticky="nsew")
+            self.nn_advice_label.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")#, rowspan=3
             
             self.nnsubFrame4.grid_rowconfigure(0, weight=1)
             self.nnsubFrame4.grid_rowconfigure(1, weight=1)
             self.nnsubFrame4.grid_rowconfigure(2, weight=1)
             self.nnsubFrame4.grid_columnconfigure(0, weight=1)
         
+        self.nnsubSubFrame = customtkinter.CTkScrollableFrame (self.nnsubFrame5, width=400, height=200, fg_color=BACKGROUND_COLOR)
+        self.nnsubSubFrame.grid(row=2, column=0, padx=0, pady=0, sticky="nw", columnspan=3)
+        
         def list_built_nns(iterations, layers, percentage):
             i = self.built_nns
-            built_nn_iteration = customtkinter.CTkLabel(self.nnsubFrame5, text=iterations, fg_color="transparent", font=FONT_MEDIUM )
-            built_nn_iteration.grid(row=i+2, column=0, padx=20, pady=10)
+            built_nn_iteration = customtkinter.CTkLabel(self.nnsubSubFrame, text=iterations, fg_color="transparent", font=FONT_MEDIUM )
+            built_nn_iteration.grid(row=i+2, column=0, padx=30, pady=10, sticky="w")
             self.built_nns_iterations.append(built_nn_iteration)
-            built_nn_layer = customtkinter.CTkLabel(self.nnsubFrame5, text=layers, fg_color="transparent", font=FONT_MEDIUM)
-            built_nn_layer.grid(row=i+2, column=1, padx=20, pady=10)
+            built_nn_layer = customtkinter.CTkLabel(self.nnsubSubFrame, text=layers, fg_color="transparent", font=FONT_MEDIUM)
+            built_nn_layer.grid(row=i+2, column=1, padx=30, pady=10, sticky="w")
             self.built_nns_layers.append(built_nn_layer)
-            built_nn_percentage = customtkinter.CTkLabel(self.nnsubFrame5, text=percentage, fg_color="transparent", font=FONT_MEDIUM)
-            built_nn_percentage.grid(row=i+2, column=2, padx=20, pady=10)
+            built_nn_percentage = customtkinter.CTkLabel(self.nnsubSubFrame, text=percentage, fg_color="transparent", font=FONT_MEDIUM)
+            built_nn_percentage.grid(row=i+2, column=2, padx=30, pady=10, sticky="w")
             self.built_nns_percentages.append(built_nn_percentage)
             
             self.built_nns = self.built_nns + 1
             
         self.nnsubFrame6 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
-        self.nnsubFrame6.grid(row=0, column=1, padx=20, pady=20, sticky="nsew", rowspan=2)
+        self.nnsubFrame6.grid(row=1, column=1, padx=20, pady=20, sticky="nsew", rowspan=2)
         
         self.NN_graphic = customtkinter.CTkImage(light_image=Image.open('graphics/neural_net_gfx/neuronales_netz.png'), dark_image=Image.open('graphics/neural_net_gfx/neuronales_netz.png'), size=(224, 400))
         self.NN_graphic_label = customtkinter.CTkLabel(self.nnsubFrame6, text="", image=self.NN_graphic)
         self.NN_graphic_label.grid(row=0, column=0, rowspan=2, padx=20, pady=10)
+        
+        # Wirksam Logo
+        self.wirksam_frame3 = customtkinter.CTkFrame(self.nnsubFrame6,border_width=2,border_color=BACKGROUND_COLOR, fg_color=BACKGROUND_COLOR)
+        self.wirksam_frame3.grid(row=3, column=0, padx=10, pady=(10, 0), sticky="n")
+        #self.wirksam_logo3 = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
+        self.wirksam_logo_image_label3 = customtkinter.CTkLabel(self.wirksam_frame3, text="", image=self.wirksam_logo)
+        self.wirksam_logo_image_label3.grid(row=0, column=0, rowspan=6, padx=20, pady=10, sticky="se")
     
         #self.takeNNButton = customtkinter.CTkButton(self.nnsubFrame6, text="Übernehme erstelltes Neuronales Netz", command=take_nn_button_pressed, state="disabled")
         #self.takeNNButton.grid(row=2, column=0, padx=20)
