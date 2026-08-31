@@ -61,7 +61,7 @@ class App(customtkinter.CTk):
         self.scores = []
         self.kn = create_kn_classifier(6, self.min_max_scaler)
         
-        self.wirksam_logo = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
+        self.wirksam_logo = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(160, 87))
         
         def update_label1(value):
             self.amount1label.configure(text=(f"{value:.1f}", CELSIUS))
@@ -627,16 +627,19 @@ class App(customtkinter.CTk):
         self.nnsubFrame6 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.nnsubFrame6.grid(row=1, column=1, padx=20, pady=20, sticky="nsew", rowspan=2)
         
-        self.NN_graphic = customtkinter.CTkImage(light_image=Image.open('graphics/neural_net_gfx/neuronales_netz.png'), dark_image=Image.open('graphics/neural_net_gfx/neuronales_netz.png'), size=(224, 400))
+        self.NN_graphic = customtkinter.CTkImage(light_image=Image.open('graphics/neural_net_gfx/neuronales_netz.png'), dark_image=Image.open('graphics/neural_net_gfx/neuronales_netz.png'), size=(324, 550))
         self.NN_graphic_label = customtkinter.CTkLabel(self.nnsubFrame6, text="", image=self.NN_graphic)
         self.NN_graphic_label.grid(row=0, column=0, rowspan=2, padx=20, pady=10)
+
+        self.nnsubFrame7 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
+        self.nnsubFrame7.grid(row=0, column=2, padx=20, pady=20, sticky="se", rowspan=3)
         
         # Wirksam Logo
-        self.wirksam_frame3 = customtkinter.CTkFrame(self.nnsubFrame6,border_width=2,border_color=BACKGROUND_COLOR, fg_color=BACKGROUND_COLOR)
-        self.wirksam_frame3.grid(row=3, column=0, padx=10, pady=(10, 0), sticky="n")
+        self.wirksam_frame3 = customtkinter.CTkFrame(self.nnsubFrame7,border_width=2,border_color=BACKGROUND_COLOR, fg_color=BACKGROUND_COLOR)
+        self.wirksam_frame3.grid(row=3, column=0, padx=10, pady=(10, 0), sticky="se")
         #self.wirksam_logo3 = customtkinter.CTkImage(light_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), dark_image=Image.open('graphics/logos/WIRKsam-Logo-Wortmarke-RGB_farbe.jpg'), size=(320, 174))
-        self.wirksam_logo_image_label3 = customtkinter.CTkLabel(self.wirksam_frame3, text="", image=self.wirksam_logo)
-        self.wirksam_logo_image_label3.grid(row=0, column=0, rowspan=6, padx=20, pady=10, sticky="se")
+        self.wirksam_logo_image_label3 = customtkinter.CTkLabel(self.nnsubFrame7, text="", image=self.wirksam_logo)
+        self.wirksam_logo_image_label3.grid(row=0, column=0, padx=20, pady=10, sticky="se")
     
         #self.takeNNButton = customtkinter.CTkButton(self.nnsubFrame6, text="Übernehme erstelltes Neuronales Netz", command=take_nn_button_pressed, state="disabled")
         #self.takeNNButton.grid(row=2, column=0, padx=20)
@@ -1125,20 +1128,40 @@ class App(customtkinter.CTk):
         self.wirksam_logo_image_label1.grid(row=0, column=0, rowspan=6, padx=20, pady=10, sticky="e")
         
         # Funktionsweise verstehen
-        
+        width = self.winfo_screenwidth()-150
+        height = self.winfo_screenheight()-250
         self.presentationList = [] # Hier jeder Eintrag Pfad zu Bild in chronologischer Reihenfolge
+        self.presentationList.append(customtkinter.CTkImage(light_image=Image.open('graphics/slides/Folie1.PNG'), dark_image=Image.open('graphics/slides/Folie1.PNG'), size=(width, height)))
+        self.presentationList.append(customtkinter.CTkImage(light_image=Image.open('graphics/slides/Folie2.PNG'), dark_image=Image.open('graphics/slides/Folie2.PNG'), size=(width, height)))
+        self.presentationList.append(customtkinter.CTkImage(light_image=Image.open('graphics/slides/Folie3.PNG'), dark_image=Image.open('graphics/slides/Folie3.PNG'), size=(width, height)))
+        self.presentationList.append(customtkinter.CTkImage(light_image=Image.open('graphics/slides/Folie4.PNG'), dark_image=Image.open('graphics/slides/Folie4.PNG'), size=(width, height)))
         
-        self.FunkVFrame = customtkinter.CTkFrame(self.tab6,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR, width=self.winfo_screenwidth()-100, height=self.winfo_screenheight()-200)
+        self.FunkVFrame = customtkinter.CTkFrame(self.tab6,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR, width=width, height=height)
         self.FunkVFrame.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nswe")
         
         self.FunkVFrame1 = customtkinter.CTkFrame(self.FunkVFrame,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
         self.FunkVFrame1.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nswe")
+        self.slideCounter = 0
+        self.slideMax = 3
+        self.slide_label = customtkinter.CTkLabel(self.FunkVFrame1, text="", image=self.presentationList[0])
+        self.slide_label.grid(row=0, column=0, padx=20, pady=10, sticky="nsew")
+        
         self.FunkVFrame2 = customtkinter.CTkFrame(self.FunkVFrame,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
         self.FunkVFrame2.grid(row=1, column=0, padx=10, pady=(10, 0), sticky="nswe")
         
-        self.FunkVReturnBtn = customtkinter.CTkButton(self.FunkVFrame2, text="Zurück", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+        def prevSlide():
+            if(self.slideCounter > 0):
+                self.slideCounter = self.slideCounter - 1
+                self.slide_label.configure(image=self.presentationList[self.slideCounter])
+        
+        def nextSlide():
+            if(self.slideCounter < self.slideMax):
+                self.slideCounter = self.slideCounter + 1
+                self.slide_label.configure(image=self.presentationList[self.slideCounter])
+        
+        self.FunkVReturnBtn = customtkinter.CTkButton(self.FunkVFrame2, text="Zurück", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", command=prevSlide, state="active")
         self.FunkVReturnBtn.grid(row=0, column=0, padx=20, pady=10, sticky="nswe")
-        self.FunkVContinueBtn = customtkinter.CTkButton(self.FunkVFrame2, text="Weiter", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+        self.FunkVContinueBtn = customtkinter.CTkButton(self.FunkVFrame2, text="Weiter", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", command=nextSlide, state="active")
         self.FunkVContinueBtn.grid(row=0, column=1, padx=20, pady=10, sticky="nswe")
         
         
