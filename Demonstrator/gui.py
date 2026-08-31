@@ -104,7 +104,7 @@ class App(customtkinter.CTk):
             self.slider_change()
             
         # Tabs    
-        self.tabview = customtkinter.CTkTabview(self, fg_color=BACKGROUND_COLOR, border_color=BLACK, text_color=BLACK)#, corner_radius=0, , width=self.winfo_screenwidth()
+        self.tabview = customtkinter.CTkTabview(self, fg_color=BACKGROUND_COLOR, border_color=BLACK, text_color=BLACK, segmented_button_selected_color=TURQUOISE, segmented_button_selected_hover_color=TURQUOISE_HELL)#, corner_radius=0, , width=self.winfo_screenwidth()
         self.tabview.pack(padx=0, pady=0)
 
         self.tab1 = self.tabview.add("1. KI live testen")
@@ -129,7 +129,7 @@ class App(customtkinter.CTk):
             self.eAeFrame.forget()
             self.prodLaufFrame = customtkinter.CTkFrame(self.tab2, width=200, height=200, fg_color=BACKGROUND_COLOR)
             self.prodLaufFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-            self.returneAe_button = customtkinter.CTkButton(self.prodLaufFrame, text="Zurück zur Auswahl", command=zurueckAuswahl1, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+            self.returneAe_button = customtkinter.CTkButton(self.prodLaufFrame, text="Zurück zur Auswahl", command=zurueckAuswahl1, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
             self.returneAe_button.grid(row=0, column=0, padx=20, sticky="nw")
             self.vermFrame = customtkinter.CTkFrame(self.prodLaufFrame, fg_color=BACKGROUND_COLOR, corner_radius=8)
             self.vermFrame.grid(row=1, column=0, padx=20, pady=20, sticky="ew")
@@ -165,46 +165,46 @@ class App(customtkinter.CTk):
             self.denkFrameCapFrame.grid(row=3, column=0, padx=10, pady=(10, 0), sticky="nsw")
             
             def do_denkFrameButton1():
-                self.denkFrameButton1.configure(fg_color="#c5d8ed")
-                self.denkFrameButton2.configure(fg_color="#dce8f5")
-                self.denkFrameButton3.configure(fg_color="#dce8f5")
-                self.denkFrameButton4.configure(fg_color="#dce8f5")
+                self.denkFrameButton1.configure(fg_color=TURQUOISE)
+                self.denkFrameButton2.configure(fg_color=TURQUOISE_HELL)
+                self.denkFrameButton3.configure(fg_color=TURQUOISE_HELL)
+                self.denkFrameButton4.configure(fg_color=TURQUOISE_HELL)
                 self.denkFrameCap_button_var = customtkinter.StringVar(value="250 Läufe")
             
             def do_denkFrameButton2():
-                self.denkFrameButton2.configure(fg_color="#c5d8ed")
-                self.denkFrameButton1.configure(fg_color="#dce8f5")
-                self.denkFrameButton3.configure(fg_color="#dce8f5")
-                self.denkFrameButton4.configure(fg_color="#dce8f5")
+                self.denkFrameButton2.configure(fg_color=TURQUOISE)
+                self.denkFrameButton1.configure(fg_color=TURQUOISE_HELL)
+                self.denkFrameButton3.configure(fg_color=TURQUOISE_HELL)
+                self.denkFrameButton4.configure(fg_color=TURQUOISE_HELL)
                 self.denkFrameCap_button_var = customtkinter.StringVar(value="500 Läufe")
                 
             def do_denkFrameButton3():
-                self.denkFrameButton3.configure(fg_color="#c5d8ed")
-                self.denkFrameButton1.configure(fg_color="#dce8f5")
-                self.denkFrameButton2.configure(fg_color="#dce8f5")
-                self.denkFrameButton4.configure(fg_color="#dce8f5")
+                self.denkFrameButton3.configure(fg_color=TURQUOISE)
+                self.denkFrameButton1.configure(fg_color=TURQUOISE_HELL)
+                self.denkFrameButton2.configure(fg_color=TURQUOISE_HELL)
+                self.denkFrameButton4.configure(fg_color=TURQUOISE_HELL)
                 self.denkFrameCap_button_var = customtkinter.StringVar(value="1000 Läufe")
                 
             def do_denkFrameButton4():
-                self.denkFrameButton4.configure(fg_color="#c5d8ed")
-                self.denkFrameButton1.configure(fg_color="#dce8f5")
-                self.denkFrameButton2.configure(fg_color="#dce8f5")
-                self.denkFrameButton3.configure(fg_color="#dce8f5")
+                self.denkFrameButton4.configure(fg_color=TURQUOISE)
+                self.denkFrameButton1.configure(fg_color=TURQUOISE_HELL)
+                self.denkFrameButton2.configure(fg_color=TURQUOISE_HELL)
+                self.denkFrameButton3.configure(fg_color=TURQUOISE_HELL)
                 self.denkFrameCap_button_var = customtkinter.StringVar(value="1451 Läufe")
             
-            self.denkFrameButton1 = customtkinter.CTkButton(self.denkFrameCapFrame, text="250\nLäufe", command=do_denkFrameButton1,corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+            self.denkFrameButton1 = customtkinter.CTkButton(self.denkFrameCapFrame, text="250\nLäufe", command=do_denkFrameButton1,corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
             self.denkFrameButton1.grid(row=0, column=0, padx=20, pady=10)
-            self.denkFrameButton2 = customtkinter.CTkButton(self.denkFrameCapFrame, text="500\nLäufe", command=do_denkFrameButton2, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+            self.denkFrameButton2 = customtkinter.CTkButton(self.denkFrameCapFrame, text="500\nLäufe", command=do_denkFrameButton2, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
             self.denkFrameButton2.grid(row=0, column=1, padx=20, pady=10)
-            self.denkFrameButton3 = customtkinter.CTkButton(self.denkFrameCapFrame, text="1000\nLäufe", command=do_denkFrameButton3, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+            self.denkFrameButton3 = customtkinter.CTkButton(self.denkFrameCapFrame, text="1000\nLäufe", command=do_denkFrameButton3, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
             self.denkFrameButton3.grid(row=0, column=2, padx=20, pady=10)
-            self.denkFrameButton4 = customtkinter.CTkButton(self.denkFrameCapFrame, text="1451\nLäufe", command=do_denkFrameButton4, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+            self.denkFrameButton4 = customtkinter.CTkButton(self.denkFrameCapFrame, text="1451\nLäufe", command=do_denkFrameButton4, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
             self.denkFrameButton4.grid(row=0, column=3, padx=20, pady=10)
             
-            self.denkFrameButton1.configure(fg_color="#c5d8ed")
-            self.denkFrameButton2.configure(fg_color="#dce8f5")
-            self.denkFrameButton3.configure(fg_color="#dce8f5")
-            self.denkFrameButton4.configure(fg_color="#dce8f5")
+            self.denkFrameButton1.configure(fg_color=TURQUOISE)
+            self.denkFrameButton2.configure(fg_color=TURQUOISE_HELL)
+            self.denkFrameButton3.configure(fg_color=TURQUOISE_HELL)
+            self.denkFrameButton4.configure(fg_color=TURQUOISE_HELL)
             self.denkFrameCap_button_var = customtkinter.StringVar(value="250 Läufe")
             
             self.denkFrameCap4 = customtkinter.CTkLabel(self.denkFrame, text="Wie gut wird die KI mit dieser Datenmenge sein?", fg_color="transparent", font=FONT_LARGE)
@@ -212,35 +212,35 @@ class App(customtkinter.CTk):
             self.denkFrameCapFrame2 = customtkinter.CTkFrame(self.denkFrame, border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
             self.denkFrameCapFrame2.grid(row=5, column=0, padx=10, pady=(10, 0), sticky="nsw")
             def do_denkFrameButton5():
-                self.denkFrameButton5.configure(fg_color="#c5d8ed")
-                self.denkFrameButton6.configure(fg_color="#dce8f5")
-                self.denkFrameButton7.configure(fg_color="#dce8f5")
+                self.denkFrameButton5.configure(fg_color=TURQUOISE)
+                self.denkFrameButton6.configure(fg_color=TURQUOISE_HELL)
+                self.denkFrameButton7.configure(fg_color=TURQUOISE_HELL)
                 self.denkFrameCap_button_var2 = customtkinter.StringVar(value="Eher schlecht")
             
             def do_denkFrameButton6():
-                self.denkFrameButton6.configure(fg_color="#c5d8ed")
-                self.denkFrameButton5.configure(fg_color="#dce8f5")
-                self.denkFrameButton7.configure(fg_color="#dce8f5")
+                self.denkFrameButton6.configure(fg_color=TURQUOISE)
+                self.denkFrameButton5.configure(fg_color=TURQUOISE_HELL)
+                self.denkFrameButton7.configure(fg_color=TURQUOISE_HELL)
                 self.denkFrameCap_button_var2 = customtkinter.StringVar(value="Mittel")
                 
             def do_denkFrameButton7():
-                self.denkFrameButton7.configure(fg_color="#c5d8ed")
-                self.denkFrameButton5.configure(fg_color="#dce8f5")
-                self.denkFrameButton6.configure(fg_color="#dce8f5")
+                self.denkFrameButton7.configure(fg_color=TURQUOISE)
+                self.denkFrameButton5.configure(fg_color=TURQUOISE_HELL)
+                self.denkFrameButton6.configure(fg_color=TURQUOISE_HELL)
                 self.denkFrameCap_button_var2 = customtkinter.StringVar(value="Gut")
             
-            self.denkFrameButton5 = customtkinter.CTkButton(self.denkFrameCapFrame2, text="Eher schlecht​\n(unter 60% richtig\n vorhergesagt)", command=do_denkFrameButton5,corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+            self.denkFrameButton5 = customtkinter.CTkButton(self.denkFrameCapFrame2, text="Eher schlecht​\n(unter 60% richtig\n vorhergesagt)", command=do_denkFrameButton5,corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
             self.denkFrameButton5.grid(row=0, column=0, padx=20, pady=10)
-            self.denkFrameButton6 = customtkinter.CTkButton(self.denkFrameCapFrame2, text="Mittel\n(60-80%) richtig\n vorhergesagt)", command=do_denkFrameButton6, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+            self.denkFrameButton6 = customtkinter.CTkButton(self.denkFrameCapFrame2, text="Mittel\n(60-80%) richtig\n vorhergesagt)", command=do_denkFrameButton6, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
             self.denkFrameButton6.grid(row=0, column=1, padx=20, pady=10)
-            self.denkFrameButton7 = customtkinter.CTkButton(self.denkFrameCapFrame2, text="Gut\n(über 80% richtig\n vorhergesagt​", command=do_denkFrameButton7, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+            self.denkFrameButton7 = customtkinter.CTkButton(self.denkFrameCapFrame2, text="Gut\n(über 80% richtig\n vorhergesagt​", command=do_denkFrameButton7, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
             self.denkFrameButton7.grid(row=0, column=2, padx=20, pady=10)
             
-            self.denkFrameButton5.configure(fg_color="#c5d8ed")
-            self.denkFrameButton6.configure(fg_color="#dce8f5")
-            self.denkFrameButton7.configure(fg_color="#dce8f5")
+            self.denkFrameButton5.configure(fg_color=TURQUOISE)
+            self.denkFrameButton6.configure(fg_color=TURQUOISE_HELL)
+            self.denkFrameButton7.configure(fg_color=TURQUOISE_HELL)
             self.denkFrameCap_button_var2 = customtkinter.StringVar(value="Eher schlecht")
-            self.denkFrameExit = customtkinter.CTkButton(self.denkFrame, text="Ergebnis anzeigen", command=create_ergebnis_ansehen_frame, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_LARGE)
+            self.denkFrameExit = customtkinter.CTkButton(self.denkFrame, text="Ergebnis anzeigen", command=create_ergebnis_ansehen_frame, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", font=FONT_LARGE, text_color_disabled="#585858")
             self.denkFrameExit.grid(row=5, column=3, padx=20, pady=10)
         
         def create_ergebnis_ansehen_frame():
@@ -329,7 +329,7 @@ class App(customtkinter.CTk):
             self.ergebnisAnsehenLabel4.grid(row=3, column=4, padx=20, pady=10, sticky="w")
             self.ergebnisAnsehenLabel5.grid(row=4, column=0, columnspan=4, padx=20, pady=10, sticky="w")
             
-            self.ergebnisAnsehenFrameExit = customtkinter.CTkButton(self.ergebnisAnsehenFrame, text="Was bedeutet das?", command=create_erklaerung_frame, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_LARGE)
+            self.ergebnisAnsehenFrameExit = customtkinter.CTkButton(self.ergebnisAnsehenFrame, text="Was bedeutet das?", command=create_erklaerung_frame, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", font=FONT_LARGE, text_color_disabled="#585858")
             self.ergebnisAnsehenFrameExit.grid(row=6, column=3, padx=20, pady=10)
         
         def create_erklaerung_frame():
@@ -379,9 +379,9 @@ class App(customtkinter.CTk):
             self.erklaerungLabel3 = customtkinter.CTkLabel(self.erklaerungFrame, text=("Damit eine KI gute Vorhersagen machen kann, ist sowohl die Menge der Daten als auch die \nsogenannte Qualität der Daten ausschlaggebend. Gute Daten sind vollständig. Das heißt alle \nWerte (z.B. Einstellwerte der Maschine und Qualitätsprüfung) sind vorhanden.\n\nDu hast gesehen: Mehr Daten helfen, aber irgendwann werden die Verbesserungen kleiner.\nDie zusätzlichen 451 Produktionsläufe erhöhen die Vorhersagequalität nur noch wenig. Für eine bessere KI\n reicht es deshalb nicht immer aus, einfach mehr Daten zu sammeln. \n\nWelche weiteren Stellschrauben gibt es?\nWechsle zu „4. KI trainieren“ und entdecke neue Möglichkeiten zur Optimierung.​​"), fg_color="transparent", justify="left")
             self.erklaerungLabel3.grid(row=6, column=0, columnspan=4, padx=20, pady=10, sticky="w")
             
-            self.erklaerungReturnButton = customtkinter.CTkButton(self.erklaerungFrame, text="Andere Datenmenge testen", command=andereDatenmengen, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_LARGE)
+            self.erklaerungReturnButton = customtkinter.CTkButton(self.erklaerungFrame, text="Andere Datenmenge testen", command=andereDatenmengen, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", font=FONT_LARGE, text_color_disabled="#585858")
             self.erklaerungReturnButton.grid(row=7, column=0, padx=20, pady=10)
-            self.erklaerungReturnButton2 = customtkinter.CTkButton(self.erklaerungFrame, text="Zum Algorithmenvergleich", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_LARGE)
+            self.erklaerungReturnButton2 = customtkinter.CTkButton(self.erklaerungFrame, text="Zum Algorithmenvergleich", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", font=FONT_LARGE, text_color_disabled="#585858")
             self.erklaerungReturnButton2.grid(row=7, column=2, padx=20, pady=10)
             
         def andereDatenmengen():
@@ -401,7 +401,7 @@ class App(customtkinter.CTk):
             self.eAeFrame.forget()
             self.scoresFrame = customtkinter.CTkFrame(self.tab2, width=200, height=200, fg_color=BACKGROUND_COLOR)
             self.scoresFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-            self.returnScores_button = customtkinter.CTkButton(self.scoresFrame, text="Zurück", command=zurueckAuswahl2, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+            self.returnScores_button = customtkinter.CTkButton(self.scoresFrame, text="Zurück", command=zurueckAuswahl2, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
             self.returnScores_button.grid(row=0, column=0, padx=20, sticky="nw")
             self.scoresSubFrame = customtkinter.CTkFrame(self.scoresFrame, fg_color=BACKGROUND_COLOR, corner_radius=8)
             self.scoresSubFrame.grid(row=1, column=0, padx=20, pady=20, sticky="esw")
@@ -418,9 +418,9 @@ class App(customtkinter.CTk):
                 self.stop_button.configure(state="active")
                 self.continue_button.configure(state="disabled")
             
-            self.stop_button = customtkinter.CTkButton(self.scoresSubFrame, text="Pausieren", command=stopGif, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", state="active")
+            self.stop_button = customtkinter.CTkButton(self.scoresSubFrame, text="Pausieren", command=stopGif, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", state="active", text_color_disabled="#585858")
             self.stop_button.grid(row=1, column=0, padx=20, sticky="we")
-            self.continue_button = customtkinter.CTkButton(self.scoresSubFrame, text="Fortsetzen", command=continueGif, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", state="disabled")
+            self.continue_button = customtkinter.CTkButton(self.scoresSubFrame, text="Fortsetzen", command=continueGif, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", state="disabled", text_color_disabled="#585858")
             self.continue_button.grid(row=1, column=2, padx=20, sticky="we")
             
         
@@ -436,7 +436,7 @@ class App(customtkinter.CTk):
         self.eAeFrame1_headline_Label.grid(row=0, column=0, padx=20, pady=10)
         self.eAeFrame1_text_Label = customtkinter.CTkLabel(self.eAeFrame1, text="Was passiert, wenn das KI-Modell weniger Produktionsläufe zum Lernen hat?\nWie viele Daten braucht die KI, um zuverlässig zu sein?​​​", fg_color="transparent")
         self.eAeFrame1_text_Label.grid(row=1, column=0, padx=20, pady=10)
-        self.eAeFrame1_button = customtkinter.CTkButton(self.eAeFrame1, text="Jetzt verstehen", command=createProdLaufFrame)
+        self.eAeFrame1_button = customtkinter.CTkButton(self.eAeFrame1, text="Jetzt verstehen", command=createProdLaufFrame, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
         self.eAeFrame1_button.grid(row=2, column=0, padx=20)
         self.eAeFrame2 = customtkinter.CTkFrame(self.eAeFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.eAeFrame2.grid(row=2, column=2, padx=20, pady=20, sticky="nsew")
@@ -444,7 +444,7 @@ class App(customtkinter.CTk):
         self.eAeFrame2_headline_Label.grid(row=0, column=0, padx=20, pady=10)
         self.eAeFrame2_text_Label = customtkinter.CTkLabel(self.eAeFrame2, text="Wie findet die KI die besten Einstellparameter? Schau dem\nmathemtatischen Modell live zu, wie es aus vielen\nmöglichen Einstellungen die beste herausfindet.​​", fg_color="transparent")
         self.eAeFrame2_text_Label.grid(row=1, column=0, padx=20, pady=10)
-        self.eAeFrame2_button = customtkinter.CTkButton(self.eAeFrame2, text="Jetzt anschauen", command=showBestQuality)
+        self.eAeFrame2_button = customtkinter.CTkButton(self.eAeFrame2, text="Jetzt anschauen", command=showBestQuality, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
         self.eAeFrame2_button.grid(row=2, column=0, padx=20)
         
         # Wirksam Logo
@@ -504,7 +504,7 @@ class App(customtkinter.CTk):
         self.layerLabel = customtkinter.CTkLabel(self.nnsubFrame2, text="Versteckte Schichten: Wie viele Verarbeitungsschritte die KI nutzt", fg_color="transparent", font=FONT_LARGE)
         self.layerLabel.grid(row=2, column=0, padx=10, pady=10, sticky="w")
         self.layersVar = customtkinter.StringVar(value="64 32 16")
-        self.layersOption = customtkinter.CTkOptionMenu(self.nnsubFrame2, values=["64 32 16", "5 5", "32 32 32", "256 128 64 32 16"],variable=self.layersVar, corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
+        self.layersOption = customtkinter.CTkOptionMenu(self.nnsubFrame2, values=["64 32 16", "5 5", "32 32 32", "256 128 64 32 16"],variable=self.layersVar, corner_radius=12,fg_color=TURQUOISE_HELL,text_color="#1a1a1a")
         self.layersOption.grid(row=2, column=1, padx=10, pady=10, sticky="w")
         self.layersOption.set("64 32 16")
         
@@ -525,7 +525,7 @@ class App(customtkinter.CTk):
             self.timeValue.configure(text=total_time)
             list_built_nns(self.iterationsSliderVar, layers, perc)
         
-        self.createNNButton = customtkinter.CTkButton(self.nnsubFrame2, text="Erstelle das KI-Modell (Training)", command=nn_button_pressed)
+        self.createNNButton = customtkinter.CTkButton(self.nnsubFrame2, text="Erstelle das KI-Modell (Training)", command=nn_button_pressed, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
         self.createNNButton.grid(row=3, column=0, padx=20, columnspan=3, sticky="nsew")
         
         self.nnsubFrame3 = customtkinter.CTkFrame(self.nnsubFrameLeft, width=200, height=200, fg_color=BACKGROUND_COLOR)
@@ -588,14 +588,14 @@ class App(customtkinter.CTk):
             
             self.built_nns = 0
         
-        self.built_nns_redo = customtkinter.CTkButton(self.nnsubFrame5, text="Neu anfangen", command=clear_built_nns)
+        self.built_nns_redo = customtkinter.CTkButton(self.nnsubFrame5, text="Neu anfangen", command=clear_built_nns, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
         self.built_nns_redo.grid(row=0, column=2, padx=20)
             
         def take_nn_button_pressed():
             self.model = self.new_model
             
         def judge_perc(perc):
-            self.nn_advice_label = customtkinter.CTkLabel(self.nnsubFrame4, text="", corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
+            self.nn_advice_label = customtkinter.CTkLabel(self.nnsubFrame4, text="", corner_radius=12,fg_color=TURQUOISE_HELL,text_color="#1a1a1a")
             if(perc < 50):
                 self.percLabel2.configure(text="Schlecht")
                 self.nn_advice_label.configure(text="Platzhalter")
@@ -712,9 +712,9 @@ class App(customtkinter.CTk):
             self.KiHAnswersCorrect = [] # 0 Falsch, 1 Richtig
             
             def set_question1():
-                self.KiHQuestionBtn1.configure(fg_color="#c5d8ed")
-                self.KiHQuestionBtn2.configure(fg_color="#dce8f5")
-                self.KiHQuestionBtn3.configure(fg_color="#dce8f5")
+                self.KiHQuestionBtn1.configure(fg_color=TURQUOISE)
+                self.KiHQuestionBtn2.configure(fg_color=TURQUOISE_HELL)
+                self.KiHQuestionBtn3.configure(fg_color=TURQUOISE_HELL)
                 self.KiHSubmission = 1
                 if(self.KiHQuestionNr == 1 & len(self.KiHAnswersCorrect) > 0):
                     self.KiHSubmitBtn.configure(state="disabled")
@@ -726,9 +726,9 @@ class App(customtkinter.CTk):
                     self.KiHSubmitBtn.configure(state="active")
             
             def set_question2():
-                self.KiHQuestionBtn2.configure(fg_color="#c5d8ed")
-                self.KiHQuestionBtn1.configure(fg_color="#dce8f5")
-                self.KiHQuestionBtn3.configure(fg_color="#dce8f5")
+                self.KiHQuestionBtn2.configure(fg_color=TURQUOISE)
+                self.KiHQuestionBtn1.configure(fg_color=TURQUOISE_HELL)
+                self.KiHQuestionBtn3.configure(fg_color=TURQUOISE_HELL)
                 self.KiHSubmission = 2
                 if(self.KiHQuestionNr == 1 & len(self.KiHAnswersCorrect) > 0):
                     self.KiHSubmitBtn.configure(state="disabled")
@@ -740,9 +740,9 @@ class App(customtkinter.CTk):
                     self.KiHSubmitBtn.configure(state="active")
                 
             def set_question3():
-                self.KiHQuestionBtn3.configure(fg_color="#c5d8ed")
-                self.KiHQuestionBtn1.configure(fg_color="#dce8f5")
-                self.KiHQuestionBtn2.configure(fg_color="#dce8f5")
+                self.KiHQuestionBtn3.configure(fg_color=TURQUOISE)
+                self.KiHQuestionBtn1.configure(fg_color=TURQUOISE_HELL)
+                self.KiHQuestionBtn2.configure(fg_color=TURQUOISE_HELL)
                 self.KiHSubmission = 3
                 if(self.KiHQuestionNr == 1 & len(self.KiHAnswersCorrect) > 0):
                     self.KiHSubmitBtn.configure(state="disabled")
@@ -753,14 +753,14 @@ class App(customtkinter.CTk):
                 else:
                     self.KiHSubmitBtn.configure(state="active")
         
-            self.KiHQuestionBtn1 = customtkinter.CTkButton(self.KiHFrame3, text="Ja, das  KI-Modell funktioniert auch für neue Produkte", command=set_question1, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
+            self.KiHQuestionBtn1 = customtkinter.CTkButton(self.KiHFrame3, text="Ja, das KI-Modell funktioniert auch für neue Produkte", command=set_question1, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", font=FONT_MEDIUM, text_color_disabled="#585858")
             self.KiHQuestionBtn1.grid(row=0, column=0, padx=10, pady=10, sticky="nwes")
-            self.KiHQuestionBtn2 = customtkinter.CTkButton(self.KiHFrame3, text="Nein, für neue Produkte werden neue Trainingsdaten benötigt", command=set_question2, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
+            self.KiHQuestionBtn2 = customtkinter.CTkButton(self.KiHFrame3, text="Nein, für neue Produkte werden neue Trainingsdaten benötigt", command=set_question2, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", font=FONT_MEDIUM, text_color_disabled="#585858")
             self.KiHQuestionBtn2.grid(row=1, column=0, padx=10, pady=10, sticky="nwes")
-            self.KiHQuestionBtn3 = customtkinter.CTkButton(self.KiHFrame3, text="Das KI-Modell passt sich automatisch an", command=set_question3, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_MEDIUM)
+            self.KiHQuestionBtn3 = customtkinter.CTkButton(self.KiHFrame3, text="Das KI-Modell passt sich automatisch an", command=set_question3, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", font=FONT_MEDIUM, text_color_disabled="#585858")
             self.KiHQuestionBtn3.grid(row=2, column=0, padx=10, pady=10, sticky="nwes")
             
-            self.KiHFeedbackLabel = customtkinter.CTkLabel(self.KiHFrame3, text="Platzhalter", font=FONT_MEDIUM, corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
+            self.KiHFeedbackLabel = customtkinter.CTkLabel(self.KiHFrame3, text="Platzhalter", font=FONT_MEDIUM, corner_radius=12,fg_color=TURQUOISE_HELL,text_color="#1a1a1a")
             self.KiHFeedbackLabel.grid(row=3, column=0, sticky="w", padx=10, pady=20)
             self.KiHErklärungLabel = customtkinter.CTkLabel(self.KiHFrame3, text="Platzhalter", font=FONT_MEDIUM,text_color="#1a1a1a")
             self.KiHErklärungLabel.grid(row=4, column=0, sticky="w", padx=10, pady=20)
@@ -844,9 +844,9 @@ class App(customtkinter.CTk):
                 self.KiHContinueBtn.configure(state="disabled")
                 self.KiHFeedbackLabel.grid_forget()
                 self.KiHErklärungLabel.grid_forget()
-                self.KiHQuestionBtn1.configure(fg_color="#dce8f5")
-                self.KiHQuestionBtn2.configure(fg_color="#dce8f5")
-                self.KiHQuestionBtn3.configure(fg_color="#dce8f5")
+                self.KiHQuestionBtn1.configure(fg_color=TURQUOISE_HELL)
+                self.KiHQuestionBtn2.configure(fg_color=TURQUOISE_HELL)
+                self.KiHQuestionBtn3.configure(fg_color=TURQUOISE_HELL)
                 self.KiHSubmission = 0
                 if(self.KiHQuestionNr == 3):
                     self.KiHFrame2.grid_forget()
@@ -895,7 +895,7 @@ class App(customtkinter.CTk):
                     self.KiHKernaussagenSubtitle3Label = customtkinter.CTkLabel(self.KiHFrame6, text="✓ Was nicht gemessen wird, kann die KI nicht lernen. Menschliche Erfahrung bleibt unersetzlich.", font=FONT_MEDIUM)
                     self.KiHKernaussagenSubtitle3Label.grid(row=3, column=0, sticky="w", padx=20, pady=10)
                     
-                    self.KiHReturnBtn = customtkinter.CTkButton(self.KiHFrame, text="Beginne das Quiz erneut", command=KiHReset, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+                    self.KiHReturnBtn = customtkinter.CTkButton(self.KiHFrame, text="Beginne das Quiz erneut", command=KiHReset, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
                     self.KiHReturnBtn.grid(row=3, column=0, padx=10, pady=10, sticky="we")
                     
                     
@@ -920,16 +920,16 @@ class App(customtkinter.CTk):
             self.KiHFrame4 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
             self.KiHFrame4.grid(row=3, column=0, padx=10, pady=10, sticky="nsew")
             
-            self.KiHSubmitBtn = customtkinter.CTkButton(self.KiHFrame4, text="Einreichen", command=submit_answer, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", state="disabled")
+            self.KiHSubmitBtn = customtkinter.CTkButton(self.KiHFrame4, text="Einreichen", command=submit_answer, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", state="disabled", text_color_disabled="#585858")
             self.KiHSubmitBtn.grid(row=3, column=1, padx=10, pady=10, sticky="ns")
-            self.KiHContinueBtn = customtkinter.CTkButton(self.KiHFrame4, text="Weiter", command=next_question, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", state="disabled")
+            self.KiHContinueBtn = customtkinter.CTkButton(self.KiHFrame4, text="Weiter", command=next_question, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", state="disabled", text_color_disabled="#585858")
             self.KiHContinueBtn.grid(row=4, column=1, padx=10, pady=10, sticky="ns")
         
         self.KiH_headline_Label = customtkinter.CTkLabel(self.KiHFrame, text="KI hinterfragen​", fg_color="transparent", font=FONT_EXTRALARGE)
         self.KiH_headline_Label.grid(row=0, column=0, padx=20, pady=10)
         self.KiH_text_Label = customtkinter.CTkLabel(self.KiHFrame, text="Du hast die KI trainiert und getestet – aber weißt du auch, wo ihre Grenzen liegen? Es folgen drei kurze Fragen aus der Produktionspraxis.​​", fg_color="transparent")
         self.KiH_text_Label.grid(row=1, column=0, padx=20, pady=10)
-        self.KiH_spawn_question_button = customtkinter.CTkButton(self.KiHFrame, text="Jetzt starten →", command=createKIHinterfragen, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+        self.KiH_spawn_question_button = customtkinter.CTkButton(self.KiHFrame, text="Jetzt starten →", command=createKIHinterfragen, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
         self.KiH_spawn_question_button.grid(row=2, column=0, padx=20)
         
         
@@ -1087,15 +1087,15 @@ class App(customtkinter.CTk):
         self.production_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
         self.production_frame.grid(row=0, column=1, padx=10, pady=(10, 0), sticky="nsw")
         self.production_frame.grid_rowconfigure((0), weight=1)
-        self.producing_button = customtkinter.CTkButton(self.production_frame, text="1.\nProduktion starten", command=self.set_kn_vals, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+        self.producing_button = customtkinter.CTkButton(self.production_frame, text="1.\nProduktion starten", command=self.set_kn_vals, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
         self.producing_button.grid(row=0, column=1, padx=10, pady=10, sticky="ns")
-        self.produce_button = customtkinter.CTkButton(self.production_frame, text="2.\nQualität bestimmen", command=self.produce_func, state="disabled", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+        self.produce_button = customtkinter.CTkButton(self.production_frame, text="2.\nQualität bestimmen", command=self.produce_func, state="disabled", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
         self.produce_button.grid(row=0, column=2, padx=10, pady=10, sticky="ns")
         self.algoOptionVar = customtkinter.StringVar(value="Genetischer Algorithmus")
-        #self.algoOption = customtkinter.CTkOptionMenu(self.production_frame, values=["Partikelschwarmoptimierung", "Genetischer Algorithmus", "Simulierte Abkühlung"],variable=self.algoOptionVar, corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
+        #self.algoOption = customtkinter.CTkOptionMenu(self.production_frame, values=["Partikelschwarmoptimierung", "Genetischer Algorithmus", "Simulierte Abkühlung"],variable=self.algoOptionVar, corner_radius=12,fg_color=TURQUOISE_HELL,text_color="#1a1a1a")
         #self.algoOption.set("Partikelschwarmoptimierung")
         #self.algoOption.grid(row=0, column=3, padx=10, pady=10, sticky="ns")
-        self.ai_button = customtkinter.CTkButton(self.production_frame, text="3.\nEinstellempfehlung generieren", command=self.use_algo, state="disabled", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+        self.ai_button = customtkinter.CTkButton(self.production_frame, text="3.\nEinstellempfehlung generieren", command=self.use_algo, state="disabled", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
         self.ai_button.grid(row=0, column=3, padx=10, pady=10, sticky="ns")
         ai_tooltip_string = ("{Die Parameter werden mit ", self.algoOptionVar.get(), " generiert. Dieser stochastische Optimierungsalgorithmus produziert nicht-deterministische Ergebnisse.}")
         self.ai_tooltip = CTkToolTip(self.ai_button, message=ai_tooltip_string)
@@ -1165,9 +1165,9 @@ class App(customtkinter.CTk):
                 self.slideCounter = self.slideCounter + 1
                 self.slide_label.configure(image=self.presentationList[self.slideCounter])
         
-        self.FunkVReturnBtn = customtkinter.CTkButton(self.FunkVFrame2, text="Zurück", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", command=prevSlide, state="active")
+        self.FunkVReturnBtn = customtkinter.CTkButton(self.FunkVFrame2, text="Zurück", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", command=prevSlide, state="active",text_color_disabled="#585858")
         self.FunkVReturnBtn.grid(row=0, column=0, padx=20, pady=10, sticky="nswe")
-        self.FunkVContinueBtn = customtkinter.CTkButton(self.FunkVFrame2, text="Weiter", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", command=nextSlide, state="active")
+        self.FunkVContinueBtn = customtkinter.CTkButton(self.FunkVFrame2, text="Weiter", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", command=nextSlide, state="active", text_color_disabled="#585858")
         self.FunkVContinueBtn.grid(row=0, column=1, padx=20, pady=10, sticky="nswe")
         
         
@@ -1305,9 +1305,9 @@ class App(customtkinter.CTk):
             optParameterLabel = customtkinter.CTkLabel(self.einstellParam_frame, text=f"{value:.1f}", fg_color="transparent", font=FONT_SMALL_LIGHT)
             optParameterLabel.grid(row=i + 2, column=3, padx=10, pady=5, sticky="w")
             self.optParameterLabels.append(optParameterLabel)
-        self.useOptimizedButton = customtkinter.CTkButton(self.einstellParam_frame, text="4.\nEmpfehlung übernehmen", command=self.useOptimizedFunc, corner_radius=12,border_width=1,border_color="#a0b4c8",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+        self.useOptimizedButton = customtkinter.CTkButton(self.einstellParam_frame, text="4.\nEmpfehlung übernehmen", command=self.useOptimizedFunc, corner_radius=12,border_width=1,border_color="#a0b4c8",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
         self.useOptimizedButton.grid(row=8, column=3, padx=10, pady=5)
-        self.removeOptimizedButton = customtkinter.CTkButton(self.einstellParam_frame, text="Empfehlung zurücksetzen", command=self.removeOptimized, corner_radius=12,border_width=1,border_color="#a0b4c8",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+        self.removeOptimizedButton = customtkinter.CTkButton(self.einstellParam_frame, text="Empfehlung zurücksetzen", command=self.removeOptimized, corner_radius=12,border_width=1,border_color="#a0b4c8",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
         self.removeOptimizedButton.grid(row=9, column=3, padx=10, pady=5)
         
     def removeOptimized(self):
