@@ -107,13 +107,13 @@ class App(customtkinter.CTk):
         self.tabview = customtkinter.CTkTabview(self, fg_color=BACKGROUND_COLOR, border_color=BLACK, text_color=BLACK)#, corner_radius=0, , width=self.winfo_screenwidth()
         self.tabview.pack(padx=0, pady=0)
 
-        self.tab1 = self.tabview.add("1. KI Live testen")
+        self.tab1 = self.tabview.add("1. KI live testen")
         self.tab5 = self.tabview.add("2. KI hinterfragen")
-        self.tab2 = self.tabview.add("3. Einstellungen ändern")
+        self.tab2 = self.tabview.add("3. Einflussfaktoren untersuchen")
         self.tab3 = self.tabview.add("4. KI selbst trainieren")
         #self.tab4 =self.tabview.add("4. Optimierungsalgorithmus")
         self.tab6 =self.tabview.add("5. Funktionsweise verstehen")
-        self.tabview.set("1. KI Live testen")
+        self.tabview.set("1. KI live testen")
         self.tab1.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR, border_width=10)
         self.tab2.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR, border_width=10)
         self.tab3.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR, border_width=10)
@@ -157,7 +157,7 @@ class App(customtkinter.CTk):
             self.denkFrame.grid(row=2, column=0, padx=10, pady=(10, 0), sticky="nsw")
             self.denkFrameCap1 = customtkinter.CTkLabel(self.denkFrame, text="Was denkst du – wie viele Produktionsläufe braucht die KI?​", fg_color="transparent", font=FONT_LARGE)
             self.denkFrameCap1.grid(row=0, column=0, padx=20, pady=10, sticky="w")
-            self.denkFrameCap2 = customtkinter.CTkLabel(self.denkFrame, text="Die KI lernt aus vergangenen Produktionsläufen und den zugehörigen Qualitätsprüfungen. Doch wie viele Daten braucht sie,\n um zuverlässige Vorhersagen treffen zu können? Wähle eine Datenmenge und schätze anschließend ein,\n wie gut die KI damit sein wird. Teste danach, ob deine Einschätzung stimmt.​​", fg_color="transparent")
+            self.denkFrameCap2 = customtkinter.CTkLabel(self.denkFrame, text="Die KI lernt aus vergangenen Produktionsläufen und den zugehörigen Qualitätsprüfungen. Doch wie viele Daten braucht sie,\n um zuverlässige Vorhersagen treffen zu können? Wähle eine Datenmenge und schätze anschließend ein,\n wie gut die KI damit sein wird.​​", fg_color="transparent")
             self.denkFrameCap2.grid(row=1, column=0, padx=20, pady=10, sticky="w")
             self.denkFrameCap3 = customtkinter.CTkLabel(self.denkFrame, text="Wähle eine Datenmenge:", fg_color="transparent", font=FONT_LARGE)
             self.denkFrameCap3.grid(row=2, column=0, columnspan=4, padx=20, pady=10, sticky="w")
@@ -249,9 +249,9 @@ class App(customtkinter.CTk):
             self.kreis2.configure(fg_color="#1f6aa5", text_color="white")
             self.ergebnisAnsehenFrame = customtkinter.CTkFrame(self.prodLaufFrame, border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
             self.ergebnisAnsehenFrame.grid(row=2, column=0, padx=10, pady=(10, 0), sticky="nsw")
-            self.ergebnisAnsehenLabel1 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=(f"Ergebnis: KI trainiert mit {(self.denkFrameCap_button_var.get())} Läufen"), fg_color="transparent", font=FONT_LARGE)
+            self.ergebnisAnsehenLabel1 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=(f"Ergebnis: KI trainiert mit {(self.denkFrameCap_button_var.get())}"), fg_color="transparent", font=FONT_LARGE)
             self.ergebnisAnsehenLabel1.grid(row=0, column=0, columnspan=4, padx=20, pady=10, sticky="w")
-            self.ergebnisAnsehenLabel2 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("Getestet an 300 Produktionsläufen, die das KI-Modell beim Training nicht gesehen hat"), fg_color="transparent")
+            self.ergebnisAnsehenLabel2 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("Die KI wurde mit 300 neuen Produktionsläufen getestet, die das KI-Modell noch nicht kennt.\nDie Werte zeigen, wie zuverlässig die einzelnen Qualitätsklassen erkannt werden.\nDie Gesamttrefferquote gibt an, wie viele Vorhersagen insgesamt korrekt waren."), fg_color="transparent", justify="left")
             self.ergebnisAnsehenLabel2.grid(row=1, column=0, columnspan=4, padx=20, pady=10, sticky="w")
             
             seg1 = customtkinter.CTkFrame(self.ergebnisAnsehenFrame, fg_color=RED, corner_radius=4, width=100, height=50)
@@ -294,7 +294,7 @@ class App(customtkinter.CTk):
                 self.progressbar.configure(progress_color=RED)
                 self.progressbar.set(0.41)
                 self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("41%"), fg_color="transparent", font=FONT_LARGE)
-                self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("Placeholder text"), fg_color="transparent")
+                self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("250 Produktionsläufe liefern erst wenige Lernbeispiele für die KI. Dadurch kommt es noch häufig zu Verwechslungen und falschen Vorhersagen"), fg_color="transparent")
                 self.segLabel1.configure(text="Ausschuss:\n25,9%")
                 self.segLabel2.configure(text="Akzeptabel:\n40,9%")
                 self.segLabel3.configure(text="Sollbereich:\n60,8%")
@@ -303,7 +303,7 @@ class App(customtkinter.CTk):
                 self.progressbar.configure(progress_color=YELLOW)
                 self.progressbar.set(0.79)
                 self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("79%"), fg_color="transparent", font=FONT_LARGE)
-                self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("500 Läufe reichen für erste brauchbare Vorhersagen. Aber es gibt trotzdem noch Verwechslungen und falsche Vorhersagen.​"), fg_color="transparent")
+                self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("500 Produktionsläufe reichen für gute Vorhersagen. Aber es gibt trotzdem noch Verwechslungen und falsche Vorhersagen.​"), fg_color="transparent")
                 self.segLabel1.configure(text="Ausschuss:\n61,9%")
                 self.segLabel2.configure(text="Akzeptabel:\n82,2%")
                 self.segLabel3.configure(text="Sollbereich:\n80,4%")
@@ -312,16 +312,16 @@ class App(customtkinter.CTk):
                 self.progressbar.configure(progress_color=YELLOW)
                 self.progressbar.set(0.83)
                 self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("83%"), fg_color="transparent", font=FONT_LARGE)
-                self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("Placeholder text"), fg_color="transparent")
+                self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("1000 Produktionsläufe liefern genügend Beispiele, damit die KI die meisten Muster zuverlässiger erkennt. Falsche Vorhersagen treten nur noch gelegentlich auf."), fg_color="transparent")
                 self.segLabel1.configure(text="Ausschuss:\n68,9%")
                 self.segLabel2.configure(text="Akzeptabel:\n84,6%")
                 self.segLabel3.configure(text="Sollbereich:\n85,6%")
                 self.segLabel4.configure(text="Ineffizient:\n88,5%")
-            if(self.denkFrameCap_button_var.get() == "1451 Läufe"):
+            if(self.denkFrameCap_button_var.get() == "1451 Produktionsläufen"):
                 self.progressbar.configure(progress_color=GREEN)
                 self.progressbar.set(0.84)
                 self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("84%"), fg_color="transparent", font=FONT_LARGE)
-                self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("Placeholder text"), fg_color="transparent")
+                self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("1400 Produktionsläufe bringen nur noch eine geringe Verbesserung. Die KI erkennt die Muster bereits sehr zuverlässig, zusätzliche Daten erhöhen die Trefferquote kaum noch."), fg_color="transparent")
                 self.segLabel1.configure(text="Ausschuss:\n73,0%")
                 self.segLabel2.configure(text="Akzeptabel:\n84,5%")
                 self.segLabel3.configure(text="Sollbereich:\n87,2%")
@@ -341,7 +341,7 @@ class App(customtkinter.CTk):
             self.erklaerungFrame.grid(row=2, column=0, padx=10, pady=(10, 0), sticky="nsw")
             self.erklaerungLabel1 = customtkinter.CTkLabel(self.erklaerungFrame, text=("Ergebnis: So verändert die Datenmenge die Qualität der KI"), fg_color="transparent", font=FONT_LARGE)
             self.erklaerungLabel1.grid(row=0, column=0, columnspan=4, padx=20, pady=10, sticky="w")
-            self.erklaerungLabel2 = customtkinter.CTkLabel(self.erklaerungFrame, text=("Je mehr Produktionsläufe und Qualitätstests die KI gesehen hat, desto zuverlässiger die Vorhersage.​"), fg_color="transparent")
+            self.erklaerungLabel2 = customtkinter.CTkLabel(self.erklaerungFrame, text=("Grundsätzlich gilt: Je mehr Produktionsläufe und Qualitätstests die KI gesehen hat, desto zuverlässiger die Vorhersage.​"), fg_color="transparent")
             self.erklaerungLabel2.grid(row=1, column=0, columnspan=4, padx=20, pady=10, sticky="w")
             
             self.erklaerungBarLabel1 = customtkinter.CTkLabel(self.erklaerungFrame, text=("250 Läufe​"), fg_color="transparent", font=FONT_LARGE)
@@ -376,7 +376,7 @@ class App(customtkinter.CTk):
             self.erklaerungBarLabel44 = customtkinter.CTkLabel(self.erklaerungFrame, text=("84%"), fg_color="transparent", font=FONT_LARGE)
             self.erklaerungBarLabel44.grid(row=5, column=3, padx=20, pady=10, sticky="w")
             
-            self.erklaerungLabel3 = customtkinter.CTkLabel(self.erklaerungFrame, text=("Damit eine KI gute Vorhersagen machen kann, ist sowohl die Menge der Daten als auch die \nsogenannte Qualität der Daten ausschlaggebend. Gute Daten sind vollständig. Das heißt alle \nWerte (z.B. Einstellparameter und Qualitätsprüfung) sind vorhanden.\n\nDu hast gesehen: Mehr Daten helfen, aber irgendwann werden die Verbesserungen kleiner.\nDie zusätzlichen 451 Produktionsläufe erhöhen die Vorhersagequalität nur noch wenig. Für eine bessere KI\n reicht es deshalb nicht immer aus, einfach mehr Daten zu sammeln.Welche weiteren Stellschrauben gibt es?\nWechsle zu „3. KI trainieren“ und entdecke neue Möglichkeiten zur Optimierung.​​"), fg_color="transparent")
+            self.erklaerungLabel3 = customtkinter.CTkLabel(self.erklaerungFrame, text=("Damit eine KI gute Vorhersagen machen kann, ist sowohl die Menge der Daten als auch die \nsogenannte Qualität der Daten ausschlaggebend. Gute Daten sind vollständig. Das heißt alle \nWerte (z.B. Einstellwerte der Maschine und Qualitätsprüfung) sind vorhanden.\n\nDu hast gesehen: Mehr Daten helfen, aber irgendwann werden die Verbesserungen kleiner.\nDie zusätzlichen 451 Produktionsläufe erhöhen die Vorhersagequalität nur noch wenig. Für eine bessere KI\n reicht es deshalb nicht immer aus, einfach mehr Daten zu sammeln. \n\nWelche weiteren Stellschrauben gibt es?\nWechsle zu „4. KI trainieren“ und entdecke neue Möglichkeiten zur Optimierung.​​"), fg_color="transparent", justify="left")
             self.erklaerungLabel3.grid(row=6, column=0, columnspan=4, padx=20, pady=10, sticky="w")
             
             self.erklaerungReturnButton = customtkinter.CTkButton(self.erklaerungFrame, text="Andere Datenmenge testen", command=andereDatenmengen, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", font=FONT_LARGE)
@@ -428,7 +428,7 @@ class App(customtkinter.CTk):
         self.eAeFrame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
         self.eAe_headline_Label = customtkinter.CTkLabel(self.eAeFrame, text="Was möchtest du untersuchen?​", fg_color="transparent", font=FONT_EXTRALARGE)
         self.eAe_headline_Label.grid(row=0, column=1, padx=20, pady=10)
-        self.eAe_text_Label = customtkinter.CTkLabel(self.eAeFrame, text="Die KI besteht aus zwei Teilen: Einem KI-Modell, das die Qualität vorhersagt\nund einem Modell, das die besten Einstellparameter findet.\nHier kannst du beide gezielt verstehen und beobachten, was passiert.​​", fg_color="transparent")
+        self.eAe_text_Label = customtkinter.CTkLabel(self.eAeFrame, text="Die KI besteht aus zwei Teilen: Einem KI-Modell, das die Qualität der Linsen vorhersagt\nund einem mathematischen Modell, das die besten Einstellparameter\nfür die Spritzgussmaschine findet (Optimierungsalgorithmus).\nHier kannst du beide Modelle gezielt untersuchen.​​", fg_color="transparent")
         self.eAe_text_Label.grid(row=1, column=1, padx=20, pady=10)
         self.eAeFrame1 = customtkinter.CTkFrame(self.eAeFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.eAeFrame1.grid(row=2, column=0, padx=20, pady=20, sticky="nsew")
@@ -436,15 +436,15 @@ class App(customtkinter.CTk):
         self.eAeFrame1_headline_Label.grid(row=0, column=0, padx=20, pady=10)
         self.eAeFrame1_text_Label = customtkinter.CTkLabel(self.eAeFrame1, text="Was passiert, wenn das KI-Modell weniger Produktionsläufe zum Lernen hat?\nWie viele Daten braucht die KI, um zuverlässig zu sein?​​​", fg_color="transparent")
         self.eAeFrame1_text_Label.grid(row=1, column=0, padx=20, pady=10)
-        self.eAeFrame1_button = customtkinter.CTkButton(self.eAeFrame1, text="Zum Vergleich", command=createProdLaufFrame)
+        self.eAeFrame1_button = customtkinter.CTkButton(self.eAeFrame1, text="Jetzt verstehen", command=createProdLaufFrame)
         self.eAeFrame1_button.grid(row=2, column=0, padx=20)
         self.eAeFrame2 = customtkinter.CTkFrame(self.eAeFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.eAeFrame2.grid(row=2, column=2, padx=20, pady=20, sticky="nsew")
-        self.eAeFrame2_headline_Label = customtkinter.CTkLabel(self.eAeFrame2, text="Optimierungsalgorithmus wechseln​", fg_color="transparent", font=FONT_EXTRALARGE)
+        self.eAeFrame2_headline_Label = customtkinter.CTkLabel(self.eAeFrame2, text="Optimierungsalgorithmus entdecken​", fg_color="transparent", font=FONT_EXTRALARGE)
         self.eAeFrame2_headline_Label.grid(row=0, column=0, padx=20, pady=10)
-        self.eAeFrame2_text_Label = customtkinter.CTkLabel(self.eAeFrame2, text="Wie findet die KI die besten Einstellparameter? Schau dem\nAlgorithmus live zu – Schritt für Schritt, wie er aus vielen\nmöglichen Einstellungen die beste herausfindet.​​", fg_color="transparent")
+        self.eAeFrame2_text_Label = customtkinter.CTkLabel(self.eAeFrame2, text="Wie findet die KI die besten Einstellparameter? Schau dem\nmathemtatischen Modell live zu, wie es aus vielen\nmöglichen Einstellungen die beste herausfindet.​​", fg_color="transparent")
         self.eAeFrame2_text_Label.grid(row=1, column=0, padx=20, pady=10)
-        self.eAeFrame2_button = customtkinter.CTkButton(self.eAeFrame2, text="Zum Vergleich", command=showBestQuality)
+        self.eAeFrame2_button = customtkinter.CTkButton(self.eAeFrame2, text="Jetzt anschauen", command=showBestQuality)
         self.eAeFrame2_button.grid(row=2, column=0, padx=20)
         
         # Wirksam Logo
@@ -473,9 +473,15 @@ class App(customtkinter.CTk):
         
         self.nnsubFrame1 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_color=TURQUOISE_HELL, border_width=2)
         self.nnsubFrame1.grid(row=0, column=0, padx=10, pady=10, sticky="ew", columnspan=2)
+
+        self.aiLabelTitle = customtkinter.CTkLabel(self.nnsubFrame1, text="Trainiere dein eigenes KI-Modell", fg_color="transparent", font=FONT_LARGE)
+        self.aiLabelTitle.grid(row=0, column=0, padx=10, pady=(10, 2), columnspan=2, sticky="w")
+
+        self.aiLabel = customtkinter.CTkLabel(self.nnsubFrame1, text="Stelle ein, wie oft das KI-Modell aus vergangenen Produktionsläufen lernt (Iterationen) und wie viele Verarbeitungsschritte es\ndabei durchläuft (Schichten). Trainiere es dann und beobachte, wie gut die Qualitätsvorhersage ist.", fg_color="transparent", justify="left")
+        self.aiLabel.grid(row=1, column=0, padx=10, pady=(2, 10), columnspan=2, sticky="w")
         
-        self.aiLabel = customtkinter.CTkLabel(self.nnsubFrame1, text="Trainiere dein eigenes neuronales Netz​\nStelle ein, wie oft das Netz aus den Daten lernt (Iterationen) und wie viele Verarbeitungsschritte es\ndabei durchläuft (Schichten). Trainiere es dann und beobachte, wie gut die Qualitätsvorhersage ist.", fg_color="transparent", font=FONT_LARGE)
-        self.aiLabel.grid(row=0, column=0, padx=10, pady=10, columnspan=2)
+        #self.aiLabel = customtkinter.CTkLabel(self.nnsubFrame1, text="Trainiere dein eigenes KI-Modell​\nStelle ein, wie oft das KI-Modell aus vergangenen Produktionsläufen lernt (Iterationen) und wie viele Verarbeitungsschritte es\ndabei durchläuft (Schichten). Trainiere es dann und beobachte, wie gut die Qualitätsvorhersage ist.", fg_color="transparent", font=FONT_LARGE)
+        #self.aiLabel.grid(row=0, column=0, padx=10, pady=10, columnspan=2)
         
         self.nnsubFrameLeft = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.nnsubFrameLeft.grid(row=1, column=0, padx=20, pady=10, sticky="nw")
@@ -495,7 +501,7 @@ class App(customtkinter.CTk):
         self.iterationsSlider.grid(row=1, column=0, padx=20)
         
         
-        self.layerLabel = customtkinter.CTkLabel(self.nnsubFrame2, text="Gebe die Größe und Anzahl der Versteckten Schichten an", fg_color="transparent", font=FONT_LARGE)
+        self.layerLabel = customtkinter.CTkLabel(self.nnsubFrame2, text="Versteckte Schichten: Wie viele Verarbeitungsschritte die KI nutzt", fg_color="transparent", font=FONT_LARGE)
         self.layerLabel.grid(row=2, column=0, padx=10, pady=10, sticky="w")
         self.layersVar = customtkinter.StringVar(value="64 32 16")
         self.layersOption = customtkinter.CTkOptionMenu(self.nnsubFrame2, values=["64 32 16", "5 5", "32 32 32", "256 128 64 32 16"],variable=self.layersVar, corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
@@ -513,13 +519,13 @@ class App(customtkinter.CTk):
             #self.mseValue.configure(text=mse)
             judge_perc(perc)
             perc = f"{perc:.1f}%"
-            self.timeLabel2.configure(text="Simuliert")
+            self.timeLabel2.configure(text="")
             self.percValue.configure(text=perc)
             #self.takeNNButton.configure(state="normal")
             self.timeValue.configure(text=total_time)
             list_built_nns(self.iterationsSliderVar, layers, perc)
         
-        self.createNNButton = customtkinter.CTkButton(self.nnsubFrame2, text="Erstelle Neuronales Netz", command=nn_button_pressed)
+        self.createNNButton = customtkinter.CTkButton(self.nnsubFrame2, text="Erstelle das KI-Modell (Training)", command=nn_button_pressed)
         self.createNNButton.grid(row=3, column=0, padx=20, columnspan=3, sticky="nsew")
         
         self.nnsubFrame3 = customtkinter.CTkFrame(self.nnsubFrameLeft, width=200, height=200, fg_color=BACKGROUND_COLOR)
@@ -919,7 +925,7 @@ class App(customtkinter.CTk):
             self.KiHContinueBtn = customtkinter.CTkButton(self.KiHFrame4, text="Weiter", command=next_question, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a", state="disabled")
             self.KiHContinueBtn.grid(row=4, column=1, padx=10, pady=10, sticky="ns")
         
-        self.KiH_headline_Label = customtkinter.CTkLabel(self.KiHFrame, text="KI Hinterfragen​", fg_color="transparent", font=FONT_EXTRALARGE)
+        self.KiH_headline_Label = customtkinter.CTkLabel(self.KiHFrame, text="KI hinterfragen​", fg_color="transparent", font=FONT_EXTRALARGE)
         self.KiH_headline_Label.grid(row=0, column=0, padx=20, pady=10)
         self.KiH_text_Label = customtkinter.CTkLabel(self.KiHFrame, text="Du hast die KI trainiert und getestet – aber weißt du auch, wo ihre Grenzen liegen? Es folgen drei kurze Fragen aus der Produktionspraxis.​​", fg_color="transparent")
         self.KiH_text_Label.grid(row=1, column=0, padx=20, pady=10)
@@ -1083,7 +1089,7 @@ class App(customtkinter.CTk):
         self.production_frame.grid_rowconfigure((0), weight=1)
         self.producing_button = customtkinter.CTkButton(self.production_frame, text="1.\nProduktion starten", command=self.set_kn_vals, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
         self.producing_button.grid(row=0, column=1, padx=10, pady=10, sticky="ns")
-        self.produce_button = customtkinter.CTkButton(self.production_frame, text="2.\nQualität vorhersagen ", command=self.produce_func, state="disabled", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
+        self.produce_button = customtkinter.CTkButton(self.production_frame, text="2.\nQualität bestimmen", command=self.produce_func, state="disabled", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color="#dce8f5",hover_color="#c5d8ed",text_color="#1a1a1a")
         self.produce_button.grid(row=0, column=2, padx=10, pady=10, sticky="ns")
         self.algoOptionVar = customtkinter.StringVar(value="Genetischer Algorithmus")
         #self.algoOption = customtkinter.CTkOptionMenu(self.production_frame, values=["Partikelschwarmoptimierung", "Genetischer Algorithmus", "Simulierte Abkühlung"],variable=self.algoOptionVar, corner_radius=12,fg_color="#dce8f5",text_color="#1a1a1a")
@@ -1265,7 +1271,7 @@ class App(customtkinter.CTk):
         self.quality_category_label.configure(text=msg2)
         if(quality_cat == "Ausschuss"):
             self.border_frame.configure(fg_color=RED, border_width=2,border_color="black")
-            self.paramPopup_label.configure(text="Schade, diese Einstellung führt zu Ausschuss.\nProbiere eine andere Kombination aus und schau!​")
+            self.paramPopup_label.configure(text="Schade, diese Einstellung führt zu Ausschuss.\nProbiere eine andere Kombination aus!​")
         if(quality_cat == "Akzeptabel"):
             self.border_frame.configure(fg_color=YELLOW, border_width=2,border_color="black")
             self.paramPopup_label.configure(text="Knapp daneben! Die Linse ist verkäuflich, jedoch nur als B-Ware.\nKannst du die Qualität weiter verbessern?")
