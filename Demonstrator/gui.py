@@ -535,7 +535,7 @@ class App(customtkinter.CTk):
         self.layerLabel = customtkinter.CTkLabel(self.nnsubFrame2, text="Versteckte Schichten: Wie viele Verarbeitungsschritte die KI nutzt", fg_color="transparent", font=FONT_LARGE)
         self.layerLabel.grid(row=2, column=0, padx=10, pady=10, sticky="w")
         self.layersVar = customtkinter.StringVar(value="64 32 16")
-        self.layersOption = customtkinter.CTkOptionMenu(self.nnsubFrame2, values=["64 32 16", "5 5", "32 32 32", "256 128 64 32 16"],variable=self.layersVar, corner_radius=12,fg_color=TURQUOISE_HELL,text_color="#1a1a1a", command=change_nn_graphic)
+        self.layersOption = customtkinter.CTkOptionMenu(self.nnsubFrame2, values=["64 32 16", "5 5", "32 32 32", "256 128 64 32 16"],variable=self.layersVar, corner_radius=12,fg_color=TURQUOISE_HELL,text_color="#1a1a1a", command=change_nn_graphic, button_color=TURQUOISE)
         self.layersOption.grid(row=2, column=1, padx=10, pady=10, sticky="w")
         self.layersOption.set("64 32 16")
         
@@ -1159,6 +1159,10 @@ class App(customtkinter.CTk):
         self.presentationList.append(customtkinter.CTkImage(light_image=Image.open('graphics/slides/Folie2.PNG'), dark_image=Image.open('graphics/slides/Folie2.PNG'), size=(width, height)))
         self.presentationList.append(customtkinter.CTkImage(light_image=Image.open('graphics/slides/Folie3.PNG'), dark_image=Image.open('graphics/slides/Folie3.PNG'), size=(width, height)))
         self.presentationList.append(customtkinter.CTkImage(light_image=Image.open('graphics/slides/Folie4.PNG'), dark_image=Image.open('graphics/slides/Folie4.PNG'), size=(width, height)))
+        self.presentationList.append(customtkinter.CTkImage(light_image=Image.open('graphics/slides/Folie5.PNG'), dark_image=Image.open('graphics/slides/Folie5.PNG'), size=(width, height)))
+        self.presentationList.append(customtkinter.CTkImage(light_image=Image.open('graphics/slides/Folie6.PNG'), dark_image=Image.open('graphics/slides/Folie6.PNG'), size=(width, height)))
+        self.presentationList.append(customtkinter.CTkImage(light_image=Image.open('graphics/slides/Folie7.PNG'), dark_image=Image.open('graphics/slides/Folie7.PNG'), size=(width, height)))
+        self.presentationList.append(customtkinter.CTkImage(light_image=Image.open('graphics/slides/Folie8.PNG'), dark_image=Image.open('graphics/slides/Folie8.PNG'), size=(width, height)))
         
         self.FunkVFrame = customtkinter.CTkFrame(self.tab6,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR, width=width, height=height)
         self.FunkVFrame.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nswe")
@@ -1166,7 +1170,7 @@ class App(customtkinter.CTk):
         self.FunkVFrame1 = customtkinter.CTkFrame(self.FunkVFrame,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
         self.FunkVFrame1.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nswe")
         self.slideCounter = 0
-        self.slideMax = 3
+        self.slideMax = 7
         self.slide_label = customtkinter.CTkLabel(self.FunkVFrame1, text="", image=self.presentationList[0])
         self.slide_label.grid(row=0, column=0, padx=20, pady=10, sticky="nsew")
         
