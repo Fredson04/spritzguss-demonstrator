@@ -42,7 +42,7 @@ RED ="#C00000"
 YELLOW = "#FFC000"
 GREEN = "#8ED973"
 ORANGE = "#E97132"
-TURQUOISE_HELL = "#96c8c8"
+TURQUOISE_HELL = "#DDEEEF"
 TURQUOISE = "#5ab4b4"
 BLACK = "#2d2d00"
 GREY = "#7d7d7d"
@@ -136,7 +136,7 @@ class App(customtkinter.CTk):
             self.vermFrame = customtkinter.CTkFrame(self.prodLaufFrame, fg_color=BACKGROUND_COLOR, corner_radius=8)
             self.vermFrame.grid(row=1, column=1, padx=20, pady=20, sticky="ew")
             
-            self.kreis1 = customtkinter.CTkLabel(self.vermFrame, text=str(1), width=36, height=36, corner_radius=18, fg_color="#1f6aa5", text_color="white", font=FONT_SMALL)
+            self.kreis1 = customtkinter.CTkLabel(self.vermFrame, text=str(1), width=36, height=36, corner_radius=18, fg_color=TURQUOISE, text_color="white", font=FONT_SMALL)
             self.kreis1.grid(row=0, column=0, padx=(20, 8), pady=15)
             self.vermLabel1 = customtkinter.CTkLabel(self.vermFrame, text="Deine Vermutung", font=customtkinter.CTkFont(size=13), text_color="black")
             self.vermLabel1.grid(row=0, column=1, sticky="w")
@@ -248,7 +248,7 @@ class App(customtkinter.CTk):
         def create_ergebnis_ansehen_frame():
             self.denkFrame.destroy()
             self.kreis1.configure(fg_color="#d0d0d0", text_color="#333333")
-            self.kreis2.configure(fg_color="#1f6aa5", text_color="white")
+            self.kreis2.configure(fg_color=TURQUOISE, text_color="white")
             self.ergebnisAnsehenFrame = customtkinter.CTkFrame(self.prodLaufFrame, border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
             self.ergebnisAnsehenFrame.grid(row=2, column=1, padx=10, pady=(10, 0), sticky="nsw")
             self.ergebnisAnsehenLabel1 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=(f"Ergebnis: KI trainiert mit {(self.denkFrameCap_button_var.get())}"), fg_color="transparent", font=FONT_LARGE)
@@ -338,7 +338,7 @@ class App(customtkinter.CTk):
             self.ergebnisAnsehenFrame.destroy()
             #self.ergebnisAnsehenFrame.grid_forget() 
             self.kreis2.configure(fg_color="#d0d0d0", text_color="#333333")
-            self.kreis3.configure(fg_color="#1f6aa5", text_color="white")
+            self.kreis3.configure(fg_color=TURQUOISE, text_color="white")
             self.erklaerungFrame = customtkinter.CTkFrame(self.prodLaufFrame, border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
             self.erklaerungFrame.grid(row=2, column=1, padx=10, pady=(10, 0), sticky="nsw")
             self.erklaerungLabel1 = customtkinter.CTkLabel(self.erklaerungFrame, text=("Ergebnis: So verändert die Datenmenge die Qualität der KI"), fg_color="transparent", font=FONT_LARGE)
@@ -424,11 +424,11 @@ class App(customtkinter.CTk):
             def continueGif():
                 self.gif.start()
                 self.stop_button.configure(state="active")
-                self.continue_button.configure(state="disabled")
+                self.continue_button.configure(state="disabled", text="Fortsetzen")
             
             self.stop_button = customtkinter.CTkButton(self.scoresSubFrame2, text="Pausieren", command=stopGif, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", state="disabled", text_color_disabled="#585858")
             self.stop_button.grid(row=1, column=0, padx=20, sticky="we")
-            self.continue_button = customtkinter.CTkButton(self.scoresSubFrame2, text="Fortsetzen", command=continueGif, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", state="active", text_color_disabled="#585858")
+            self.continue_button = customtkinter.CTkButton(self.scoresSubFrame2, text="Starten", command=continueGif, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", state="active", text_color_disabled="#585858")
             self.continue_button.grid(row=1, column=2, padx=20, sticky="we")
             
         
@@ -481,6 +481,29 @@ class App(customtkinter.CTk):
         
         self.nnsubFrame1 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR, border_width=2)
         self.nnsubFrame1.grid(row=0, column=0, padx=10, pady=10, sticky="ew", columnspan=2)
+        
+        self.nnsubFrame6 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_color=TURQUOISE, border_width=2)
+        self.nnsubFrame6.grid(row=0, column=1, padx=20, pady=10, sticky="nsew", rowspan=2)
+                
+        self.NN_graphic = []
+        self.NN_graphic.append(customtkinter.CTkImage(light_image=Image.open('graphics/neural_net_gfx/5_5.PNG'), dark_image=Image.open('graphics/neural_net_gfx/5_5.PNG'), size=(337, 600)))
+        self.NN_graphic.append(customtkinter.CTkImage(light_image=Image.open('graphics/neural_net_gfx/32_32_32.PNG'), dark_image=Image.open('graphics/neural_net_gfx/32_32_32.PNG'), size=(337, 600)))
+        self.NN_graphic.append(customtkinter.CTkImage(light_image=Image.open('graphics/neural_net_gfx/64_32_16.PNG'), dark_image=Image.open('graphics/neural_net_gfx/64_32_16.PNG'), size=(337, 600)))
+        self.NN_graphic.append(customtkinter.CTkImage(light_image=Image.open('graphics/neural_net_gfx/256_128_64_32_16.PNG'), dark_image=Image.open('graphics/neural_net_gfx/256_128_64_32_16.PNG'), size=(337, 600)))
+                
+        self.NN_graphic_label = customtkinter.CTkLabel(self.nnsubFrame6, text="", image=self.NN_graphic[2])
+        self.NN_graphic_label.grid(row=0, column=0, rowspan=2, padx=20, pady=10)
+                
+        def change_nn_graphic(choice):
+                    #"64 32 16", "5 5", "32 32 32", "256 128 64 32 16"
+            if(choice == "64 32 16"):
+                self.NN_graphic_label.configure(image=self.NN_graphic[2])
+            if(choice == "5 5"):
+                self.NN_graphic_label.configure(image=self.NN_graphic[0])
+            if(choice == "32 32 32"):
+                self.NN_graphic_label.configure(image=self.NN_graphic[1])
+            if(choice == "256 128 64 32 16"):
+                self.NN_graphic_label.configure(image=self.NN_graphic[3])
 
         self.aiLabelTitle = customtkinter.CTkLabel(self.nnsubFrame1, text="Trainiere dein eigenes KI-Modell", fg_color="transparent", font=FONT_LARGE)
         self.aiLabelTitle.grid(row=0, column=0, padx=10, pady=(10, 2), columnspan=2, sticky="w")
@@ -505,14 +528,14 @@ class App(customtkinter.CTk):
         self.iterationsSliderVar = tk.IntVar(value=250)
         self.iterationsLabel2 = customtkinter.CTkLabel(self.nnsubFrame2, text=f"{(self.iterationsSliderVar.get()):.0f}", fg_color="transparent", font=FONT_LARGE)
         self.iterationsLabel2.grid(row=0, column=1, padx=10, pady=10, sticky="w")
-        self.iterationsSlider = customtkinter.CTkSlider(self.nnsubFrame2, from_=1, to=500, variable=self.iterationsSliderVar, command=change_iterationsSlider_val, number_of_steps=499)
+        self.iterationsSlider = customtkinter.CTkSlider(self.nnsubFrame2, from_=1, to=500, variable=self.iterationsSliderVar, command=change_iterationsSlider_val, number_of_steps=499, button_color=TURQUOISE)
         self.iterationsSlider.grid(row=1, column=0, padx=20)
         
         
         self.layerLabel = customtkinter.CTkLabel(self.nnsubFrame2, text="Versteckte Schichten: Wie viele Verarbeitungsschritte die KI nutzt", fg_color="transparent", font=FONT_LARGE)
         self.layerLabel.grid(row=2, column=0, padx=10, pady=10, sticky="w")
         self.layersVar = customtkinter.StringVar(value="64 32 16")
-        self.layersOption = customtkinter.CTkOptionMenu(self.nnsubFrame2, values=["64 32 16", "5 5", "32 32 32", "256 128 64 32 16"],variable=self.layersVar, corner_radius=12,fg_color=TURQUOISE_HELL,text_color="#1a1a1a")
+        self.layersOption = customtkinter.CTkOptionMenu(self.nnsubFrame2, values=["64 32 16", "5 5", "32 32 32", "256 128 64 32 16"],variable=self.layersVar, corner_radius=12,fg_color=TURQUOISE_HELL,text_color="#1a1a1a", command=change_nn_graphic)
         self.layersOption.grid(row=2, column=1, padx=10, pady=10, sticky="w")
         self.layersOption.set("64 32 16")
         
@@ -638,12 +661,6 @@ class App(customtkinter.CTk):
             
             self.built_nns = self.built_nns + 1
             
-        self.nnsubFrame6 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_color=TURQUOISE, border_width=2)
-        self.nnsubFrame6.grid(row=1, column=1, padx=20, pady=20, sticky="nsew", rowspan=2)
-        
-        self.NN_graphic = customtkinter.CTkImage(light_image=Image.open('graphics/neural_net_gfx/neuronales_netz.png'), dark_image=Image.open('graphics/neural_net_gfx/neuronales_netz.png'), size=(324, 550))
-        self.NN_graphic_label = customtkinter.CTkLabel(self.nnsubFrame6, text="", image=self.NN_graphic)
-        self.NN_graphic_label.grid(row=0, column=0, rowspan=2, padx=20, pady=10)
 
         self.nnsubFrame7 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.nnsubFrame7.grid(row=0, column=2, padx=20, pady=20, sticky="se", rowspan=3)
@@ -677,7 +694,7 @@ class App(customtkinter.CTk):
             self.FragenFrame = customtkinter.CTkFrame(self.KiHFrame, fg_color=BACKGROUND_COLOR, corner_radius=8)
             self.FragenFrame.grid(row=0, column=0, padx=10, pady=10, sticky="ew")
                 
-            self.KiHkreis1 = customtkinter.CTkLabel(self.FragenFrame, text=str(1), width=36, height=36, corner_radius=18, fg_color="#1f6aa5", text_color="white", font=FONT_SMALL)
+            self.KiHkreis1 = customtkinter.CTkLabel(self.FragenFrame, text=str(1), width=36, height=36, corner_radius=18, fg_color=TURQUOISE, text_color="white", font=FONT_SMALL)
             self.KiHkreis1.grid(row=0, column=0, padx=(20, 8), pady=15)
             self.KiHkreisLabel1 = customtkinter.CTkLabel(self.FragenFrame, text="Frage 1", font=customtkinter.CTkFont(size=13), text_color="black")
             self.KiHkreisLabel1.grid(row=0, column=1, sticky="w")
@@ -851,7 +868,7 @@ class App(customtkinter.CTk):
                     self.KiHFrame2.grid_forget()
                     self.KiHFrame3.grid_forget()
                     self.KiHFrame4.grid_forget()
-                    self.KiHkreis4.configure(fg_color="#1f6aa5", text_color="white")
+                    self.KiHkreis4.configure(fg_color=TURQUOISE, text_color="white")
                     
                     correct_answers = self.KiHAnswersCorrect.count(1)
                     self.KiHFrame5 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, border_width=2,border_color="gray")
@@ -900,7 +917,7 @@ class App(customtkinter.CTk):
                     
                 if(self.KiHQuestionNr == 2):
                     self.KiHQuestionNr = 3
-                    self.KiHkreis3.configure(fg_color="#1f6aa5", text_color="white")
+                    self.KiHkreis3.configure(fg_color=TURQUOISE, text_color="white")
                     self.KiHFragenNrLabel.configure(text="Frage 3 von 3")
                     self.KiHFragenLabel.configure(text="Die KI schlägt Maschineneinstellungen auf Basis von verfügbaren Prozesswerten vor.\nBedeutet das, dass nun jeder die Maschine auch ohne Erfahrung bedienen kann?​​")
                     self.KiHQuestionBtn1.configure(text="Ja, die KI übernimmt das Wissen der erfahrenen Maschinenführer vollständig")
@@ -909,7 +926,7 @@ class App(customtkinter.CTk):
                 # Umgedreht, damit nicht beide ifs nacheinander laufen (sicher auch eleganter lösbar)
                 if(self.KiHQuestionNr == 1):
                     self.KiHQuestionNr = 2
-                    self.KiHkreis2.configure(fg_color="#1f6aa5", text_color="white")
+                    self.KiHkreis2.configure(fg_color=TURQUOISE, text_color="white")
                     self.KiHFragenNrLabel.configure(text="Frage 2 von 3")
                     self.KiHFragenLabel.configure(text="Die Trainingsdaten wurden ausschließlich im Winter gesammelt,\nals die Halle kalt war. Im Sommer steigt die Hallentemperatur auf 35 °C.\nWie zuverlässig ist die KI-Vorhersage dann noch?​")
                     self.KiHQuestionBtn1.configure(text="Genauso zuverlässig")
@@ -949,42 +966,42 @@ class App(customtkinter.CTk):
         slider_label_tooltip_string = "Der Wertebereich jedes Prozessparameters basiert auf dem Wertebereich des jeweiligen Parameters im Kunststofflinsendatensatz. Hierbei weicht der minimal einstellbare Wert jedes Parameters um 50% zum minimalwert im Datensatz ab, und ebenso ist es bei dem maximal einstellbaren Wert."
         self.slider_label_tooltip = CTkToolTip(self.sliderLabel, message=slider_label_tooltip_string)
         self.slider1var = tk.DoubleVar(value=((155.032-81.747)/2)+81.747)
-        self.slider1 = customtkinter.CTkSlider(self.einstellParam_frame, from_=81.747/1.5, to=155.032*1.5, variable=self.slider1var, command=update_label1)
+        self.slider1 = customtkinter.CTkSlider(self.einstellParam_frame, from_=81.747/1.5, to=155.032*1.5, variable=self.slider1var, command=update_label1, button_color=TURQUOISE)
         self.slider1.grid(row=2, column=1, padx=10, pady=5, sticky="w")
         self.slider1label = customtkinter.CTkLabel(self.einstellParam_frame, text=f"Schmelztemperatur:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider1label.grid(row=2, column=0, padx=10, pady=5, sticky="w")
         self.amount1label = customtkinter.CTkLabel(self.einstellParam_frame, text=(f"{(self.slider1var.get()):.1f}", CELSIUS), fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.amount1label.grid(row=2, column=2, padx=10, pady=5, sticky="w")
         self.slider2var = tk.DoubleVar(value=((82.159-78.409)/2)+78.409)
-        self.slider2 = customtkinter.CTkSlider(self.einstellParam_frame, from_=78.409/1.5, to=82.159*1.5, variable=self.slider2var, command=update_label2)
+        self.slider2 = customtkinter.CTkSlider(self.einstellParam_frame, from_=78.409/1.5, to=82.159*1.5, variable=self.slider2var, command=update_label2, button_color=TURQUOISE)
         self.slider2.grid(row=3, column=1, padx=10, pady=5, sticky="w")
         self.slider2label = customtkinter.CTkLabel(self.einstellParam_frame, text=f"Werkzeugtemperatur:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider2label.grid(row=3, column=0, padx=10, pady=5, sticky="w")
         self.amount2label = customtkinter.CTkLabel(self.einstellParam_frame, text=(f"{(self.slider2var.get()):.1f}", CELSIUS), fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.amount2label.grid(row=3, column=2, padx=10, pady=5, sticky="w")
         self.slider6var = tk.DoubleVar(value=((930.6-876.7)/2)+876.7)
-        self.slider6 = customtkinter.CTkSlider(self.einstellParam_frame, from_=876.7/1.5, to=930.6*1.5, variable=self.slider6var, command=update_label6)
+        self.slider6 = customtkinter.CTkSlider(self.einstellParam_frame, from_=876.7/1.5, to=930.6*1.5, variable=self.slider6var, command=update_label6, button_color=TURQUOISE)
         self.slider6.grid(row=4, column=1, padx=10, pady=5, sticky="w")
         self.slider6label = customtkinter.CTkLabel(self.einstellParam_frame, text=f"Schließkraft:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider6label.grid(row=4, column=0, padx=10, pady=5, sticky="w")
         self.amount6label = customtkinter.CTkLabel(self.einstellParam_frame, text=(f"{(self.slider6var.get()):.1f}", NEWTON), fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.amount6label.grid(row=4, column=2, padx=10, pady=5, sticky="w")
         self.slider10var = tk.DoubleVar(value=((155.5-144.8)/2)+144.8)
-        self.slider10 = customtkinter.CTkSlider(self.einstellParam_frame, from_=144.8/1.5, to=155.5*1.5, variable=self.slider10var, command=update_label10)
+        self.slider10 = customtkinter.CTkSlider(self.einstellParam_frame, from_=144.8/1.5, to=155.5*1.5, variable=self.slider10var, command=update_label10, button_color=TURQUOISE)
         self.slider10.grid(row=5, column=1, padx=10, pady=5, sticky="w")
         self.slider10label = customtkinter.CTkLabel(self.einstellParam_frame, text=f"Gegendruck:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider10label.grid(row=5, column=0, padx=10, pady=5, sticky="w")
         self.amount10label = customtkinter.CTkLabel(self.einstellParam_frame, text=(f"{(self.slider10var.get()):.1f}", BAR), fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.amount10label.grid(row=5, column=2, padx=10, pady=5, sticky="w")
         self.slider11var = tk.DoubleVar(value=((943-780.5)/2)+780.5)
-        self.slider11 = customtkinter.CTkSlider(self.einstellParam_frame, from_=780.5/1.5, to=943*1.5, variable=self.slider11var, command=update_label11)
+        self.slider11 = customtkinter.CTkSlider(self.einstellParam_frame, from_=780.5/1.5, to=943*1.5, variable=self.slider11var, command=update_label11, button_color=TURQUOISE)
         self.slider11.grid(row=6, column=1, padx=10, pady=5, sticky="w")
         self.slider11label = customtkinter.CTkLabel(self.einstellParam_frame, text=f"Einspritzdruck:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider11label.grid(row=6, column=0, padx=10, pady=5, sticky="w")
         self.amount11label = customtkinter.CTkLabel(self.einstellParam_frame, text=(f"{(self.slider11var.get()):.1f}", BAR), fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.amount11label.grid(row=6, column=2, padx=10, pady=5, sticky="w")
         self.slider13var = tk.DoubleVar(value=((19.23-18.51)/2)+18.51)
-        self.slider13 = customtkinter.CTkSlider(self.einstellParam_frame, from_=18.51/1.5, to=19.23*1.5, variable=self.slider13var, command=update_label13)
+        self.slider13 = customtkinter.CTkSlider(self.einstellParam_frame, from_=18.51/1.5, to=19.23*1.5, variable=self.slider13var, command=update_label13, button_color=TURQUOISE)
         self.slider13.grid(row=7, column=1, padx=10, pady=5, sticky="w")
         self.slider13label = customtkinter.CTkLabel(self.einstellParam_frame, text=f"Schussvolumen:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider13label.grid(row=7, column=0, padx=10, pady=5, sticky="w")
