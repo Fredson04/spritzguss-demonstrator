@@ -111,18 +111,19 @@ class App(customtkinter.CTk):
 
         self.tab1 = self.tabview.add("1. KI live testen")
         self.tab5 = self.tabview.add("2. KI hinterfragen")
-        self.tab2 = self.tabview.add("3. Einflussfaktoren untersuchen")
+        self.tab2 = self.tabview.add("3. KI untersuchen")
         self.tab3 = self.tabview.add("4. KI selbst trainieren")
         #self.tab4 =self.tabview.add("4. Optimierungsalgorithmus")
         self.tab6 =self.tabview.add("5. Funktionsweise verstehen")
         self.tabview.set("1. KI live testen")
+        
         self.tab1.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR, border_width=10, corner_radius=12)
         self.tab2.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR, border_width=10, corner_radius=12)
         self.tab3.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR, border_width=10, corner_radius=12)
         #self.tab4.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR)
         self.tab5.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR, border_width=10, corner_radius=12)
         self.tab6.configure(fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR, border_width=10, corner_radius=12)
-        
+   
         self.tabview._segmented_button.configure(corner_radius=8, width=140, border_width=10, font=FONT_MEDIUM)
         
         # Einstellungen ändern Tab
@@ -159,7 +160,7 @@ class App(customtkinter.CTk):
             self.denkFrame.grid(row=2, column=1, padx=10, pady=10, sticky="nsw")
             self.denkFrameCap1 = customtkinter.CTkLabel(self.denkFrame, text="Was denkst du – wie viele Produktionsläufe braucht die KI?​", fg_color="transparent", font=FONT_LARGE)
             self.denkFrameCap1.grid(row=0, column=0, padx=20, pady=10, sticky="w")
-            self.denkFrameCap2 = customtkinter.CTkLabel(self.denkFrame, text="Die KI lernt aus vergangenen Produktionsläufen und den zugehörigen Qualitätsprüfungen. Doch wie viele Daten braucht sie,\n um zuverlässige Vorhersagen treffen zu können? Wähle eine Datenmenge und schätze anschließend ein,\n wie gut die KI damit sein wird.​​", fg_color="transparent")
+            self.denkFrameCap2 = customtkinter.CTkLabel(self.denkFrame, text="Die KI lernt aus vergangenen Produktionsläufen und den zugehörigen Qualitätsprüfungen. Doch wie viele Daten braucht sie,\n um zuverlässige Vorhersagen treffen zu können? Wähle eine Datenmenge und schätze anschließend ein,\n wie gut die KI damit sein wird.​​", fg_color="transparent", justify="left")
             self.denkFrameCap2.grid(row=1, column=0, padx=20, pady=10, sticky="w")
             self.denkFrameCap3 = customtkinter.CTkLabel(self.denkFrame, text="Wähle eine Datenmenge:", fg_color="transparent", font=FONT_LARGE)
             self.denkFrameCap3.grid(row=2, column=0, columnspan=4, padx=20, pady=10, sticky="w")
@@ -378,7 +379,7 @@ class App(customtkinter.CTk):
             self.erklaerungBarLabel44 = customtkinter.CTkLabel(self.erklaerungFrame, text=("84%"), fg_color="transparent", font=FONT_LARGE)
             self.erklaerungBarLabel44.grid(row=5, column=3, padx=20, pady=10, sticky="w")
             
-            self.erklaerungLabel3 = customtkinter.CTkLabel(self.erklaerungFrame, text=("Damit eine KI gute Vorhersagen machen kann, ist sowohl die Menge der Daten als auch die \nsogenannte Qualität der Daten ausschlaggebend. Gute Daten sind vollständig. Das heißt alle \nWerte (z.B. Einstellwerte der Maschine und Qualitätsprüfung) sind vorhanden.\n\nDu hast gesehen: Mehr Daten helfen, aber irgendwann werden die Verbesserungen kleiner.\nDie zusätzlichen 451 Produktionsläufe erhöhen die Vorhersagequalität nur noch wenig. Für eine bessere KI\n reicht es deshalb nicht immer aus, einfach mehr Daten zu sammeln. \n\nWelche weiteren Stellschrauben gibt es?\nWechsle zu „4. KI trainieren“ und entdecke neue Möglichkeiten zur Optimierung.​​"), fg_color="transparent", justify="left")
+            self.erklaerungLabel3 = customtkinter.CTkLabel(self.erklaerungFrame, text=("Damit eine KI gute Vorhersagen machen kann, ist sowohl die Menge der Daten als auch die \nsogenannte Qualität der Daten ausschlaggebend. Gute Daten sind vollständig. Das heißt alle \nWerte (z.B. Einstellwerte der Maschine und Qualitätsprüfung) sind vorhanden.\n\nDu hast gesehen: Mehr Daten helfen, aber irgendwann werden die Verbesserungen kleiner.\nDie zusätzlichen 451 Produktionsläufe erhöhen die Vorhersagequalität nur noch wenig. Für eine bessere KI\n reicht es deshalb nicht immer aus, einfach mehr Daten zu sammeln. \n\nWelche weiteren Stellschrauben gibt es?\nWechsle zu „4. KI selbst trainieren“ und entdecke neue Möglichkeiten zur Optimierung.​​"), fg_color="transparent", justify="left")
             self.erklaerungLabel3.grid(row=6, column=0, columnspan=4, padx=20, pady=10, sticky="w")
             
             self.erklaerungReturnButton = customtkinter.CTkButton(self.erklaerungFrame, text="Andere Datenmenge testen", command=andereDatenmengen, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", font=FONT_LARGE, text_color_disabled="#585858")
@@ -408,7 +409,7 @@ class App(customtkinter.CTk):
             self.returnScores_button.grid(row=0, column=0, padx=20, sticky="nw")
             self.scoresCaptionLabel = customtkinter.CTkLabel(self.scoresSubFrame1, text=("​ Wie findet das mathematische Modell die besten Einstellungen?​​"), fg_color="transparent", justify="left", font=FONT_MEDIUM)
             self.scoresCaptionLabel.grid(row=0, column=1, padx=20, pady=5, sticky="we")
-            self.scoresLabel = customtkinter.CTkLabel(self.scoresSubFrame1, text=("Der Optimierungsalgorithmus testet Schritt für Schritt verschiedene Einstellungen der Maschine. Nach jeder Iteration\nwird mit Hilfe des KI-Modells die erreichte Qualität vorhergesagt. Besonders gute Einstellungen werden bevorzugt\nweiterverwendet und verändert, um neue Lösungen zu erzeugen. So nähert sich das mathematische Modell schrittweise\nden Einstellungen an, die die beste Produktqualität liefern.​"), fg_color="transparent", justify="left", font=FONT_MEDIUM_LIGHT)
+            self.scoresLabel = customtkinter.CTkLabel(self.scoresSubFrame1, text=("Das mathematische Modell (Optimierungsalgorithmus) testet Schritt für Schritt verschiedene Einstellungen der Maschine.\nNach jeder Iteration wird mit Hilfe des KI-Modells die erreichte Qualität vorhergesagt. Besonders gute Einstellungen werden bevorzugt weiterverwendet und verändert,\num neue Lösungen zu erzeugen. So nähert sich das mathematische Modell schrittweise den Einstellungen an, die die beste Produktqualität liefern.​\nDrücke auf Starten, um zu sehen wie das mathematische Modell arbeitet."), fg_color="transparent", justify="left", font=FONT_MEDIUM_LIGHT)
             self.scoresLabel.grid(row=1, column=1, padx=20, pady=5, sticky="we")
             self.scoresSubFrame2 = customtkinter.CTkFrame(self.scoresFrame, fg_color=BACKGROUND_COLOR, corner_radius=8)
             self.scoresSubFrame2.grid(row=1, column=0, padx=20, pady=5, sticky="new")
@@ -438,7 +439,7 @@ class App(customtkinter.CTk):
         self.eAe_headline_Label.grid(row=0, column=1, padx=20, pady=10)
         self.eAe_text_Label = customtkinter.CTkLabel(self.eAeFrame, text="Die KI besteht aus zwei Teilen: Einem KI-Modell, das die Qualität der Linsen vorhersagt\nund einem mathematischen Modell, das die besten Einstellparameter\nfür die Spritzgussmaschine findet (Optimierungsalgorithmus).\nHier kannst du beide Modelle gezielt untersuchen.​​", fg_color="transparent")
         self.eAe_text_Label.grid(row=1, column=1, padx=20, pady=10)
-        self.eAeFrame1 = customtkinter.CTkFrame(self.eAeFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
+        self.eAeFrame1 = customtkinter.CTkFrame(self.eAeFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_width=2,border_color="gray")
         self.eAeFrame1.grid(row=2, column=2, padx=20, pady=20, sticky="nsew")
         self.eAeFrame1_headline_Label = customtkinter.CTkLabel(self.eAeFrame1, text="Einfluss der Datenmenge verstehen​​", fg_color="transparent", font=FONT_EXTRALARGE)
         self.eAeFrame1_headline_Label.grid(row=0, column=0, padx=20, pady=10)
@@ -446,7 +447,7 @@ class App(customtkinter.CTk):
         self.eAeFrame1_text_Label.grid(row=1, column=0, padx=20, pady=10)
         self.eAeFrame1_button = customtkinter.CTkButton(self.eAeFrame1, text="Jetzt verstehen", command=createProdLaufFrame, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858", font=FONT_MEDIUM)
         self.eAeFrame1_button.grid(row=2, column=0, padx=20)
-        self.eAeFrame2 = customtkinter.CTkFrame(self.eAeFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
+        self.eAeFrame2 = customtkinter.CTkFrame(self.eAeFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_width=2,border_color="gray")
         self.eAeFrame2.grid(row=2, column=0, padx=20, pady=20, sticky="nsew")
         self.eAeFrame2_headline_Label = customtkinter.CTkLabel(self.eAeFrame2, text="Optimierungsalgorithmus entdecken​", fg_color="transparent", font=FONT_EXTRALARGE)
         self.eAeFrame2_headline_Label.grid(row=0, column=0, padx=20, pady=10)
@@ -482,7 +483,7 @@ class App(customtkinter.CTk):
         self.nnsubFrame1 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_color=BACKGROUND_COLOR, border_width=2)
         self.nnsubFrame1.grid(row=0, column=0, padx=10, pady=10, sticky="ew", columnspan=2)
         
-        self.nnsubFrame6 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_color=TURQUOISE, border_width=2)
+        self.nnsubFrame6 = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_color="gray", border_width=2)
         self.nnsubFrame6.grid(row=0, column=1, padx=20, pady=10, sticky="nsew", rowspan=2)
                 
         self.NN_graphic = []
@@ -508,13 +509,13 @@ class App(customtkinter.CTk):
         self.aiLabelTitle = customtkinter.CTkLabel(self.nnsubFrame1, text="Trainiere dein eigenes KI-Modell", fg_color="transparent", font=FONT_LARGE)
         self.aiLabelTitle.grid(row=0, column=0, padx=10, pady=(10, 2), columnspan=2, sticky="w")
 
-        self.aiLabel = customtkinter.CTkLabel(self.nnsubFrame1, text="Stelle ein, wie oft das KI-Modell aus vergangenen Produktionsläufen lernt (Iterationen) und wie viele Verarbeitungsschritte es\ndabei durchläuft (Schichten). Trainiere es dann und beobachte, wie gut die Qualitätsvorhersage ist.", fg_color="transparent", justify="left")
+        self.aiLabel = customtkinter.CTkLabel(self.nnsubFrame1, text="Das Training einer KI bedeutet, dass sie aus vielen Produktionsläufen lernt, um später gute Vorhersagen zu machen.\nStelle ein, wie oft das KI-Modell aus vergangenen Produktionsläufen lernt (Iterationen) und wie viele Verarbeitungsschritte es\ndabei durchläuft (Schichten). Drücke dann auf Erstelle das KI-Modell und beobachte, wie gut die Qualitätsvorhersage ist.", fg_color="transparent", justify="left")
         self.aiLabel.grid(row=1, column=0, padx=10, pady=(2, 10), columnspan=2, sticky="w")
         
         #self.aiLabel = customtkinter.CTkLabel(self.nnsubFrame1, text="Trainiere dein eigenes KI-Modell​\nStelle ein, wie oft das KI-Modell aus vergangenen Produktionsläufen lernt (Iterationen) und wie viele Verarbeitungsschritte es\ndabei durchläuft (Schichten). Trainiere es dann und beobachte, wie gut die Qualitätsvorhersage ist.", fg_color="transparent", font=FONT_LARGE)
         #self.aiLabel.grid(row=0, column=0, padx=10, pady=10, columnspan=2)
         
-        self.nnsubFrameLeft = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_color=TURQUOISE, border_width=2)
+        self.nnsubFrameLeft = customtkinter.CTkFrame(self.nnFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_color="gray", border_width=2)
         self.nnsubFrameLeft.grid(row=1, column=0, padx=20, pady=10, sticky="nw")
         
         self.nnsubFrame2 = customtkinter.CTkFrame(self.nnsubFrameLeft, width=200, height=200, fg_color=BACKGROUND_COLOR)
@@ -528,14 +529,14 @@ class App(customtkinter.CTk):
         self.iterationsSliderVar = tk.IntVar(value=250)
         self.iterationsLabel2 = customtkinter.CTkLabel(self.nnsubFrame2, text=f"{(self.iterationsSliderVar.get()):.0f}", fg_color="transparent", font=FONT_LARGE)
         self.iterationsLabel2.grid(row=0, column=1, padx=10, pady=10, sticky="w")
-        self.iterationsSlider = customtkinter.CTkSlider(self.nnsubFrame2, from_=1, to=500, variable=self.iterationsSliderVar, command=change_iterationsSlider_val, number_of_steps=499, button_color=TURQUOISE)
+        self.iterationsSlider = customtkinter.CTkSlider(self.nnsubFrame2, from_=1, to=500, variable=self.iterationsSliderVar, command=change_iterationsSlider_val, number_of_steps=499, button_color=TURQUOISE, hover=False)
         self.iterationsSlider.grid(row=1, column=0, padx=20)
         
         
         self.layerLabel = customtkinter.CTkLabel(self.nnsubFrame2, text="Versteckte Schichten: Wie viele Verarbeitungsschritte die KI nutzt", fg_color="transparent", font=FONT_LARGE)
         self.layerLabel.grid(row=2, column=0, padx=10, pady=10, sticky="w")
         self.layersVar = customtkinter.StringVar(value="64 32 16")
-        self.layersOption = customtkinter.CTkOptionMenu(self.nnsubFrame2, values=["64 32 16", "5 5", "32 32 32", "256 128 64 32 16"],variable=self.layersVar, corner_radius=12,fg_color=TURQUOISE_HELL,text_color="#1a1a1a", command=change_nn_graphic, button_color=TURQUOISE)
+        self.layersOption = customtkinter.CTkOptionMenu(self.nnsubFrame2, values=["64 32 16", "5 5", "32 32 32", "256 128 64 32 16"],variable=self.layersVar, corner_radius=12,fg_color=TURQUOISE_HELL,text_color="#1a1a1a", command=change_nn_graphic, button_color=TURQUOISE, hover=False)
         self.layersOption.grid(row=2, column=1, padx=10, pady=10, sticky="w")
         self.layersOption.set("64 32 16")
         
@@ -595,8 +596,8 @@ class App(customtkinter.CTk):
         self.built_nns_iterations = []
         self.built_nns_layers = []
         self.built_nns_percentages = []
-        self.built_nns_caption = customtkinter.CTkLabel(self.nnsubFrame5, text="Bisherige Versuche", fg_color="transparent", font=FONT_LARGE )
-        self.built_nns_caption.grid(row=0, column=0, padx=20, pady=10, sticky="w")
+        self.built_nns_caption = customtkinter.CTkLabel(self.nnsubFrame5, text="Bisherige Versuche", fg_color="transparent", font=FONT_LARGE, justify="left")
+        self.built_nns_caption.grid(row=0, column=0, padx=10, pady=10, sticky="w")
         self.nnsubsubFrame1 = customtkinter.CTkFrame(self.nnsubFrame5, width=200, height=200, fg_color=BACKGROUND_COLOR)
         self.nnsubsubFrame1.grid(row=1, column=0, padx=20, pady=0, sticky="nw")
         self.built_nns_subcaption1 = customtkinter.CTkLabel(self.nnsubsubFrame1, text="Iterationen", fg_color="transparent", font=FONT_MEDIUM )
@@ -686,6 +687,25 @@ class App(customtkinter.CTk):
         self.wirksam_logo_image_label2 = customtkinter.CTkLabel(self.wirksam_frame2, text="", image=self.wirksam_logo)
         self.wirksam_logo_image_label2.grid(row=0, column=0, rowspan=6, padx=20, pady=10, sticky="se")
         
+        def KiHReset():
+            self.KiHSubmission = 0
+            self.KiHQuestionNr = 1
+            self.KiHAnswersCorrect = []
+                        
+            self.KiHReturnBtn.grid_forget()
+            self.KiHFrame5.grid_forget()
+            self.KiHFrame6.grid_forget()
+                        
+            self.KiHkreis1.configure(fg_color="#62717c", text_color="black")
+            self.KiHkreis2.configure(fg_color="#62717c", text_color="black")
+            self.KiHkreis3.configure(fg_color="#62717c", text_color="black")
+            self.KiHkreis4.configure(fg_color="#62717c", text_color="black")
+            self.FragenFrame.grid_forget()
+                        
+            self.KiH_headline_Label.grid(row=0, column=0, padx=20, pady=10)
+            self.KiH_text_Label.grid(row=1, column=0, padx=20, pady=10)
+            self.KiH_spawn_question_button.grid(row=2, column=0, padx=20)
+        
         def createKIHinterfragen():
             self.KiH_headline_Label.grid_forget()
             self.KiH_text_Label.grid_forget()
@@ -727,7 +747,7 @@ class App(customtkinter.CTk):
             self.KiHFragenNrLabel.grid(row=0, column=0, sticky="w", padx=10, pady=10)
             
             self.KiHFragenLabel = customtkinter.CTkLabel(self.KiHFrame2, text="Das KI-Modell wurde für eine bestimmte Linse trainiert. Nun soll eine\nandere Linse produziert werden. Zwar werden dieselbe Maschine und\nderselbe Kunststoff verwendet, die Geometrie der Linse ist\njedoch verändert. Kann für das neue Produkt dasselbe KI-Modell genutzt werden?​", font=FONT_MEDIUM, justify="left")
-            self.KiHFragenLabel.grid(row=1, column=0, sticky="w", padx=10, pady=10)
+            self.KiHFragenLabel.grid(row=1, column=0, sticky="w", padx=10, pady=15)
             
             self.KiHFrame3 = customtkinter.CTkFrame(self.KiHFrame, width=200, height=200, fg_color=BACKGROUND_COLOR)
             self.KiHFrame3.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
@@ -786,9 +806,9 @@ class App(customtkinter.CTk):
             self.KiHQuestionBtn3.grid(row=2, column=0, padx=10, pady=10, sticky="w")
             
             self.KiHFeedbackLabel = customtkinter.CTkLabel(self.KiHFrame3, text="Platzhalter", font=FONT_MEDIUM, corner_radius=12,fg_color=TURQUOISE_HELL,text_color="#1a1a1a", justify="left")
-            self.KiHFeedbackLabel.grid(row=3, column=0, sticky="w", padx=10, pady=20)
+            self.KiHFeedbackLabel.grid(row=3, column=0, sticky="w", padx=10, pady=15)
             self.KiHErklärungLabel = customtkinter.CTkLabel(self.KiHFrame3, text="Platzhalter", font=FONT_MEDIUM_LIGHT,text_color="#1a1a1a", justify="left")
-            self.KiHErklärungLabel.grid(row=4, column=0, sticky="w", padx=10, pady=20)
+            self.KiHErklärungLabel.grid(row=4, column=0, sticky="w", padx=10, pady=15)
             self.KiHFeedbackLabel.grid_forget()
             self.KiHErklärungLabel.grid_forget()
             
@@ -817,7 +837,7 @@ class App(customtkinter.CTk):
                     if(self.KiHSubmission == 3):
                         self.KiHFeedbackLabel.configure(fg_color=GREEN, text="Richtig. Das Modell hat Sommerbedingungen nie gesehen und\nbemerkt die Veränderung nicht – ohne Warnsignal.​")
                         self.KiHAnswersCorrect.append(1)
-                    self.KiHErklärungLabel.configure(text="Auch wenn die Maschineneinstellungen gleich bleiben – die Umgebungstemperatur\nverändert den Prozess. Das Granulat im Trichter erwärmt\nsich, die Schmelze verhält sich anders. Füllzeit, Druck und\nZykluszeit verschieben sich – genau die Werte, aus denen das Modell\ngelernt hat. Das Modell hat Sommerwerte nie gesehen und gibt trotzdem\neine Vorhersage aus – ohne zu wissen,\ndass die Bedingungen sich verändert haben.​​")
+                    self.KiHErklärungLabel.configure(text="Auch wenn die Maschineneinstellungen gleich bleiben – die Umgebungstemperatur\nverändert den Prozess. Das Granulat im Trichter erwärmt sich, die Schmelze\nverhält sich anders. Füllzeit, Druck und Zykluszeit verschieben sich – genau\ndie Werte, aus denen das Modell gelernt hat. Das Modell hat Sommerwerte nie gesehen\nund gibt trotzdem eine Vorhersage aus – ohne zu wissen, dass die Bedingungen sich verändert haben.​​")
                 
                 if(self.KiHQuestionNr == 3):
                     if(self.KiHSubmission == 1):
@@ -832,27 +852,10 @@ class App(customtkinter.CTk):
                     self.KiHErklärungLabel.configure(text="Die KI lernt aus verfügbaren Prozesswerten und kann daraus\npassende Maschineneinstellungen ableiten. Es gibt jedoch Einflussfaktoren,\ndie in diesen Daten nicht enthalten sind. So können beispielsweise\ndie Feuchtigkeit oder Temperatur des Granulats abhängig vom Lagerort\nvariieren und das Prozessergebnis beeinflussen. Erfahrene\nMaschinenführer erkennen solche Situationen frühzeitig und\nbeziehen sie in ihre Entscheidungen ein.​​​")
                     
                     
-                self.KiHFeedbackLabel.grid()
-                self.KiHErklärungLabel.grid()
+                self.KiHFeedbackLabel.grid(row=3, column=0, sticky="w", padx=10, pady=15)
+                self.KiHErklärungLabel.grid(row=4, column=0, sticky="w", padx=10, pady=10)
             
-            def KiHReset():
-                self.KiHSubmission = 0
-                self.KiHQuestionNr = 1
-                self.KiHAnswersCorrect = []
-                
-                self.KiHReturnBtn.grid_forget()
-                self.KiHFrame5.grid_forget()
-                self.KiHFrame6.grid_forget()
-                
-                self.KiHkreis1.configure(fg_color="#62717c", text_color="black")
-                self.KiHkreis2.configure(fg_color="#62717c", text_color="black")
-                self.KiHkreis3.configure(fg_color="#62717c", text_color="black")
-                self.KiHkreis4.configure(fg_color="#62717c", text_color="black")
-                self.FragenFrame.grid_forget()
-                
-                self.KiH_headline_Label.grid(row=0, column=0, padx=20, pady=10)
-                self.KiH_text_Label.grid(row=1, column=0, padx=20, pady=10)
-                self.KiH_spawn_question_button.grid(row=2, column=0, padx=20)
+            
                 
             
             def next_question():
@@ -937,9 +940,9 @@ class App(customtkinter.CTk):
             self.KiHFrame4.grid(row=3, column=0, padx=10, pady=10, sticky="nsew")
             
             self.KiHSubmitBtn = customtkinter.CTkButton(self.KiHFrame4, text="Einreichen", command=submit_answer, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", state="disabled", text_color_disabled="#585858", font=FONT_MEDIUM)
-            self.KiHSubmitBtn.grid(row=3, column=1, padx=10, pady=10, sticky="ns")
+            self.KiHSubmitBtn.grid(row=3, column=1, padx=10, pady=5, sticky="ns")
             self.KiHContinueBtn = customtkinter.CTkButton(self.KiHFrame4, text="Weiter", command=next_question, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", state="disabled", text_color_disabled="#585858", font=FONT_MEDIUM)
-            self.KiHContinueBtn.grid(row=4, column=1, padx=10, pady=10, sticky="ns")
+            self.KiHContinueBtn.grid(row=4, column=1, padx=10, pady=5, sticky="ns")
         
         self.KiH_headline_Label = customtkinter.CTkLabel(self.KiHFrame, text="KI hinterfragen​", fg_color="transparent", font=FONT_EXTRALARGE)
         self.KiH_headline_Label.grid(row=0, column=0, padx=20, pady=10)
@@ -966,42 +969,42 @@ class App(customtkinter.CTk):
         slider_label_tooltip_string = "Der Wertebereich jedes Prozessparameters basiert auf dem Wertebereich des jeweiligen Parameters im Kunststofflinsendatensatz. Hierbei weicht der minimal einstellbare Wert jedes Parameters um 50% zum minimalwert im Datensatz ab, und ebenso ist es bei dem maximal einstellbaren Wert."
         self.slider_label_tooltip = CTkToolTip(self.sliderLabel, message=slider_label_tooltip_string)
         self.slider1var = tk.DoubleVar(value=((155.032-81.747)/2)+81.747)
-        self.slider1 = customtkinter.CTkSlider(self.einstellParam_frame, from_=81.747/1.5, to=155.032*1.5, variable=self.slider1var, command=update_label1, button_color=TURQUOISE)
+        self.slider1 = customtkinter.CTkSlider(self.einstellParam_frame, from_=81.747/1.5, to=155.032*1.5, variable=self.slider1var, command=update_label1, button_color=TURQUOISE, hover=False)
         self.slider1.grid(row=2, column=1, padx=10, pady=5, sticky="w")
         self.slider1label = customtkinter.CTkLabel(self.einstellParam_frame, text=f"Schmelztemperatur:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider1label.grid(row=2, column=0, padx=10, pady=5, sticky="w")
         self.amount1label = customtkinter.CTkLabel(self.einstellParam_frame, text=(f"{(self.slider1var.get()):.1f}", CELSIUS), fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.amount1label.grid(row=2, column=2, padx=10, pady=5, sticky="w")
         self.slider2var = tk.DoubleVar(value=((82.159-78.409)/2)+78.409)
-        self.slider2 = customtkinter.CTkSlider(self.einstellParam_frame, from_=78.409/1.5, to=82.159*1.5, variable=self.slider2var, command=update_label2, button_color=TURQUOISE)
+        self.slider2 = customtkinter.CTkSlider(self.einstellParam_frame, from_=78.409/1.5, to=82.159*1.5, variable=self.slider2var, command=update_label2, button_color=TURQUOISE, hover=False)
         self.slider2.grid(row=3, column=1, padx=10, pady=5, sticky="w")
         self.slider2label = customtkinter.CTkLabel(self.einstellParam_frame, text=f"Werkzeugtemperatur:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider2label.grid(row=3, column=0, padx=10, pady=5, sticky="w")
         self.amount2label = customtkinter.CTkLabel(self.einstellParam_frame, text=(f"{(self.slider2var.get()):.1f}", CELSIUS), fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.amount2label.grid(row=3, column=2, padx=10, pady=5, sticky="w")
         self.slider6var = tk.DoubleVar(value=((930.6-876.7)/2)+876.7)
-        self.slider6 = customtkinter.CTkSlider(self.einstellParam_frame, from_=876.7/1.5, to=930.6*1.5, variable=self.slider6var, command=update_label6, button_color=TURQUOISE)
+        self.slider6 = customtkinter.CTkSlider(self.einstellParam_frame, from_=876.7/1.5, to=930.6*1.5, variable=self.slider6var, command=update_label6, button_color=TURQUOISE, hover=False)
         self.slider6.grid(row=4, column=1, padx=10, pady=5, sticky="w")
         self.slider6label = customtkinter.CTkLabel(self.einstellParam_frame, text=f"Schließkraft:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider6label.grid(row=4, column=0, padx=10, pady=5, sticky="w")
         self.amount6label = customtkinter.CTkLabel(self.einstellParam_frame, text=(f"{(self.slider6var.get()):.1f}", NEWTON), fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.amount6label.grid(row=4, column=2, padx=10, pady=5, sticky="w")
         self.slider10var = tk.DoubleVar(value=((155.5-144.8)/2)+144.8)
-        self.slider10 = customtkinter.CTkSlider(self.einstellParam_frame, from_=144.8/1.5, to=155.5*1.5, variable=self.slider10var, command=update_label10, button_color=TURQUOISE)
+        self.slider10 = customtkinter.CTkSlider(self.einstellParam_frame, from_=144.8/1.5, to=155.5*1.5, variable=self.slider10var, command=update_label10, button_color=TURQUOISE, hover=False)
         self.slider10.grid(row=5, column=1, padx=10, pady=5, sticky="w")
         self.slider10label = customtkinter.CTkLabel(self.einstellParam_frame, text=f"Gegendruck:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider10label.grid(row=5, column=0, padx=10, pady=5, sticky="w")
         self.amount10label = customtkinter.CTkLabel(self.einstellParam_frame, text=(f"{(self.slider10var.get()):.1f}", BAR), fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.amount10label.grid(row=5, column=2, padx=10, pady=5, sticky="w")
         self.slider11var = tk.DoubleVar(value=((943-780.5)/2)+780.5)
-        self.slider11 = customtkinter.CTkSlider(self.einstellParam_frame, from_=780.5/1.5, to=943*1.5, variable=self.slider11var, command=update_label11, button_color=TURQUOISE)
+        self.slider11 = customtkinter.CTkSlider(self.einstellParam_frame, from_=780.5/1.5, to=943*1.5, variable=self.slider11var, command=update_label11, button_color=TURQUOISE, hover=False)
         self.slider11.grid(row=6, column=1, padx=10, pady=5, sticky="w")
         self.slider11label = customtkinter.CTkLabel(self.einstellParam_frame, text=f"Einspritzdruck:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider11label.grid(row=6, column=0, padx=10, pady=5, sticky="w")
         self.amount11label = customtkinter.CTkLabel(self.einstellParam_frame, text=(f"{(self.slider11var.get()):.1f}", BAR), fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.amount11label.grid(row=6, column=2, padx=10, pady=5, sticky="w")
         self.slider13var = tk.DoubleVar(value=((19.23-18.51)/2)+18.51)
-        self.slider13 = customtkinter.CTkSlider(self.einstellParam_frame, from_=18.51/1.5, to=19.23*1.5, variable=self.slider13var, command=update_label13, button_color=TURQUOISE)
+        self.slider13 = customtkinter.CTkSlider(self.einstellParam_frame, from_=18.51/1.5, to=19.23*1.5, variable=self.slider13var, command=update_label13, button_color=TURQUOISE, hover=False)
         self.slider13.grid(row=7, column=1, padx=10, pady=5, sticky="w")
         self.slider13label = customtkinter.CTkLabel(self.einstellParam_frame, text=f"Schussvolumen:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider13label.grid(row=7, column=0, padx=10, pady=5, sticky="w")
@@ -1017,47 +1020,49 @@ class App(customtkinter.CTk):
         
         self.prozessParam_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
         self.prozessParam_frame.grid(row=1, column=1, padx=10, pady=(10, 0), sticky="nsew")
-        self.prozessParam_label = customtkinter.CTkLabel(self.prozessParam_frame, text="Prozessparameter", font=FONT_EXTRALARGE)
-        self.prozessParam_label.grid(row=0, column=0, columnspan=2, sticky="we", padx=10, pady=10)
+        self.prozessParam_label = customtkinter.CTkLabel(self.prozessParam_frame, text="Prozessparameter", font=FONT_EXTRALARGE, justify="center")
+        self.prozessParam_label.grid(row=0, column=0, columnspan=3, sticky="we", padx=10, pady=10)
         self.parameter2Label = customtkinter.CTkLabel(self.prozessParam_frame, text="Parameter", fg_color="transparent", font=FONT_LARGE)
         self.parameter2Label.grid(row=1, column=0, padx=10, pady=5, sticky="w")
+        self.dummy_label = customtkinter.CTkLabel(self.prozessParam_frame, text="", font=FONT_EXTRALARGE)
+        self.dummy_label.grid(row=1, column=1, sticky="we", padx=10, pady=10)
         self.value2Label = customtkinter.CTkLabel(self.prozessParam_frame, text="Wert", fg_color="transparent", font=FONT_LARGE)
-        self.value2Label.grid(row=1, column=1, padx=10, pady=5, sticky="w")
+        self.value2Label.grid(row=1, column=2, padx=10, pady=5, sticky="w")
         self.slider3var = tk.DoubleVar(value=self.generated_paremeters[0][6])
         self.slider3label = customtkinter.CTkLabel(self.prozessParam_frame, text=f"Füllzeit:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider3label.grid(row=2, column=0, padx=10, pady=5, sticky="w")
         self.amount3label = customtkinter.CTkLabel(self.prozessParam_frame, text=(f"{(self.slider3var.get()):.1f}", SECONDS), fg_color="transparent", font=FONT_SMALL_LIGHT)
-        self.amount3label.grid(row=2, column=1, padx=10, pady=5, sticky="w")
+        self.amount3label.grid(row=2, column=2, padx=10, pady=5, sticky="w")
         self.slider4var = tk.DoubleVar(value=self.generated_paremeters[0][7])
         self.slider4label = customtkinter.CTkLabel(self.prozessParam_frame, text=f"Plastizierzeit:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider4label.grid(row=3, column=0, padx=10, pady=5, sticky="w")
         self.amount4label = customtkinter.CTkLabel(self.prozessParam_frame, text=(f"{(self.slider4var.get()):.1f}", SECONDS), fg_color="transparent", font=FONT_SMALL_LIGHT)
-        self.amount4label.grid(row=3, column=1, padx=10, pady=5, sticky="w")
+        self.amount4label.grid(row=3, column=2, padx=10, pady=5, sticky="w")
         self.slider5var = tk.DoubleVar(value=self.generated_paremeters[0][8])
         self.slider5label = customtkinter.CTkLabel(self.prozessParam_frame, text=f"Zykluszeit:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider5label.grid(row=4, column=0, padx=10, pady=5, sticky="w")
         self.amount5label = customtkinter.CTkLabel(self.prozessParam_frame, text=(f"{(self.slider5var.get()):.1f}", SECONDS), fg_color="transparent", font=FONT_SMALL_LIGHT)
-        self.amount5label.grid(row=4, column=1, padx=10, pady=5, sticky="w")
+        self.amount5label.grid(row=4, column=2, padx=10, pady=5, sticky="w")
         self.slider7var = tk.DoubleVar(value=self.generated_paremeters[0][9])
         self.slider7label = customtkinter.CTkLabel(self.prozessParam_frame, text=f"Maximale Schließkraft:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider7label.grid(row=5, column=0, padx=10, pady=5, sticky="w")
         self.amount7label = customtkinter.CTkLabel(self.prozessParam_frame, text=(f"{(self.slider7var.get()):.1f}", NEWTON), fg_color="transparent", font=FONT_SMALL_LIGHT)
-        self.amount7label.grid(row=5, column=1, padx=10, pady=5, sticky="w")
+        self.amount7label.grid(row=5, column=2, padx=10, pady=5, sticky="w")
         self.slider8var = tk.DoubleVar(value=self.generated_paremeters[0][10])
         self.slider8label = customtkinter.CTkLabel(self.prozessParam_frame, text=f"Maximales Schneckendrehmoment:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider8label.grid(row=6, column=0, padx=10, pady=5, sticky="w")
         self.amount8label = customtkinter.CTkLabel(self.prozessParam_frame, text=(f"{(self.slider8var.get()):.1f}", NEWTONMETER), fg_color="transparent", font=FONT_SMALL_LIGHT)
-        self.amount8label.grid(row=6, column=1, padx=10, pady=5, sticky="w")
+        self.amount8label.grid(row=6, column=2, padx=10, pady=5, sticky="w")
         self.slider9var = tk.DoubleVar(value=self.generated_paremeters[0][11])
         self.slider9label = customtkinter.CTkLabel(self.prozessParam_frame, text=f"Mittleres Schneckendrehmoment:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider9label.grid(row=7, column=0, padx=10, pady=5, sticky="w")
         self.amount9label = customtkinter.CTkLabel(self.prozessParam_frame, text=(f"{(self.slider9var.get()):.1f}", NEWTONMETER), fg_color="transparent", font=FONT_SMALL_LIGHT)
-        self.amount9label.grid(row=7, column=1, padx=10, pady=5, sticky="w")
+        self.amount9label.grid(row=7, column=2, padx=10, pady=5, sticky="w")
         self.slider12var = tk.DoubleVar(value=self.generated_paremeters[0][12])
         self.slider12label = customtkinter.CTkLabel(self.prozessParam_frame, text=f"Finale Schneckenposition:", fg_color="transparent", font=FONT_SMALL_LIGHT)
         self.slider12label.grid(row=8, column=0, padx=10, pady=5, sticky="w")
         self.amount12label = customtkinter.CTkLabel(self.prozessParam_frame, text=(f"{(self.slider12var.get()):.1f}", CM), fg_color="transparent", font=FONT_SMALL_LIGHT)
-        self.amount12label.grid(row=8, column=1, padx=10, pady=5, sticky="w")
+        self.amount12label.grid(row=8, column=2, padx=10, pady=5, sticky="w")
         
         #Quality Widgets
         def use_shap_button():
@@ -1083,8 +1088,8 @@ class App(customtkinter.CTk):
         
         segmente = [
             ("Ausschuss\nU₀ < 0,4",           RED, 100),
-            ("Akzeptabel\n0,4 ≤ U₀ < 0,45",  YELLOW, 130),
-            ("Sollbereich\n0,45 ≤ U₀ ≤ 0,5", GREEN, 130),
+            ("Akzeptabel\n0,4 ≤ U₀ < 0,45",  YELLOW, 100),
+            ("Sollbereich\n0,45 ≤ U₀ ≤ 0,5", GREEN, 100),
             ("Ineffizient\nU₀ > 0,5",         ORANGE, 100),
         ]
 
@@ -1093,7 +1098,7 @@ class App(customtkinter.CTk):
 
         for col, (text, farbe, breite) in enumerate(segmente):
             seg = customtkinter.CTkFrame(self.qual_frame, fg_color=farbe, corner_radius=4, width=breite, height=50)
-            seg.grid(row=1, column=col+3, padx=2, pady=(0, 10), sticky="nsew")
+            seg.grid(row=1, column=col+3, padx=5, pady=(0, 10), sticky="nsew")
             seg.grid_propagate(False)
             customtkinter.CTkLabel(seg, text=text, font=customtkinter.CTkFont(size=12), text_color="black",justify="center").grid(row=0, column=0, sticky="nsew", padx=5, pady=4)
             seg.grid_rowconfigure(0, weight=1)
@@ -1112,7 +1117,7 @@ class App(customtkinter.CTk):
         #self.algoOption = customtkinter.CTkOptionMenu(self.production_frame, values=["Partikelschwarmoptimierung", "Genetischer Algorithmus", "Simulierte Abkühlung"],variable=self.algoOptionVar, corner_radius=12,fg_color=TURQUOISE_HELL,text_color="#1a1a1a")
         #self.algoOption.set("Partikelschwarmoptimierung")
         #self.algoOption.grid(row=0, column=3, padx=10, pady=10, sticky="ns")
-        self.ai_button = customtkinter.CTkButton(self.production_frame, text="3.\nEinstellempfehlung generieren", command=self.use_algo, state="disabled", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
+        self.ai_button = customtkinter.CTkButton(self.production_frame, text="3.\nKI-Empfehlung generieren", command=self.use_algo, state="disabled", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
         self.ai_button.grid(row=0, column=3, padx=10, pady=10, sticky="ns")
         ai_tooltip_string = ("{Die Parameter werden mit ", self.algoOptionVar.get(), " generiert. Dieser stochastische Optimierungsalgorithmus produziert nicht-deterministische Ergebnisse.}")
         self.ai_tooltip = CTkToolTip(self.ai_button, message=ai_tooltip_string)
@@ -1177,6 +1182,7 @@ class App(customtkinter.CTk):
         self.FunkVFrame2 = customtkinter.CTkFrame(self.FunkVFrame,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
         self.FunkVFrame2.grid(row=1, column=0, padx=10, pady=(10, 0), sticky="nswe")
         
+        
         def prevSlide():
             if(self.slideCounter > 0):
                 self.slideCounter = self.slideCounter - 1
@@ -1192,11 +1198,44 @@ class App(customtkinter.CTk):
         self.FunkVContinueBtn = customtkinter.CTkButton(self.FunkVFrame2, text="Weiter", corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", command=nextSlide, state="active", text_color_disabled="#585858")
         self.FunkVContinueBtn.grid(row=0, column=1, padx=20, pady=10, sticky="nswe")
         
-        
+        def resetEverything():
+            #KI Live testen:
+            self.current_iter = "000"
+            self.slider1var = tk.DoubleVar(value=((155.032-81.747)/2)+81.747)
+            self.slider1.configure(variable=self.slider1var)
+            self.slider2var = tk.DoubleVar(value=((82.159-78.409)/2)+78.409)
+            self.slider2.configure(variable=self.slider2var)
+            self.slider6var = tk.DoubleVar(value=((930.6-876.7)/2)+876.7)
+            self.slider6.configure(variable=self.slider6var)
+            self.slider10var = tk.DoubleVar(value=((155.5-144.8)/2)+144.8)
+            self.slider10.configure(variable=self.slider10var)
+            self.slider11var = tk.DoubleVar(value=((943-780.5)/2)+780.5)
+            self.slider11.configure(variable=self.slider11var)
+            self.slider13var = tk.DoubleVar(value=((19.23-18.51)/2)+18.51)
+            self.slider13.configure(variable=self.slider13var)
+            self.slider_change()
+            self.removeOptimized()
+            self.lens_produced_label2.configure(text="Unproduziert")
+            self.article_produced_label2.configure(text="-")
+            self.material_label2.configure(text="-")
+            self.charge_label2.configure(text="-")
+            #KI Hinterfragen:
+            KiHReset()
+            #Einflussfaktoren untersuchen:
+            self.prodLaufFrame.destroy()
+            self.scoresFrame.destroy()
+            self.eAeFrame.grid()
+            #KI selbst trainieren:
+            clear_built_nns()
+            #Funktionsweise verstehen:
+            self.slideCounter = 0
+            self.slide_label.configure(image=self.presentationList[self.slideCounter])
+        self.tabview.configure(command=resetEverything)
+
         #Mögliche optimierung:
         self.update_idletasks()
         self.deiconify()
-        
+    
     def slider_change(self):
         self.produce_button.configure(state="disabled")
         self.quality_category_label.configure(text="")
@@ -1303,7 +1342,7 @@ class App(customtkinter.CTk):
         if(quality_cat == "Ineffizient"):
             self.border_frame.configure(fg_color=ORANGE, border_width=2,border_color="black")
             self.paramPopup_label.configure(text="Interessant! Die Qualität ist sogar besser als erforderlich. Die Herausforderung ist,\n die Qualitätsanforderungen zu erfüllen und gleichzeitig\n wirtschaftlich zu produzieren. Versuch's noch einmal.")
-        produce_tooltip_string = "Die Qualität wird durch ein Neuronales Netz berechnet. Dieses wurde mit einem Datensatz der die Herstellung von Kunststofflinsen abbildet trainiert."
+        produce_tooltip_string = "Die Qualität wird durch ein Neuronales Netz berechnet. Dieses wurde mit\neinem Datensatz der die Herstellung von Kunststofflinsen abbildet trainiert."
         self.produce_tooltip = CTkToolTip(self.produce_label, message=produce_tooltip_string)
         self.ai_button.configure(state="normal")
     
@@ -1320,7 +1359,7 @@ class App(customtkinter.CTk):
         solution = self.scaler2.inverse_transform(solution_std)
         self.transformed_solution = solution.squeeze()
         self.transformed_solution = self.transformed_solution[0:6]
-        self.Optparamterlabel0 = customtkinter.CTkLabel(self.einstellParam_frame, text="Empfehlung", fg_color="transparent", font=FONT_LARGE)
+        self.Optparamterlabel0 = customtkinter.CTkLabel(self.einstellParam_frame, text="KI-Empfehlung", fg_color="transparent", font=FONT_LARGE)
         self.Optparamterlabel0.grid(row=1, column=3, padx=10, pady=5, sticky="w")
         self.optParameterLabels = []
         for i, value in enumerate(self.transformed_solution):
