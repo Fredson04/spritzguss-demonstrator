@@ -446,7 +446,7 @@ class App(customtkinter.CTk):
         self.eAeFrame1_text_Label = customtkinter.CTkLabel(self.eAeFrame1, text="Was passiert, wenn das KI-Modell weniger Produktionsläufe zum\nLernen hat? Wie viele Daten braucht die KI,\num zuverlässig zu sein?", fg_color="transparent")
         self.eAeFrame1_text_Label.grid(row=1, column=0, padx=20, pady=10)
         self.eAeFrame1_button = customtkinter.CTkButton(self.eAeFrame1, text="Jetzt verstehen", command=createProdLaufFrame, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858", font=FONT_MEDIUM)
-        self.eAeFrame1_button.grid(row=2, column=0, padx=20)
+        self.eAeFrame1_button.grid(row=2, column=0, padx=20, pady=10)
         self.eAeFrame2 = customtkinter.CTkFrame(self.eAeFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_width=2,border_color="gray")
         self.eAeFrame2.grid(row=2, column=0, padx=20, pady=20, sticky="nsew")
         self.eAeFrame2_headline_Label = customtkinter.CTkLabel(self.eAeFrame2, text="Optimierungsalgorithmus entdecken", fg_color="transparent", font=FONT_EXTRALARGE)
@@ -454,7 +454,7 @@ class App(customtkinter.CTk):
         self.eAeFrame2_text_Label = customtkinter.CTkLabel(self.eAeFrame2, text="Wie findet der Optimierungsalgorithmus gute Maschineneinstellungen?\nSchau dem mathematischen Verfahren live dabei zu, wie es aus vielen\nmöglichen Einstellungen eine passende Kombination findet.", fg_color="transparent")
         self.eAeFrame2_text_Label.grid(row=1, column=0, padx=20, pady=10)
         self.eAeFrame2_button = customtkinter.CTkButton(self.eAeFrame2, text="Jetzt anschauen", command=showBestQuality, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858", font=FONT_MEDIUM)
-        self.eAeFrame2_button.grid(row=2, column=0, padx=20)
+        self.eAeFrame2_button.grid(row=2, column=0, padx=20, pady=10)
         
         # Wirksam Logo
         self.wirksam_frame4 = customtkinter.CTkFrame(self.tab2,border_width=2,border_color=BACKGROUND_COLOR, fg_color=BACKGROUND_COLOR)
@@ -620,6 +620,21 @@ class App(customtkinter.CTk):
             self.built_nns_percentages.clear()
             
             self.built_nns = 0
+            
+            if hasattr(self, "percLabel2") and self.percLabel2.winfo_exists():
+                self.percLabel2.configure(text="")
+            
+            if hasattr(self, "nn_advice_label") and self.nn_advice_label.winfo_exists():
+                self.nn_advice_label.configure(text="", fg_color=BACKGROUND_COLOR)
+            
+            if hasattr(self, "percValue") and self.percValue.winfo_exists():
+                self.percValue.configure(text="")
+            
+            if hasattr(self, "timeValue") and self.timeValue.winfo_exists():
+                self.timeValue.configure(text="")
+            
+            if hasattr(self, "timeLabel2") and self.timeLabel2.winfo_exists():
+                self.timeLabel2.configure(text="")
         
         self.built_nns_redo = customtkinter.CTkButton(self.nnsubFrame5, text="Neu starten", command=clear_built_nns, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
         self.built_nns_redo.grid(row=0, column=2, padx=20)
@@ -1138,7 +1153,7 @@ class App(customtkinter.CTk):
         
         # Production Widgets
         self.production_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
-        self.production_frame.grid(row=0, column=1, padx=10, pady=(10, 0), sticky="nsw")
+        self.production_frame.grid(row=0, column=1, padx=10, pady=(10, 0), sticky="nesw")
         self.production_frame.grid_rowconfigure((0), weight=1)
         self.producing_button = customtkinter.CTkButton(self.production_frame, text="1.\nProduktion starten", command=self.set_kn_vals, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", text_color_disabled="#585858")
         self.producing_button.grid(row=0, column=1, padx=10, pady=10, sticky="ns")
@@ -1301,7 +1316,7 @@ class App(customtkinter.CTk):
                 self.scoresFrame.destroy()
             self.eAeFrame.grid()
             #KI selbst trainieren:
-            #clear_built_nns()
+            clear_built_nns()
             #Funktionsweise verstehen:
             self.slideCounter = 0
             self.slide_label.configure(image=self.presentationList[self.slideCounter])
@@ -1448,10 +1463,13 @@ class App(customtkinter.CTk):
     def removeOptimized(self):
         if hasattr(self, "Optparamterlabel0") and self.Optparamterlabel0.winfo_exists():
             self.Optparamterlabel0.destroy()
-        for i in range(0, len(self.optParameterLabels)):
-            self.optParameterLabels[i].destroy()
-        self.useOptimizedButton.destroy()
-        self.removeOptimizedButton.destroy()
+        if hasattr(self, "optParameterLabels"):
+            for i in range(0, len(self.optParameterLabels)):
+                self.optParameterLabels[i].destroy()
+        if hasattr(self, "useOptimizedButton") and self.useOptimizedButton.winfo_exists():
+            self.useOptimizedButton.destroy()
+        if hasattr(self, "removeOptimizedButton") and self.removeOptimizedButton.winfo_exists():
+            self.removeOptimizedButton.destroy()
         
     def useOptimizedFunc(self):
         self.slider1.set((self.transformed_solution)[0])
