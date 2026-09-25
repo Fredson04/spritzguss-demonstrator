@@ -10,12 +10,23 @@ def shap_explainer2(model): # Gibt eine Erklärung der NN Gewichtung mithilfe vo
 
 def shap_explainer(model, scaler): # Gibt eine Erklärung der NN Gewichtung mithilfe von Shap aus
     X_train, X_test, y_train, y_test = get_train_test_split(scaler)
-    explainer = shap.KernelExplainer(model.predict, X_train)
+    background = shap.sample(X_train, 100)
+    explainer = shap.KernelExplainer(model.predict, background)
     shap_values = explainer.shap_values(X_test)
     #shap_values = explainer.shap_values(X_test)
     #shap.plots.waterfall(shap_values[0])
-    shap.summary_plot(shap_values, X_test)
-    shap.summary_plot(shap_values, X_test, plot_type="bar")
+    
+    feature_names = [
+        "Schmelztemperatur",
+        "Werkzeugtemperatur", 
+        "Schließkraft",
+        "Gegendruck",
+        "Einspritzdruck",
+        "Schussvolumen"
+    ]
+    
+    shap.summary_plot(shap_values, X_test, feature_names=feature_names)
+    shap.summary_plot(shap_values, X_test, plot_type="bar", feature_names=feature_names)
     
 def get_train_test_split(scaler):
     file = "dataset/" + "spritzguss-new.csv"
