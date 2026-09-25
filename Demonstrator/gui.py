@@ -160,7 +160,7 @@ class App(customtkinter.CTk):
             self.denkFrame.grid(row=2, column=1, padx=10, pady=10, sticky="nsw")
             self.denkFrameCap1 = customtkinter.CTkLabel(self.denkFrame, text="Was denkst du – wie viele Produktionsläufe braucht die KI?", fg_color="transparent", font=FONT_LARGE)
             self.denkFrameCap1.grid(row=0, column=0, padx=20, pady=10, sticky="w")
-            self.denkFrameCap2 = customtkinter.CTkLabel(self.denkFrame, text="Die KI lernt aus vergangenen Produktionsläufen und den zugehörigen Qualitätsprüfungen. Doch wie viele Daten braucht sie,\n um zuverlässige Vorhersagen treffen zu können? Wähle eine Datenmenge und schätze anschließend ein,\n wie gut die KI damit sein wird.", fg_color="transparent", justify="left")
+            self.denkFrameCap2 = customtkinter.CTkLabel(self.denkFrame, text="Die KI lernt aus vergangenen Produktionsläufen und den zugehörigen Qualitätsprüfungen. Doch wie viele Daten braucht sie,\num zuverlässige Vorhersagen treffen zu können? Wähle eine Datenmenge und schätze anschließend ein,\nwie gut die KI damit sein wird.", fg_color="transparent", justify="left")
             self.denkFrameCap2.grid(row=1, column=0, padx=20, pady=10, sticky="w")
             self.denkFrameCap3 = customtkinter.CTkLabel(self.denkFrame, text="Wähle eine Datenmenge:", fg_color="transparent", font=FONT_LARGE)
             self.denkFrameCap3.grid(row=2, column=0, columnspan=4, padx=20, pady=10, sticky="w")
@@ -1112,7 +1112,7 @@ class App(customtkinter.CTk):
         
         #Quality Widgets
         def use_shap_button():
-            shap_explainer(self.model)
+            shap_explainer(self.model, self.scaler2)
         
         self.qual_frame = customtkinter.CTkFrame(self.tab1,border_width=2,border_color="gray", fg_color=BACKGROUND_COLOR)
         self.qual_frame.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nsew")
@@ -1122,8 +1122,8 @@ class App(customtkinter.CTk):
         self.border_frame.grid(row=1, column=0, padx=10, pady=10)
         
         #SHAP vorerst entfernt
-        #self.shap_button = customtkinter.CTkButton(self.qual_frame, text="i", width=40, height=40, corner_radius=20, fg_color="#d0d0d0", hover_color="#989898", text_color="black", font=customtkinter.CTkFont(size=16, weight="bold"), border_width=3, border_color="black", command=use_shap_button)
-        #self.shap_button.grid(row=1, column=1, padx=10, pady=10)
+        self.shap_button = customtkinter.CTkButton(self.qual_frame, text="i", width=40, height=40, corner_radius=20, fg_color="#d0d0d0", hover_color="#989898", text_color="black", font=customtkinter.CTkFont(size=16, weight="bold"), border_width=3, border_color="black", command=use_shap_button)
+        self.shap_button.grid(row=1, column=1, padx=10, pady=10)
         
         self.quality_category_label = customtkinter.CTkLabel(self.border_frame, text="", fg_color="transparent")
         self.quality_category_label.grid(row=0, column=0, padx=3, pady=3)
