@@ -296,7 +296,7 @@ class App(customtkinter.CTk):
             if(self.denkFrameCap_button_var.get() == "250 Läufe"):
                 self.progressbar.configure(progress_color=RED)
                 self.progressbar.set(0.41)
-                self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("41%"), fg_color="transparent", font=FONT_LARGE)
+                self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("41%"), corner_radius=12,fg_color=RED,text_color="#1a1a1a", font=FONT_LARGE)
                 self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("250 Produktionsläufe liefern der KI erst wenige Beispiele zum Lernen. Deshalb verwechselt sie die Qualitätsklassen noch häufig und macht falsche Vorhersagen."), fg_color="transparent")
                 self.segLabel1.configure(text="Ausschuss:\n25,9%")
                 self.segLabel2.configure(text="Akzeptabel:\n40,9%")
@@ -305,7 +305,7 @@ class App(customtkinter.CTk):
             if(self.denkFrameCap_button_var.get() == "500 Läufe"):
                 self.progressbar.configure(progress_color=YELLOW)
                 self.progressbar.set(0.79)
-                self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("79%"), fg_color="transparent", font=FONT_LARGE)
+                self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("79%"), corner_radius=12,fg_color=YELLOW,text_color="#1a1a1a", font=FONT_LARGE)
                 self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("500 Produktionsläufe reichen für gute Vorhersagen. Trotzdem verwechselt die KI einzelne Qualitätsklassen und macht noch falsche Vorhersagen."), fg_color="transparent")
                 self.segLabel1.configure(text="Ausschuss:\n61,9%")
                 self.segLabel2.configure(text="Akzeptabel:\n82,2%")
@@ -314,7 +314,7 @@ class App(customtkinter.CTk):
             if(self.denkFrameCap_button_var.get() == "1000 Läufe"):
                 self.progressbar.configure(progress_color=YELLOW)
                 self.progressbar.set(0.83)
-                self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("83%"), fg_color="transparent", font=FONT_LARGE)
+                self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("83%"), corner_radius=12,fg_color=GREEN,text_color="#1a1a1a", font=FONT_LARGE)
                 self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("1000 Produktionsläufe liefern genügend Beispiele zum Lernen. Die KI erkennt die meisten Zusammenhänge nun zuverlässiger. Falsche Vorhersagen treten nur noch gelegentlich auf."), fg_color="transparent")
                 self.segLabel1.configure(text="Ausschuss:\n68,9%")
                 self.segLabel2.configure(text="Akzeptabel:\n84,6%")
@@ -323,7 +323,7 @@ class App(customtkinter.CTk):
             if(self.denkFrameCap_button_var.get() == "1451 Läufe"):
                 self.progressbar.configure(progress_color=GREEN)
                 self.progressbar.set(0.84)
-                self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("84%"), fg_color="transparent", font=FONT_LARGE)
+                self.ergebnisAnsehenLabel4 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("84%"), corner_radius=12,fg_color=GREEN,text_color="#1a1a1a", font=FONT_LARGE)
                 self.ergebnisAnsehenLabel5 = customtkinter.CTkLabel(self.ergebnisAnsehenFrame, text=("1451 Produktionsläufe bringen gegenüber 1000 Läufen nur noch eine geringe Verbesserung. Die KI erkennt die Zusammenhänge bereits sehr zuverlässig. Zusätzliche Daten erhöhen die Trefferquote kaum noch."), fg_color="transparent")
                 self.segLabel1.configure(text="Ausschuss:\n73,0%")
                 self.segLabel2.configure(text="Akzeptabel:\n84,5%")
@@ -332,6 +332,8 @@ class App(customtkinter.CTk):
             self.ergebnisAnsehenLabel4.grid(row=3, column=4, padx=20, pady=10, sticky="w")
             self.ergebnisAnsehenLabel5.grid(row=4, column=0, columnspan=4, padx=20, pady=10, sticky="w")
             
+            self.erklaerungReturnButton1 = customtkinter.CTkButton(self.ergebnisAnsehenFrame, text="Andere Datenmenge testen", command=andereDatenmengen1, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", font=FONT_LARGE, text_color_disabled="#585858")
+            self.erklaerungReturnButton1.grid(row=6, column=2, padx=20, pady=10)
             self.ergebnisAnsehenFrameExit = customtkinter.CTkButton(self.ergebnisAnsehenFrame, text="Was bedeutet das?", command=create_erklaerung_frame, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", font=FONT_LARGE, text_color_disabled="#585858")
             self.ergebnisAnsehenFrameExit.grid(row=6, column=3, padx=20, pady=10)
         
@@ -352,7 +354,7 @@ class App(customtkinter.CTk):
             self.erklaerungBar1 = customtkinter.CTkProgressBar(self.erklaerungFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",progress_color=RED,border_width=0)
             self.erklaerungBar1.grid(row=2, column=1, columnspan=2, padx=20, pady=10, sticky="w")
             self.erklaerungBar1.set(0.41)
-            self.erklaerungBarLabel11 = customtkinter.CTkLabel(self.erklaerungFrame, text=("41%"), fg_color="transparent", font=FONT_LARGE)
+            self.erklaerungBarLabel11 = customtkinter.CTkLabel(self.erklaerungFrame, text=("41%"), corner_radius=12,fg_color=RED,text_color="#1a1a1a", font=FONT_LARGE)
             self.erklaerungBarLabel11.grid(row=2, column=3, padx=20, pady=10, sticky="w")
             
             self.erklaerungBarLabel2 = customtkinter.CTkLabel(self.erklaerungFrame, text=("500 Läufe"), fg_color="transparent", font=FONT_LARGE)
@@ -360,7 +362,7 @@ class App(customtkinter.CTk):
             self.erklaerungBar2 = customtkinter.CTkProgressBar(self.erklaerungFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",progress_color=YELLOW,border_width=0)
             self.erklaerungBar2.grid(row=3, column=1, columnspan=2, padx=20, pady=10, sticky="w")
             self.erklaerungBar2.set(0.79)
-            self.erklaerungBarLabel22 = customtkinter.CTkLabel(self.erklaerungFrame, text=("79%"), fg_color="transparent", font=FONT_LARGE)
+            self.erklaerungBarLabel22 = customtkinter.CTkLabel(self.erklaerungFrame, text=("79%"), corner_radius=12,fg_color=YELLOW,text_color="#1a1a1a", font=FONT_LARGE)
             self.erklaerungBarLabel22.grid(row=3, column=3, padx=20, pady=10, sticky="w")
             
             self.erklaerungBarLabel3 = customtkinter.CTkLabel(self.erklaerungFrame, text=("1000 Läufe"), fg_color="transparent", font=FONT_LARGE)
@@ -368,7 +370,7 @@ class App(customtkinter.CTk):
             self.erklaerungBar3 = customtkinter.CTkProgressBar(self.erklaerungFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",progress_color=GREEN,border_width=0)
             self.erklaerungBar3.grid(row=4, column=1, columnspan=2, padx=20, pady=10, sticky="w")
             self.erklaerungBar3.set(0.83)
-            self.erklaerungBarLabel33 = customtkinter.CTkLabel(self.erklaerungFrame, text=("83%"), fg_color="transparent", font=FONT_LARGE)
+            self.erklaerungBarLabel33 = customtkinter.CTkLabel(self.erklaerungFrame, text=("83%"), corner_radius=12,fg_color=GREEN,text_color="#1a1a1a", font=FONT_LARGE)
             self.erklaerungBarLabel33.grid(row=4, column=3, padx=20, pady=10, sticky="w")
             
             self.erklaerungBarLabel4 = customtkinter.CTkLabel(self.erklaerungFrame, text=("1451 Läufe"), fg_color="transparent", font=FONT_LARGE)
@@ -376,16 +378,21 @@ class App(customtkinter.CTk):
             self.erklaerungBar4 = customtkinter.CTkProgressBar(self.erklaerungFrame, orientation="horizontal", corner_radius=0,fg_color="#a8a8a8",progress_color=GREEN,border_width=0)
             self.erklaerungBar4.grid(row=5, column=1, columnspan=2, padx=20, pady=10, sticky="w")
             self.erklaerungBar4.set(0.84)
-            self.erklaerungBarLabel44 = customtkinter.CTkLabel(self.erklaerungFrame, text=("84%"), fg_color="transparent", font=FONT_LARGE)
+            self.erklaerungBarLabel44 = customtkinter.CTkLabel(self.erklaerungFrame, text=("84%"), corner_radius=12,fg_color=GREEN,text_color="#1a1a1a", font=FONT_LARGE)
             self.erklaerungBarLabel44.grid(row=5, column=3, padx=20, pady=10, sticky="w")
             
             self.erklaerungLabel3 = customtkinter.CTkLabel(self.erklaerungFrame, text=("Damit eine KI gute Vorhersagen machen kann, sind die Datenmenge und die Datenqualität wichtig.\nGute Daten sind vollständig. Das heißt, alle benötigten Werte sind vorhanden, zum Beispiel\nMaschineneinstellungen und Ergebnisse der Qualitätsprüfung.\n\nDu hast gesehen: Mehr Daten helfen, aber irgendwann werden die Verbesserungen kleiner.\nDie zusätzlichen 451 Produktionsläufe erhöhen die Trefferquote nur noch wenig. Für eine bessere KI\nreicht es deshalb nicht immer aus, einfach mehr Daten zu sammeln. Auch das KI-Modell kann angepasst\noder ein anderes Modell ausprobiert werden. Es gibt nicht die eine KI-Lösung für jede Aufgabe.\n\nWelche weiteren Stellschrauben gibt es?\nWechsle zu „4. KI selbst trainieren“ und probiere verschiedene Einstellungen des KI-Modells aus."), fg_color="transparent", justify="left")
             self.erklaerungLabel3.grid(row=6, column=0, columnspan=4, padx=20, pady=10, sticky="w")
             
-            self.erklaerungReturnButton = customtkinter.CTkButton(self.erklaerungFrame, text="Andere Datenmenge testen", command=andereDatenmengen, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", font=FONT_LARGE, text_color_disabled="#585858")
-            self.erklaerungReturnButton.grid(row=7, column=1, padx=20, pady=10)
-            
-        def andereDatenmengen():
+            self.erklaerungReturnButton2 = customtkinter.CTkButton(self.erklaerungFrame, text="Andere Datenmenge testen", command=andereDatenmengen2, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", font=FONT_LARGE, text_color_disabled="#585858")
+            self.erklaerungReturnButton2.grid(row=7, column=1, padx=20, pady=10)
+        
+        def andereDatenmengen1():
+            self.ergebnisAnsehenFrame.destroy()
+            self.prodLaufFrame.destroy()
+            createProdLaufFrame()
+           
+        def andereDatenmengen2():
             self.erklaerungFrame.destroy()
             self.prodLaufFrame.destroy()
             createProdLaufFrame()

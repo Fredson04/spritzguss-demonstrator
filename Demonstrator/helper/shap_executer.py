@@ -1,6 +1,7 @@
 import pandas as pd
 import shap
 from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
 def shap_explainer2(model): # Gibt eine Erklärung der NN Gewichtung mithilfe von Shap aus
     X_train, X_test, y_train, y_test = get_train_test_split()
     explainer = shap.Explainer(model.predict, X_test)
@@ -26,7 +27,15 @@ def shap_explainer(model, scaler): # Gibt eine Erklärung der NN Gewichtung mith
     ]
     
     shap.summary_plot(shap_values, X_test, feature_names=feature_names)
-    shap.summary_plot(shap_values, X_test, plot_type="bar", feature_names=feature_names)
+    shap.summary_plot(shap_values, X_test, plot_type="bar", feature_names=feature_names, show=False)
+
+    #Nur zum Beispiel
+    plt.title("Feature Importance", fontsize=16)
+    plt.xlabel("SHAP Wert", fontsize=12)
+    plt.text(x=0.05, y=0.95, s="Modell: MLP", transform=plt.gca().transAxes)
+
+    plt.tight_layout()
+    plt.show()
     
 def get_train_test_split(scaler):
     file = "dataset/" + "spritzguss-new.csv"
