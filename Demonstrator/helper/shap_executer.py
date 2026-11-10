@@ -82,9 +82,11 @@ def shap_explainer(model, scaler):  # Gibt eine Erklärung der NN Gewichtung mit
     ax_text.text(
         0.0, 0.95,
         "Was zeigt das Diagramm?\n"
-        "Das Diagramm zeigt, wie stark die einzelnen Prozessparameter\n"
-        "die Vorhersage des KI-Modells beeinflussen. Je länger der Balken,\n"
-        "desto größer der Einfluss.",
+        "Auf Basis vergangener Produktionsdaten sagt ein KI-Modell die\n"
+        "Qualität der LED-Linsen für die aktuell gewählten Maschinen-\n"
+        "einstellungen vorher. Das Diagramm zeigt, wie stark die einzelnen\n"
+        "Prozessparameter die Vorhersage des KI-Modells beeinflussen. Je\n"
+        "länger der Balken, desto größer der Einfluss.",
         transform=ax_text.transAxes,
         fontsize=11,
         verticalalignment="top",
@@ -103,9 +105,11 @@ def shap_explainer(model, scaler):  # Gibt eine Erklärung der NN Gewichtung mit
     # Normaler Text darunter
     ax_text.text(
         0.0, 0.55,
-        "Das Diagramm zeigt, wie stark die einzelnen Prozessparameter\n"
-        "die Vorhersage des KI-Modells beeinflussen. Je länger der Balken,\n"
-        "desto größer der Einfluss.",
+        "Auf Basis vergangener Produktionsdaten sagt ein KI-Modell die\n"
+        "Qualität der LED-Linsen für die aktuell gewählten Maschinen-\n"
+        "einstellungen vorher. Das Diagramm zeigt, wie stark die einzelnen\n"
+        "Prozessparameter die Vorhersage des KI-Modells beeinflussen. Je\n"
+        "länger der Balken, desto größer der Einfluss.",
         transform=ax_text.transAxes,
         fontsize=11,
         verticalalignment="top"
