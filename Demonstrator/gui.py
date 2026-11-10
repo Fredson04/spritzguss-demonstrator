@@ -1,3 +1,4 @@
+#Für die, die das nach mir lesen: Über diese Datei läuft alles.
 import datetime
 import pickle
 import time
