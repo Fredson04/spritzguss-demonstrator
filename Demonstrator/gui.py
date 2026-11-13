@@ -417,15 +417,15 @@ class App(customtkinter.CTk):
             self.returnScores_button.grid(row=0, column=0, padx=20, sticky="nw")
             self.scoresCaptionLabel = customtkinter.CTkLabel(self.scoresSubFrame1, text=(" Wie findet das mathematische Modell die besten Einstellungen?"), fg_color="transparent", justify="left", font=FONT_MEDIUM)
             self.scoresCaptionLabel.grid(row=0, column=1, padx=20, pady=5, sticky="we")
-            self.scoresLabel = customtkinter.CTkLabel(self.scoresSubFrame1, text=("Der Optimierungsalgorithmus ist ein mathematisches Verfahren. Er testet Schritt für Schritt verschiedene Einstellungen der Maschine.\nIn jedem Durchlauf, einer sogenannten Iteration, sagt das KI-Modell die erwartete Qualität voraus. Gute Einstellungskombinationen werden\nausgewählt, miteinander kombiniert und leicht verändert. So entstehen nach und nach neue Vorschläge. Mit jedem Durchlauf findet das Verfahren\nbessere Einstellungen für die gewünschte Produktqualität. Drücke auf „Starten“, um zu sehen, wie das Verfahren arbeitet."), fg_color="transparent", justify="left", font=FONT_MEDIUM_LIGHT)
+            self.scoresLabel = customtkinter.CTkLabel(self.scoresSubFrame1, text=("Der Optimierungsalgorithmus ist ein mathematisches Verfahren. Er testet Schritt für Schritt verschiedene Einstellungen der Maschine.\nIn jedem Durchlauf, einer sogenannten Iteration, sagt das KI-Modell die erwartete Qualität voraus. Gute Einstellungskombinationen werden\nausgewählt, miteinander kombiniert und leicht verändert. So entstehen nach und nach neue Vorschläge. Mit jedem Durchlauf findet das Verfahren\nbessere Einstellungen für die gewünschte Produktqualität.\n\nDrücke auf „Starten“ und beobachte, wie das mathematische Modell Schritt für Schritt nach\nder besten Einstellung sucht. Was denkst du: Welche Iteration sollte das Modell\nauswählen, um die bestmögliche Qualität zu erreichen?"), fg_color="transparent", justify="left", font=FONT_MEDIUM_LIGHT)
             self.scoresLabel.grid(row=1, column=1, padx=20, pady=5, sticky="we")
             
             self.scoresSubFrame4 = customtkinter.CTkFrame(self.scoresFrame, width=200, height=200, fg_color=BACKGROUND_COLOR, border_color="#1a1a1a")
             self.scoresSubFrame4.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
             
-            self.scoresSubFrame2 = customtkinter.CTkFrame(self.scoresSubFrame4, fg_color=BACKGROUND_COLOR, corner_radius=8)
-            self.scoresSubFrame2.grid(row=0, column=0, padx=20, pady=5, sticky="new")
-            self.gif = GifLabel.GifLabel(self.scoresSubFrame2, "graphics/scores.gif", width=500, height=500)
+            self.scoresSubFrame2 = customtkinter.CTkFrame(self.scoresSubFrame4, fg_color=BACKGROUND_COLOR, corner_radius=6)
+            self.scoresSubFrame2.grid(row=0, column=0, padx=10, pady=5, sticky="new")
+            self.gif = GifLabel.GifLabel(self.scoresSubFrame2, "graphics/scores.gif", width=400, height=400)
             self.markedGif = False
             self.gif.grid(row=0, column=1, padx=10, pady=10)
             self.gif.stop()
@@ -438,38 +438,41 @@ class App(customtkinter.CTk):
                 self.gif.start()
                 self.stop_button.configure(state="active")
                 self.continue_button.configure(state="disabled", text="Fortsetzen")
-            
+                        
             self.stop_button = customtkinter.CTkButton(self.scoresSubFrame2, text="Pausieren", command=stopGif, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", state="disabled", text_color_disabled="#585858")
             self.stop_button.grid(row=1, column=0, padx=20, sticky="we")
             self.continue_button = customtkinter.CTkButton(self.scoresSubFrame2, text="Starten", command=continueGif, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", state="active", text_color_disabled="#585858")
             self.continue_button.grid(row=1, column=2, padx=20, sticky="we")
             
-            self.scoresSubFrame3 = customtkinter.CTkFrame(self.scoresSubFrame4, fg_color=BACKGROUND_COLOR, corner_radius=8)
-            self.scoresSubFrame3.grid(row=0, column=1, padx=20, pady=5, sticky="new")
-            self.changeGifText = customtkinter.CTkLabel(self.scoresSubFrame3, text=("Bist du verwirrt mit den Kategorien? Klicke hier"), fg_color="transparent", justify="left", font=FONT_MEDIUM_LIGHT)
-            self.changeGifText.grid(row=0, column=0, padx=20, pady=5, sticky="we")
+            self.scoresSubFrame3 = customtkinter.CTkFrame(self.scoresSubFrame4, fg_color=BACKGROUND_COLOR, corner_radius=0)
+            self.scoresSubFrame3.grid(row=0, column=1, padx=5, pady=5, sticky="ns", rowspan=2)
+            
+            self.changeGifText = customtkinter.CTkLabel(self.scoresSubFrame3, text=("Noch unsicher?"), fg_color="transparent", justify="left", font=FONT_MEDIUM_LIGHT)
+            self.changeGifText.grid(row=2, column=0, padx=20, pady=(40, 2))
             
             def changeGif():
                 if(self.markedGif):
                     self.gif.destroy()
-                    self.gif = GifLabel.GifLabel(self.scoresSubFrame2, "graphics/scores.gif", width=500, height=500)
+                    self.gif = GifLabel.GifLabel(self.scoresSubFrame2, "graphics/scores.gif", width=400, height=400)
                     self.markedGif = False
                     self.gif.grid(row=0, column=1, padx=10, pady=10)
                     self.gif.stop()
                     self.markedGif = False
+                    self.changeGifButton.configure(text="Tipp anzeigen")   
                 else:
                     self.gif.destroy()
-                    self.gif = GifLabel.GifLabel(self.scoresSubFrame2, "graphics/scoresMarkierung.gif", width=500, height=500)
+                    self.gif = GifLabel.GifLabel(self.scoresSubFrame2, "graphics/scoresMarkierung.gif", width=400, height=400)
                     self.markedGif = False
                     self.gif.grid(row=0, column=1, padx=10, pady=10)
                     self.gif.stop()
-                    self.markedGif = True    
+                    self.markedGif = True 
+                    self.changeGifButton.configure(text="Tipp entfernen")   
                 
                 self.continue_button.configure(state="active", text="Starten")
                 self.stop_button.configure(state="disabled")
             
-            self.changeGifButton = customtkinter.CTkButton(self.scoresSubFrame3, text="Wechseln", command=changeGif, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", state="active", text_color_disabled="#585858")
-            self.changeGifButton.grid(row=1, column=0, padx=20, sticky="we")
+            self.changeGifButton = customtkinter.CTkButton(self.scoresSubFrame3, text="Tipp anzeigen", command=changeGif, corner_radius=12,border_width=2,border_color="#1a1a1a",fg_color=TURQUOISE_HELL,hover_color=TURQUOISE,text_color="#1a1a1a", state="active", text_color_disabled="#585858")
+            self.changeGifButton.grid(row=3, column=0, padx=20, pady=(2, 0))
             
         
         self.eAeFrame = customtkinter.CTkFrame(self.tab2, width=200, height=200, fg_color=BACKGROUND_COLOR)
